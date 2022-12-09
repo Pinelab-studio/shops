@@ -36,14 +36,16 @@
         </div>
       </div>
     </div>
+    <AppFooter :collections="$context.navbarCollections" />
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/AppHeader.vue';
+import AppFooter from '../components/AppFooter.vue';
 
 export default {
-  components: { AppHeader },
+  components: { AppHeader, AppFooter },
   props: {
     showNewsletter: {
       default: true,

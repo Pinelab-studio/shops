@@ -5,7 +5,7 @@
         Vanaf €50,- gratis verzenden binnen NL
       </p>
     </div>
-    <b-navbar type="" centered transparent class="is-fixed-top">
+    <b-navbar centered transparent class="is-fixed-top">
       <template #brand>
         <div class="container is-widescreen section" id="top-navbar">
           <div class="columns is-mobile pt-2" style="width: 100%">
