@@ -13,24 +13,30 @@
             <article class="tile is-child">
               <p class="title has-text-black mb-0">
                 {{ $context.product.name }}
+                <b-button
+                  label="Review schrijven"
+                  type="is-primary is-pulled-right"
+                  @click="isReviewComponentModalActive = true"
+                />
+                <b-modal
+                  v-model="isReviewComponentModalActive"
+                  has-modal-card
+                  trap-focus
+                  :destroy-on-hide="false"
+                  aria-role="dialog"
+                  aria-label="Review Modal"
+                  close-button-aria-label="Close"
+                  aria-modal
+                >
+                  <template #default="props">
+                    <modal-form
+                      v-bind="formProps"
+                      @close="props.close"
+                    ></modal-form>
+                  </template>
+                </b-modal>
               </p>
-              <b-rate
-                class="my-3"
-                v-model="rate"
-                :icon-pack="packs"
-                :icon="icons"
-                :max="maxs"
-                :size="sizes"
-                :locale="locale"
-                :show-score="score"
-                :custom-text="custom"
-                :show-text="text"
-                :texts="texts"
-                :rtl="isRtl"
-                :spaced="isSpaced"
-                :disabled="isDisabled"
-              >
-              </b-rate>
+              <b-rate class="my-3"> </b-rate>
               <p class="subtitle has-text-black">
                 {{ variant.priceWithTax | euro }}
               </p>
@@ -78,6 +84,33 @@
             ></p>
           </article>
         </div>
+
+        <section id="popular-products">
+          <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
+            Populaire producten
+          </h4>
+          <div class="columns is-multiline is-mobile">
+            <template v-for="index in 5">
+              <div class="column is-6-mobile is-4-tablet is-one-fifth-desktop">
+                <ProductCard
+                  title="Wormenkwekerij stickers"
+                  image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
+                  slug="wormenkwekerij-stickers"
+                  price="14900"
+                />
+              </div>
+            </template>
+          </div>
+        </section>
+
+        <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
+          Reviews
+        </h4>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-grey">
+            <Reviews />
+          </article>
+        </div>
       </div>
     </div>
   </DefaultLayout>
@@ -86,10 +119,20 @@
 import ProductImages from 'pinelab-storefront/lib/components/ProductImages';
 import VariantSelector from 'pinelab-storefront/lib/components/VariantSelector';
 import ReadMoreDescription from '@/components/ReadMoreDescription';
-import { buy, getMetaInfo, hydrate, isOutOfStock } from 'pinelab-storefront';
+import ProductCard from '@/components/ProductCard.vue';
+import Reviews from '@/components/Reviews';
+import { buy, hydrate, isOutOfStock } from 'pinelab-storefront';
+import ModalForm from '@/components/ModalForm';
 
 export default {
-  components: { ProductImages, VariantSelector, ReadMoreDescription },
+  components: {
+    ProductImages,
+    VariantSelector,
+    ReadMoreDescription,
+    ModalForm,
+    Reviews,
+    ProductCard,
+  },
   computed: {
     variant() {
       return (
@@ -104,23 +147,22 @@ export default {
   },
   data() {
     return {
+      //  CART DATA
       selectedVariant: undefined,
       isLoading: false,
       quantity: 1,
 
+      //  RATING STARS DATA
       rate: 4,
       maxs: 5,
-      sizes: 'default',
-      packs: 'mdi',
-      icons: 'star',
-      score: false,
       custom: 'reviews',
-      text: false,
-      texts: [],
-      isRtl: false,
-      isSpaced: false,
-      isDisabled: true,
-      locale: undefined, // Browser locale
+
+      // REVIEW MODAL DATA
+      isReviewComponentModalActive: false,
+      formProps: {
+        email: 'evan@you.com',
+        password: 'testing',
+      },
     };
   },
   async mounted() {
