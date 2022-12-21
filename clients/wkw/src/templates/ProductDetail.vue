@@ -17,18 +17,16 @@
               <b-rate
                 class="my-3"
                 v-model="rate"
-                :icon-pack="packs"
-                :icon="icons"
-                :max="maxs"
-                :size="sizes"
-                :locale="locale"
-                :show-score="score"
-                :custom-text="custom"
-                :show-text="text"
-                :texts="texts"
-                :rtl="isRtl"
-                :spaced="isSpaced"
-                :disabled="isDisabled"
+                icon-pack="mdi"
+                icon="star"
+                :max="5"
+                :show-score="false"
+                :show-text="false"
+                :texts="[]"
+                custom-text="reviews"
+                :rtl="false"
+                :spaced="false"
+                :disabled="true"
               >
               </b-rate>
               <p class="subtitle has-text-black">
@@ -92,6 +90,7 @@ export default {
   components: { ProductImages, VariantSelector, ReadMoreDescription },
   computed: {
     variant() {
+      console.log(this.$context);
       return (
         this.selectedVariant ||
         this.$context?.product.variants.find((v) => !isOutOfStock(v)) ||
@@ -107,24 +106,10 @@ export default {
       selectedVariant: undefined,
       isLoading: false,
       quantity: 1,
-
       rate: 4,
-      maxs: 5,
-      sizes: 'default',
-      packs: 'mdi',
-      icons: 'star',
-      score: false,
-      custom: 'reviews',
-      text: false,
-      texts: [],
-      isRtl: false,
-      isSpaced: false,
-      isDisabled: true,
-      locale: undefined, // Browser locale
     };
   },
   async mounted() {
-    console.log(this.$context.product);
     await hydrate(this.$context.product, this.$vendure);
   },
   methods: {
