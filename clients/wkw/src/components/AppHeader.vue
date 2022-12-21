@@ -26,7 +26,7 @@
                   type="search"
                 ></b-input>
                 <p class="control">
-                  <b-button type="is-shadowless is-hovered">
+                  <b-button type="is-primary is-shadowless is-hovered">
                     <i class="mdi mdi-magnify mdi-26px has-text-white"></i>
                   </b-button>
                 </p>
@@ -44,7 +44,7 @@
                 v-slot="{ nrOfItems, open }"
               >
                 <div @click="open()">
-                  <b-button type="is-shadowless is-hovered">
+                  <b-button type="is-primary is-shadowless is-hovered">
                     <i
                       class="mdi mdi-basket-outline mdi-26px has-text-white"
                     ></i>
@@ -55,7 +55,7 @@
                 </div>
               </Basket>
               <b-button
-                type="is-shadowless is-hovered is-hidden-tablet is-pulled-right mr-2"
+                type="is-primary is-shadowless is-hovered is-hidden-tablet is-pulled-right mr-2"
               >
                 <i class="mdi mdi-magnify mdi-26px has-text-white"></i>
               </b-button>

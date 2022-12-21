@@ -52,13 +52,13 @@
           Populaire producten
         </h4>
         <div class="columns is-multiline is-mobile">
-          <template v-for="index in 5">
+          <template v-for="product in $context.products">
             <div class="column is-6-mobile is-4-tablet is-one-fifth-desktop">
               <ProductCard
-                title="Wormenkwekerij stickers"
+                :title="product.name"
                 image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
-                slug="wormenkwekerij-stickers"
-                price="14900"
+                :slug="product.url"
+                :price="product.lowestPrice"
               />
             </div>
           </template>

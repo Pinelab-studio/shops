@@ -246,7 +246,16 @@ export const config: VendureConfig = {
     CoinbasePlugin,
     MyparcelPlugin.init({
       vendureHost: process.env.VENDURE_HOST!,
-      syncWebhookOnStartup: isProd && !runningLocal, // Only sync for prod
+      syncWebhookOnStartup: isProd && !runningLocal, // Only sync for prod,
+      getCustomsInformationFn: (orderLine) => {
+        return {
+          weightInGrams:
+            (orderLine.productVariant.product.customFields as any).weight || 0,
+          classification: (orderLine.productVariant.product.customFields as any)
+            .hsCode,
+          countryCodeOfOrigin: 'NL',
+        };
+      },
     }),
     GoedgepicktPlugin.init({
       vendureHost: process.env.VENDURE_HOST!,

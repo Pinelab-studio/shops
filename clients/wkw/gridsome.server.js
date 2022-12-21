@@ -109,6 +109,10 @@ module.exports = async function (api) {
       const collections = vendureNL.unflatten(allCollections);
       const navbarCollections = collections.map(mapToMinimalCollection);
 
+      // Breadcrumb pages
+      const Home = '/';
+      const Assortiment = '/assortiment/';
+
       const global = {
         navbarCollections,
         lang,
@@ -120,17 +124,24 @@ module.exports = async function (api) {
         component: './src/templates/Index.vue',
         context: {
           ...global,
+          products: products.slice(0, 5), // popular products for now
         },
       });
 
       // -------------------- ProductDetail -----------------------------------
       products.forEach((product) => {
+        const breadcrumb = {
+          Home,
+          Assortiment,
+          [product.name]: product.url,
+        };
         createPage({
           path: product.url,
           component: './src/templates/ProductDetail.vue',
           context: {
             ...global,
             product,
+            breadcrumb,
           },
         });
       });
