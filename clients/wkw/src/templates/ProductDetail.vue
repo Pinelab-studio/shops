@@ -90,7 +90,6 @@ export default {
   components: { ProductImages, VariantSelector, ReadMoreDescription },
   computed: {
     variant() {
-      console.log(this.$context);
       return (
         this.selectedVariant ||
         this.$context?.product.variants.find((v) => !isOutOfStock(v)) ||
