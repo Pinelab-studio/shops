@@ -32,6 +32,16 @@ import path from 'path';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import { GoogleStoragePlugin } from 'vendure-plugin-google-storage-assets/dist/google-storage-plugin';
 import { GoedgepicktPlugin } from 'vendure-plugin-goedgepickt';
+import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
+import {
+  AverageOrderValueMetric,
+  ConversionRateMetric,
+  MetricsPlugin,
+  NrOfOrdersMetric,
+} from 'vendure-plugin-metrics';
+import { RevenueMetric } from '../src/metrics/revenue-metric';
+import { EBoekhoudenPlugin } from 'vendure-plugin-e-boekhouden';
+import { EBookPlugin } from '../src/e-book/e-book.plugin';
 
 const testPaymentMethod = new PaymentMethodHandler({
   code: 'test-payment-method',
@@ -121,6 +131,17 @@ export async function startDevServer(): Promise<TestEnv> {
       ],
     },
     plugins: [
+      LimitVariantPerOrderPlugin,
+      MetricsPlugin.init({
+        metrics: [
+          new NrOfOrdersMetric(),
+          new AverageOrderValueMetric(),
+          new ConversionRateMetric(),
+          new RevenueMetric(),
+        ],
+      }),
+      EBoekhoudenPlugin,
+      EBookPlugin.init(process.env.VENDURE_HOST!),
       InvoicePlugin.init({
         vendureHost: 'localhost:3000',
         storageStrategy: new LocalFileStrategy(),

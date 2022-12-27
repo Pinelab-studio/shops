@@ -1,6 +1,6 @@
 {
   "name": "shops-vendure-backend",
-  "version": "0.61.0",
+  "version": "0.62.0",
   "private": true,
   "scripts": {
     "start": "node ./dist/index",
@@ -54,6 +54,7 @@
     "vendure-plugin-google-cloud-tasks": "4.3.0",
     "vendure-plugin-google-storage-assets": "4.3.0",
     "vendure-plugin-invoices": "4.5.0",
+    "vendure-plugin-limit-product-per-order": "^4.7.0",
     "vendure-plugin-metrics": "4.3.0",
     "vendure-plugin-myparcel": "4.5.0",
     "vendure-plugin-order-export": "4.3.0",

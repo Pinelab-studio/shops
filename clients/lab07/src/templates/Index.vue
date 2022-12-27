@@ -55,7 +55,7 @@ export default {
   height: 100vw;
   transform-origin: top left;
   transform: rotate(-90deg) translateX(-100vh);
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 

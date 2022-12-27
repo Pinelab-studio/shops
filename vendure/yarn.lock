@@ -12742,6 +12742,11 @@ vendure-plugin-invoices@4.5.0:
     pdf-creator-node "^2.3.4"
     tmp "^0.2.1"
 
+vendure-plugin-limit-product-per-order@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-limit-product-per-order/-/vendure-plugin-limit-product-per-order-4.7.0.tgz#e773266d1d801433b8f25356e6b280fe9dcf07ee"
+  integrity sha512-/6tNdLBmhBfBeKwY4KobC6g35a0dQF71nL10T1Ck8JF4lBLYQjLdldEBAVnhJClELHr9a8XovbZMJzAEQrOyqw==
+
 vendure-plugin-metrics@4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/vendure-plugin-metrics/-/vendure-plugin-metrics-4.3.0.tgz#2c89be29cab903bc821188231cc61243a8592d69"
