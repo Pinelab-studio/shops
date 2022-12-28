@@ -45,6 +45,7 @@ module.exports = async function (api) {
       wkw_algemeen: common,
       wkw_paginas: pages,
       wkw_blogs: blogs,
+      wkw_reviews: reviews,
     } = await directus.request(GET_CONTENT);
 
     const pages_nl = pages.filter((p) => p.language === 'nl');
@@ -130,6 +131,8 @@ module.exports = async function (api) {
 
       // -------------------- ProductDetail -----------------------------------
       products.forEach((product) => {
+        // TODO filter reviews per product
+
         const breadcrumb = {
           Home,
           Assortiment,
@@ -141,6 +144,7 @@ module.exports = async function (api) {
           context: {
             ...global,
             product,
+            reviews,
             breadcrumb,
           },
         });
