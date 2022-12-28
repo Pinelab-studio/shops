@@ -11,7 +11,7 @@
           </b-input>
         </b-field>
 
-        <b-field label="Email">
+        <b-field label="Email (wordt niet getoond bij review)">
           <b-input
             icon="email"
             type="email"
@@ -20,7 +20,6 @@
           >
           </b-input>
         </b-field>
-
         <b-field label="Review">
           <b-input type="textarea" placeholder="Wat vindt u van dit product">
           </b-input>

@@ -22,7 +22,6 @@
                   v-model="isReviewComponentModalActive"
                   has-modal-card
                   trap-focus
-                  :destroy-on-hide="false"
                   aria-role="dialog"
                   aria-label="Review Modal"
                   close-button-aria-label="Close"
@@ -36,7 +35,15 @@
                   </template>
                 </b-modal>
               </p>
-              <b-rate class="my-3"> </b-rate>
+
+              <b-rate
+                v-model="rate"
+                class="my-3"
+                rate="4"
+                disabled="true"
+                custom-text=""
+              ></b-rate>
+
               <p class="subtitle has-text-black">
                 {{ variant.priceWithTax | euro }}
               </p>
@@ -155,7 +162,6 @@ export default {
       //  RATING STARS DATA
       rate: 4,
       maxs: 5,
-      custom: 'reviews',
 
       // REVIEW MODAL DATA
       isReviewComponentModalActive: false,
@@ -193,5 +199,10 @@ export default {
 .carousel-item {
   object-fit: cover;
   height: 500px;
+}
+
+.columns {
+  margin-left: 0;
+  margin-right: 0;
 }
 </style>
