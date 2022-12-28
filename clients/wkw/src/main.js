@@ -7,13 +7,16 @@ import '@fontsource/poppins';
 import {
   formatEuro,
   preconnectLinks,
-  setLabelFunction,
+  createLabelFunction,
   setStore,
 } from 'pinelab-storefront';
 
 export default function (Vue, { router, head, isClient }) {
   head.link.push(...preconnectLinks);
-  setLabelFunction(Vue, require('../labels.json'));
+  Vue.prototype.$l = createLabelFunction([
+    require('../labels/nl.json'),
+    require('../labels/en.json'),
+  ]);
   Vue.filter('euro', formatEuro);
   if (isClient) {
     setStore(

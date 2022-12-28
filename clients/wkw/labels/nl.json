@@ -1,4 +1,5 @@
 {
+  "lang": "nl",
   "basket": {
     "title": "Winkelmand",
     "shipping-cost": "Verzendkosten",
@@ -53,5 +54,12 @@
   },
   "error": {
     "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
+  },
+  "urls": {
+    "home": "Home",
+    "category-prefix": "product-categorie",
+    "product-prefix": "product",
+    "domain": "https://wormenkwekerijwasse.nl",
+    "slug-prefix": ""
   }
 }

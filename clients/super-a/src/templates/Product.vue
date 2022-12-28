@@ -15,6 +15,9 @@
           v-on:select="selectedVariant = $event"
         />
         <br />
+        <p v-if="limit" class="has-text-danger mb-4">
+          Limited item! You can only buy {{ limit }}
+        </p>
         <b-button
           class="is-primary is-fullwidth"
           :loading="isLoading"
@@ -39,6 +42,9 @@ export default {
     VariantSelector,
   },
   computed: {
+    limit() {
+      return this.variant.customFields?.maxPerOrder;
+    },
     variant() {
       return (
         this.selectedVariant ||

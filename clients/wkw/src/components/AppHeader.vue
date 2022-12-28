@@ -1,59 +1,64 @@
 <template>
   <div>
-    <div id="banner" class="notification is-dark-green p-1 has-text-centered">
+    <div
+      id="banner"
+      class="notification is-dark-green p-1 m-0 has-text-centered"
+    >
       <p class="mdi mdi-truck-outline has-text-white">
         Vanaf €50,- gratis verzenden binnen NL
       </p>
     </div>
-    <b-navbar centered transparent class="is-fixed-top">
+    <b-navbar class="is-fixed-top" style="padding-top: 27px">
       <template #brand>
-        <div class="container is-widescreen section" id="top-navbar">
-          <div class="columns is-mobile pt-2" style="width: 100%">
-            <div class="column">
-              <g-link to="/" aria-current="page">
-                <img
-                  src="/img/logo-wormenkwekerijwasse.png"
-                  width="120px"
-                  id="logo"
-                />
+        <div class="container is-widescreen section py-4">
+          <div class="columns is-mobile is-vcentered">
+            <!-- LOGO -->
+            <div class="column is-4-mobile">
+              <g-link to="/">
+                <img src="/img/logo-wormenkwekerijwasse.png" width="100px" />
               </g-link>
             </div>
-            <div id="search" class="column is-hidden-mobile">
+            <!-- SEARCH -->
+            <div class="column is-hidden-mobile">
               <b-field position="is-centered">
                 <b-input
                   placeholder="Zoek producten..."
                   type="search"
                 ></b-input>
                 <p class="control">
-                  <b-button type="is-shadowless is-hovered">
+                  <b-button type="is-primary is-shadowless is-hovered">
                     <i class="mdi mdi-magnify mdi-26px has-text-white"></i>
                   </b-button>
                 </p>
               </b-field>
             </div>
-            <div class="column has-text-right" id="icons">
-              <span class="icon is-medium is-hidden-tablet is-clickable">
-                <i
-                  class="mdi mdi-magnify mdi-36px has-text-primary mr-6"
-                  @click="isSearchModalActive = true"
-                  style="z-index: 999"
-                >
-                </i>
-              </span>
+            <!-- ICONS -->
+            <div class="column">
               <Basket
+                class="is-flex is-pulled-right"
                 :vendure="$vendure"
                 :store="$store"
                 :emitter="$emitter"
                 cartUrl="/winkelmand/"
-                @cart-button-clicked="
-                  $router.push('/winkelmand/').catch((e) => {})
-                "
-                @checkout-button-clicked="
-                  $router.push('/checkout/').catch((e) => {})
-                "
+                checkoutUrl="/checkout/"
+                v-slot="{ nrOfItems, open }"
               >
-                <i class="mdi mdi-basket mdi-36px has-text-primary"></i>
+                <div @click="open()">
+                  <b-button type="is-primary is-shadowless is-hovered">
+                    <i
+                      class="mdi mdi-basket-outline mdi-26px has-text-white"
+                    ></i>
+                  </b-button>
+                  <a id="cart-badge" class="tag is-black is-rounded">
+                    {{ nrOfItems }}
+                  </a>
+                </div>
               </Basket>
+              <b-button
+                type="is-primary is-shadowless is-hovered is-hidden-tablet is-pulled-right mr-2"
+              >
+                <i class="mdi mdi-magnify mdi-26px has-text-white"></i>
+              </b-button>
             </div>
           </div>
         </div>
@@ -136,8 +141,6 @@
             <g-link to="/" class="navbar-link is-arrowless"> Contact</g-link>
           </div>
         </div>
-
-        <!-- Mobile menu -->
       </template>
     </b-navbar>
   </div>
@@ -152,20 +155,19 @@ export default {
 };
 </script>
 <style>
+#cart-badge {
+  margin-top: -10px;
+  margin-left: -15px;
+  position: absolute;
+  text-decoration: none;
+}
+
 .navbar-brand {
   width: 100%;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  flex-shrink: 0;
 }
 
 .navbar {
   flex-wrap: wrap;
-}
-
-.navbar-burger {
-  margin-top: 50px !important;
 }
 
 .navbar-start {
@@ -187,28 +189,11 @@ export default {
   padding-bottom: 0;
 }
 
-#logo {
-  height: 75px;
-  padding: 0 0 5px 0;
-  object-fit: contain;
-  margin-left: -4px;
-}
-
-#top-navbar {
-  padding-top: 25px;
-  padding-bottom: 0;
-  height: 105px;
-}
-
 #banner {
   z-index: 31;
   position: fixed;
   top: 0;
   width: 100%;
-}
-
-#search {
-  padding-top: 35px;
 }
 
 .navbar-item,
@@ -221,19 +206,5 @@ export default {
 .navbar-link {
   color: white !important;
   padding-left: 0 !important;
-}
-
-.navbar-menu {
-  background: #4c8a45;
-  justify-content: center;
-}
-
-#icons {
-  padding-top: 25px;
-  padding-right: 0;
-}
-
-.cart-badge {
-  margin-left: -10px;
 }
 </style>
