@@ -6892,10 +6892,10 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinelab-storefront@^0.57.5:
-  version "0.57.5"
-  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.57.5.tgz#fee85cee9461c36f5a3f484f9fd57a8f6d1094e0"
-  integrity sha512-xE2QG16SL3xa4Q+1rZZqv/O7cIwii/X5Ll87KdcsOm0fKutUG7nfxuSha/486RrRk1eJ/7dzfPFqH/aaZBTeQg==
+pinelab-storefront@0.62.0:
+  version "0.62.0"
+  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.62.0.tgz#13a9b715b15ca370f49ff718b7d2e16d1eb1e04c"
+  integrity sha512-6xO5lE7ZkfnD8f5JrWkRjB+QIeaeDas24p3QqeHWrWN9pYbTPLJWMEwVnkcH8tHSCJ/+UhhnkXQVSe/wBSj6ew==
   dependencies:
     graphql "15.3.0"
     graphql-request "^3.4.0"
@@ -8152,6 +8152,10 @@ snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
   integrity sha512-O27l4xaMYt/RSQ5TR3vpWCAB5Kb/czIcqUFOM/C4fYcLnbZUc1PkjTAMjof2pBWaSTwOUd6qUHcFGVGj7aIwnw==
+  dependencies:
+    define-property "^1.0.0"
+    isobject "^3.0.0"
+    snapdragon-util "^3.0.1"
 
 snapdragon-util@^5.0.1:
   version "5.0.1"

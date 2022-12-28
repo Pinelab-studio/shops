@@ -12733,14 +12733,19 @@ vendure-plugin-google-storage-assets@4.3.0:
     "@google-cloud/storage" "^5.18.2"
     tmp "^0.2.1"
 
-vendure-plugin-invoices@4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-invoices/-/vendure-plugin-invoices-4.5.0.tgz#915e299ce3b530db5a1def07827c4ffce973c561"
-  integrity sha512-wTOH5Eu16ZN7D/cVJzlA6C5OoALW0Es2q6JiXraVk6ftWsxVXAYKHk+scGmxfZW08kc74yPkY1kuHicmZnMJrA==
+vendure-plugin-invoices@4.7.1:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-invoices/-/vendure-plugin-invoices-4.7.1.tgz#ef0ad87dbd57a6451747b093e285dffa3ec8f04f"
+  integrity sha512-UZOAokZYnkEJiuFb/K1hLTXM4Oll1BZ02qeGzIyW6kaiqmcgmDvpLUFJWkHUT8DzIkI9chis0uCeT4EeHzO2+Q==
   dependencies:
     adm-zip "^0.5.9"
     pdf-creator-node "^2.3.4"
     tmp "^0.2.1"
+
+vendure-plugin-limit-product-per-order@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-limit-product-per-order/-/vendure-plugin-limit-product-per-order-4.7.0.tgz#e773266d1d801433b8f25356e6b280fe9dcf07ee"
+  integrity sha512-/6tNdLBmhBfBeKwY4KobC6g35a0dQF71nL10T1Ck8JF4lBLYQjLdldEBAVnhJClELHr9a8XovbZMJzAEQrOyqw==
 
 vendure-plugin-metrics@4.3.0:
   version "4.3.0"

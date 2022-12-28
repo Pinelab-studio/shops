@@ -60,6 +60,7 @@ import {
   NrOfOrdersMetric,
 } from 'vendure-plugin-metrics';
 import { RevenueMetric } from './metrics/revenue-metric';
+import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -202,6 +203,7 @@ export const config: VendureConfig = {
     ],
   },
   plugins: [
+    LimitVariantPerOrderPlugin,
     MetricsPlugin.init({
       metrics: [
         new NrOfOrdersMetric(),
