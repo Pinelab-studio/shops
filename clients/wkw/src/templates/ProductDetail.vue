@@ -172,7 +172,6 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.$context.product);
     await hydrate(this.$context.product, this.$vendure);
   },
   methods: {

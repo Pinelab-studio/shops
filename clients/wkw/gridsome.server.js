@@ -45,6 +45,7 @@ module.exports = async function (api) {
       wkw_algemeen: common,
       wkw_paginas: pages,
       wkw_blogs: blogs,
+      wkw_reviews: reviews,
     } = await directus.request(GET_CONTENT);
 
     const pages_nl = pages.filter((p) => p.language === 'nl');
@@ -112,8 +113,6 @@ module.exports = async function (api) {
       // Breadcrumb pages
       const Home = '/';
       const Assortiment = '/assortiment/';
-      const Categorie = '/product-categorie/';
-      const Product = '/product/';
 
       const global = {
         navbarCollections,
@@ -126,18 +125,27 @@ module.exports = async function (api) {
         component: './src/templates/Index.vue',
         context: {
           ...global,
+          products: products.slice(0, 5), // popular products for now
         },
       });
 
       // -------------------- ProductDetail -----------------------------------
       products.forEach((product) => {
+        // TODO filter reviews per product
+
+        const breadcrumb = {
+          Home,
+          Assortiment,
+          [product.name]: product.url,
+        };
         createPage({
           path: product.url,
           component: './src/templates/ProductDetail.vue',
           context: {
             ...global,
             product,
-            breadcrumb: { Home, Assortiment, Categorie, Product },
+            reviews,
+            breadcrumb,
           },
         });
       });
