@@ -36,13 +36,17 @@
                 </b-modal>
               </p>
 
-              <b-rate
-                v-model="rate"
-                class="my-3"
-                rate="4"
-                disabled="true"
-                custom-text=""
-              ></b-rate>
+              <div class="is-flex">
+                <b-rate
+                  v-model="$context.avgRating"
+                  class="my-3 pr-1"
+                  :disabled="true"
+                  :show-score="true"
+                ></b-rate>
+                <a class="my-3" href="#reviews">
+                  - {{ $context.reviews.length }} Reviews</a
+                >
+              </div>
 
               <p class="subtitle has-text-black">
                 {{ variant.priceWithTax | euro }}
@@ -82,40 +86,52 @@
             </article>
           </div>
         </div>
+        <span class="anchor" id="full-description"></span>
+
         <div class="tile is-parent">
+          <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+            Product beschrijving
+          </h4>
+        </div>
+        <div class="tile is-parent py-0">
           <article class="tile is-child">
-            <p
-              id="full-description"
-              class="content"
-              v-html="$context.product.description"
-            ></p>
+            <p class="content" v-html="$context.product.description"></p>
           </article>
         </div>
 
         <section id="popular-products">
-          <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
-            Populaire producten
-          </h4>
-          <div class="columns is-multiline is-mobile">
-            <template v-for="index in 5">
-              <div class="column is-6-mobile is-4-tablet is-one-fifth-desktop">
-                <ProductCard
-                  title="Wormenkwekerij stickers"
-                  image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
-                  slug="wormenkwekerij-stickers"
-                  price="14900"
-                />
-              </div>
-            </template>
+          <div class="tile is-parent">
+            <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+              Klanten kochten ook
+            </h4>
+          </div>
+          <div class="tile is-child">
+            <div class="columns is-multiline is-mobile">
+              <template v-for="index in 5">
+                <div
+                  class="column is-6-mobile is-4-tablet is-one-fifth-desktop"
+                >
+                  <ProductCard
+                    title="Wormenkwekerij stickers"
+                    image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
+                    slug="wormenkwekerij-stickers"
+                    price="14900"
+                  />
+                </div>
+              </template>
+            </div>
           </div>
         </section>
 
-        <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
-          Reviews
-        </h4>
+        <span class="anchor" id="reviews"></span>
         <div class="tile is-parent">
+          <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+            Reviews
+          </h4>
+        </div>
+        <div class="tile is-parent py-0">
           <article class="tile is-child notification is-grey">
-            <Reviews />
+            <Reviews :reviews="$context.reviews" />
           </article>
         </div>
       </div>
@@ -159,16 +175,8 @@ export default {
       isLoading: false,
       quantity: 1,
 
-      //  RATING STARS DATA
-      rate: 4,
-      maxs: 5,
-
       // REVIEW MODAL DATA
       isReviewComponentModalActive: false,
-      formProps: {
-        email: 'evan@you.com',
-        password: 'testing',
-      },
     };
   },
   async mounted() {
@@ -190,7 +198,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .tile {
   height: min-content;
 }

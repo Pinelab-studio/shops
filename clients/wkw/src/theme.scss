@@ -253,3 +253,10 @@ a.navbar-burger.burger {
   line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+.anchor {
+  display: block;
+  height: 160px; /*same height as header*/
+  margin-top: -160px; /*same height as header*/
+  visibility: hidden;
+}
