@@ -124,7 +124,13 @@ module.exports = async function (api) {
 
       // -------------------- ProductDetail -----------------------------------
       products.forEach((product) => {
-        // TODO filter reviews per product
+        const reviewsForThisProduct = reviews.filter(
+          (review) => review.vendure_product_id == product.id
+        );
+
+        const sum = reviewsForThisProduct.reduce((a, b) => a + b.rating, 0);
+        const avg = sum / reviewsForThisProduct.length || 0;
+        const avgRating = Math.round(avg * 10) / 10;
 
         const breadcrumb = {
           Home,
@@ -147,7 +153,8 @@ module.exports = async function (api) {
           context: {
             ...global,
             product,
-            reviews,
+            reviews: reviewsForThisProduct,
+            avgRating,
             breadcrumb,
             translatedPages,
           },

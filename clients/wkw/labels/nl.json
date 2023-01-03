@@ -72,5 +72,8 @@
     "information": "Informatie",
     "advice": "Advies & informatie",
     "faq": "FAQ"
+  },
+  "product": {
+    "no-reviews": "Er zijn nog geen reviews voor dit product."
   }
 }

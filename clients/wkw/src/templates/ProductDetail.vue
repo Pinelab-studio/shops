@@ -14,21 +14,24 @@
               <p class="title has-text-black mb-0">
                 {{ $context.product.name }}
               </p>
-              <b-rate
-                class="my-3"
-                v-model="rate"
-                icon-pack="mdi"
-                icon="star"
-                :max="5"
-                :show-score="false"
-                :show-text="false"
-                :texts="[]"
-                custom-text="reviews"
-                :rtl="false"
-                :spaced="false"
-                :disabled="true"
-              >
-              </b-rate>
+
+              <div class="is-flex">
+                <b-rate
+                  v-model="$context.avgRating"
+                  class="my-3 pr-1"
+                  :disabled="true"
+                  :show-score="true"
+                ></b-rate>
+                <div v-if="$context.reviews.length > 0">
+                  <a class="my-3 is-flex" href="#reviews">
+                    - {{ $context.reviews.length }} Reviews</a
+                  >
+                </div>
+                <div v-else>
+                  <a class="my-3 is-flex"> - No reviews</a>
+                </div>
+              </div>
+
               <p class="subtitle has-text-black">
                 {{ variant.priceWithTax | euro }}
               </p>
@@ -67,14 +70,76 @@
             </article>
           </div>
         </div>
+        <span class="anchor" id="full-description"></span>
+
         <div class="tile is-parent">
+          <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+            Product beschrijving
+          </h4>
+        </div>
+        <div class="tile is-parent py-0">
           <article class="tile is-child">
-            <p
-              id="full-description"
-              class="content"
-              v-html="$context.product.description"
-            ></p>
+            <p class="content" v-html="$context.product.description"></p>
           </article>
+        </div>
+
+        <section id="popular-products">
+          <div class="tile is-parent">
+            <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+              Klanten kochten ook
+            </h4>
+          </div>
+          <div class="tile is-child">
+            <div class="columns is-multiline is-mobile">
+              <template v-for="index in 5">
+                <div
+                  class="column is-6-mobile is-4-tablet is-one-fifth-desktop"
+                >
+                  <ProductCard
+                    title="Wormenkwekerij stickers"
+                    image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
+                    slug="wormenkwekerij-stickers"
+                    price="14900"
+                  />
+                </div>
+              </template>
+            </div>
+          </div>
+        </section>
+
+        <div v-if="$context.reviews.length > 0">
+          <span class="anchor" id="reviews"></span>
+          <div class="tile is-parent">
+            <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+              Reviews
+              <!-- <b-button
+                  label="Review schrijven"
+                  type="is-primary is-pulled-right"
+                  @click="isReviewComponentModalActive = true"
+                />
+                <b-modal
+                  v-model="isReviewComponentModalActive"
+                  has-modal-card
+                  trap-focus
+                  aria-role="dialog"
+                  aria-label="Review Modal"
+                  close-button-aria-label="Close"
+                  aria-modal
+                >
+                  <template #default="props">
+                    <modal-form
+                      v-bind="formProps"
+                      @close="props.close"
+                    ></modal-form>
+                  </template>
+                </b-modal> -->
+            </h4>
+          </div>
+          <div class="tile is-parent py-0">
+            <article class="tile is-child notification is-grey">
+              <Reviews :reviews="$context.reviews" />
+            </article>
+          </div>
         </div>
       </div>
     </div>
@@ -84,10 +149,20 @@
 import ProductImages from 'pinelab-storefront/lib/components/ProductImages';
 import VariantSelector from 'pinelab-storefront/lib/components/VariantSelector';
 import ReadMoreDescription from '@/components/ReadMoreDescription';
-import { buy, getMetaInfo, hydrate, isOutOfStock } from 'pinelab-storefront';
+import ProductCard from '@/components/ProductCard.vue';
+import Reviews from '@/components/Reviews';
+import { buy, hydrate, isOutOfStock } from 'pinelab-storefront';
+import ModalForm from '@/components/ModalForm';
 
 export default {
-  components: { ProductImages, VariantSelector, ReadMoreDescription },
+  components: {
+    ProductImages,
+    VariantSelector,
+    ReadMoreDescription,
+    ModalForm,
+    Reviews,
+    ProductCard,
+  },
   computed: {
     variant() {
       return (
@@ -102,10 +177,13 @@ export default {
   },
   data() {
     return {
+      //  CART DATA
       selectedVariant: undefined,
       isLoading: false,
       quantity: 1,
-      rate: 4,
+
+      // REVIEW MODAL DATA
+      isReviewComponentModalActive: false,
     };
   },
   async mounted() {
@@ -114,6 +192,7 @@ export default {
   methods: {
     async buy() {
       this.isLoading = true;
+      console.log(this.variant);
       await buy(
         this.variant,
         {
@@ -127,7 +206,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .tile {
   height: min-content;
 }
@@ -135,5 +214,10 @@ export default {
 .carousel-item {
   object-fit: cover;
   height: 500px;
+}
+
+.columns {
+  margin-left: 0;
+  margin-right: 0;
 }
 </style>
