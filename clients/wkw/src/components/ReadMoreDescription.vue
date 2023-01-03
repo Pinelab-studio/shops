@@ -9,14 +9,30 @@
 <script>
 export default {
   props: ['description', 'maxLength', 'collapse'],
+  watch: {
+    description(newValue, oldValue) {
+      this.transformToPlainText(newValue);
+    },
+  },
   data() {
     return {
-      plaintext: this.description
-        ?.replace(/<[^>]+>/g, ' ')
-        ?.replaceAll('&nbsp;', ' '),
+      plaintext: '',
     };
   },
-
+  created() {
+    this.transformToPlainText(this.description);
+  },
+  methods: {
+    /**
+     * Transforms the HTML description to plaintext, otherwise safari's line-clamp won't work
+     * https://stackoverflow.com/questions/70897195/line-clamp-webkit-not-working-in-safari
+     */
+    transformToPlainText(description) {
+      this.plaintext = description
+        ?.replace(/<[^>]+>/g, ' ')
+        ?.replaceAll('&nbsp;', ' ');
+    },
+  },
   computed: {
     isDescriptionLongEnough() {
       return this.description?.length > this.maxLength;
