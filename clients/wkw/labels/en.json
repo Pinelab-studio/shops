@@ -61,5 +61,8 @@
     "product-prefix": "product",
     "domain": "https://wormenkwekerijwasse.nl",
     "slug-prefix": "/en"
+  },
+  "product": {
+    "no-reviews": "Er zijn nog geen reviews voor dit product."
   }
 }
