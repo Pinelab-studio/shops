@@ -1,11 +1,6 @@
-const {
-  VendureServer,
-  SearchUtil,
-  deduplicate,
-  createLabelFunction,
-} = require('pinelab-storefront');
+const { VendureServer, createLabelFunction } = require('pinelab-storefront');
 const { GraphQLClient } = require('graphql-request');
-const { mapToMinimalCollection } = require('./util');
+const { mapToMinimalCollection, setFullUrl } = require('./util');
 const { GET_CONTENT } = require('./content.queries');
 
 module.exports = async function (api) {
@@ -86,29 +81,26 @@ module.exports = async function (api) {
       const categoryPrefix = getlabel('urls.category-prefix', lang);
       const productPrefix = getlabel('urls.product-prefix', lang);
 
-      // Set absolute path for product.url and collection.url: product.url = '/product/lavameel/'
-      allCollections = allCollections.map((colllection) => ({
-        ...colllection,
-        url: `${slugPrefix}/${categoryPrefix}/${colllection.slug}/`,
-      }));
-      products = products.map((product) => ({
-        ...product,
-        url: `${slugPrefix}/${productPrefix}/${product.slug}/`,
-      }));
-      productsPerCollection = productsPerCollection.map((collectionMap) => {
-        collectionMap.products = collectionMap.products.map((product) => ({
-          ...product,
-          url: `${slugPrefix}/${productPrefix}/${product.slug}/`,
-        }));
-        collectionMap.collection = {
-          ...collectionMap.collection,
-          url: `${slugPrefix}/${categoryPrefix}/${collectionMap.collection.slug}/`,
-        };
-        return collectionMap;
-      });
-
       const collections = vendureNL.unflatten(allCollections);
       const navbarCollections = collections.map(mapToMinimalCollection);
+
+      // Set absolute path for product.url and collection.url: product.url = '/product/lavameel/'
+      allCollections = allCollections.map((c) =>
+        setFullUrl(c, `${slugPrefix}/${categoryPrefix}`)
+      );
+      products = products.map((p) =>
+        setFullUrl(p, `${slugPrefix}/${productPrefix}`)
+      );
+      productsPerCollection = productsPerCollection.map((collectionMap) => {
+        collectionMap.products = collectionMap.products.map((p) =>
+          setFullUrl(p, `${slugPrefix}/${productPrefix}`)
+        );
+        collectionMap.collection = setFullUrl(
+          collectionMap.collection,
+          `${slugPrefix}/${categoryPrefix}`
+        );
+        return collectionMap;
+      });
 
       // Breadcrumb pages
       const Home = '/';
@@ -121,11 +113,12 @@ module.exports = async function (api) {
 
       // -------------------- Home -----------------------------------
       createPage({
-        path: '/',
+        path: `/${slugPrefix}`,
         component: './src/templates/Index.vue',
         context: {
           ...global,
-          products: products.slice(0, 5), // popular products for now
+          popularProducts: products.slice(0, 5), // popular products for now,
+          popularCollections: collections.slice(0, 5),
         },
       });
 
@@ -138,6 +131,16 @@ module.exports = async function (api) {
           Assortiment,
           [product.name]: product.url,
         };
+        // Find translated version of current product
+        const translatedPages = {};
+        languages.forEach((language) => {
+          const translatedProduct = language.products.find(
+            (p) => p.id === product.id
+          );
+          translatedPages[language.lang] = translatedProduct
+            ? translatedProduct.url
+            : undefined;
+        });
         createPage({
           path: product.url,
           component: './src/templates/ProductDetail.vue',
@@ -146,6 +149,7 @@ module.exports = async function (api) {
             product,
             reviews,
             breadcrumb,
+            translatedPages,
           },
         });
       });

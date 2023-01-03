@@ -40,8 +40,11 @@
         </div>
       </div>
       <div class="has-text-right">
-        <a class="has-text-white" href="https://pinelab.studio/" target="_blank"
-          >Met plezier gemaakt door Pinelab</a
+        <a
+          class="has-text-white"
+          href="https://pinelab.studio/"
+          target="_blank"
+          >{{ $l('common.made-by') }}</a
         >
       </div>
     </div>

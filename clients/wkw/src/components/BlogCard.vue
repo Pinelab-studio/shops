@@ -21,7 +21,7 @@
                       <p class="title has-text-white has-text-weight-bold is-5">
                         {{ blogpost.title }}
                       </p>
-                      <HomeButton>Lees meer</HomeButton>
+                      <HomeButton>{{ $l('common.read-more') }}</HomeButton>
                     </div>
                   </div>
                 </div>

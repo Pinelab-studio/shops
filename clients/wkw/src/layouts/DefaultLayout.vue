@@ -25,7 +25,7 @@
         </div>
         <div class="column">
           <b-field position="is-centered" grouped group-multiline>
-            <b-input placeholder="Naam" type="fname"> </b-input>
+            <b-input placeholder="Naam" type="name"> </b-input>
             <b-input placeholder="E-mailadres" type="email"> </b-input>
             <p class="control">
               <b-button

@@ -15,4 +15,13 @@ module.exports = {
         : undefined,
     };
   },
+  /**
+   * Set the full path of a product or collection on item.url
+   */
+  setFullUrl: function (itemWithSlug, prefixPath) {
+    return {
+      ...itemWithSlug,
+      url: `/${prefixPath}/${itemWithSlug.slug}/`,
+    };
+  },
 };

@@ -33,15 +33,15 @@
       </section>
       <section id="popular-categories">
         <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
-          Populaire categorieën
+          {{ $l('common.popular-categories') }}
         </h4>
         <div class="columns is-multiline is-mobile">
-          <template v-for="index in 5">
+          <template v-for="collection in $context.popularCollections">
             <div class="column is-6-mobile is-4-tablet is-one-fifth-desktop">
               <CategoryCard
-                title="Boeken worm"
-                image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
-                slug="boeken-en-ebooks"
+                :title="collection.name"
+                :image="collection.featuredAsset.thumbnail"
+                :slug="collection.url"
               />
             </div>
           </template>
@@ -49,14 +49,14 @@
       </section>
       <section id="popular-products">
         <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
-          Populaire producten
+          {{ $l('common.popular-products') }}
         </h4>
         <div class="columns is-multiline is-mobile">
-          <template v-for="product in $context.products">
+          <template v-for="product in $context.popularProducts">
             <div class="column is-6-mobile is-4-tablet is-one-fifth-desktop">
               <ProductCard
                 :title="product.name"
-                image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
+                :image="product.featuredAsset.thumbnail"
                 :slug="product.url"
                 :price="product.lowestPrice"
               />
