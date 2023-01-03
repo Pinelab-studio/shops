@@ -64,7 +64,9 @@
                   :disabled="isSoldOut"
                   aria-label="In winkelmand"
                   v-on:click="buy()"
-                  >{{ isSoldOut ? 'Uitverkocht' : 'In winkelmand' }}
+                  >{{
+                    isSoldOut ? $l('common.sold-out') : $l('common.add-to-cart')
+                  }}
                 </b-button>
               </b-field>
             </article>
@@ -74,7 +76,7 @@
 
         <div class="tile is-parent">
           <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
-            Product beschrijving
+            {{ $l('product.description') }}
           </h4>
         </div>
         <div class="tile is-parent py-0">
@@ -86,17 +88,17 @@
         <section id="popular-products">
           <div class="tile is-parent">
             <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
-              Klanten kochten ook
+              {{ $l('product.related') }}
             </h4>
           </div>
           <div class="tile is-child">
             <div class="columns is-multiline is-mobile">
-              <template v-for="index in 5">
+              <template v-for="product of $context.popularProducts">
                 <div
                   class="column is-6-mobile is-4-tablet is-one-fifth-desktop"
                 >
                   <ProductCard
-                    title="Wormenkwekerij stickers"
+                    :title="product.title"
                     image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
                     slug="wormenkwekerij-stickers"
                     price="14900"
@@ -198,7 +200,6 @@ export default {
   methods: {
     async buy() {
       this.isLoading = true;
-      console.log(this.variant);
       await buy(
         this.variant,
         {

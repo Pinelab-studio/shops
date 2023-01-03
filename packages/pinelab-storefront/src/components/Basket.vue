@@ -203,7 +203,7 @@ export default {
         message,
         position: 'is-top-right',
         type: 'is-light',
-        actionText: this.$l(`basket.to-cart`),
+        actionText: this.$l(`basket.go-to-cart`),
         pauseOnHover: true,
         duration: 5000,
         onAction: () => {

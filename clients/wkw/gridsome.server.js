@@ -26,13 +26,14 @@ module.exports = async function (api) {
       products: productsNL,
       collections: collectionsNL,
       productsPerCollection: productsPerCollectionNL,
-      availableCountries,
+      availableCountries: availableCountriesNL,
     } = await vendureNL.getShopData();
 
     let {
       products: productsEN,
       collections: collectionsEN,
       productsPerCollection: productsPerCollectionEN,
+      availableCountries: availableCountriesEN,
     } = await vendureEN.getShopData();
 
     const {
@@ -57,6 +58,8 @@ module.exports = async function (api) {
         productsPerCollection: productsPerCollectionNL,
         pages: pages_nl,
         blogs: blogs_nl,
+        availableCountries: availableCountriesNL,
+        slugPrefix: getlabel('urls.slug-prefix', 'nl'),
       },
       {
         lang: 'en',
@@ -65,6 +68,8 @@ module.exports = async function (api) {
         productsPerCollection: productsPerCollectionEN,
         pages: pages_en,
         blogs: blogs_en,
+        availableCountries: availableCountriesEN,
+        slugPrefix: getlabel('urls.slug-prefix', 'en'),
       },
     ];
 
@@ -103,12 +108,12 @@ module.exports = async function (api) {
       products,
       collections: allCollections,
       productsPerCollection,
+      availableCountries,
       lang,
       pages,
       blogs,
+      slugPrefix,
     } of languages) {
-      const slugPrefix = getlabel('urls.slug-prefix', lang);
-
       const collections = vendureNL.unflatten(allCollections);
       const navbarCollections = collections.map(mapToMinimalCollection);
 
@@ -118,16 +123,22 @@ module.exports = async function (api) {
       const global = {
         navbarCollections,
         lang,
+        cartUrl: `${slugPrefix}/cart/`,
+        checkoutUrl: `${slugPrefix}/checkout/`,
+        homeUrl: `${slugPrefix}/`,
       };
+
+      const popularProducts = products.slice(0, 5);
+      const popularCollections = collections.slice(0, 5);
 
       // -------------------- Home -----------------------------------
       createPage({
-        path: `/${slugPrefix}`,
+        path: global.homeUrl,
         component: './src/templates/Index.vue',
         context: {
           ...global,
-          popularProducts: products.slice(0, 5), // popular products for now,
-          popularCollections: collections.slice(0, 5),
+          popularProducts,
+          popularCollections,
         },
       });
 
@@ -145,7 +156,6 @@ module.exports = async function (api) {
           let translatedProduct = language.products.find(
             (p) => p.id == product.id
           );
-
           translatedPages[language.lang] = translatedProduct.url;
         });
 
@@ -163,8 +173,40 @@ module.exports = async function (api) {
             avgRating,
             breadcrumb,
             translatedPages,
+            popularProducts,
           },
         });
+      });
+
+      // -------------------- Cart -----------------------------------
+      const cartTranslations = {};
+      languages.forEach(({ lang, slugPrefix }) => {
+        cartTranslations[lang] = `${slugPrefix}/cart/`;
+      });
+      createPage({
+        path: global.cartUrl,
+        component: './src/templates/Cart.vue',
+        context: {
+          ...global,
+          popularCollections,
+          translatedPages: cartTranslations,
+        },
+      });
+      console.log(cartTranslations);
+
+      // -------------------- Checkout -----------------------------------
+      const checkoutTranslations = {};
+      languages.forEach(({ lang, slugPrefix }) => {
+        checkoutTranslations[lang] = `${slugPrefix}/checkout/`;
+      });
+      createPage({
+        path: global.checkoutUrl,
+        component: './src/templates/Checkout.vue',
+        context: {
+          ...global,
+          availableCountries,
+          translatedPages: checkoutTranslations,
+        },
       });
     }
   });

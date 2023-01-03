@@ -9,7 +9,7 @@
     "empty-cart": "Je winkelmand is leeg... ",
     "added": "toegevoegd aan winkelmand",
     "removed": "verwijderd uit winkelmand",
-    "to-cart": "Naar winkelmand"
+    "continue": "Verder winkelen"
   },
   "customer-details": {
     "title": "Gegevens",
@@ -36,7 +36,8 @@
     "title": "Samenvatting",
     "shipping-cost": "Verzendkosten",
     "subtotal": "Subtotaal",
-    "total": "Totaal"
+    "total": "Totaal",
+    "payments": "Betaalmogelijkheden"
   },
   "checkup": {
     "title": "Bestellen en betalen",
@@ -55,7 +56,9 @@
     "popular-categories": "Populaire categorieën",
     "popular-products": "Populaire producten",
     "made-by": "Met plezier gemaakt door Pinelab",
-    "read-more": "Lees meer"
+    "read-more": "Lees meer",
+    "add-to-cart": "In winkelmand",
+    "sold-out": "Uitverkocht"
   },
   "error": {
     "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
@@ -74,6 +77,8 @@
     "faq": "FAQ"
   },
   "product": {
-    "no-reviews": "Er zijn nog geen reviews voor dit product."
+    "no-reviews": "Er zijn nog geen reviews voor dit product.",
+    "description": "Product beschrijving",
+    "related": "Anderen kochten ook"
   }
 }
