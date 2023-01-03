@@ -19,9 +19,9 @@ module.exports = {
    * Set the full path of a product or collection on item.url
    */
   setFullUrl: function (itemWithSlug, prefixPath) {
-    return {
-      ...itemWithSlug,
-      url: `/${prefixPath}/${itemWithSlug.slug}/`,
-    };
+    itemWithSlug.url = `/${prefixPath}/${itemWithSlug.slug}/`.replaceAll(
+      '//',
+      '/'
+    ); // replace all double slashes
   },
 };
