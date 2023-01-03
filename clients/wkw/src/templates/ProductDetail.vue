@@ -13,27 +13,6 @@
             <article class="tile is-child">
               <p class="title has-text-black mb-0">
                 {{ $context.product.name }}
-                <b-button
-                  label="Review schrijven"
-                  type="is-primary is-pulled-right"
-                  @click="isReviewComponentModalActive = true"
-                />
-                <b-modal
-                  v-model="isReviewComponentModalActive"
-                  has-modal-card
-                  trap-focus
-                  aria-role="dialog"
-                  aria-label="Review Modal"
-                  close-button-aria-label="Close"
-                  aria-modal
-                >
-                  <template #default="props">
-                    <modal-form
-                      v-bind="formProps"
-                      @close="props.close"
-                    ></modal-form>
-                  </template>
-                </b-modal>
               </p>
 
               <div class="is-flex">
@@ -43,9 +22,14 @@
                   :disabled="true"
                   :show-score="true"
                 ></b-rate>
-                <a class="my-3" href="#reviews">
-                  - {{ $context.reviews.length }} Reviews</a
-                >
+                <div v-if="$context.reviews.length > 0">
+                  <a class="my-3 is-flex" href="#reviews">
+                    - {{ $context.reviews.length }} Reviews</a
+                  >
+                </div>
+                <div v-else>
+                  <a class="my-3 is-flex"> - No reviews</a>
+                </div>
               </div>
 
               <p class="subtitle has-text-black">
@@ -123,16 +107,39 @@
           </div>
         </section>
 
-        <span class="anchor" id="reviews"></span>
-        <div class="tile is-parent">
-          <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
-            Reviews
-          </h4>
-        </div>
-        <div class="tile is-parent py-0">
-          <article class="tile is-child notification is-grey">
-            <Reviews :reviews="$context.reviews" />
-          </article>
+        <div v-if="$context.reviews.length > 0">
+          <span class="anchor" id="reviews"></span>
+          <div class="tile is-parent">
+            <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+              Reviews
+              <!-- <b-button
+                  label="Review schrijven"
+                  type="is-primary is-pulled-right"
+                  @click="isReviewComponentModalActive = true"
+                />
+                <b-modal
+                  v-model="isReviewComponentModalActive"
+                  has-modal-card
+                  trap-focus
+                  aria-role="dialog"
+                  aria-label="Review Modal"
+                  close-button-aria-label="Close"
+                  aria-modal
+                >
+                  <template #default="props">
+                    <modal-form
+                      v-bind="formProps"
+                      @close="props.close"
+                    ></modal-form>
+                  </template>
+                </b-modal> -->
+            </h4>
+          </div>
+          <div class="tile is-parent py-0">
+            <article class="tile is-child notification is-grey">
+              <Reviews :reviews="$context.reviews" />
+            </article>
+          </div>
         </div>
       </div>
     </div>
@@ -185,6 +192,7 @@ export default {
   methods: {
     async buy() {
       this.isLoading = true;
+      console.log(this.variant);
       await buy(
         this.variant,
         {

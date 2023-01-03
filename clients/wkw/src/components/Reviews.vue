@@ -21,26 +21,28 @@
             </p>
           </div>
 
-          <article class="media">
-            <figure class="media-left my-1 mx-3">
-              <p class="image is-48x48">
-                <img
-                  class="is-rounded"
-                  src="https://www.beleggersbelangen.nl/wp-content/uploads/2018/01/frank-wasse-belegger-van-de-week.jpg"
-                />
-              </p>
-            </figure>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong>Frank van Wormenkwekerijwasse</strong>
-                  <br />
-                  {{ review.response }}
-                  <br />
+          <div v-if="review.response">
+            <article class="media">
+              <figure class="media-left my-1 mx-3">
+                <p class="image is-48x48">
+                  <img
+                    class="is-rounded"
+                    src="/img/frank-wasse-profielfoto.jpg"
+                  />
                 </p>
+              </figure>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong>Frank van Wormenkwekerijwasse</strong>
+                    <br />
+                    {{ review.response }}
+                    <br />
+                  </p>
+                </div>
               </div>
-            </div>
-          </article>
+            </article>
+          </div>
         </div>
       </article>
     </template>

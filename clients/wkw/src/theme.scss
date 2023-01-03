@@ -116,31 +116,11 @@ $link-focus-border: $primary;*/
 html {
   font-size: 12px;
   @include tablet {
-    font-size: 16px;
+    font-size: 12px;
   }
   @include desktop {
     font-size: 14px;
   }
-}
-
-h1 {
-  @extend .is-size-1;
-  @extend .mb-3;
-}
-
-h2 {
-  @extend .is-size-2;
-  @extend .mb-3;
-}
-
-h3 {
-  @extend .is-size-3;
-  @extend .mb-3;
-}
-
-h4 {
-  @extend .is-size-4;
-  @extend .mb-3;
 }
 
 // PRODUCT CARD //
