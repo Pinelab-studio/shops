@@ -1,11 +1,6 @@
-const {
-  VendureServer,
-  SearchUtil,
-  deduplicate,
-  createLabelFunction,
-} = require('pinelab-storefront');
+const { VendureServer, createLabelFunction } = require('pinelab-storefront');
 const { GraphQLClient } = require('graphql-request');
-const { mapToMinimalCollection } = require('./util');
+const { mapToMinimalCollection, setFullUrl } = require('./util');
 const { GET_CONTENT } = require('./content.queries');
 
 module.exports = async function (api) {
@@ -73,6 +68,36 @@ module.exports = async function (api) {
       },
     ];
 
+    // Set full urls for all products and collections or all languages
+    languages.forEach(
+      ({
+        products,
+        collections: allCollections,
+        productsPerCollection,
+        lang,
+      }) => {
+        const slugPrefix = getlabel('urls.slug-prefix', lang);
+        const categoryPrefix = getlabel('urls.category-prefix', lang);
+        const productPrefix = getlabel('urls.product-prefix', lang);
+        allCollections.forEach((c) =>
+          setFullUrl(c, `${slugPrefix}/${categoryPrefix}`)
+        );
+        products.forEach((p) =>
+          setFullUrl(p, `${slugPrefix}/${productPrefix}`)
+        );
+        productsPerCollection.forEach((collectionMap) => {
+          collectionMap.products.forEach((p) =>
+            setFullUrl(p, `${slugPrefix}/${productPrefix}`)
+          );
+          setFullUrl(
+            collectionMap.collection,
+            `${slugPrefix}/${categoryPrefix}`
+          );
+          return collectionMap;
+        });
+      }
+    );
+
     // Create pages for each language
     for (let {
       products,
@@ -83,36 +108,12 @@ module.exports = async function (api) {
       blogs,
     } of languages) {
       const slugPrefix = getlabel('urls.slug-prefix', lang);
-      const categoryPrefix = getlabel('urls.category-prefix', lang);
-      const productPrefix = getlabel('urls.product-prefix', lang);
-
-      // Set absolute path for product.url and collection.url: product.url = '/product/lavameel/'
-      allCollections = allCollections.map((colllection) => ({
-        ...colllection,
-        url: `${slugPrefix}/${categoryPrefix}/${colllection.slug}/`,
-      }));
-      products = products.map((product) => ({
-        ...product,
-        url: `${slugPrefix}/${productPrefix}/${product.slug}/`,
-      }));
-      productsPerCollection = productsPerCollection.map((collectionMap) => {
-        collectionMap.products = collectionMap.products.map((product) => ({
-          ...product,
-          url: `${slugPrefix}/${productPrefix}/${product.slug}/`,
-        }));
-        collectionMap.collection = {
-          ...collectionMap.collection,
-          url: `${slugPrefix}/${categoryPrefix}/${collectionMap.collection.slug}/`,
-        };
-        return collectionMap;
-      });
 
       const collections = vendureNL.unflatten(allCollections);
       const navbarCollections = collections.map(mapToMinimalCollection);
 
       // Breadcrumb pages
       const Home = '/';
-      const Assortiment = '/assortiment/';
 
       const global = {
         navbarCollections,
@@ -121,11 +122,12 @@ module.exports = async function (api) {
 
       // -------------------- Home -----------------------------------
       createPage({
-        path: '/',
+        path: `/${slugPrefix}`,
         component: './src/templates/Index.vue',
         context: {
           ...global,
-          products: products.slice(0, 5), // popular products for now
+          popularProducts: products.slice(0, 5), // popular products for now,
+          popularCollections: collections.slice(0, 5),
         },
       });
 
@@ -134,14 +136,21 @@ module.exports = async function (api) {
         const reviewsForThisProduct = reviews.filter(
           (review) => review.vendure_product_id == product.id
         );
-
         const sum = reviewsForThisProduct.reduce((a, b) => a + b.rating, 0);
         const avg = sum / reviewsForThisProduct.length || 0;
         const avgRating = Math.round(avg * 10) / 10;
+        // Find translated version of current product
+        const translatedPages = {};
+        languages.forEach((language) => {
+          let translatedProduct = language.products.find(
+            (p) => p.id == product.id
+          );
+
+          translatedPages[language.lang] = translatedProduct.url;
+        });
 
         const breadcrumb = {
           Home,
-          Assortiment,
           [product.name]: product.url,
         };
         createPage({
@@ -153,6 +162,7 @@ module.exports = async function (api) {
             reviews: reviewsForThisProduct,
             avgRating,
             breadcrumb,
+            translatedPages,
           },
         });
       });

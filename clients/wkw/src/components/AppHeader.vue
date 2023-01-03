@@ -106,7 +106,7 @@
           </template>
           <!-- Overflow collections -->
           <div class="navbar-item has-dropdown is-hoverable shadow">
-            <a class="navbar-link"> Meer </a>
+            <a class="navbar-link"> {{ $l('nav.more') }}</a>
             <div class="navbar-dropdown">
               <div class="container section py-1">
                 <div class="columns has-text-left">
@@ -123,15 +123,17 @@
           </div>
           <!-- Non-collection navigation items -->
           <div class="navbar-item has-dropdown is-hoverable shadow">
-            <a class="navbar-link"> Informatie </a>
+            <a class="navbar-link"> {{ $l('nav.information') }} </a>
             <div class="navbar-dropdown">
               <div class="container section py-1">
                 <div class="columns has-text-left">
                   <div class="column">
                     <g-link to="/" class="navbar-item px-0">
-                      Advies en informatie
+                      {{ $l('nav.advice') }}
                     </g-link>
-                    <g-link to="/" class="navbar-item px-0"> FAQ</g-link>
+                    <g-link to="/" class="navbar-item px-0">
+                      {{ $l('nav.faq') }}</g-link
+                    >
                   </div>
                 </div>
               </div>
@@ -139,6 +141,9 @@
           </div>
           <div class="navbar-item is-hoverable shadow">
             <g-link to="/" class="navbar-link is-arrowless"> Contact</g-link>
+          </div>
+          <div class="navbar-item is-hoverable shadow">
+            <LanguageSwitcher />
           </div>
         </div>
       </template>
@@ -148,10 +153,11 @@
 
 <script>
 import Basket from 'pinelab-storefront/lib/components/Basket';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default {
   props: ['collections'],
-  components: { Basket },
+  components: { LanguageSwitcher, Basket },
 };
 </script>
 <style>

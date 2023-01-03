@@ -50,7 +50,12 @@
     "title": "Bestelling voltooid"
   },
   "common": {
-    "couponcode": "Kortingscode"
+    "couponcode": "Kortingscode",
+    "buy-now": "Koop nu",
+    "popular-categories": "Populaire categorieën",
+    "popular-products": "Populaire producten",
+    "made-by": "Met plezier gemaakt door Pinelab",
+    "read-more": "Lees meer"
   },
   "error": {
     "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
@@ -61,6 +66,12 @@
     "product-prefix": "product",
     "domain": "https://wormenkwekerijwasse.nl",
     "slug-prefix": ""
+  },
+  "nav": {
+    "more": "Meer",
+    "information": "Informatie",
+    "advice": "Advies & informatie",
+    "faq": "FAQ"
   },
   "product": {
     "no-reviews": "Er zijn nog geen reviews voor dit product."
