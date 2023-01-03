@@ -29,4 +29,11 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('QuantityInput', QuantityInput);
   Vue.component('DefaultLayout', DefaultLayout);
   Vue.component('PopupImage', PopupImage);
+
+  // Add date filter for global use
+  Vue.filter('date', function (value) {
+    const date = new Date(value);
+    const month = date.toLocaleString('nl-NL', { month: 'long' });
+    return `${month} ${date.getFullYear()}`;
+  });
 }

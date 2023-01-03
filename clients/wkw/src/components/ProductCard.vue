@@ -11,7 +11,7 @@
         <div class="media">
           <div class="media-content">
             <p class="title has-text-weight-bold is-6">{{ title }}</p>
-            <p class="subtitle is-7">{{ price | euro }}</p>
+            <p class="subtitle is-6">{{ price | euro }}</p>
           </div>
         </div>
       </div>

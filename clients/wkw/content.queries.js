@@ -40,6 +40,15 @@ const GET_CONTENT = gql`
       short_description
       naam
     }
+    wkw_reviews {
+      vendure_product_id
+      author_name
+      date_created
+      message
+      product_title
+      rating
+      response
+    }
   }
 `;
 

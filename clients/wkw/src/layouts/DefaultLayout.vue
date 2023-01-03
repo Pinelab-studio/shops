@@ -2,6 +2,7 @@
   <div>
     <AppHeader :collections="$context.navbarCollections" />
     <div class="container is-widescreen section navbar-margin pb-6">
+      <Breadcrumb v-if="$context.breadcrumb" :crumbs="$context.breadcrumb" />
       <slot name="content" />
     </div>
     <div v-if="$slots.fullwidth" class="has-background-primary">
@@ -24,7 +25,7 @@
         </div>
         <div class="column">
           <b-field position="is-centered" grouped group-multiline>
-            <b-input placeholder="Naam" type="fname"> </b-input>
+            <b-input placeholder="Naam" type="name"> </b-input>
             <b-input placeholder="E-mailadres" type="email"> </b-input>
             <p class="control">
               <b-button
@@ -36,19 +37,25 @@
         </div>
       </div>
     </div>
+    <AppFooter :collections="$context.navbarCollections" />
   </div>
 </template>
 
 <script>
 import AppHeader from '@/components/AppHeader.vue';
+import AppFooter from '@/components/AppFooter.vue';
+import Breadcrumb from 'pinelab-storefront/lib/components/Breadcrumb';
 
 export default {
-  components: { AppHeader },
+  components: { AppHeader, AppFooter, Breadcrumb },
   props: {
     showNewsletter: {
       default: true,
       type: Boolean,
     },
+  },
+  async mounted() {
+    await this.$vendure.getActiveOrder();
   },
 };
 </script>
