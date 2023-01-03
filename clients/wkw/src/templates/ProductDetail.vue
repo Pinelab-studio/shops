@@ -151,7 +151,7 @@ import VariantSelector from 'pinelab-storefront/lib/components/VariantSelector';
 import ReadMoreDescription from '@/components/ReadMoreDescription';
 import ProductCard from '@/components/ProductCard.vue';
 import Reviews from '@/components/Reviews';
-import { buy, hydrate, isOutOfStock } from 'pinelab-storefront';
+import { buy, hydrate, isOutOfStock, getMetaInfo } from 'pinelab-storefront';
 import ModalForm from '@/components/ModalForm';
 
 export default {
@@ -203,6 +203,10 @@ export default {
       );
       this.isLoading = false;
     },
+  },
+  metaInfo() {
+    const url = `${process.env.GRIDSOME_HOST}${this.$route.fullPath}`;
+    return getMetaInfo(this.$context.product, url);
   },
 };
 </script>
