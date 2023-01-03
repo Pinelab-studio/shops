@@ -192,7 +192,6 @@ module.exports = async function (api) {
           translatedPages: cartTranslations,
         },
       });
-      console.log(cartTranslations);
 
       // -------------------- Checkout -----------------------------------
       const checkoutTranslations = {};
