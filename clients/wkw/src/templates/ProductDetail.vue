@@ -106,40 +106,46 @@
             </div>
           </div>
         </section>
+        <span class="anchor" id="reviews"></span>
+        <div class="tile is-parent">
+          <h4
+            class="title has-text-black has-text-weight-bold py-3 my-0"
+            style="width: 100%"
+          >
+            Reviews
+            <b-button
+              label="Review schrijven"
+              type="is-primary is-pulled-right"
+              @click="isReviewComponentModalActive = true"
+            />
+            <b-modal
+              v-model="isReviewComponentModalActive"
+              has-modal-card
+              trap-focus
+              aria-role="dialog"
+              aria-label="Review Modal"
+              close-button-aria-label="Close"
+              aria-modal
+            >
+              <template #default="props">
+                <modal-form
+                  v-bind="formProps"
+                  @close="props.close"
+                ></modal-form>
+              </template>
+            </b-modal>
+          </h4>
+        </div>
 
-        <div v-if="$context.reviews.length > 0">
-          <span class="anchor" id="reviews"></span>
-          <div class="tile is-parent">
-            <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
-              Reviews
-              <!-- <b-button
-                  label="Review schrijven"
-                  type="is-primary is-pulled-right"
-                  @click="isReviewComponentModalActive = true"
-                />
-                <b-modal
-                  v-model="isReviewComponentModalActive"
-                  has-modal-card
-                  trap-focus
-                  aria-role="dialog"
-                  aria-label="Review Modal"
-                  close-button-aria-label="Close"
-                  aria-modal
-                >
-                  <template #default="props">
-                    <modal-form
-                      v-bind="formProps"
-                      @close="props.close"
-                    ></modal-form>
-                  </template>
-                </b-modal> -->
-            </h4>
-          </div>
-          <div class="tile is-parent py-0">
-            <article class="tile is-child notification is-grey">
+        <div class="tile is-parent py-0">
+          <article class="tile is-child notification is-grey">
+            <div v-if="$context.reviews.length > 0">
               <Reviews :reviews="$context.reviews" />
-            </article>
-          </div>
+            </div>
+            <div v-else>
+              {{ $l('product.no-reviews') }}
+            </div>
+          </article>
         </div>
       </div>
     </div>
