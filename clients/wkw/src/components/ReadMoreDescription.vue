@@ -2,7 +2,7 @@
   <div v-if="description">
     <div :class="`collapsed-${collapse} mb-0`">{{ plaintext }}</div>
     <div v-if="isDescriptionLongEnough" class="has-text-right">
-      <a href="#full-description">Lees meer</a>
+      <a href="#full-description">{{ $l('common.read-more') }}</a>
     </div>
   </div>
 </template>
