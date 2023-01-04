@@ -33,15 +33,15 @@
       </section>
       <section id="popular-categories">
         <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
-          Populaire categorieën
+          {{ $l('common.popular-categories') }}
         </h4>
         <div class="columns is-multiline is-mobile">
-          <template v-for="index in 5">
-            <div class="column is-4-mobile is-one-fifth-desktop">
+          <template v-for="collection in $context.popularCollections">
+            <div class="column is-6-mobile is-4-tablet is-one-fifth-desktop">
               <CategoryCard
-                title="Boeken worm"
-                image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
-                slug="boeken-en-ebooks"
+                :title="collection.name"
+                :image="collection.featuredAsset.thumbnail"
+                :slug="collection.url"
               />
             </div>
           </template>
@@ -49,16 +49,16 @@
       </section>
       <section id="popular-products">
         <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
-          Populaire producten
+          {{ $l('common.popular-products') }}
         </h4>
         <div class="columns is-multiline is-mobile">
-          <template v-for="index in 5">
-            <div class="column is-4-mobile is-one-fifth-desktop">
+          <template v-for="product in $context.popularProducts">
+            <div class="column is-6-mobile is-4-tablet is-one-fifth-desktop">
               <ProductCard
-                title="Wormenkwekerij stickers"
-                image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
-                slug="wormenkwekerij-stickers"
-                price="14900"
+                :title="product.name"
+                :image="product.featuredAsset.thumbnail"
+                :slug="product.url"
+                :price="product.lowestPrice"
               />
             </div>
           </template>
@@ -100,27 +100,7 @@
     </template>
 
     <template #content2>
-      <section id="highlighted">
-        <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
-          Blog
-        </h4>
-        <div class="columns">
-          <div class="column">
-            <BlogCard
-              title="Geen gezonde bodem zonder wormen"
-              image="https://storage.googleapis.com/wassets/preview/ba/seeds__preview.jpeg"
-              slug="geen-gezonde-bodem-zonder-wormen"
-            />
-          </div>
-          <div class="column">
-            <BlogCard
-              title="Help mijn wormen ontsnappen"
-              image="https://storage.googleapis.com/wassets/preview/ba/seeds__preview.jpeg"
-              slug="help-mijn-wormen-ontsnappen"
-            />
-          </div>
-        </div>
-      </section>
+      <BlogCard />
     </template>
   </DefaultLayout>
 </template>

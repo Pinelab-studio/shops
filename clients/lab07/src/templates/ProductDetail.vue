@@ -1,6 +1,6 @@
 <template>
   <DefaultLayout>
-    <b-button tag="a" href="/shop/"> < </b-button>
+    <b-button tag="a" href="/shop/"></b-button>
     <br />
     <br />
     <div class="columns">

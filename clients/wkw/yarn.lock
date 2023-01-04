@@ -7033,10 +7033,10 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinelab-storefront@0.60.6:
-  version "0.60.6"
-  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.60.6.tgz#ca750e56c8ebb2d453a8c4ae81f614d6ded43203"
-  integrity sha512-XCZ2/jHN8l6O1HWAGTVcqxjreXXa9jlYgbLU/MCAeaGGQnKFPd7VWMAy8M3AELTVXisyc2jBZ0WD7/4Kl4MStQ==
+pinelab-storefront@0.62.2:
+  version "0.62.2"
+  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.62.2.tgz#66c79e4048a56a76fdbb9a6514b928de598d0bdc"
+  integrity sha512-Vl4w4kSfqLxHTrRAX48oC/w+FKz2Isc8yelpm6fPrAd/1O47M1vjQvPBsxqWqJR0Gv+26+lmXFipO6Pnz63hCg==
   dependencies:
     graphql "15.3.0"
     graphql-request "^3.4.0"

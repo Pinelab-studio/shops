@@ -1,6 +1,6 @@
 {
   "name": "shops-vendure-backend",
-  "version": "0.62.0",
+  "version": "0.62.2",
   "private": true,
   "scripts": {
     "start": "node ./dist/index",
@@ -13,6 +13,7 @@
     "serve:wkw-prod": "export ENV_FILE=.env.wkw-prod && yarn serve",
     "script:prod": "export ENV_FILE=.env && yarn ts-node",
     "script:test": "export ENV_FILE=.env.test && yarn ts-node",
+    "script:wkw-test": "export ENV_FILE=.env.wkw-test && yarn ts-node",
     "copy": "yarn copyfiles -u 1 'src/__admin-ui/dist/**/*' dist",
     "build": "yarn tsc && yarn copy",
     "build:admin": "rimraf src/__admin-ui && yarn ts-node src/compile-admin-ui.ts",

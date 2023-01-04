@@ -1,56 +1,64 @@
 {
   "lang": "en",
   "basket": {
-    "title": "Winkelmand",
-    "shipping-cost": "Verzendkosten",
-    "total": "Totaal",
-    "go-to-cart": "Naar winkelmand",
-    "go-to-checkout": "Bestellen",
-    "empty-cart": "Je winkelmand is leeg... ",
-    "added": "toegevoegd aan winkelmand",
-    "removed": "verwijderd uit winkelmand",
-    "to-cart": "Naar winkelmand"
+    "title": "Cart",
+    "shipping-cost": "Shipping",
+    "total": "Total",
+    "go-to-cart": "Go to cart",
+    "go-to-checkout": "Order now",
+    "empty-cart": "You don't have any items in cart... ",
+    "added": "added",
+    "removed": "removed from cart",
+    "continue": "Continue shopping"
   },
   "customer-details": {
-    "title": "Gegevens",
-    "firstname": "Voornaam",
-    "lastname": "Achternaam",
-    "company": "Bedrijfsnaam",
-    "phone": "Telefoonnr.",
-    "email": "Email adres",
-    "postalcode": "Postcode",
-    "housenr": "Huisnr.",
-    "street": "Straat",
-    "city": "Plaats",
-    "country": "Land",
-    "different-billing-address": "Ander factuuradres",
-    "billing-address": "Factuuradres",
-    "submit": "Bezorging"
+    "title": "Your details",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "company": "Company",
+    "phone": "Phonenr.",
+    "email": "Email address",
+    "postalcode": "Postalcode",
+    "housenr": "Housenr.",
+    "street": "Street",
+    "city": "City",
+    "country": "Country",
+    "different-billing-address": "Different billing address",
+    "billing-address": "Billing address",
+    "submit": "Shipping"
   },
   "shipping": {
-    "step-title": "Bezorging",
-    "page-title": "Verzendwijze kiezen:",
-    "submit": "Bestellen en betalen"
+    "step-title": "Shipping",
+    "page-title": "Pick a shipping method:",
+    "submit": "Order"
   },
   "order-summary": {
-    "title": "Samenvatting",
-    "shipping-cost": "Verzendkosten",
-    "subtotal": "Subtotaal",
-    "total": "Totaal"
+    "title": "Summary",
+    "shipping-cost": "Shipping",
+    "subtotal": "Sub total",
+    "total": "Total",
+    "payments": "Supported payments"
   },
   "checkup": {
-    "title": "Bestellen en betalen",
-    "shipping-address": "Verzendadres",
-    "billing-address": "Factuuradres",
-    "items": "Producten",
-    "disclaimer": "Door te klikken op 'Doorgaan en betalen' ga ik akkoord met de algemene voorwaarden. Ik heb kennis genomen van de annuleringsvoorwaarden en de privacyverklaring.",
-    "pay": "Betalen"
+    "title": "Order and pay",
+    "shipping-address": "Shipping address",
+    "billing-address": "Billing address",
+    "items": "Items",
+    "disclaimer": "",
+    "pay": "Pay"
   },
   "finished": {
-    "title": "Bestelling voltooid"
+    "title": "Finished"
   },
   "common": {
-    "couponcode": "Kortingscode"
+    "couponcode": "Coupon code",
+    "buy-now": "Buy now",
+    "popular-categories": "Popular categories",
+    "popular-products": "Popular products",
+    "made-by": "Happily made by Pinelab",
+    "read-more": "Read more",
+    "add-to-cart": "Add to cart",
+    "sold-out": "Sold out"
   },
   "error": {
     "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
@@ -61,5 +69,16 @@
     "product-prefix": "product",
     "domain": "https://wormenkwekerijwasse.nl",
     "slug-prefix": "/en"
+  },
+  "nav": {
+    "more": "More",
+    "information": "Information",
+    "advice": "Advice & information",
+    "faq": "FAQ"
+  },
+  "product": {
+    "no-reviews": "Er zijn nog geen reviews voor dit product.",
+    "description": "Product description",
+    "related": "Others also purchased"
   }
 }
