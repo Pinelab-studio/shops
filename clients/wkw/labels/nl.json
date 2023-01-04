@@ -20,6 +20,7 @@
     "email": "Email adres",
     "postalcode": "Postcode",
     "housenr": "Huisnr.",
+    "housenrAddition": "Toevoeging",
     "street": "Straat",
     "city": "Plaats",
     "country": "Land",
