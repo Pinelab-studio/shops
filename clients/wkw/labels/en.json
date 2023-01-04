@@ -20,6 +20,7 @@
     "email": "Email address",
     "postalcode": "Postalcode",
     "housenr": "Housenr.",
+    "housenrAddition": "Addition",
     "street": "Street",
     "city": "City",
     "country": "Country",
