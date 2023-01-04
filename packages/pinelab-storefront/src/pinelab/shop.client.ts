@@ -1,5 +1,5 @@
 import { gql } from 'graphql-request';
-import { VendureClient } from './vendure.client';
+import { VendureClient } from '../vendure/vendure.client';
 import {
   CreateCoinbasePaymentIntentMutation,
   CreateMolliePaymentIntentMutation,
@@ -17,11 +17,14 @@ import {
   SetOrderCustomFieldsMutationVariables,
   UpdateOrderCustomFieldsInput,
 } from '../generated/graphql';
-import { Store } from './types';
+import { Store } from '../vendure/types';
 
 const additionalCollectionFields = gql`
   fragment AdditionalCollectionFields on Collection {
     id
+    featuredAsset {
+      thumbnail
+    }
   }
 `;
 
@@ -52,6 +55,11 @@ const additionalProductFields = gql`
 const additionalOrderFields = gql`
   fragment AdditionalOrderFields on Order {
     id
+    lines {
+      featuredAsset {
+        thumbnail
+      }
+    }
   }
 `;
 
@@ -140,5 +148,27 @@ export class ShopClient extends VendureClient {
       );
     await this.validateResult(createCoinbasePaymentIntent);
     return createCoinbasePaymentIntent;
+  }
+
+  /**
+   * Redirects a user to the given payment platform
+   */
+  async startPayment(
+    method: 'mollie' | 'coinbase',
+    paymentMethodCode?: string
+  ) {
+    if (method === 'mollie' && !paymentMethodCode) {
+      throw Error(`Need paymentMethodCode for mollie payment`);
+    } else if (method === 'mollie') {
+      const redirectUrl = await this.createMolliePaymentIntent(
+        paymentMethodCode!
+      );
+      window.location.replace(redirectUrl);
+    } else if (method === 'coinbase') {
+      const redirectUrl = await this.createCoinbasePaymentIntent();
+      window.location.replace(redirectUrl);
+    } else {
+      throw Error(`Invalid payment method given: ${method}`);
+    }
   }
 }

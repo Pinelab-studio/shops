@@ -2748,7 +2748,12 @@ export type ProductVariant = Node & {
   options: Array<ProductOption>;
   facetValues: Array<FacetValue>;
   translations: Array<ProductVariantTranslation>;
-  customFields?: Maybe<Scalars['JSON']>;
+  customFields?: Maybe<ProductVariantCustomFields>;
+};
+
+export type ProductVariantCustomFields = {
+  __typename?: 'ProductVariantCustomFields';
+  maxPerOrder?: Maybe<Scalars['Int']>;
 };
 
 export type ProductVariantFilterParameter = {
@@ -2763,6 +2768,7 @@ export type ProductVariantFilterParameter = {
   currencyCode?: Maybe<StringOperators>;
   priceWithTax?: Maybe<NumberOperators>;
   stockLevel?: Maybe<StringOperators>;
+  maxPerOrder?: Maybe<NumberOperators>;
 };
 
 export type ProductVariantList = PaginatedList & {
@@ -2794,6 +2800,7 @@ export type ProductVariantSortParameter = {
   price?: Maybe<SortOrder>;
   priceWithTax?: Maybe<SortOrder>;
   stockLevel?: Maybe<SortOrder>;
+  maxPerOrder?: Maybe<SortOrder>;
 };
 
 export type ProductVariantTranslation = {

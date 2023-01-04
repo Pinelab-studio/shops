@@ -106,7 +106,6 @@ export function getVendureQueries(
       }
       featuredAsset {
         preview
-        thumbnail
       }
       productVariants {
         items {
@@ -169,7 +168,6 @@ export function getVendureQueries(
         featuredAsset {
           id
           preview
-          thumbnail
         }
         productVariant {
           id
