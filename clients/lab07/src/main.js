@@ -13,6 +13,16 @@ import QuantityInput from 'pinelab-storefront/lib/components/QuantityInput';
 import VueGtag from 'vue-gtag';
 
 export default function (Vue, { router, head, isClient }) {
+  // Get image by ID from directus
+  Vue.mixin({
+    methods: {
+      getDefaultImage: (id) =>
+        `${process.env.GRIDSOME_DIRECTUS_HOST}/assets/${id}?key=default`,
+      getSquareImage: (id) =>
+        `${process.env.GRIDSOME_DIRECTUS_HOST}/assets/${id}?key=square`,
+    },
+  });
+
   Vue.use(Buefy);
   Vue.component('QuantityInput', QuantityInput);
   Vue.component('PopupImage', PopupImage);

@@ -1,0 +1,85 @@
+{
+  "lang": "nl",
+  "basket": {
+    "title": "Winkelmand",
+    "shipping-cost": "Verzendkosten",
+    "total": "Totaal",
+    "go-to-cart": "Naar winkelmand",
+    "go-to-checkout": "Bestellen",
+    "empty-cart": "Je winkelmand is leeg... ",
+    "added": "toegevoegd aan winkelmand",
+    "removed": "verwijderd uit winkelmand",
+    "continue": "Verder winkelen"
+  },
+  "customer-details": {
+    "title": "Gegevens",
+    "firstname": "Voornaam",
+    "lastname": "Achternaam",
+    "company": "Bedrijfsnaam",
+    "phone": "Telefoonnr.",
+    "email": "Email adres",
+    "postalcode": "Postcode",
+    "housenr": "Huisnr.",
+    "housenrAddition": "Toevoeging",
+    "street": "Straat",
+    "city": "Plaats",
+    "country": "Land",
+    "different-billing-address": "Ander factuuradres",
+    "billing-address": "Factuuradres",
+    "submit": "Bezorging"
+  },
+  "shipping": {
+    "step-title": "Bezorging",
+    "page-title": "Verzendwijze kiezen:",
+    "submit": "Bestellen en betalen"
+  },
+  "order-summary": {
+    "title": "Samenvatting",
+    "shipping-cost": "Verzendkosten",
+    "subtotal": "Subtotaal",
+    "total": "Totaal",
+    "payments": "Betaalmogelijkheden"
+  },
+  "checkup": {
+    "title": "Bestellen en betalen",
+    "shipping-address": "Verzendadres",
+    "billing-address": "Factuuradres",
+    "items": "Producten",
+    "disclaimer": "Door te klikken op 'Doorgaan en betalen' ga ik akkoord met de algemene voorwaarden. Ik heb kennis genomen van de annuleringsvoorwaarden en de privacyverklaring.",
+    "pay": "Betalen"
+  },
+  "finished": {
+    "title": "Bestelling voltooid"
+  },
+  "common": {
+    "couponcode": "Kortingscode",
+    "buy-now": "Koop nu",
+    "popular-categories": "Populaire categorieën",
+    "popular-products": "Populaire producten",
+    "made-by": "Met plezier gemaakt door Pinelab",
+    "read-more": "Lees meer",
+    "add-to-cart": "In winkelmand",
+    "sold-out": "Uitverkocht"
+  },
+  "error": {
+    "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
+  },
+  "urls": {
+    "home": "Home",
+    "category-prefix": "product-categorie",
+    "product-prefix": "product",
+    "domain": "https://wormenkwekerijwasse.nl",
+    "slug-prefix": ""
+  },
+  "nav": {
+    "more": "Meer",
+    "information": "Informatie",
+    "advice": "Advies & informatie",
+    "faq": "FAQ"
+  },
+  "product": {
+    "no-reviews": "Er zijn nog geen reviews voor dit product.",
+    "description": "Product beschrijving",
+    "related": "Anderen kochten ook"
+  }
+}

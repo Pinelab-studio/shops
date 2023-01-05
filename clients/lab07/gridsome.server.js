@@ -16,7 +16,7 @@ module.exports = function (api) {
     const [
       { products, collections, productsPerCollection },
       availableCountries,
-      { lab07_projects: projects },
+      { lab07_projects: projects, lab07_general: general },
     ] = await Promise.all([
       vendureClient.getCompleteCatalog(),
       vendureClient.getAvailableCountries(),
@@ -26,12 +26,16 @@ module.exports = function (api) {
     products.reverse();
 
     const global = {
-      // TODO add email and stuff
+      kvk: general.kvk,
+      instagramUrl: general.instagram_url,
+      emailAddress: general.email_address,
     };
 
     // Breadcrumb pages
     const Home = '/';
     const Shop = '/shop/';
+    const About = '/over-ons/';
+    const Contact = '/contact/';
     const Winkelmand = '/winkelmand/';
     const Checkout = '/checkout/';
 
@@ -66,6 +70,30 @@ module.exports = function (api) {
         products,
         collections,
         breadcrumb: { Home, Shop },
+      },
+    });
+
+    // ----------------- About  ---------------------
+    createPage({
+      path: '/over-ons/',
+      component: './src/templates/About.vue',
+      context: {
+        ...global,
+        breadcrumb: { Home, About },
+        aboutPage: general.about_page,
+        aboutImage1: general.about_image1,
+        aboutImage2: general.about_image2,
+      },
+    });
+
+    // ----------------- Contact  ---------------------
+    createPage({
+      path: '/contact/',
+      component: './src/templates/Contact.vue',
+      context: {
+        ...global,
+        breadcrumb: { Home, Contact },
+        contactPage: general.contact_page,
       },
     });
 

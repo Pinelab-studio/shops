@@ -1,6 +1,6 @@
 {
   "name": "shops-vendure-backend",
-  "version": "0.60.3",
+  "version": "0.63.0",
   "private": true,
   "scripts": {
     "start": "node ./dist/index",
@@ -13,6 +13,7 @@
     "serve:wkw-prod": "export ENV_FILE=.env.wkw-prod && yarn serve",
     "script:prod": "export ENV_FILE=.env && yarn ts-node",
     "script:test": "export ENV_FILE=.env.test && yarn ts-node",
+    "script:wkw-test": "export ENV_FILE=.env.wkw-test && yarn ts-node",
     "copy": "yarn copyfiles -u 1 'src/__admin-ui/dist/**/*' dist",
     "build": "yarn tsc && yarn copy",
     "build:admin": "rimraf src/__admin-ui && yarn ts-node src/compile-admin-ui.ts",
@@ -53,9 +54,10 @@
     "vendure-plugin-goedgepickt": "4.3.0",
     "vendure-plugin-google-cloud-tasks": "4.3.0",
     "vendure-plugin-google-storage-assets": "4.3.0",
-    "vendure-plugin-invoices": "4.3.0",
+    "vendure-plugin-invoices": "4.7.1",
+    "vendure-plugin-limit-product-per-order": "^4.7.0",
     "vendure-plugin-metrics": "4.3.0",
-    "vendure-plugin-myparcel": "4.4.0",
+    "vendure-plugin-myparcel": "4.5.0",
     "vendure-plugin-order-export": "4.3.0",
     "vendure-plugin-sendcloud": "4.3.0",
     "vendure-plugin-shipping-by-weight-and-country": "4.3.0",

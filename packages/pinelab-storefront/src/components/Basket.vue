@@ -176,7 +176,7 @@ export default {
         message,
         position: 'is-top-right',
         type: 'is-light',
-        actionText: this.$l(`basket.to-cart`),
+        actionText: this.$l(`basket.go-to-cart`),
         pauseOnHover: true,
         duration: 5000,
         onAction: () => {
@@ -186,7 +186,8 @@ export default {
     },
     showError(e) {
       console.error(e);
-      const label = this.$l(`error.${e.errorCode}`);
+      let label = this.$l(`error.${e.errorCode}`);
+      label = label === `error.${e.errorCode}` ? undefined : label;
       this.$buefy.toast.open({
         message: label || e.message,
         duration: 5000,

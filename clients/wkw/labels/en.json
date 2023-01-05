@@ -1,0 +1,85 @@
+{
+  "lang": "en",
+  "basket": {
+    "title": "Cart",
+    "shipping-cost": "Shipping",
+    "total": "Total",
+    "go-to-cart": "Go to cart",
+    "go-to-checkout": "Order now",
+    "empty-cart": "You don't have any items in cart... ",
+    "added": "added",
+    "removed": "removed from cart",
+    "continue": "Continue shopping"
+  },
+  "customer-details": {
+    "title": "Your details",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "company": "Company",
+    "phone": "Phonenr.",
+    "email": "Email address",
+    "postalcode": "Postalcode",
+    "housenr": "Housenr.",
+    "housenrAddition": "Addition",
+    "street": "Street",
+    "city": "City",
+    "country": "Country",
+    "different-billing-address": "Different billing address",
+    "billing-address": "Billing address",
+    "submit": "Shipping"
+  },
+  "shipping": {
+    "step-title": "Shipping",
+    "page-title": "Pick a shipping method:",
+    "submit": "Order"
+  },
+  "order-summary": {
+    "title": "Summary",
+    "shipping-cost": "Shipping",
+    "subtotal": "Sub total",
+    "total": "Total",
+    "payments": "Supported payments"
+  },
+  "checkup": {
+    "title": "Order and pay",
+    "shipping-address": "Shipping address",
+    "billing-address": "Billing address",
+    "items": "Items",
+    "disclaimer": "",
+    "pay": "Pay"
+  },
+  "finished": {
+    "title": "Finished"
+  },
+  "common": {
+    "couponcode": "Coupon code",
+    "buy-now": "Buy now",
+    "popular-categories": "Popular categories",
+    "popular-products": "Popular products",
+    "made-by": "Happily made by Pinelab",
+    "read-more": "Read more",
+    "add-to-cart": "Add to cart",
+    "sold-out": "Sold out"
+  },
+  "error": {
+    "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
+  },
+  "urls": {
+    "home": "Home",
+    "category-prefix": "product-category",
+    "product-prefix": "product",
+    "domain": "https://wormenkwekerijwasse.nl",
+    "slug-prefix": "/en"
+  },
+  "nav": {
+    "more": "More",
+    "information": "Information",
+    "advice": "Advice & information",
+    "faq": "FAQ"
+  },
+  "product": {
+    "no-reviews": "Er zijn nog geen reviews voor dit product.",
+    "description": "Product description",
+    "related": "Others also purchased"
+  }
+}

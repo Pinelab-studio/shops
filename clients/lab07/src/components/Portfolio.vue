@@ -1,26 +1,41 @@
 <template>
-  <section class="hero p-5 is-justify-content-center is-flex-direction-row">
+  <section
+    class="hero is-justify-content-center is-flex-direction-row"
+    style="padding-top: 100px"
+  >
     <div class="tile has-text-centered">
       <div class="tile is-parent">
-        <div class="carousel-container">
-          <b-carousel
-            :repeat="false"
-            :arrow-hover="true"
-            :autoplay="false"
-            animated="slide"
-          >
-            <b-carousel-item v-for="(carousel, i) in carousels" :key="i">
-              <b-image :src="carousel.url" />
-            </b-carousel-item>
-          </b-carousel>
-        </div>
+        <b-carousel
+          :repeat="false"
+          :arrow="true"
+          :arrow-hover="false"
+          :autoplay="false"
+          animated="slide"
+        >
+          <b-carousel-item v-for="(image, i) in images" :key="i">
+            <div
+              @click="
+                $emit('imageClick', {
+                  imageUrl: getDefaultImage(image.directus_files_id.id),
+                })
+              "
+            >
+              <b-image
+                :src="getSquareImage(image.directus_files_id.id)"
+                alt="image.directus_files_id.title"
+                :lazy="false"
+                class="is-clickable"
+              ></b-image>
+            </div>
+          </b-carousel-item>
+        </b-carousel>
       </div>
       <div class="tile is-parent is-vertical">
         <article class="tile is-child">
-          <p class="title big">podiumschool leeuwarden</p>
+          <p class="portfolio-title">{{ title }}</p>
         </article>
         <article class="tile is-child">
-          <p class="subtitle">foto's van docenten van de podiumschool</p>
+          <div v-html="description" class="subtitle"></div>
         </article>
       </div>
     </div>
@@ -29,62 +44,37 @@
 
 <script>
 export default {
-  data() {
-    return {
-      carousels: [
-        { url: require('/static/1.jpg') },
-        { url: require('/static/2.jpg') },
-        { url: require('/static/3.jpg') },
-        { url: require('/static/4.jpg') },
-        { url: require('/static/5.jpg') },
-        { url: require('/static/6.jpg') },
-        { url: require('/static/7.jpg') },
-      ],
-    };
-  },
+  emits: ['imageClick'],
+  props: ['title', 'description', 'images'],
 };
 </script>
-<style>
-.title.big {
-  font-size: 3rem !important;
-  font-weight: normal;
-  color: black;
-  bottom: 0;
-  position: absolute;
-  margin: -24px;
+<style scoped>
+.tile {
+  align-items: center;
+  max-width: 1000px;
 }
 
-.tile {
-  max-width: 1000px;
-  position: relative;
-  box-sizing: border-box;
+.portfolio-title {
+  font-size: 3rem;
 }
 
 @media only screen and (max-width: 768px) {
   .tile {
     max-width: 400px;
   }
-}
 
-.carousel-container {
-  height: 600px;
-  max-height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  display: flex !important;
-  background-color: none;
-}
-
-@media only screen and (max-width: 600px) {
-  .carousel-container {
-    height: auto;
+  .portfolio-title {
+    font-size: 2rem;
   }
 }
 
-.image img {
-  max-height: 600px;
-  height: auto;
-  width: 476px;
+@media only screen and (max-width: 500px) {
+  .tile {
+    max-width: 300px;
+  }
+
+  .portfolio-title {
+    font-size: 2rem;
+  }
 }
 </style>

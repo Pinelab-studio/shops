@@ -1,0 +1,34 @@
+{
+  "name": "wormenkwekerij-wasse",
+  "private": true,
+  "scripts": {
+    "serve:static": "yarn concurrently \"nodemon --ext js,vue --watch '.src/' --exec 'yarn gridsome build && yarn http-server ./dist/'\"",
+    "serve:local": "export VENDURE_ENV=local && yarn dev",
+    "dev": "yarn link-there && yarn link-here && concurrently \"cd ../../packages/pinelab-storefront && yarn watch\" \"gridsome develop\"",
+    "link-here": "yarn link pinelab-storefront",
+    "link-there": "cd ../../packages/pinelab-storefront && yarn link"
+  },
+  "dependencies": {
+    "@fontsource/poppins": "^4.5.10",
+    "@gridsome/plugin-sitemap": "^0.4.0",
+    "buefy": "^0.9.7",
+    "debounce": "^1.2.1",
+    "fuse.js": "^6.6.2",
+    "graphql-tag": "^2.12.6",
+    "pinelab-storefront": "0.63.0"
+  },
+  "devDependencies": {
+    "@gridsome/source-graphql": "^0.1.0",
+    "concurrently": "^6.2.0",
+    "gridsome": "^0.7.23",
+    "http-server": "^0.12.3",
+    "nodemon": "^2.0.7",
+    "rimraf": "^3.0.2",
+    "sass": "^1.32.13",
+    "sass-loader": "^10.1.1"
+  },
+  "version": "0.63.0",
+  "resolutions": {
+    "graphql": "^14.7.0"
+  }
+}

@@ -3448,6 +3448,12 @@ export type ProductFieldsFragment = { __typename?: 'Product' } & Pick<
           featuredAsset?: Maybe<
             { __typename?: 'Asset' } & Pick<Asset, 'id' | 'preview'>
           >;
+          customFields?: Maybe<
+            { __typename?: 'ProductVariantCustomFields' } & Pick<
+              ProductVariantCustomFields,
+              'maxPerOrder'
+            >
+          >;
         }
     >;
   } & AdditionalProductFieldsFragment;

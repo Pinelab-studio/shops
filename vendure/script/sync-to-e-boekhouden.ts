@@ -1,4 +1,3 @@
-import { GoedgepicktService } from 'vendure-plugin-goedgepickt/dist/vendure-plugin-goedgepickt/src/api/goedgepickt.service';
 import {
   bootstrap,
   ChannelService,
@@ -23,7 +22,28 @@ import { EBoekhoudenService } from 'vendure-plugin-e-boekhouden/dist/api/e-boekh
     authorizedAsOwnerOnly: false,
     channel,
   });
-  await app.get(EBoekhoudenService).pushOrder({ orderCode, channelToken });
-  console.log(`Sent order ${orderCode} to Eboekhouden`);
+
+  if (!orderCode) {
+    const date = '2022-12-06T09:50:34+00:00';
+    console.log(`Syncing all orders placed after ${date} to e-boekhouden`);
+    let orders = await app.get(OrderService).findAll(ctx, {
+      filter: {
+        orderPlacedAt: {
+          after: date,
+        },
+      },
+    });
+    for (const order of orders.items) {
+      await app
+        .get(EBoekhoudenService)
+        .pushOrder({ orderCode: order.code, channelToken });
+      console.log(`Sent order ${order.code} to Eboekhouden`);
+    }
+    console.log(`Synced ${orders.items.length} orders to e-boekhouden`);
+  } else {
+    await app.get(EBoekhoudenService).pushOrder({ orderCode, channelToken });
+    console.log(`Sent order ${orderCode} to Eboekhouden`);
+  }
+
   process.exit(0);
 })();

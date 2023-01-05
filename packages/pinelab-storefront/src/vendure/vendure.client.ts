@@ -399,13 +399,28 @@ export class VendureClient {
         this.client.setHeader('Authorization', `Bearer ${token}`);
       }
     }
-    const { data, headers } = await this.client.rawRequest(document, variables);
-    const token = headers.get(this.tokenName);
-    if (token && window?.localStorage) {
-      // Make sure we save received tokens
-      window.localStorage.setItem(this.tokenName, token);
+    try {
+      const { data, headers } = await this.client.rawRequest(
+        document,
+        variables
+      );
+      token = headers.get(this.tokenName);
+      if (token && window?.localStorage) {
+        // Make sure we save received tokens
+        window.localStorage.setItem(this.tokenName, token);
+      }
+      return data;
+    } catch (e) {
+      const error = (e as any).response?.errors?.[0];
+      if (error) {
+        throw new VendureError(
+          error.message,
+          undefined,
+          error.extensions?.code
+        );
+      }
+      throw e;
     }
-    return data;
   }
 }
 

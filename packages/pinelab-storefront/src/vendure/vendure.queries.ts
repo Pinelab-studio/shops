@@ -83,6 +83,9 @@ export function getVendureQueries(
           preview
         }
       }
+      customFields {
+        maxPerOrder
+      }
     }
   `;
 

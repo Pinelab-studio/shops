@@ -1,6 +1,5 @@
 const gql = require(`graphql-tag`);
 
-// TODO define queries for fetching portfolio projects const GET_CONTENT = gql``;
 const GET_CONTENT = gql`
   {
     lab07_projects {
@@ -12,6 +11,21 @@ const GET_CONTENT = gql`
           title
         }
       }
+    }
+    lab07_general {
+      kvk
+      instagram_url
+      email_address
+      about_page
+      about_image1 {
+        id
+        title
+      }
+      about_image2 {
+        id
+        title
+      }
+      contact_page
     }
   }
 `;

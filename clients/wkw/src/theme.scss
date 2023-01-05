@@ -1,0 +1,272 @@
+// Import Bulma's core
+@import '~bulma/sass/utilities/_all';
+
+// Set your colors
+$text: #3f3f3f;
+$primary: #4c8a45;
+$link: #3f88c5;
+$info: $link;
+$success: #4c8a45af;
+$dark-green: #365433;
+$dark-green-invert: findColorInvert($orange);
+$warning: #ffba08;
+$danger: #ef6461;
+$dark: $text;
+
+$footer-background-color: $primary;
+$footer-color: $primary-invert;
+
+// Lists and maps
+$custom-colors: null !default;
+$custom-shades: null !default;
+
+$family-sans-serif: 'Poppins';
+$family-primary: 'Poppins';
+
+$control-radius: 2px;
+
+$notification-radius: 0px;
+
+$navbar-item-hover-background-color: $primary;
+$navbar-item-active-background-color: $primary;
+$navbar-tab-hover-background-color: $primary;
+$navbar-tab-active-background-color: $primary;
+$navbar-dropdown-background-color: $primary;
+$navbar-background-color: $primary;
+$navbar-dropdown-item-hover-color: $white;
+$navbar-dropdown-arrow: $white;
+
+$footer-background-color: $dark-green;
+$footer-padding: 1.5rem;
+$navbar-dropdown-item-hover-background-color: $primary;
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: mergeColorMaps(
+  (
+    'white': (
+      $white,
+      $black,
+    ),
+    'black': (
+      $black,
+      $white,
+    ),
+    'light': (
+      $light,
+      $light-invert,
+    ),
+    'dark': (
+      $dark,
+      $dark-invert,
+    ),
+    'primary': (
+      $primary,
+      $primary-invert,
+      $primary-light,
+      $primary-dark,
+    ),
+    'link': (
+      $link,
+      $link-invert,
+      $link-light,
+      $link-dark,
+    ),
+    'info': (
+      $info,
+      $info-invert,
+      $info-light,
+      $info-dark,
+    ),
+    'success': (
+      $success,
+      $success-invert,
+      $success-light,
+      $success-dark,
+    ),
+    'warning': (
+      $warning,
+      $warning-invert,
+      $warning-light,
+      $warning-dark,
+    ),
+    'danger': (
+      $danger,
+      $danger-invert,
+      $danger-light,
+      $danger-dark,
+    ),
+  ),
+  $custom-colors: (
+    'dark-green': (
+      $dark-green,
+      $dark-green-invert,
+    ),
+  )
+);
+
+// Links
+/*$link: $primary;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;*/
+
+// Import Bulma and Buefy styles
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
+
+html {
+  font-size: 14px;
+}
+
+// PRODUCT CARD //
+
+.container-overlay {
+  position: relative;
+}
+
+/* Make the image to responsive */
+.image {
+  width: 100%;
+  height: auto;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.hover-overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  width: 100%;
+  height: 100%;
+  transition: 0.3s ease;
+  opacity: 0;
+}
+
+/* When you mouse over the container, fade in the overlay*/
+.container-overlay:hover .hover-overlay {
+  opacity: 0.5;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  width: 100%;
+  height: 100%;
+  transition: 0.3s ease;
+  opacity: 0.5;
+}
+
+/* When you mouse over the container, fade in the overlay*/
+.container-overlay:hover .overlay {
+  opacity: 1;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.input:active,
+.input:focus {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  border-color: gray;
+}
+
+.mdi-26px {
+  font-size: 26px;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.navbar-dropdown {
+  background-color: $primary;
+  border-top: 0px;
+  color: $white;
+  font-size: 12px;
+  @include tablet {
+    font-size: 16px;
+  }
+  @include desktop {
+    font-size: 14px;
+  }
+}
+.navbar-brand {
+  background-color: $white;
+  @include mobile {
+    border-bottom: 1px solid #d0d0d0;
+  }
+  @include tablet {
+    border-bottom: 1px solid #d0d0d0;
+  }
+}
+
+a.navbar-burger.burger {
+  height: auto;
+}
+
+.collapsed-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
+.collapsed-3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.anchor {
+  display: block;
+  height: 160px; /*same height as header*/
+  margin-top: -160px; /*same height as header*/
+  visibility: hidden;
+}
+
+#side-basket button,
+.checkout-steps a,
+.checkout-steps button {
+  @extend .is-primary;
+}
+
+#side-basket h1,
+.checkout-steps h1 {
+  @extend .is-1;
+  @extend .title;
+}
+
+#side-basket h2,
+.checkout-steps h2 {
+  @extend .is-2;
+  @extend .title;
+}
+
+#side-basket h3,
+.checkout-steps h3 {
+  @extend .is-3;
+  @extend .title;
+}
+
+#side-basket h4,
+.checkout-steps h4 {
+  @extend .is-4;
+  @extend .title;
+}
+
+#side-basket h5,
+.checkout-steps h5 {
+  @extend .is-4;
+  @extend .title;
+}
