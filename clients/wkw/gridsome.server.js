@@ -1,6 +1,11 @@
 const { VendureServer, createLabelFunction } = require('pinelab-storefront');
 const { GraphQLClient } = require('graphql-request');
-const { mapToMinimalCollection, setFullUrl } = require('./util');
+const {
+  mapToMinimalCollection,
+  mapToMinimalPage,
+  mapToMinimalBlogPage,
+  setFullUrl,
+} = require('./util');
 const { GET_CONTENT } = require('./content.queries');
 
 module.exports = async function (api) {
@@ -111,6 +116,8 @@ module.exports = async function (api) {
 
       const collections = vendureNL.unflatten(allCollections);
       const navbarCollections = collections.map(mapToMinimalCollection);
+      const pageLinks = pages.map(mapToMinimalPage);
+      const blogPageLinks = blogs.map(mapToMinimalBlogPage);
 
       // Breadcrumb pages
       const Home = '/';
@@ -118,6 +125,8 @@ module.exports = async function (api) {
       const global = {
         navbarCollections,
         lang,
+        common,
+        pageLinks,
       };
 
       // -------------------- Home -----------------------------------
@@ -128,6 +137,7 @@ module.exports = async function (api) {
           ...global,
           popularProducts: products.slice(0, 5), // popular products for now,
           popularCollections: collections.slice(0, 5),
+          blogPageLinks,
         },
       });
 

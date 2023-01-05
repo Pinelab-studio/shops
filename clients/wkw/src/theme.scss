@@ -139,6 +139,7 @@ html {
   height: 100%;
   transition: 0.3s ease;
   opacity: 0;
+  border-radius: 0.25rem;
 }
 
 /* When you mouse over the container, fade in the overlay*/
@@ -155,6 +156,7 @@ html {
   height: 100%;
   transition: 0.3s ease;
   opacity: 0.5;
+  border-radius: 0.25rem;
 }
 
 /* When you mouse over the container, fade in the overlay*/

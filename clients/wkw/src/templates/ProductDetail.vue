@@ -221,11 +221,6 @@ export default {
   height: min-content;
 }
 
-.carousel-item {
-  object-fit: cover;
-  height: 500px;
-}
-
 .columns {
   margin-left: 0;
   margin-right: 0;
