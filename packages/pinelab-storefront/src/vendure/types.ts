@@ -45,14 +45,8 @@ export interface SortableCollection extends BasicCollection {
   children?: SortableCollection[];
 }
 
-export class Store {
-  activeOrder: OrderFieldsFragment | undefined;
-}
-
-export interface VueContext {
-  $vendure: VendureClient;
-  $store: Store;
-  $emitter: Emitter<any>;
+export class Store<T> {
+  activeOrder: (OrderFieldsFragment & T) | undefined;
 }
 
 export class VendureError extends Error {

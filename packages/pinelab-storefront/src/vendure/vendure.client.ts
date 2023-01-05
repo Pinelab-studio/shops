@@ -14,19 +14,8 @@ import {
   CollectionsQuery,
   CollectionsQueryVariables,
   CreateAddressInput,
-  CreateCoinbasePaymentIntentMutation,
   CreateCustomerInput,
-  CreateMolliePaymentIntentMutation,
-  CreateMolliePaymentIntentMutationVariables,
-  DutchAddressLookupQuery,
-  DutchAddressLookupQueryVariables,
-  DutchPostalCodeInput,
   EligibleShippingMethodsQuery,
-  MolliePaymentIntent,
-  MyparcelDropOffPoint,
-  MyparcelDropOffPointInput,
-  MyparcelDropOffPointsQuery,
-  MyparcelDropOffPointsQueryVariables,
   NextOrderStatesQuery,
   OrderByCodeQuery,
   OrderByCodeQueryVariables,
@@ -39,8 +28,6 @@ import {
   SetCustomerForOrderMutationVariables,
   SetOrderBillingAddressMutation,
   SetOrderBillingAddressMutationVariables,
-  SetOrderCustomFieldsMutation,
-  SetOrderCustomFieldsMutationVariables,
   SetOrderShippingAddressMutation,
   SetOrderShippingAddressMutationVariables,
   SetOrderShippingMethodMutation,
@@ -49,7 +36,6 @@ import {
   StockLevelProductsQueryVariables,
   TransitionOrderToStateMutation,
   TransitionOrderToStateMutationVariables,
-  UpdateOrderCustomFieldsInput,
 } from '../generated/graphql';
 import {
   BasicCollection,
@@ -58,17 +44,33 @@ import {
   Store,
   VendureError,
 } from './types';
-import { AdditionalVendureFields, getVendureQueries } from './vendure.queries';
+import { getVendureQueries } from './vendure.queries';
 import { setCalculatedFields } from '../util/product.util';
 import { getProductsForCollection } from '../util/collection.util';
 
-export class VendureClient {
+export interface AdditionalVendureFields {
+  additionalCollectionFields?: string;
+  additionalProductFields?: string;
+  additionalOrderFields?: string;
+}
+
+export type ExtendedCollection<T> = T & CollectionFieldsFragment;
+export type ExtendedProduct<T> = T & ProductFieldsFragment;
+export type ExtendedOrder<T> = T & OrderFieldsFragment;
+
+/**
+ * Graphql client for Vendure
+ *
+ * Pass types of your additional Collection, Product and Order fields as generic types
+ * to make this client return your extended types.
+ */
+export class VendureClient<C = {}, P = {}, O = {}> {
   client: GraphQLClient;
   tokenName = 'vendure-auth-token';
   protected queries: ReturnType<typeof getVendureQueries>;
 
   constructor(
-    protected store: Store,
+    protected store: Store<O>,
     protected url: string,
     protected channelToken: string,
     additionalGraphqlFields?: AdditionalVendureFields
@@ -79,12 +81,12 @@ export class VendureClient {
     this.queries = getVendureQueries(additionalGraphqlFields);
   }
 
-  async getActiveOrder(): Promise<OrderFieldsFragment | undefined> {
+  async getActiveOrder(): Promise<ExtendedOrder<O> | undefined> {
     const { activeOrder } = await this.request<ActiveOrderQuery>(
       this.queries.GET_ACTIVE_ORDER
     );
-    this.store.activeOrder = activeOrder;
-    return activeOrder;
+    this.store.activeOrder = activeOrder as ExtendedOrder<O>;
+    return this.store.activeOrder;
   }
 
   /**
@@ -108,7 +110,7 @@ export class VendureClient {
   async addProductToCart(
     productVariantId: string,
     quantity: number
-  ): Promise<OrderFieldsFragment> {
+  ): Promise<ExtendedOrder<O>> {
     const { addItemToOrder } = await this.request<
       AdditemToOrderMutation,
       AdditemToOrderMutationVariables
@@ -117,16 +119,16 @@ export class VendureClient {
       quantity,
     });
     await this.validateResult(addItemToOrder);
-    this.store.activeOrder = addItemToOrder as OrderFieldsFragment;
+    this.store.activeOrder = addItemToOrder as ExtendedOrder<O>;
     await this.setDefaultShippingMethod();
-    return addItemToOrder as OrderFieldsFragment;
+    return addItemToOrder as ExtendedOrder<O>;
   }
 
   /**
    * Sets the first eligible shipping method with 'default' in its code
    * If not found, it sets the first eligible method
    */
-  async setDefaultShippingMethod() {
+  async setDefaultShippingMethod(): Promise<void> {
     const methods = await this.getEligibleShippingMethods();
     const selectedShippingMethodId =
       this.store.activeOrder?.shippingLines?.[0]?.shippingMethod?.id;
@@ -158,7 +160,7 @@ export class VendureClient {
 
   async setOrderShippingMethod(
     shippingMethodId: string
-  ): Promise<OrderFieldsFragment> {
+  ): Promise<ExtendedOrder<O>> {
     const { setOrderShippingMethod } = await this.request<
       SetOrderShippingMethodMutation,
       SetOrderShippingMethodMutationVariables
@@ -166,58 +168,58 @@ export class VendureClient {
       shippingMethodId,
     });
     await this.validateResult(setOrderShippingMethod);
-    this.store.activeOrder = setOrderShippingMethod as OrderFieldsFragment;
-    return setOrderShippingMethod as OrderFieldsFragment;
+    this.store.activeOrder = setOrderShippingMethod as ExtendedOrder<O>;
+    return this.store.activeOrder;
   }
 
   @NoConcurrentRequests()
   async adjustOrderLine(
     orderLineId: string,
     quantity: number
-  ): Promise<OrderFieldsFragment> {
+  ): Promise<ExtendedOrder<O>> {
     const { adjustOrderLine } = await this.request<
       AdjustOrderLineMutation,
       AdjustOrderLineMutationVariables
     >(this.queries.ADJUST_ORDERLINE, { orderLineId, quantity });
     await this.validateResult(adjustOrderLine);
-    this.store.activeOrder = adjustOrderLine as OrderFieldsFragment;
-    return adjustOrderLine as OrderFieldsFragment;
+    this.store.activeOrder = adjustOrderLine as ExtendedOrder<O>;
+    return this.store.activeOrder;
   }
 
   async setCustomerForOrder(
     input: CreateCustomerInput
-  ): Promise<OrderFieldsFragment> {
+  ): Promise<ExtendedOrder<O>> {
     const { setCustomerForOrder } = await this.request<
       SetCustomerForOrderMutation,
       SetCustomerForOrderMutationVariables
     >(this.queries.SET_CUSTOMER_FOR_ORDER, { input });
     await this.validateResult(setCustomerForOrder);
-    this.store.activeOrder = setCustomerForOrder as OrderFieldsFragment;
-    return setCustomerForOrder as OrderFieldsFragment;
+    this.store.activeOrder = setCustomerForOrder as ExtendedOrder<O>;
+    return this.store.activeOrder;
   }
 
   async setOrderShippingAddress(
     input: CreateAddressInput
-  ): Promise<OrderFieldsFragment> {
+  ): Promise<ExtendedOrder<O>> {
     const { setOrderShippingAddress: order } = await this.request<
       SetOrderShippingAddressMutation,
       SetOrderShippingAddressMutationVariables
     >(this.queries.SET_ORDERSHIPPINGADDRESS, { input });
     await this.validateResult(order);
-    this.store.activeOrder = order as OrderFieldsFragment;
-    return order as OrderFieldsFragment;
+    this.store.activeOrder = order as ExtendedOrder<O>;
+    return this.store.activeOrder;
   }
 
   async setOrderBillingAddress(
     input: CreateAddressInput
-  ): Promise<OrderFieldsFragment> {
+  ): Promise<ExtendedOrder<O>> {
     const { setOrderBillingAddress: order } = await this.request<
       SetOrderBillingAddressMutation,
       SetOrderBillingAddressMutationVariables
     >(this.queries.SET_ORDERBILLINGADDRESS, { input });
     await this.validateResult(order);
-    this.store.activeOrder = order as OrderFieldsFragment;
-    return order as OrderFieldsFragment;
+    this.store.activeOrder = order as ExtendedOrder<O>;
+    return this.store.activeOrder;
   }
 
   async getNextOrderStates(): Promise<string[]> {
@@ -227,25 +229,25 @@ export class VendureClient {
     return nextOrderStates;
   }
 
-  async transitionOrderToState(state: string): Promise<OrderFieldsFragment> {
+  async transitionOrderToState(state: string): Promise<ExtendedOrder<O>> {
     const { transitionOrderToState } = await this.request<
       TransitionOrderToStateMutation,
       TransitionOrderToStateMutationVariables
     >(this.queries.TRANSITION_ORDER_TO_STATE, { state });
     await this.validateResult(transitionOrderToState);
-    this.store.activeOrder = transitionOrderToState as OrderFieldsFragment;
-    return transitionOrderToState as OrderFieldsFragment;
+    this.store.activeOrder = transitionOrderToState as ExtendedOrder<O>;
+    return this.store.activeOrder;
   }
 
-  async getOrderByCode(code: string): Promise<OrderFieldsFragment | undefined> {
+  async getOrderByCode(code: string): Promise<ExtendedOrder<O> | undefined> {
     const { orderByCode } = await this.request<
       OrderByCodeQuery,
       OrderByCodeQueryVariables
     >(this.queries.GET_ORDER_BY_CODE, { code });
-    return orderByCode;
+    return orderByCode as ExtendedOrder<O>;
   }
 
-  async applyCouponCode(couponCode: string): Promise<OrderFieldsFragment> {
+  async applyCouponCode(couponCode: string): Promise<ExtendedOrder<O>> {
     const { applyCouponCode: order } = await this.request<
       ApplyCouponCodeMutation,
       ApplyCouponCodeMutationVariables
@@ -253,13 +255,13 @@ export class VendureClient {
       couponCode,
     });
     await this.validateResult(order);
-    this.store.activeOrder = order as OrderFieldsFragment;
-    return order as OrderFieldsFragment;
+    this.store.activeOrder = order as ExtendedOrder<O>;
+    return this.store.activeOrder;
   }
 
   async removeCouponCode(
     couponCode: string
-  ): Promise<OrderFieldsFragment | undefined> {
+  ): Promise<ExtendedOrder<O> | undefined> {
     const { removeCouponCode: order } = await this.request<
       RemoveCouponCodeMutation,
       RemoveCouponCodeMutationVariables
@@ -267,19 +269,19 @@ export class VendureClient {
       couponCode,
     });
     if (order) {
-      this.store.activeOrder = order;
-      return order;
+      this.store.activeOrder = order as ExtendedOrder<O>;
+      return this.store.activeOrder;
     }
   }
 
-  async removeAllOrderLines(): Promise<OrderFieldsFragment> {
+  async removeAllOrderLines(): Promise<ExtendedOrder<O>> {
     const { removeAllOrderLines: order } =
       await this.request<RemoveAllOrderLinesMutation>(
         this.queries.REMOVE_ALL_ORDER_LINES
       );
     await this.validateResult(order);
-    this.store.activeOrder = order as OrderFieldsFragment;
-    return order as OrderFieldsFragment;
+    this.store.activeOrder = order as ExtendedOrder<O>;
+    return this.store.activeOrder;
   }
 
   /**
@@ -404,7 +406,7 @@ export class VendureClient {
         document,
         variables
       );
-      token = headers.get(this.tokenName);
+      const token = headers.get(this.tokenName);
       if (token && window?.localStorage) {
         // Make sure we save received tokens
         window.localStorage.setItem(this.tokenName, token);

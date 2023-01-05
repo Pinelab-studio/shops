@@ -3448,12 +3448,6 @@ export type ProductFieldsFragment = { __typename?: 'Product' } & Pick<
           featuredAsset?: Maybe<
             { __typename?: 'Asset' } & Pick<Asset, 'id' | 'preview'>
           >;
-          customFields?: Maybe<
-            { __typename?: 'ProductVariantCustomFields' } & Pick<
-              ProductVariantCustomFields,
-              'maxPerOrder'
-            >
-          >;
         }
     >;
   } & AdditionalProductFieldsFragment;
@@ -3470,9 +3464,7 @@ export type CollectionFieldsFragment = { __typename?: 'Collection' } & Pick<
         { __typename?: 'Collection' } & Pick<Collection, 'id' | 'name' | 'slug'>
       >
     >;
-    featuredAsset?: Maybe<
-      { __typename?: 'Asset' } & Pick<Asset, 'preview' | 'thumbnail'>
-    >;
+    featuredAsset?: Maybe<{ __typename?: 'Asset' } & Pick<Asset, 'preview'>>;
     productVariants: { __typename?: 'ProductVariantList' } & {
       items: Array<
         { __typename?: 'ProductVariant' } & {
@@ -3537,10 +3529,7 @@ export type OrderFieldsFragment = { __typename?: 'Order' } & Pick<
         'id' | 'quantity' | 'linePriceWithTax'
       > & {
           featuredAsset?: Maybe<
-            { __typename?: 'Asset' } & Pick<
-              Asset,
-              'id' | 'preview' | 'thumbnail'
-            >
+            { __typename?: 'Asset' } & Pick<Asset, 'id' | 'preview'>
           >;
           productVariant: { __typename?: 'ProductVariant' } & Pick<
             ProductVariant,

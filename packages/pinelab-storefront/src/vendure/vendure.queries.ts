@@ -1,10 +1,6 @@
 import { gql } from 'graphql-request';
+import { AdditionalVendureFields } from './vendure.client';
 
-export interface AdditionalVendureFields {
-  additionalCollectionFields?: string;
-  additionalProductFields?: string;
-  additionalOrderFields?: string;
-}
 /**
  * Create Graphql queries including the given additional field fragments
  * @param additionalGraphqlFields
@@ -82,9 +78,6 @@ export function getVendureQueries(
           id
           preview
         }
-      }
-      customFields {
-        maxPerOrder
       }
     }
   `;

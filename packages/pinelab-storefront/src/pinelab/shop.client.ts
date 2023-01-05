@@ -1,6 +1,9 @@
 import { gql } from 'graphql-request';
 import { VendureClient } from '../vendure/vendure.client';
 import {
+  AdditionalCollectionFieldsFragment,
+  AdditionalOrderFieldsFragment,
+  AdditionalProductFieldsFragment,
   CreateCoinbasePaymentIntentMutation,
   CreateMolliePaymentIntentMutation,
   CreateMolliePaymentIntentMutationVariables,
@@ -43,6 +46,9 @@ const additionalProductFields = gql`
       featuredAsset {
         thumbnail
       }
+      customFields {
+        maxPerOrder
+      }
     }
     customFields {
       metaTitle
@@ -67,7 +73,11 @@ const additionalOrderFields = gql`
  * A Vendure client tailored to fetch all fields from the Pinelab Shops Vendure instance.
  * For generic projects use {@link VendureClient}
  */
-export class ShopClient extends VendureClient {
+export class ShopClient extends VendureClient<
+  AdditionalCollectionFieldsFragment,
+  AdditionalProductFieldsFragment,
+  AdditionalOrderFieldsFragment
+> {
   constructor(store: Store, url: string, channelToken: string) {
     super(store, url, channelToken, {
       additionalCollectionFields,
