@@ -17,8 +17,8 @@ module.exports = {
   },
   mapToMinimalPage: function (page) {
     return {
+      title: page.titel,
       slug: page.slug,
-      title: page.title,
       language: page.language,
     };
   },

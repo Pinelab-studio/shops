@@ -22,18 +22,20 @@
         </div>
         <div class="column">
           <h4 class="has-text-weight-bold is-5">Contact</h4>
-          <template v-for="index in 5">
+          <template>
             <g-link to="/">
-              <p class="has-text-white hover-underline">Wassekwekerijwormen</p>
+              <p class="has-text-white hover-underline">
+                {{ $context.common.telefoon }}
+              </p>
             </g-link>
           </template>
         </div>
         <div class="column">
           <h4 class="has-text-weight-bold is-5">FAQ</h4>
-          <template v-for="index in 5">
-            <g-link to="/">
+          <template v-for="page in $context.pageLinks">
+            <g-link :to="page.slug">
               <p class="has-text-white hover-underline">
-                Wanneer komt mijn pakket aan?
+                {{ page.title }}
               </p>
             </g-link>
           </template>
@@ -53,7 +55,7 @@
 
 <script>
 export default {
-  props: ['collections'],
+  props: ['collections', 'pages'],
 };
 </script>
 <style>
