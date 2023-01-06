@@ -53,6 +53,9 @@ export default {
       type: Boolean,
     },
   },
+  async mounted() {
+    await this.$vendure.getActiveOrder();
+  },
 };
 </script>
 <style>

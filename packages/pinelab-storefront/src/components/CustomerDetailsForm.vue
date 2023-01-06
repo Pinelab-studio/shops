@@ -348,6 +348,11 @@ export default {
     };
   },
   async mounted() {
+    const defaultCountry = this.$context?.availableCountries?.find(
+      (c) => c.code.toUpperCase() === 'NL'
+    );
+    this.address.countryCode = defaultCountry?.code || 'nl';
+    this.billingAddress.countryCode = defaultCountry?.code || 'nl';
     const activeOrder = await this.vendure.getActiveOrder();
     this.hasDifferentBillingAddress = !!activeOrder?.billingAddress?.postalCode;
     // Prepolutate customer

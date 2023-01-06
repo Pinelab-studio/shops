@@ -14,7 +14,7 @@
           <div class="columns is-mobile is-vcentered">
             <!-- LOGO -->
             <div class="column is-4-mobile">
-              <g-link to="/">
+              <g-link :to="$context.homeUrl">
                 <img src="/img/logo-wormenkwekerijwasse.png" width="100px" />
               </g-link>
             </div>
@@ -39,8 +39,8 @@
                 :vendure="$vendure"
                 :store="$store"
                 :emitter="$emitter"
-                cartUrl="/winkelmand/"
-                checkoutUrl="/checkout/"
+                :cartUrl="$context.cartUrl"
+                :checkoutUrl="$context.checkoutUrl"
                 v-slot="{ nrOfItems, open }"
               >
                 <div @click="open()">
