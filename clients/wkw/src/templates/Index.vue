@@ -67,17 +67,25 @@
     </template>
 
     <template #fullwidth>
-      <div class="columns is-centered content">
+      <div class="columns is-centered is-vcentered content">
         <div class="column p-4">
           <div class="has-text-white" v-html="$context.home.intro"></div>
         </div>
         <div class="column p-4">
-          <iframe
+          <!-- <iframe
             loading="lazy"
             src="https://www.youtube.com/embed/cLblUjpFdfU"
             width="100%"
             height="100%"
-          ></iframe>
+          ></iframe> -->
+          <template>
+            <YoutubeEmbedLite
+              vid="cLblUjpFdfU"
+              thumb-quality="hq"
+              :params="{ start: 0 }"
+              aspect="0.4"
+            />
+          </template>
         </div>
       </div>
     </template>
@@ -93,8 +101,15 @@ import ProductCard from '@/components/ProductCard.vue';
 import CategoryCard from '@/components/CategoryCard.vue';
 import BlogCarousel from '@/components/BlogCarousel.vue';
 import HighlightCard from '@/components/HighlightCard.vue';
+import YoutubeEmbedLite from '@miyaoka/vue-youtube-embed-lite';
 export default {
-  components: { ProductCard, CategoryCard, BlogCarousel, HighlightCard },
+  components: {
+    ProductCard,
+    CategoryCard,
+    BlogCarousel,
+    HighlightCard,
+    YoutubeEmbedLite,
+  },
 };
 </script>
 <style>
