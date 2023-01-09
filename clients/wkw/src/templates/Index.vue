@@ -69,24 +69,7 @@
     <template #fullwidth>
       <div class="columns is-centered content">
         <div class="column p-4">
-          <div class="has-text-white">
-            <h2 class="has-text-white">Over Wormenkwekerij Wasse</h2>
-            <p>
-              Wormenkwekerij Wasse is de expert op het gebied van compostwormen,
-              viswormen en alles wat daar bij komt kijken. Bekijk anders
-              hiernaast onze video!
-            </p>
-            <p>
-              In samenwerking met Franky's Flora kunnen we het alternatief
-              bieden voor kunstmest. Met onze natuurlijke en biologische
-              producten krijgt u elk grasveldje groen en kweekt u de lekkerste
-              vruchten.
-            </p>
-            <p>
-              Wij helpen u graag met veel passie bij het nieuwe tuinieren van de
-              toekomst. Op naar meer biodiversiteit!
-            </p>
-          </div>
+          <div class="has-text-white" v-html="$context.home.intro"></div>
         </div>
         <div class="column p-4">
           <iframe
@@ -117,5 +100,9 @@ export default {
 <style>
 iframe {
   min-height: 200px;
+}
+
+.content h3 {
+  color: white;
 }
 </style>

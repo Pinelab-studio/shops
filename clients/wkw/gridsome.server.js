@@ -118,6 +118,7 @@ module.exports = async function (api) {
       const navbarCollections = collections.map(mapToMinimalCollection);
       const pageLinks = pages.map(mapToMinimalPage);
       const blogPageLinks = blogs.map(mapToMinimalBlogPage);
+      pages.forEach((p) => setFullUrl(p, `${slugPrefix}/`));
 
       // Breadcrumb pages
       const Home = '/';
@@ -138,7 +139,20 @@ module.exports = async function (api) {
           popularProducts: products.slice(0, 5), // popular products for now,
           popularCollections: collections.slice(0, 5),
           blogPageLinks,
+          home,
         },
+      });
+
+      // ----------------- Static pages ------------
+      pages.forEach((page) => {
+        createPage({
+          path: page.url,
+          component: './src/templates/StaticPage.vue',
+          context: {
+            ...global,
+            page,
+          },
+        });
       });
 
       // -------------------- ProductDetail -----------------------------------

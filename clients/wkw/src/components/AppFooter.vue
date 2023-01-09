@@ -28,6 +28,25 @@
                 {{ $context.common.telefoon }}
               </p>
             </g-link>
+            <g-link to="/">
+              <p class="has-text-white hover-underline">
+                {{ $context.common.email }}
+              </p>
+            </g-link>
+            <br />
+            <g-link to="/">
+              <p
+                class="has-text-white hover-underline"
+                v-html="$context.common.adres"
+              ></p>
+            </g-link>
+            <br />
+            <g-link to="/">
+              <p
+                class="has-text-white hover-underline"
+                v-html="$context.common.openingstijden"
+              ></p>
+            </g-link>
           </template>
         </div>
         <div class="column">
