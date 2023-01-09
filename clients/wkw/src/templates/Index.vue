@@ -80,6 +80,7 @@
           ></iframe> -->
           <template>
             <YoutubeEmbedLite
+              id="youtubeEmbed"
               vid="cLblUjpFdfU"
               thumb-quality="hq"
               :params="{ start: 0 }"
@@ -119,5 +120,10 @@ iframe {
 
 .content h3 {
   color: white;
+}
+
+#youtubeEmbed {
+  position: relative;
+  z-index: 1;
 }
 </style>
