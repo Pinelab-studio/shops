@@ -148,7 +148,7 @@ module.exports = async function (api) {
           ...global,
           popularProducts,
           popularCollections,
-          blogPageLinks,
+          blogs: blogPageLinks.slice(0, 10),
         },
       });
 
