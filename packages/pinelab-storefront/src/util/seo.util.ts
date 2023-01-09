@@ -1,9 +1,11 @@
+import {
+  CollectionFieldsFragment,
+  ProductFieldsFragment,
+} from '../generated/graphql';
+
 /**
  * Removes all HTML tags from a HTML string and truncate to max X characters
  */
-import { ProductFieldsFragment } from '../generated/graphql';
-import { BasicCollection, CalculatedProduct } from '../vendure/types';
-
 export function getSeoDescription(description?: string) {
   const maxlength = 120;
   const minlength = 70;
@@ -32,9 +34,8 @@ export function getSeoDescription(description?: string) {
  */
 export function getMetaInfo(
   item?:
-    | BasicCollection
-    | ProductFieldsFragment
-    | CalculatedProduct<ProductFieldsFragment>,
+    | CollectionFieldsFragment
+    | (ProductFieldsFragment & { lowestPrice: number }),
   url?: string,
   type: 'product' | 'article' | 'blog' | 'website' = 'product'
 ): MetaInfo | undefined {
@@ -47,8 +48,8 @@ export function getMetaInfo(
   const title = (item as any).customFields?.metaTitle || item.name;
   const image = item.featuredAsset ? item.featuredAsset.preview : undefined;
   let script: any = [];
-  const calculatedProduct = item as CalculatedProduct<ProductFieldsFragment>;
-  if (calculatedProduct.lowestPrice) {
+  const product = item;
+  if ((product as any).lowestPrice) {
     script = [
       {
         type: 'application/ld+json',
@@ -60,7 +61,7 @@ export function getMetaInfo(
           description: seoDescription,
           offers: {
             '@type': 'Offer',
-            price: (calculatedProduct.lowestPrice / 100).toFixed(2),
+            price: ((product as any).lowestPrice / 100).toFixed(2),
             priceCurrency: 'EUR',
           },
         },

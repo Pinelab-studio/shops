@@ -1,21 +1,21 @@
 import {
-  BasicCollection,
-  CalculatedProduct,
-  SortableCollection,
-} from '../vendure/types';
-import {
   CollectionFieldsFragment,
   ProductFieldsFragment,
 } from '../generated/graphql';
-import { deduplicate, setCalculatedFields } from './product.util';
+import { deduplicate, enrichProduct } from './product.util';
+
+type TreeCollection<T extends CollectionFieldsFragment> = T & {
+  children: T;
+  parent: T;
+};
 
 /**
  * By default the collection graphql query returns all child and parent collections in one flat array.
- * This function sets the correct childCollections for each topLevel collection.
+ * This function builds the collection tree with child and parent collections
  */
-export function unflatten(
-  allCollections: BasicCollection[]
-): SortableCollection[] {
+export function getCollectionTree<T extends CollectionFieldsFragment>(
+  allCollections: T[]
+): TreeCollection<T>[] {
   // Get toplevel collections
   let collections = allCollections.filter(
     (col) => col.parent?.name === '__root_collection__'
@@ -29,10 +29,10 @@ export function unflatten(
 /**
  * Recursively gets childCollections for given collection
  */
-export function getChildCollection(
-  collection: BasicCollection,
-  allCollections: BasicCollection[]
-): SortableCollection {
+export function getChildCollection<T extends CollectionFieldsFragment>(
+  collection: T,
+  allCollections: T[]
+): TreeCollection<T> {
   const fullChildren = collection.children?.map((originalChild) => {
     let fullChildCollection = allCollections.find(
       (c) => c.id === originalChild.id
@@ -53,22 +53,20 @@ export function getChildCollection(
   return {
     ...collection,
     children: fullChildren,
-  } as SortableCollection;
+  } as TreeCollection<T>;
 }
 
 /**
  * Find products that belong to the given Collection
  */
-export function getProductsForCollection(
+export function getProductsForCollection<T extends ProductFieldsFragment>(
   collection: CollectionFieldsFragment,
-  allProducts: ProductFieldsFragment[]
-): CalculatedProduct<ProductFieldsFragment>[] {
-  let productsPerCollection: ProductFieldsFragment[] =
-    collection.productVariants.items
-      .map((variant) =>
-        allProducts.find((product) => product.id === variant.product.id)
-      )
-      .filter((product): product is ProductFieldsFragment => !!product);
-  productsPerCollection = deduplicate(productsPerCollection);
-  return productsPerCollection.map((p) => setCalculatedFields(p));
+  allProducts: T[]
+): T[] {
+  let productsPerCollection: T[] = collection.productVariants.items
+    .map((variant) =>
+      allProducts.find((product) => product.id === variant.product.id)
+    )
+    .filter((product): product is T => !!product);
+  return deduplicate(productsPerCollection);
 }

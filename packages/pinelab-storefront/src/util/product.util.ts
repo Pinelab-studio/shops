@@ -1,31 +1,89 @@
 import { VendureClient } from '../vendure/vendure.client';
 import { Emitter } from 'mitt';
 import { ProductFieldsFragment, ProductVariant } from '../generated/graphql';
-import { CalculatedProduct, MinimalProduct } from '../vendure/types';
+
+export interface MinimalProduct {
+  id: string;
+  slug: string;
+  variants: { priceWithTax: number; stockLevel: string; id: string }[];
+}
 
 /**
- * Enrich given product with additional fields
+ * Product with additional utility properties
  */
-export function setCalculatedFields<T extends MinimalProduct>(
-  product: T
-): CalculatedProduct<T> {
-  const lowestPrice = Math.min(...product.variants.map((v) => v.priceWithTax));
-  const highestPrice = Math.max(...product.variants.map((v) => v.priceWithTax));
-  const allVariantsOutOfStock = product.variants.every((v) => isOutOfStock(v));
+export type ProductWithUtilityFields<T> = T & {
+  lowestPrice: number;
+  soldOut: boolean;
+  /**
+   * Absolute url without domain based on the provided prefix and the products slug. I.E. /product/my-product-slug/
+   */
+  url: string;
+  label?: string;
+};
+
+/**
+ * Enrich given product with additional utility properties
+ */
+export function enrichProduct<T extends ProductFieldsFragment>(
+  product: T,
+  urlPrefix: string
+): ProductWithUtilityFields<T> {
+  const prices: number[] = [];
+  product.variants.forEach((v) => {
+    prices.push(v.priceWithTax);
+  });
   return {
     ...product,
-    lowestPrice,
-    highestPrice,
-    soldOut: allVariantsOutOfStock,
+    lowestPrice: Math.min(...prices),
+    highestPrice: Math.max(...prices),
+    soldOut: isProductSoldOut(product),
+    url: getUrl(product, urlPrefix),
+    label: product.facetValues.find(
+      (facetValue) => facetValue.facet.code === 'product-label'
+    )?.name,
   };
+}
+
+type ProductWithVariants = {
+  variants: { id: string | number; stockLevel: string }[];
+};
+/**
+ * A product is sold out if all its variants are out of stock
+ */
+export function isProductSoldOut(product: ProductWithVariants): boolean {
+  return product.variants.every((v) => isOutOfStock(v));
+}
+
+/**
+ * Update the stockLevels of variants of a product based on a freshly fetched product
+ */
+export function updateStockLevelOfVariants(
+  product: ProductWithVariants,
+  freshProduct: ProductWithVariants
+): void {
+  product.variants.forEach((v) => {
+    v.stockLevel =
+      freshProduct.variants.find((hv) => hv.id === v.id)?.stockLevel ||
+      'IN_STOCK';
+  });
+}
+
+/**
+ * Set the full path of a product or collection on item.url
+ */
+export function getUrl(
+  itemWithSlug: { slug: string },
+  prefixPath: string
+): string {
+  return `/${prefixPath}/${itemWithSlug.slug}/`.replace(/\/\//g, '/'); // replace all double slashes with single slashes
 }
 
 /**
  * Remove duplicate products from given list of products
  */
-export function deduplicate(
-  products: ProductFieldsFragment[]
-): ProductFieldsFragment[] {
+export function deduplicate<T extends ProductFieldsFragment>(
+  products: T[]
+): T[] {
   const uniq: string[] = [];
   return products.filter((prod) => {
     if (uniq.indexOf(prod.slug) === -1) {
@@ -34,51 +92,6 @@ export function deduplicate(
     }
     return false;
   });
-}
-
-/**
- * Hydrate products on client side.
- * For now this only updates product.soldOut
- */
-export async function hydrate<T extends MinimalProduct>(
-  products: CalculatedProduct<T>[] | CalculatedProduct<T>,
-  vendure: VendureClient
-): Promise<void> {
-  if (Array.isArray(products)) {
-    if (products.length === 0) {
-      return;
-    }
-    const productIds = products.map((p) => p.id);
-    const stockLevels = (await vendure.getStockForProducts(productIds)).map(
-      (stockLevel) => setCalculatedFields(stockLevel)
-    );
-    products.forEach((p) => {
-      const productWithStockLevel = stockLevels.find(
-        (productWithStockLevel) => productWithStockLevel.id === p.id
-      );
-      if (productWithStockLevel) {
-        p.soldOut = productWithStockLevel.soldOut;
-        p.variants.forEach((v) => {
-          v.stockLevel =
-            productWithStockLevel.variants.find((hv) => hv.id === v.id)
-              ?.stockLevel || 'IN_STOCK';
-        });
-      }
-      return p;
-    });
-  } else if (products) {
-    // Single product
-    const product = products as CalculatedProduct<T>;
-    const [hydratedProduct] = (
-      await vendure.getStockForProducts([product.id])
-    ).map((stockLevel) => setCalculatedFields(stockLevel));
-    product.variants.forEach((v) => {
-      v.stockLevel =
-        hydratedProduct.variants.find((hv) => hv.id === v.id)?.stockLevel ||
-        'IN_STOCK';
-    });
-    product.soldOut = hydratedProduct.soldOut;
-  }
 }
 
 export function isOutOfStock(variant: { stockLevel: string }): boolean {

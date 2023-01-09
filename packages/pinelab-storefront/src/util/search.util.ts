@@ -1,5 +1,4 @@
 import type Fuse from 'fuse.js';
-import { CalculatedProduct } from '../vendure/types';
 import {
   CollectionFieldsFragment,
   ProductFieldsFragment,
@@ -28,8 +27,9 @@ export interface KeyWeight {
   weight: number;
 }
 
-interface SearchableProduct extends CalculatedProduct<ProductFieldsFragment> {
+interface SearchableProduct extends ProductFieldsFragment {
   collections: CollectionFieldsFragment[];
+  lowestPrice: number;
   customFields?: { keywords?: string };
 }
 

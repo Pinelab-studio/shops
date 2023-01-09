@@ -9,4 +9,3 @@ export * from './util/collection.util';
 export * from './pinelab/shop.client';
 export * from './vendure/vendure.client';
 export * from './vendure/vendure.queries';
-export * from './vendure/types';

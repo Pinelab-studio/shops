@@ -37,32 +37,83 @@ import {
   TransitionOrderToStateMutation,
   TransitionOrderToStateMutationVariables,
 } from '../generated/graphql';
-import {
-  BasicCollection,
-  CatalogData,
-  CollectionMap,
-  Store,
-  VendureError,
-} from './types';
 import { getVendureQueries } from './vendure.queries';
-import { setCalculatedFields } from '../util/product.util';
 import { getProductsForCollection } from '../util/collection.util';
+import {
+  ProductWithUtilityFields,
+  enrichProduct,
+  isProductSoldOut,
+  updateStockLevelOfVariants,
+  getUrl,
+} from '../util/product.util';
 
+export class Store<T> {
+  activeOrder: (OrderFieldsFragment & T) | undefined;
+}
+
+export class VendureError extends Error {
+  constructor(
+    public message: string,
+    public orderCode?: string,
+    public errorCode?: string
+  ) {
+    super(message);
+  }
+}
+
+/**
+ * Additional graphql fragments that will be merged with the default fragments
+ */
 export interface AdditionalVendureFields {
   additionalCollectionFields?: string;
   additionalProductFields?: string;
   additionalOrderFields?: string;
 }
 
-export type ExtendedCollection<T> = T & CollectionFieldsFragment;
-export type ExtendedProduct<T> = T & ProductFieldsFragment;
+/**
+ * Use to construct full Url's from prefixes + slugs on collections and products
+ */
+export interface UrlPrefixes {
+  productPrefix?: string;
+  collectionPrefix?: string;
+}
+
+export type ExtendedCollection<T> = T &
+  CollectionFieldsFragment & { url: string };
+/**
+ * A product, with its extended graphql fields and its enriched utility fields
+ */
+export type ExtendedProduct<T> = ProductWithUtilityFields<
+  T & ProductFieldsFragment
+>;
 export type ExtendedOrder<T> = T & OrderFieldsFragment;
+
+export interface CatalogData<C, P> {
+  /**
+   * All products from store
+   */
+  products: ExtendedProduct<P>[];
+  /**
+   * Products with variants per collection
+   */
+  productsPerCollection: {
+    collection: ExtendedCollection<C>;
+    products: ExtendedProduct<P>[];
+  }[];
+  /**
+   * All collections from Vendure
+   * DOES NOT INCLUDE VARIANTS!
+   */
+  collections: ExtendedCollection<C>[];
+}
 
 /**
  * Graphql client for Vendure
  *
- * Pass types of your additional Collection, Product and Order fields as generic types
+ * Pass types of your additional Collection, Product and Order fields as generic arguments
  * to make this client return your extended types.
+ *
+ * @example `new VendureClient<MyCollectionType, MyProductType, MyOrderType>()`
  */
 export class VendureClient<C = {}, P = {}, O = {}> {
   client: GraphQLClient;
@@ -73,7 +124,8 @@ export class VendureClient<C = {}, P = {}, O = {}> {
     protected store: Store<O>,
     protected url: string,
     protected channelToken: string,
-    additionalGraphqlFields?: AdditionalVendureFields
+    protected additionalGraphqlFields?: AdditionalVendureFields,
+    protected urlPrefixes?: UrlPrefixes
   ) {
     this.client = new GraphQLClient(url, {
       headers: { 'vendure-token': channelToken },
@@ -288,53 +340,54 @@ export class VendureClient<C = {}, P = {}, O = {}> {
    * Resource heavy! Fetches all products and collections from Vendure.
    * Should only be used for SSG
    */
-  async getCompleteCatalog(): Promise<CatalogData> {
+  async getCompleteCatalog(): Promise<CatalogData<C, P>> {
     let [collectionList, allProducts] = await Promise.all([
       this.getAllCollections(),
       this.getAllProducts(),
     ]);
-    const products = allProducts.map((p) => setCalculatedFields(p));
-    products.map((p) => (p.soldOut = false));
-
-    const productsPerCollection: CollectionMap[] = collectionList.map(
-      (collection) => {
-        const products = getProductsForCollection(collection, allProducts);
-        return {
-          collection: { ...collection, productVariants: undefined },
-          products,
-        };
-      }
-    );
-    const collections: BasicCollection[] = collectionList.map((c) => ({
+    allProducts.map((p) => (p.soldOut = false)); // During SSG we make sure no products are Sold Out
+    const productsPerCollection = collectionList.map((collection) => {
+      const products = getProductsForCollection(collection, allProducts);
+      return {
+        collection: { ...collection, productVariants: [] },
+        products: products.map((p) =>
+          enrichProduct(p, this.urlPrefixes?.productPrefix || '')
+        ),
+      };
+    });
+    const collections = collectionList.map((c) => ({
       ...c,
-      productVariants: undefined,
+      productVariants: [],
     }));
     return {
-      products,
+      products: allProducts,
       productsPerCollection,
       collections,
     };
   }
 
   /**
-   * Resource heavy! Fetches all collections with all childCollections
+   * Resource heavy! Fetches all collections with all childCollections. Returns a flat array of collections, not the tree
    * Should only be used for SSG
    */
-  async getAllCollections(): Promise<CollectionFieldsFragment[]> {
+  async getAllCollections(): Promise<ExtendedCollection<C>[]> {
     const {
       collections: { items },
     } = await this.client.request<CollectionsQuery, CollectionsQueryVariables>(
       this.queries.GET_COLLECTIONS
     );
-    return items;
+    return items.map((item) => ({
+      ...item,
+      url: getUrl(item, this.urlPrefixes?.collectionPrefix || ''),
+    })) as ExtendedCollection<C>[];
   }
 
   /**
    * Resource heavy! Fetches all products in batches
    * Should only be used for SSG
    */
-  async getAllProducts(): Promise<ProductFieldsFragment[]> {
-    const products: ProductFieldsFragment[] = [];
+  async getAllProducts(): Promise<ExtendedProduct<P>[]> {
+    const products: ExtendedProduct<P>[] = [];
     let hasMore = true;
     let page = 1;
     let skip = 0;
@@ -349,12 +402,14 @@ export class VendureClient<C = {}, P = {}, O = {}> {
           take,
         },
       });
-      products.push(...productList.items);
+      products.push(...(productList.items as ExtendedProduct<P>[]));
       skip = page * take;
       page++;
       hasMore = productList.totalItems > products.length;
     }
-    return products;
+    return products.map((p) =>
+      enrichProduct(p, this.urlPrefixes?.productPrefix || '')
+    );
   }
 
   /**
@@ -422,6 +477,40 @@ export class VendureClient<C = {}, P = {}, O = {}> {
         );
       }
       throw e;
+    }
+  }
+
+  /**
+   * Hydrate products on client side.
+   * For now this only updates product.soldOut
+   */
+  async hydrate(
+    products: ExtendedProduct<P>[] | ExtendedProduct<P>,
+    vendure: VendureClient
+  ): Promise<ExtendedProduct<P> | undefined> {
+    if (Array.isArray(products)) {
+      if (products.length === 0) {
+        return;
+      }
+      const productIds = products.map((p) => p.id);
+      const stockLevels = await vendure.getStockForProducts(productIds);
+      products.forEach((p) => {
+        const productWithStockLevel = stockLevels.find(
+          (productWithStockLevel) => productWithStockLevel.id === p.id
+        );
+        if (productWithStockLevel) {
+          p.soldOut = isProductSoldOut(productWithStockLevel);
+          updateStockLevelOfVariants(p, productWithStockLevel);
+        }
+      });
+    } else if (products) {
+      // Single product
+      const product = products as ExtendedProduct<P>;
+      const [stockLevelProduct] = await vendure.getStockForProducts([
+        product.id,
+      ]);
+      product.soldOut = isProductSoldOut(stockLevelProduct);
+      updateStockLevelOfVariants(product, stockLevelProduct);
     }
   }
 }

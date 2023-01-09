@@ -1,5 +1,5 @@
 import { gql } from 'graphql-request';
-import { VendureClient } from '../vendure/vendure.client';
+import { Store, VendureClient } from '../vendure/vendure.client';
 import {
   AdditionalCollectionFieldsFragment,
   AdditionalOrderFieldsFragment,
@@ -20,7 +20,6 @@ import {
   SetOrderCustomFieldsMutationVariables,
   UpdateOrderCustomFieldsInput,
 } from '../generated/graphql';
-import { Store } from '../vendure/types';
 
 const additionalCollectionFields = gql`
   fragment AdditionalCollectionFields on Collection {
@@ -78,7 +77,11 @@ export class ShopClient extends VendureClient<
   AdditionalProductFieldsFragment,
   AdditionalOrderFieldsFragment
 > {
-  constructor(store: Store, url: string, channelToken: string) {
+  constructor(
+    store: Store<AdditionalOrderFieldsFragment>,
+    url: string,
+    channelToken: string
+  ) {
     super(store, url, channelToken, {
       additionalCollectionFields,
       additionalProductFields,
