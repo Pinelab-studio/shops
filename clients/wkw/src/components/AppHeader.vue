@@ -44,6 +44,7 @@
                   </a>
                 </div>
               </Basket>
+              <!--- mobile search -->
               <b-button
                 type="is-primary is-shadowless is-hovered is-hidden-tablet is-pulled-right mr-2"
                 @click="isSearchModalActive = true"
