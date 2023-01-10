@@ -15,7 +15,7 @@
     "debounce": "^1.2.1",
     "fuse.js": "^6.6.2",
     "graphql-tag": "^2.12.6",
-    "pinelab-storefront": "0.63.0"
+    "pinelab-storefront": "0.64.0"
   },
   "devDependencies": {
     "@gridsome/source-graphql": "^0.1.0",
@@ -27,7 +27,7 @@
     "sass": "^1.32.13",
     "sass-loader": "^10.1.1"
   },
-  "version": "0.63.0",
+  "version": "0.64.0",
   "resolutions": {
     "graphql": "^14.7.0"
   }
