@@ -39,6 +39,9 @@ module.exports = {
       '/'
     ); // replace all double slashes
   },
+  /**
+   * Get all collections that a product belongs to
+   */
   getProductCollections: function (
     productsPerCollection,
     allCollections,
