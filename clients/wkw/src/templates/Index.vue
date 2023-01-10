@@ -93,7 +93,7 @@
 
     <template #content2>
       <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">Blog</h4>
-      <BlogCarousel :blogs="$context.blogPageLinks" />
+      <BlogCarousel :blogs="$context.blogs" />
     </template>
   </DefaultLayout>
 </template>
