@@ -8,9 +8,7 @@ import {
   formatEuro,
   preconnectLinks,
   createLabelFunction,
-  setStore,
   VendureClient,
-  Store,
 } from 'pinelab-storefront';
 import mitt from 'mitt';
 
