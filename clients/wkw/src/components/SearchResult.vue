@@ -1,8 +1,8 @@
 <template>
-  <div class="media">
+  <div class="media search-result">
     <div class="media-left">
-      <img v-if="item.thumbnail" width="32" :src="item.thumbnail" />
-      <img v-else width="32" src="/favicon.png" />
+      <img v-if="item.thumbnail" width="50" :src="item.thumbnail" />
+      <img v-else width="50" src="/favicon.png" />
     </div>
     <div class="media-content">
       {{ item.name }}
@@ -21,3 +21,8 @@ export default {
   props: ['item'],
 };
 </script>
+<style>
+.search-result img {
+  border-radius: 0.25rem;
+}
+</style>

@@ -71,7 +71,6 @@ export default {
       if (!result) {
         return;
       }
-      console.log(result.item.url);
       this.$router.push(result.item.url);
     },
   },
