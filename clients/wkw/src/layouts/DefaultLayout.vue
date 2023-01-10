@@ -56,6 +56,45 @@ export default {
   async mounted() {
     await this.$vendure.getActiveOrder();
   },
+  // Create href lang tags
+  metaInfo() {
+    const lang = this.$context.lang || 'nl';
+    const links = [];
+    const domain = process.env.GRIDSOME_HOST;
+    // Set hreflang if translated page is set
+    Object.entries(this.$context.translatedPages || []).forEach(
+      ([key, value]) => {
+        if (!value) {
+          return;
+        }
+        links.push({
+          rel: 'alternate',
+          hreflang: key,
+          href: `${domain}${value}`,
+        });
+        if (key === 'nl') {
+          links.push({
+            rel: 'alternate',
+            hreflang: 'x-default',
+            href: `${domain}${value}`,
+          });
+        }
+      }
+    );
+    return {
+      htmlAttrs: {
+        lang,
+      },
+      meta: [
+        {
+          name: 'description',
+          content:
+            'Wormenkwekerij Wasse, Koop hier gemakkelijk online uw wormen en wormencompost of snuffel eens tussen alle informatie en advies.',
+        },
+      ],
+      link: links,
+    };
+  },
 };
 </script>
 <style>
