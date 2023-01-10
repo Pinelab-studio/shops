@@ -85,13 +85,6 @@ export default {
       htmlAttrs: {
         lang,
       },
-      meta: [
-        {
-          name: 'description',
-          content:
-            'Wormenkwekerij Wasse, Koop hier gemakkelijk online uw wormen en wormencompost of snuffel eens tussen alle informatie en advies.',
-        },
-      ],
       link: links,
     };
   },
