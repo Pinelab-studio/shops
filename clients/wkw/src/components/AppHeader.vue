@@ -20,7 +20,7 @@
             </div>
             <!-- SEARCH -->
             <div class="column is-hidden-mobile">
-              <b-field position="is-centered">
+              <!--              <b-field position="is-centered">
                 <b-input
                   placeholder="Zoek producten..."
                   type="search"
@@ -30,7 +30,8 @@
                     <i class="mdi mdi-magnify mdi-26px has-text-white"></i>
                   </b-button>
                 </p>
-              </b-field>
+              </b-field>-->
+              <Search />
             </div>
             <!-- ICONS -->
             <div class="column">
@@ -154,10 +155,11 @@
 <script>
 import Basket from 'pinelab-storefront/lib/components/Basket';
 import LanguageSwitcher from './LanguageSwitcher';
+import Search from './Search';
 
 export default {
   props: ['collections'],
-  components: { LanguageSwitcher, Basket },
+  components: { Search, LanguageSwitcher, Basket },
 };
 </script>
 <style>

@@ -39,4 +39,16 @@ module.exports = {
       '/'
     ); // replace all double slashes
   },
+  getProductCollections: function (
+    productsPerCollection,
+    allCollections,
+    productId
+  ) {
+    const collectionMap = productsPerCollection.find(({ products }) =>
+      products.find((p) => p.id === productId)
+    );
+    if (collectionMap) {
+      return allCollections.filter((c) => c.id === collectionMap.collection.id);
+    }
+  },
 };

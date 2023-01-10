@@ -31,6 +31,7 @@ export interface KeyWeight {
 interface SearchableProduct extends CalculatedProduct<ProductFieldsFragment> {
   collections: CollectionFieldsFragment[];
   customFields?: { keywords?: string };
+  url?: string;
 }
 
 export class SearchUtil {
@@ -66,6 +67,7 @@ export class SearchUtil {
         collections,
         keywords,
         thumbnail: p.featuredAsset?.thumbnail,
+        url: p.url,
       };
     });
   }
