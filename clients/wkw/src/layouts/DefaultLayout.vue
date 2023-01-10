@@ -16,12 +16,11 @@
     <div v-if="showNewsletter" class="has-background-primary">
       <div class="container is-widescreen section p-5">
         <div class="has-text-centered">
-          <h3 class="has-text-white has-text-weight-bold">
-            Meld je aan voor de wormen courant
-          </h3>
-          <p class="has-text-white has">
-            Aanbiedingen, tips and tricks voor compostering en bodemverbetering
-          </p>
+          <div
+            id="newsletterMessage"
+            class="has-text-white"
+            v-html="$context.common.nieuwsbrief"
+          ></div>
         </div>
         <div class="column">
           <b-field position="is-centered" grouped group-multiline>
@@ -67,5 +66,8 @@ export default {
   .navbar-margin {
     margin-top: 160px !important;
   }
+}
+#newsletterMessage strong {
+  color: white;
 }
 </style>

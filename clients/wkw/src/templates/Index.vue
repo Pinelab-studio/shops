@@ -100,17 +100,18 @@
     </template>
 
     <template #content2>
-      <BlogCard />
+      <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">Blog</h4>
+      <BlogCarousel :blogs="$context.blogs" />
     </template>
   </DefaultLayout>
 </template>
 <script>
 import ProductCard from '@/components/ProductCard.vue';
 import CategoryCard from '@/components/CategoryCard.vue';
-import BlogCard from '@/components/BlogCard.vue';
+import BlogCarousel from '@/components/BlogCarousel.vue';
 import HighlightCard from '@/components/HighlightCard.vue';
 export default {
-  components: { ProductCard, CategoryCard, BlogCard, HighlightCard },
+  components: { ProductCard, CategoryCard, BlogCarousel, HighlightCard },
 };
 </script>
 <style>

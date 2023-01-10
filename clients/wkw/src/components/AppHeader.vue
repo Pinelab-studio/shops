@@ -4,8 +4,8 @@
       id="banner"
       class="notification is-dark-green p-1 m-0 has-text-centered"
     >
-      <p class="mdi mdi-truck-outline has-text-white">
-        Vanaf €50,- gratis verzenden binnen NL
+      <p class="has-text-white">
+        {{ $context.common.banner }}
       </p>
     </div>
     <b-navbar class="is-fixed-top" style="padding-top: 27px">

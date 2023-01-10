@@ -15,6 +15,21 @@ module.exports = {
         : undefined,
     };
   },
+  mapToMinimalPage: function (page) {
+    return {
+      slug: page.slug,
+      title: page.title,
+      language: page.language,
+    };
+  },
+  mapToMinimalBlogPage: function (blogs) {
+    return {
+      slug: blogs.slug,
+      title: blogs.titel,
+      language: blogs.language,
+      image: blogs.featured_image,
+    };
+  },
   /**
    * Set the full path of a product or collection on item.url
    */
