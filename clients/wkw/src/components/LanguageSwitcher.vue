@@ -13,6 +13,7 @@ export default {
   methods: {
     getTranslatedUrl(lang) {
       const root = lang === 'nl' ? '/' : `/${lang}/`;
+      this.$vendure.getActiveOrder(); // Refetch active order in current language
       return this.$context.translatedPages?.[lang] || root;
     },
   },
