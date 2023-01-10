@@ -48,9 +48,9 @@ export default function (Vue, { router, head, isClient }) {
       `${apiBase}?languageCode=nl`,
       channelToken
     );
+    // Create a getter function that returns an NL or EN client based on the $context.lang when $vendure is used
     Object.defineProperty(Vue.prototype, '$vendure', {
       get: function () {
-        // return NL or EN client for $vendure based on the current $context.lang
         return this?.$context?.lang == 'nl' ? vendureClientNl : vendureClientEn;
       },
     });
