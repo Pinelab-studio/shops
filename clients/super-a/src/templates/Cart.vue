@@ -37,6 +37,8 @@
         </div>
       </div>
       <div v-else style="height: 50vh">
+        <br />
+        <br />
         You don't have any items in your cart yet...
       </div>
     </div>

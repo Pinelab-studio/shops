@@ -1,6 +1,12 @@
 <template>
   <div>
-    <b-navbar type="is-danger" centered transparent class="is-fixed-top">
+    <b-navbar
+      type="is-danger"
+      centered
+      transparent
+      class="is-fixed-top"
+      :shadow="false"
+    >
       <template #brand>
         <div class="container is-widescreen section" id="top-navbar">
           <div class="columns is-mobile pt-2" style="width: 100%">
@@ -398,6 +404,12 @@ export default {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
+}
+
+.navbar-dropdown {
+  border-top: none !important;
+  border-bottom: 1px solid #dbdbdb;
+  box-shadow: none !important;
 }
 
 .navbar-item {
