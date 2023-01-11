@@ -15,9 +15,6 @@ export default {
       maxLength: 200,
     };
   },
-  created() {
-    this.transformToPlainText(this.description);
-  },
   computed: {
     isTextLongEnough() {
       return this.text?.length > this.maxLength;
