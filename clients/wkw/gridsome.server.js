@@ -222,6 +222,33 @@ module.exports = async function (api) {
         });
       });
 
+      // -------------------- ProductListing -----------------------------------
+      allCollections.forEach((collection) => {
+        const translatedPages = {};
+        languages.forEach((language) => {
+          let translatedCollection = language.collections.find(
+            (c) => c.id == collection.id
+          );
+          translatedPages[language.lang] = translatedCollection.url;
+        });
+
+        const breadcrumb = {
+          Home,
+          [collection.name]: collection.url,
+        };
+        createPage({
+          path: collection.url,
+          component: './src/templates/ProductListing.vue',
+          context: {
+            ...global,
+            breadcrumb,
+            collection,
+            translatedPages,
+            popularProducts,
+          },
+        });
+      });
+
       // -------------------- Cart -----------------------------------
       const cartTranslations = {};
       languages.forEach(({ lang, slugPrefix }) => {
