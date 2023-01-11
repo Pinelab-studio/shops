@@ -140,7 +140,7 @@ import VariantSelector from 'pinelab-storefront/lib/components/VariantSelector';
 import ReadMoreDescription from '@/components/ReadMoreDescription';
 import ProductCard from '@/components/ProductCard.vue';
 import Reviews from '@/components/Reviews';
-import { buy, getMetaInfo, isOutOfStock } from 'pinelab-storefront';
+import { buy, getMetaInfo, hydrate, isOutOfStock } from 'pinelab-storefront';
 import WriteReviewButton from '../components/WriteReviewButton';
 
 export default {
