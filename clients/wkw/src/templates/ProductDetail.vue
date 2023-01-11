@@ -173,7 +173,7 @@ export default {
     };
   },
   async mounted() {
-    // await hydrate(this.$context.product, this.$vendure);
+    await hydrate(this.$context.product, this.$vendure);
   },
   methods: {
     async buy() {
