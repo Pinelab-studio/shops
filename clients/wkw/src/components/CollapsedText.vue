@@ -25,12 +25,3 @@ export default {
   },
 };
 </script>
-<style>
-#full-description::before {
-  display: block;
-  content: ' ';
-  height: 200px;
-  visibility: hidden;
-  pointer-events: none;
-}
-</style>
