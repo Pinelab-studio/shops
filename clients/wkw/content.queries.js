@@ -44,6 +44,7 @@ const GET_CONTENT = gql`
       vendure_product_id
       author_name
       date_created
+      review_date
       message
       product_title
       rating

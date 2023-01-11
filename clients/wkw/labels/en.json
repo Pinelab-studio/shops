@@ -79,8 +79,19 @@
     "faq": "FAQ"
   },
   "product": {
-    "no-reviews": "Er zijn nog geen reviews voor dit product.",
+    "no-reviews": "No reviews yet.",
     "description": "Product description",
     "related": "Others also purchased"
+  },
+  "review": {
+    "write-button": "Write review",
+    "title": "Write a review for ",
+    "name": "Name",
+    "email": "Email (will never be shown on the site)",
+    "message": "Review",
+    "message-placeholder": "What do you think about ",
+    "rating": "How would you rate this product?",
+    "thank-you": "Thank you!",
+    "submit": "Submit review"
   }
 }

@@ -82,5 +82,16 @@
     "no-reviews": "Er zijn nog geen reviews voor dit product.",
     "description": "Product beschrijving",
     "related": "Anderen kochten ook"
+  },
+  "review": {
+    "write-button": "Schrijf review",
+    "title": "Schrijf een review voor ",
+    "name": "Uw naam",
+    "email": "Emailadres (wordt nooit getoond bij een review)",
+    "message": "Uw review",
+    "message-placeholder": "Wat vind u van ",
+    "rating": "Hoeveel sterren geeft u dit product?",
+    "thank-you": "Bedankt voor uw review!",
+    "submit": "Plaats review"
   }
 }

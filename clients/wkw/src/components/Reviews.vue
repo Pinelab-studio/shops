@@ -7,7 +7,7 @@
             <p>
               <strong
                 >{{ review.author_name }} -
-                {{ review.date_created | date }}</strong
+                {{ review.review_date | date }}</strong
               >
               <b-rate
                 v-model="review.rating"
@@ -16,7 +16,7 @@
                 size="is-small"
               >
               </b-rate>
-              {{ review.message }}
+              <CollapsedText :text="review.message" />
               <br />
             </p>
           </div>
@@ -36,7 +36,7 @@
                   <p>
                     <strong>Frank van Wormenkwekerijwasse</strong>
                     <br />
-                    {{ review.response }}
+                    <CollapsedText :text="review.response" />
                     <br />
                   </p>
                 </div>
@@ -50,7 +50,9 @@
 </template>
 
 <script>
+import CollapsedText from './CollapsedText';
 export default {
+  components: { CollapsedText },
   props: ['reviews'],
 };
 </script>
