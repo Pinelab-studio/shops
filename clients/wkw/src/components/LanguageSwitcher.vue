@@ -1,9 +1,9 @@
 <template>
   <div>
-    <a v-if="$context.lang === 'en'" :href="getTranslatedUrl('nl')"
+    <a v-if="$context.lang === 'en'" @click="goTo('nl')"
       ><img src="/img/nl.svg" class="lang-flag" alt="Nederlands"
     /></a>
-    <a v-else :href="getTranslatedUrl('en')"
+    <a v-else @click="goTo('en')"
       ><img src="/img/en.svg" class="lang-flag" alt="English"
     /></a>
   </div>
@@ -14,6 +14,12 @@ export default {
     getTranslatedUrl(lang) {
       const root = lang === 'nl' ? '/' : `/${lang}/`;
       return this.$context.translatedPages?.[lang] || root;
+    },
+    async goTo(lang) {
+      const root = lang === 'nl' ? '/' : `/${lang}/`;
+      const url = this.$context.translatedPages?.[lang] || root;
+      await this.$router.push(url);
+      location.reload(); // force reload after language change
     },
   },
 };

@@ -59,9 +59,9 @@
             />
           </div>
         </div>
-        <hr />
       </section>
-      <section id="news">
+      <section v-if="$context.news && $context.news.length" id="news">
+        <hr />
         <h2>{{ $context.home.news_section_title }}</h2>
 
         <div class="columns is-multiline">

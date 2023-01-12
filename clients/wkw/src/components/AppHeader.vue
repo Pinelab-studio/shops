@@ -20,17 +20,7 @@
             </div>
             <!-- SEARCH -->
             <div class="column is-hidden-mobile">
-              <b-field position="is-centered">
-                <b-input
-                  placeholder="Zoek producten..."
-                  type="search"
-                ></b-input>
-                <p class="control">
-                  <b-button type="is-primary is-shadowless is-hovered">
-                    <i class="mdi mdi-magnify mdi-26px has-text-white"></i>
-                  </b-button>
-                </p>
-              </b-field>
+              <Search />
             </div>
             <!-- ICONS -->
             <div class="column">
@@ -54,8 +44,10 @@
                   </a>
                 </div>
               </Basket>
+              <!--- mobile search -->
               <b-button
                 type="is-primary is-shadowless is-hovered is-hidden-tablet is-pulled-right mr-2"
+                @click="isSearchModalActive = true"
               >
                 <i class="mdi mdi-magnify mdi-26px has-text-white"></i>
               </b-button>
@@ -148,16 +140,38 @@
         </div>
       </template>
     </b-navbar>
+
+    <!-------------- search modal for mobile search------------------->
+    <b-modal
+      v-model="isSearchModalActive"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      aria-role="dialog"
+      aria-label="Example Modal"
+      close-button-aria-label="Close"
+      aria-modal
+    >
+      <div class="card">
+        <Search />
+      </div>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import Basket from 'pinelab-storefront/lib/components/Basket';
 import LanguageSwitcher from './LanguageSwitcher';
+import Search from './Search';
 
 export default {
   props: ['collections'],
-  components: { LanguageSwitcher, Basket },
+  components: { Search, LanguageSwitcher, Basket },
+  data() {
+    return {
+      isSearchModalActive: false,
+    };
+  },
 };
 </script>
 <style>

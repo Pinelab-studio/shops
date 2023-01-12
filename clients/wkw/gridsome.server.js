@@ -1,12 +1,19 @@
-const { VendureServer, createLabelFunction } = require('pinelab-storefront');
+const {
+  VendureServer,
+  createLabelFunction,
+  SearchUtil,
+} = require('pinelab-storefront');
 const { GraphQLClient } = require('graphql-request');
 const {
   mapToMinimalCollection,
   mapToMinimalPage,
   mapToMinimalBlogPage,
   setFullUrl,
+  getProductCollections,
 } = require('./util');
 const { GET_CONTENT } = require('./content.queries');
+const fs = require('fs');
+const Fuse = require('fuse.js');
 
 module.exports = async function (api) {
   const getlabel = createLabelFunction([
@@ -144,6 +151,33 @@ module.exports = async function (api) {
 
       const popularProducts = products.slice(0, 5);
       const popularCollections = collections.slice(0, 5);
+
+      // ----------------- Search ---------------------
+      const searchProducts = products.map((p) => ({
+        ...p,
+        collections:
+          getProductCollections(productsPerCollection, allCollections, p.id) ||
+          [],
+      }));
+      const searchUtil = new SearchUtil(Fuse);
+      const indexObject = searchUtil.createSearchIndex(searchProducts, [
+        {
+          name: 'keywords',
+          weight: 3,
+        },
+        {
+          name: 'name',
+          weight: 2,
+        },
+        {
+          name: 'collections',
+          weight: 1,
+        },
+      ]);
+      fs.writeFileSync(
+        `./static/_${lang}_search.json`,
+        JSON.stringify(indexObject)
+      );
 
       // -------------------- Home -----------------------------------
       createPage({
