@@ -22,12 +22,13 @@ module.exports = {
       language: page.language,
     };
   },
-  mapToMinimalBlogPage: function (blogs) {
+  mapToMinimalBlogPage: function (blog) {
     return {
-      slug: blogs.slug,
-      title: blogs.titel,
-      language: blogs.language,
-      image: blogs.featured_image,
+      slug: blog.slug,
+      title: blog.titel,
+      language: blog.language,
+      image: blog.featured_image,
+      url: blog.url,
     };
   },
   /**

@@ -45,15 +45,15 @@ module.exports = async function (api) {
       wkw_home: home,
       wkw_algemeen: common,
       wkw_paginas: pages,
-      wkw_blogs: blogs,
+      wkw_blogs: allBlogs,
       wkw_reviews: reviews,
     } = await directus.request(GET_CONTENT);
 
     const pages_nl = pages.filter((p) => p.language === 'nl');
     const pages_en = pages.filter((p) => p.language === 'en');
 
-    const blogs_nl = blogs.filter((b) => b.language === 'nl');
-    const blogs_en = blogs.filter((b) => b.language === 'en');
+    const blogs_nl = allBlogs.filter((b) => b.language === 'nl');
+    const blogs_en = allBlogs.filter((b) => b.language === 'en');
 
     const languages = [
       {
@@ -85,10 +85,13 @@ module.exports = async function (api) {
         collections: allCollections,
         productsPerCollection,
         lang,
+        blogs,
       }) => {
         const slugPrefix = getlabel('urls.slug-prefix', lang);
         const categoryPrefix = getlabel('urls.category-prefix', lang);
         const productPrefix = getlabel('urls.product-prefix', lang);
+        pages.forEach((p) => setFullUrl(p, `${slugPrefix}/`));
+        blogs.forEach((b) => setFullUrl(b, `${slugPrefix}/informatie/`));
         allCollections.forEach((c) =>
           setFullUrl(c, `${slugPrefix}/${categoryPrefix}`)
         );
@@ -123,7 +126,8 @@ module.exports = async function (api) {
       const navbarCollections = collections.map(mapToMinimalCollection);
       const pageLinks = pages.map(mapToMinimalPage);
       const blogPageLinks = blogs.map(mapToMinimalBlogPage);
-      pages.forEach((p) => setFullUrl(p, `${slugPrefix}/`));
+
+      console.log(blogs);
 
       // Breadcrumb pages
       const Home = '/';
@@ -162,6 +166,19 @@ module.exports = async function (api) {
           context: {
             ...global,
             page,
+          },
+        });
+      });
+
+      // ----------------- Blog pages ------------
+      blogs.forEach((blog) => {
+        console.log(blog.url);
+        createPage({
+          path: blog.url,
+          component: './src/templates/BlogPage.vue',
+          context: {
+            ...global,
+            blog,
           },
         });
       });
