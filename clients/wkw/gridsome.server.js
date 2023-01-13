@@ -231,11 +231,18 @@ module.exports = async function (api) {
           );
           translatedPages[language.lang] = translatedCollection.url;
         });
-
         const breadcrumb = {
           Home,
           [collection.name]: collection.url,
         };
+
+        // TODO Get subcollecctions and all products of a collection AND of subcollections
+        const productsPerCollectionMap = productsPerCollection.find(
+          (ppc) => ppc.collection.id === collection.id
+        );
+        console.log(productsPerCollectionMap.products.map((p) => p.name));
+        console.log('-----------------');
+
         createPage({
           path: collection.url,
           component: './src/templates/ProductListing.vue',
