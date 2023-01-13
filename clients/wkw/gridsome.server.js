@@ -145,7 +145,7 @@ module.exports = async function (api) {
       };
 
       const popularProducts = products.slice(0, 5);
-      const popularCollections = collections.slice(0, 5);
+      const popularCollections = collections.slice(0, 6);
 
       // ----------------- Search ---------------------
       const searchProducts = products.map((p) => ({
@@ -223,39 +223,48 @@ module.exports = async function (api) {
       });
 
       // -------------------- ProductListing -----------------------------------
-      allCollections.forEach((collection) => {
-        const translatedPages = {};
-        languages.forEach((language) => {
-          let translatedCollection = language.collections.find(
-            (c) => c.id == collection.id
-          );
-          translatedPages[language.lang] = translatedCollection.url;
-        });
-        const breadcrumb = {
-          Home,
-          [collection.name]: collection.url,
-        };
-
-        // TODO Get subcollecctions and all products of a collection AND of subcollections
-        console.log(collection.name);
-        const productsPerCollectionMap = productsPerCollection.find(
-          (ppc) => ppc.collection.id === collection.id
-        );
-        console.log(productsPerCollectionMap.products.map((p) => p.name));
-        console.log('-----------------');
-
-        createPage({
-          path: collection.url,
-          component: './src/templates/ProductListing.vue',
-          context: {
-            ...global,
-            breadcrumb,
-            collection,
-            translatedPages,
-            popularProducts,
-          },
-        });
-      });
+      productsPerCollection.forEach(
+        ({ products: directProducts, collection }) => {
+          const translatedPages = {};
+          languages.forEach((language) => {
+            let translatedCollection = language.collections.find(
+              (c) => c.id == collection.id
+            );
+            translatedPages[language.lang] = translatedCollection.url;
+          });
+          const breadcrumb = {
+            Home,
+            [collection.name]: collection.url,
+          };
+          let childCollections = [];
+          const childProducts = []; // products of childCollections
+          collection.children?.forEach((childCol) => {
+            const childCollectionMap = productsPerCollection.find(
+              ({ collection: colWithProducts }) =>
+                colWithProducts.id == childCol.id
+            );
+            if (childCollectionMap) {
+              childCollections.push(childCollectionMap.collection);
+              childProducts.push(...childCollectionMap.products);
+            }
+          });
+          createPage({
+            path: collection.url,
+            component: './src/templates/ProductListing.vue',
+            context: {
+              ...global,
+              breadcrumb,
+              collection,
+              translatedPages,
+              childCollections:
+                childCollections.length > 0
+                  ? childCollections.map(mapToMinimalCollection)
+                  : undefined,
+              products: directProducts.concat(childProducts), // Merge direct products and childProducts
+            },
+          });
+        }
+      );
 
       // -------------------- Cart -----------------------------------
       const cartTranslations = {};

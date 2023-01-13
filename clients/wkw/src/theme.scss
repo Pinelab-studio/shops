@@ -25,7 +25,7 @@ $family-primary: 'Poppins';
 
 $control-radius: 5px;
 
-$notification-radius: 0px;
+$notification-radius: 5px;
 
 $navbar-item-hover-background-color: $primary;
 $navbar-item-active-background-color: $primary;
@@ -127,6 +127,14 @@ html {
 .image {
   width: 100%;
   height: auto;
+}
+
+.card img {
+  border-radius: 0;
+}
+
+img {
+  border-radius: $control-radius;
 }
 
 /* The overlay effect - lays on top of the container and over the image */
