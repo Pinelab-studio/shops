@@ -237,6 +237,7 @@ module.exports = async function (api) {
         };
 
         // TODO Get subcollecctions and all products of a collection AND of subcollections
+        console.log(collection.name);
         const productsPerCollectionMap = productsPerCollection.find(
           (ppc) => ppc.collection.id === collection.id
         );
