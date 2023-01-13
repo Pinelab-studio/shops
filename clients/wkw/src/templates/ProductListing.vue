@@ -10,12 +10,9 @@
       :collapse="3"
     />
     <br />
-    <section id="sub-categories">
+    <section v-if="$context.childCollections" id="sub-categories">
       <h2 class="title is-4">{{ $l('common.popular-categories') }}</h2>
-      <div
-        class="columns is-multiline is-mobile"
-        v-if="$context.childCollections"
-      >
+      <div class="columns is-multiline is-mobile">
         <div
           class="column is-6-mobile"
           :class="getColumnWidth()"
@@ -28,10 +25,9 @@
           />
         </div>
       </div>
+      <br />
+      <br />
     </section>
-
-    <br />
-    <br />
 
     <section id="products">
       <h2 class="title is-4">{{ $l('common.products') }}</h2>
@@ -49,6 +45,8 @@
           />
         </div>
       </div>
+      <br />
+      <br />
     </section>
 
     <section id="description">
@@ -84,7 +82,7 @@ export default {
      * Get column widht class based on the nr of childcollections
      */
     getColumnWidth() {
-      switch (this.$context.childCollections.length) {
+      switch (this.$context.childCollections?.length) {
         case 2:
           return 'is-6';
         case 3:
