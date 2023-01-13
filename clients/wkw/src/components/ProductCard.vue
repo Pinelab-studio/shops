@@ -1,6 +1,6 @@
 <template>
   <g-link :to="slug">
-    <div class="card container-overlay">
+    <div class="card container-overlay" style="height: 100%">
       <div class="card-image">
         <figure class="image is-1by1">
           <img :src="image" />
@@ -24,4 +24,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.media-content {
+  overflow-x: clip;
+}
+</style>

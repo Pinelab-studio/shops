@@ -32,12 +32,12 @@
         </div>
       </section>
       <section id="popular-categories">
-        <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
+        <h4 class="title has-text-weight-bold is-5 pt-5">
           {{ $l('common.popular-categories') }}
         </h4>
         <div class="columns is-multiline is-mobile">
           <template v-for="collection in $context.popularCollections">
-            <div class="column is-6-mobile is-4-tablet is-one-fifth-desktop">
+            <div class="column is-6-mobile">
               <CategoryCard
                 :title="collection.name"
                 :image="collection.featuredAsset.thumbnail"
@@ -48,7 +48,7 @@
         </div>
       </section>
       <section id="popular-products">
-        <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">
+        <h4 class="title has-text-weight-bold is-5 pt-5">
           {{ $l('common.popular-products') }}
         </h4>
         <div class="columns is-multiline is-mobile">
@@ -100,7 +100,7 @@
     </template>
 
     <template #content2>
-      <h4 class="title has-text-black has-text-weight-bold is-5 pt-5">Blog</h4>
+      <h4 class="title has-text-weight-bold is-5 pt-5">Blog</h4>
       <BlogCarousel :blogs="$context.blogs" />
     </template>
   </DefaultLayout>
