@@ -210,7 +210,7 @@ module.exports = async function (api) {
         const translatedBlogs = {};
         languages.forEach((language) => {
           let translatedBlog = language.blogs.find((b) => b.name === blog.name);
-          translatedBlog[language.lang] = translatedBlog.url;
+          translatedBlogs[language.lang] = translatedBlog.url;
         });
         const informationUrlTitle = getlabel('nav.advice', lang);
         const breadcrumb = {

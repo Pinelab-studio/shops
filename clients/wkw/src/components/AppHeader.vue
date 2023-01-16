@@ -120,7 +120,10 @@
               <div class="container section py-1">
                 <div class="columns has-text-left">
                   <div class="column">
-                    <g-link :to="$context.homeUrl" class="navbar-item px-0">
+                    <g-link
+                      :to="$context.informationUrl"
+                      class="navbar-item px-0"
+                    >
                       {{ $l('nav.advice') }}
                     </g-link>
                     <g-link to="/faq/" class="navbar-item px-0">
