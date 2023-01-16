@@ -246,6 +246,10 @@ a.navbar-burger.burger {
   visibility: hidden;
 }
 
+strong {
+  color: unset;
+}
+
 #side-basket button,
 .checkout-steps a,
 .checkout-steps button {
