@@ -151,11 +151,6 @@ img {
   border-radius: 0.25rem;
 }
 
-/* When you mouse over the container, fade in the overlay*/
-.container-overlay:hover .hover-overlay {
-  opacity: 0.5;
-}
-
 .overlay {
   position: absolute;
   bottom: 0;
@@ -171,6 +166,11 @@ img {
 /* When you mouse over the container, fade in the overlay*/
 .container-overlay:hover .overlay {
   opacity: 1;
+}
+
+/* When you mouse over the container, fade in the overlay*/
+.container-overlay:hover .hover-overlay {
+  opacity: 0.5;
 }
 
 .centered {
@@ -244,6 +244,18 @@ a.navbar-burger.burger {
   height: 160px; /*same height as header*/
   margin-top: -160px; /*same height as header*/
   visibility: hidden;
+}
+
+strong {
+  color: unset;
+}
+
+.has-text-white h1,
+.has-text-white h2,
+.has-text-white h3,
+.has-text-white h4,
+.has-text-white h5 {
+  @extend .has-text-white;
 }
 
 #side-basket button,

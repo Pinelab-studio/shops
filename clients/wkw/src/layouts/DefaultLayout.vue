@@ -24,19 +24,23 @@
         </div>
         <div class="column">
           <b-field position="is-centered" grouped group-multiline>
-            <b-input placeholder="Naam" type="name"> </b-input>
-            <b-input placeholder="E-mailadres" type="email"> </b-input>
+            <b-input :placeholder="$l('review.name')" type="name"> </b-input>
+            <b-input :placeholder="$l('customer-details.email')" type="email">
+            </b-input>
             <p class="control">
               <b-button
                 type="is-dark-green is-shadowless is-hovered"
-                label="Aanmelden"
+                :label="$l('common.subscribe')"
               />
             </p>
           </b-field>
         </div>
       </div>
     </div>
-    <AppFooter :collections="$context.navbarCollections" />
+    <AppFooter
+      :collections="$context.navbarCollections"
+      :pages="$context.pageLinks"
+    />
   </div>
 </template>
 
@@ -98,8 +102,5 @@ export default {
   .navbar-margin {
     margin-top: 160px !important;
   }
-}
-#newsletterMessage strong {
-  color: white;
 }
 </style>

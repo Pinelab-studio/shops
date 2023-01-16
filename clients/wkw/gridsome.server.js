@@ -10,6 +10,7 @@ const {
   mapToMinimalBlogPage,
   setFullUrl,
   getProductCollections,
+  findTranslatedFields,
 } = require('./util');
 const { GET_CONTENT } = require('./content.queries');
 const fs = require('fs');
@@ -49,18 +50,22 @@ module.exports = async function (api) {
     } = await vendureEN.getShopData();
 
     const {
-      wkw_home: home,
-      wkw_algemeen: common,
-      wkw_paginas: pages,
-      wkw_blogs: blogs,
+      wkw_home: home_all, // _all means it contains all languages
+      wkw_algemeen: common_all,
+      wkw_paginas: allPages,
+      wkw_blogs: allBlogs,
       wkw_reviews: reviews,
     } = await directus.request(GET_CONTENT);
 
-    const pages_nl = pages.filter((p) => p.language === 'nl');
-    const pages_en = pages.filter((p) => p.language === 'en');
+    const pages_nl = allPages.filter((p) => p.language === 'nl');
+    const pages_en = allPages.filter((p) => p.language === 'en');
 
-    const blogs_nl = blogs.filter((b) => b.language === 'nl');
-    const blogs_en = blogs.filter((b) => b.language === 'en');
+    const blogs_nl = allBlogs.filter((b) => b.language === 'nl');
+    const blogs_en = allBlogs.filter((b) => b.language === 'en');
+
+    // Find '_en' counterpart of fields if they exist
+    const common_en = findTranslatedFields(common_all, 'en');
+    const home_en = findTranslatedFields(home_all, 'en');
 
     const languages = [
       {
@@ -72,6 +77,8 @@ module.exports = async function (api) {
         blogs: blogs_nl,
         availableCountries: availableCountriesNL,
         slugPrefix: getlabel('urls.slug-prefix', 'nl'),
+        common: common_all,
+        homeContent: home_all,
       },
       {
         lang: 'en',
@@ -82,6 +89,8 @@ module.exports = async function (api) {
         blogs: blogs_en,
         availableCountries: availableCountriesEN,
         slugPrefix: getlabel('urls.slug-prefix', 'en'),
+        common: common_en,
+        homeContent: home_en,
       },
     ];
 
@@ -92,10 +101,15 @@ module.exports = async function (api) {
         collections: allCollections,
         productsPerCollection,
         lang,
+        blogs,
+        pages,
       }) => {
         const slugPrefix = getlabel('urls.slug-prefix', lang);
         const categoryPrefix = getlabel('urls.category-prefix', lang);
         const productPrefix = getlabel('urls.product-prefix', lang);
+        const informationUrl = getlabel('urls.information', lang);
+        pages.forEach((p) => setFullUrl(p, `${slugPrefix}`));
+        blogs.forEach((b) => setFullUrl(b, `${slugPrefix}/${informationUrl}/`));
         allCollections.forEach((c) =>
           setFullUrl(c, `${slugPrefix}/${categoryPrefix}`)
         );
@@ -125,6 +139,8 @@ module.exports = async function (api) {
       pages,
       blogs,
       slugPrefix,
+      common,
+      homeContent,
     } of languages) {
       const collections = vendureNL.unflatten(allCollections);
       const navbarCollections = collections.map(mapToMinimalCollection);
@@ -132,7 +148,7 @@ module.exports = async function (api) {
       const blogPageLinks = blogs.map(mapToMinimalBlogPage);
 
       // Breadcrumb pages
-      const Home = '/';
+      const Home = `${slugPrefix}/`;
 
       const global = {
         navbarCollections,
@@ -140,6 +156,7 @@ module.exports = async function (api) {
         cartUrl: `${slugPrefix}/cart/`,
         checkoutUrl: `${slugPrefix}/checkout/`,
         homeUrl: `${slugPrefix}/`,
+        informationUrl: getlabel('urls.information', lang),
         common,
         pageLinks,
       };
@@ -183,7 +200,45 @@ module.exports = async function (api) {
           popularProducts,
           popularCollections,
           blogs: blogPageLinks.slice(0, 10),
+          homeContent,
         },
+      });
+
+      // ----------------- Static pages ------------
+      pages.forEach((page) => {
+        createPage({
+          path: page.url,
+          component: './src/templates/StaticPage.vue',
+          context: {
+            ...global,
+            page,
+          },
+        });
+      });
+
+      // ----------------- Blog pages ------------
+      blogs.forEach((blog) => {
+        const translatedBlogs = {};
+        languages.forEach((language) => {
+          let translatedBlog = language.blogs.find((b) => b.name === blog.name);
+          translatedBlogs[language.lang] = translatedBlog.url;
+        });
+        const informationUrlTitle = getlabel('nav.advice', lang);
+        const breadcrumb = {
+          Home,
+          [informationUrlTitle]: `${slugPrefix}/${global.informationUrl}`,
+          [blog.titel]: '', // Not clickable anyway
+        };
+        createPage({
+          path: blog.url,
+          component: './src/templates/BlogPage.vue',
+          context: {
+            ...global,
+            blog,
+            breadcrumb,
+            translatedPages: translatedBlogs,
+          },
+        });
       });
 
       // -------------------- BlogOverview -----------------------------------

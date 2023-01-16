@@ -11,6 +11,7 @@
   "dependencies": {
     "@fontsource/poppins": "^4.5.10",
     "@gridsome/plugin-sitemap": "^0.4.0",
+    "@miyaoka/vue-youtube-embed-lite": "^1.1.0",
     "buefy": "^0.9.7",
     "debounce": "^1.2.1",
     "fuse.js": "^6.6.2",

@@ -17,17 +17,19 @@ module.exports = {
   },
   mapToMinimalPage: function (page) {
     return {
+      title: page.titel,
       slug: page.slug,
-      title: page.title,
+      url: page.url,
       language: page.language,
     };
   },
-  mapToMinimalBlogPage: function (blogs) {
+  mapToMinimalBlogPage: function (blog) {
     return {
-      slug: blogs.slug,
-      title: blogs.titel,
-      language: blogs.language,
-      image: blogs.featured_image,
+      slug: blog.slug,
+      title: blog.titel,
+      language: blog.language,
+      image: blog.featured_image,
+      url: blog.url,
     };
   },
   /**
@@ -53,5 +55,16 @@ module.exports = {
     if (collectionMap) {
       return allCollections.filter((c) => c.id === collectionMap.collection.id);
     }
+  },
+  /**
+   * Find translated fields from Directus if they exist. If not, use the default.
+   * I.E. for the field 'obj.intro' we also check if there is a 'obj.intro_en' and assign that to obj.intro
+   */
+  findTranslatedFields: function (obj, lang) {
+    const translatedObj = {};
+    Object.entries(obj).forEach(([key, value]) => {
+      translatedObj[key] = obj[`${key}_${lang}`] || obj[key];
+    });
+    return translatedObj;
   },
 };

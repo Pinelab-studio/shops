@@ -61,13 +61,15 @@
     "read-more": "Read more",
     "add-to-cart": "Add to cart",
     "sold-out": "Sold out",
-    "items-found": "items found"
+    "items-found": "items found",
+    "subscribe": "Subscribe"
   },
   "error": {
     "INSUFFICIENT_STOCK_ERROR": "We don't have any more of those items!"
   },
   "urls": {
     "home": "Home",
+    "information": "information",
     "category-prefix": "product-category",
     "product-prefix": "product",
     "domain": "https://wormenkwekerijwasse.nl",
