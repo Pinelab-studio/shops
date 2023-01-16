@@ -6,25 +6,32 @@
         <div class="columns">
           <div class="column">
             <HighlightCard
-              title="Alle benodigdheden om te starten met kweken"
-              image="https://storage.googleapis.com/wassets/preview/ba/seeds__preview.jpeg"
-              slug="alle-benodigdheden-om-te-starten-met-kweken"
+              :title="$context.featuredProducts[0]?.name"
+              :image="$context.featuredProducts[0]?.featuredAsset?.thumbnail"
+              :slug="$context.featuredProducts[0]?.url"
+              :price="$context.featuredProducts[0]?.lowestPrice"
             />
           </div>
           <div class="column is-4">
             <div class="columns is-mobile is-multiline">
               <div class="column is-12-tablet is-6-mobile">
                 <HighlightCard
-                  title="Alle potgrond 1+1"
-                  image="https://storage.googleapis.com/wassets/preview/ba/seeds__preview.jpeg"
-                  slug="alle-potgrond-1+1"
+                  :title="$context.featuredProducts[1]?.name"
+                  :image="
+                    $context.featuredProducts[1]?.featuredAsset?.thumbnail
+                  "
+                  :slug="$context.featuredProducts[1]?.url"
+                  :price="$context.featuredProducts[1]?.lowestPrice"
                 />
               </div>
               <div class="column is-12-tablet is-6-mobile">
                 <HighlightCard
-                  title="Nieuw in het assortiment"
-                  image="https://storage.googleapis.com/wassets/preview/be/compost-rol-verdeler-2-min-300x300__preview.jpg"
-                  slug="nieuw-in-het-assortiment"
+                  :title="$context.featuredProducts[2]?.name"
+                  :image="
+                    $context.featuredProducts[2]?.featuredAsset?.thumbnail
+                  "
+                  :slug="$context.featuredProducts[2]?.url"
+                  :price="$context.featuredProducts[2]?.lowestPrice"
                 />
               </div>
             </div>

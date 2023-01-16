@@ -191,7 +191,10 @@ module.exports = async function (api) {
         JSON.stringify(indexObject)
       );
 
-      // -------------------- Home -----------------------------------
+      // -------------------- Home / Index -----------------------------------
+      const featured = products.filter((p) =>
+        p.facetValues.find((facetValue) => facetValue.code === 'featured')
+      );
       createPage({
         path: global.homeUrl,
         component: './src/templates/Index.vue',
@@ -201,6 +204,7 @@ module.exports = async function (api) {
           popularCollections,
           blogs: blogPageLinks.slice(0, 10),
           homeContent,
+          featuredProducts: featured.slice(0, 3),
         },
       });
 
