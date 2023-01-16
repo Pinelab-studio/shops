@@ -1,7 +1,5 @@
 <template>
   <div>
-    {{ blogs }}
-
     <b-carousel-list
       :data="blogs"
       :items-to-show="itemsToShow"
