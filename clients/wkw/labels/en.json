@@ -94,5 +94,9 @@
     "rating": "How would you rate this product?",
     "thank-you": "Thank you!",
     "submit": "Submit review"
+  },
+  "order-confirmation": {
+    "thanks": "Thank you for your order",
+    "error": "Something weent wrong. Please contact us and mention your order number: "
   }
 }

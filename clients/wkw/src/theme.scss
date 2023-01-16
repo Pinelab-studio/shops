@@ -270,6 +270,7 @@ a.navbar-burger.burger {
   @extend .title;
 }
 
+.order-summary h4,
 #side-basket h4,
 .checkout-steps h4 {
   @extend .is-4;
