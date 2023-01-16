@@ -37,7 +37,10 @@
         </div>
       </div>
     </div>
-    <AppFooter :collections="$context.navbarCollections" />
+    <AppFooter
+      :collections="$context.navbarCollections"
+      :pages="$context.pageLinks"
+    />
   </div>
 </template>
 

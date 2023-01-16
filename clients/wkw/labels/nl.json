@@ -69,6 +69,7 @@
   },
   "urls": {
     "home": "Home",
+    "information": "informatie",
     "category-prefix": "product-categorie",
     "product-prefix": "product",
     "domain": "https://wormenkwekerijwasse.nl",
