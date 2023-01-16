@@ -186,6 +186,16 @@ module.exports = async function (api) {
         },
       });
 
+      // -------------------- BlogOverview -----------------------------------
+      createPage({
+        path: `${slugPrefix}/informatie`,
+        component: './src/templates/BlogOverview.vue',
+        context: {
+          ...global,
+          blogs,
+        },
+      });
+
       // -------------------- ProductDetail -----------------------------------
       products.forEach((product) => {
         const reviewsForThisProduct = reviews.filter(
