@@ -22,3 +22,26 @@ export default {
   props: ['title', 'image', 'slug'],
 };
 </script>
+
+<style scoped>
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.65); /* Black see-through */
+  width: 100%;
+  height: 100%;
+  transition: 0.3s ease;
+  opacity: 1;
+  border-radius: 0.25rem;
+}
+
+/* When you mouse over the container, fade in the overlay*/
+.container-overlay:hover .overlay {
+  opacity: 0.5;
+}
+
+.title {
+  word-break: normal;
+}
+</style>

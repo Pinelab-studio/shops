@@ -23,7 +23,7 @@
 
           <div v-if="review.response">
             <article class="media">
-              <figure class="media-left my-1 mx-3">
+              <figure class="media-left">
                 <p class="image is-48x48">
                   <img
                     class="is-rounded"

@@ -7,7 +7,7 @@
       :arrowHover="false"
     >
       <template #item="blog">
-        <g-link :to="`/blog/${blog.slug}`">
+        <g-link :to="blog.url">
           <div class="container-overlay">
             <div class="card-image">
               <b-image

@@ -151,11 +151,6 @@ img {
   border-radius: 0.25rem;
 }
 
-/* When you mouse over the container, fade in the overlay*/
-.container-overlay:hover .hover-overlay {
-  opacity: 0.5;
-}
-
 .overlay {
   position: absolute;
   bottom: 0;
@@ -171,6 +166,11 @@ img {
 /* When you mouse over the container, fade in the overlay*/
 .container-overlay:hover .overlay {
   opacity: 1;
+}
+
+/* When you mouse over the container, fade in the overlay*/
+.container-overlay:hover .hover-overlay {
+  opacity: 0.5;
 }
 
 .centered {
