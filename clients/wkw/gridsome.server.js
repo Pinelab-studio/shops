@@ -213,7 +213,6 @@ module.exports = async function (api) {
           translatedBlogs[language.lang] = translatedBlog.url;
         });
         const informationUrlTitle = getlabel('nav.advice', lang);
-        console.log(blog);
         const breadcrumb = {
           Home,
           [informationUrlTitle]: `${slugPrefix}/${global.informationUrl}`,
