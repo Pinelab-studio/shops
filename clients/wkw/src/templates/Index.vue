@@ -72,12 +72,6 @@
           <div class="has-text-white" v-html="$context.home.intro"></div>
         </div>
         <div class="column p-4">
-          <!-- <iframe
-            loading="lazy"
-            src="https://www.youtube.com/embed/cLblUjpFdfU"
-            width="100%"
-            height="100%"
-          ></iframe> -->
           <template>
             <YoutubeEmbedLite
               id="youtubeEmbed"
