@@ -243,11 +243,11 @@ module.exports = async function (api) {
 
       // -------------------- BlogOverview -----------------------------------
       createPage({
-        path: `${slugPrefix}/informatie`,
+        path: `${slugPrefix}/${global.informationUrl}`,
         component: './src/templates/BlogOverview.vue',
         context: {
           ...global,
-          blogs,
+          blogs: blogPageLinks,
         },
       });
 

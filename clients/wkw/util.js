@@ -25,11 +25,14 @@ module.exports = {
   },
   mapToMinimalBlogPage: function (blog) {
     return {
-      slug: blog.slug,
       title: blog.titel,
       language: blog.language,
-      image: blog.featured_image,
+      image: blog.featured_image.id,
       url: blog.url,
+      short_description: blog.short_description,
+      fName: blog.user_created.first_name,
+      lName: blog.user_created.last_name,
+      date: blog.date_created,
     };
   },
   /**

@@ -1,22 +1,27 @@
 <template>
-  <DefaultLayout #content>
-    <section id="blogs">
-      <h4 class="title has-text-weight-bold is-5 pt-5">Blogs</h4>
-      <div class="columns is-multiline is-mobile">
-        <template v-for="blog in $context.blogs">
-          <div class="column is-6-mobile">
-            <BlogCard
-              :image="blog.featured_image.id"
-              :title="blog.titel"
-              :fName="blog.user_created.first_name"
-              :lName="blog.user_created.last_name"
-              :date="blog.date_created | date"
-              :content="blog.content"
-            />
-          </div>
-        </template>
-      </div>
-    </section>
+  <DefaultLayout>
+    <template #content>
+      <section id="blogs">
+        <h4 class="title has-text-weight-bold is-5 pt-5">Blogs</h4>
+        <div class="columns is-multiline is-mobile">
+          <template v-for="blog in $context.blogs">
+            <div
+              class="column is-one-third-desktop is-half-tablet is-12-mobile"
+            >
+              <BlogCard
+                :image="getDefaultImage(blog.image)"
+                :title="blog.title"
+                :fName="blog.fName"
+                :lName="blog.lName"
+                :date="blog.date"
+                :content="blog.short_description"
+                :url="blog.url"
+              />
+            </div>
+          </template>
+        </div>
+      </section>
+    </template>
   </DefaultLayout>
 </template>
 <script>
