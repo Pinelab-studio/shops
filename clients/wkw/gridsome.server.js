@@ -51,13 +51,13 @@ module.exports = async function (api) {
     const {
       wkw_home: home,
       wkw_algemeen: common,
-      wkw_paginas: pages,
+      wkw_paginas: all_pages,
       wkw_blogs: allBlogs,
       wkw_reviews: reviews,
     } = await directus.request(GET_CONTENT);
 
-    const pages_nl = pages.filter((p) => p.language === 'nl');
-    const pages_en = pages.filter((p) => p.language === 'en');
+    const pages_nl = all_pages.filter((p) => p.language === 'nl');
+    const pages_en = all_pages.filter((p) => p.language === 'en');
 
     const blogs_nl = allBlogs.filter((b) => b.language === 'nl');
     const blogs_en = allBlogs.filter((b) => b.language === 'en');
@@ -93,12 +93,14 @@ module.exports = async function (api) {
         productsPerCollection,
         lang,
         blogs,
+        pages,
       }) => {
         const slugPrefix = getlabel('urls.slug-prefix', lang);
         const categoryPrefix = getlabel('urls.category-prefix', lang);
         const productPrefix = getlabel('urls.product-prefix', lang);
-        pages.forEach((p) => setFullUrl(p, `${slugPrefix}/`));
-        blogs.forEach((b) => setFullUrl(b, `${slugPrefix}/informatie/`));
+        const informationUrl = getlabel('urls.information', lang);
+        pages.forEach((p) => setFullUrl(p, `${slugPrefix}`));
+        blogs.forEach((b) => setFullUrl(b, `${slugPrefix}/${informationUrl}/`));
         allCollections.forEach((c) =>
           setFullUrl(c, `${slugPrefix}/${categoryPrefix}`)
         );
@@ -134,8 +136,6 @@ module.exports = async function (api) {
       const pageLinks = pages.map(mapToMinimalPage);
       const blogPageLinks = blogs.map(mapToMinimalBlogPage);
 
-      console.log(blogs);
-
       // Breadcrumb pages
       const Home = '/';
 
@@ -145,6 +145,7 @@ module.exports = async function (api) {
         cartUrl: `${slugPrefix}/cart/`,
         checkoutUrl: `${slugPrefix}/checkout/`,
         homeUrl: `${slugPrefix}/`,
+        informationUrl: getlabel('urls.information', lang),
         common,
         pageLinks,
       };
@@ -185,8 +186,8 @@ module.exports = async function (api) {
         component: './src/templates/Index.vue',
         context: {
           ...global,
-          popularProducts: products.slice(0, 5), // popular products for now,
-          popularCollections: collections.slice(0, 5),
+          popularProducts,
+          popularCollections,
           blogs: blogPageLinks.slice(0, 10),
           home,
         },
@@ -206,12 +207,25 @@ module.exports = async function (api) {
 
       // ----------------- Blog pages ------------
       blogs.forEach((blog) => {
+        const translatedBlogs = {};
+        languages.forEach((language) => {
+          let translatedBlog = language.blogs.find((b) => b.name === blog.name);
+          translatedBlog[language.lang] = translatedBlog.url;
+        });
+        const informationUrlTitle = getlabel('nav.advice', lang);
+        const breadcrumb = {
+          Home,
+          [informationUrlTitle]: `${slugPrefix}/${global.informationUrl}`,
+          [blog.name]: '', // Not clickable anyway
+        };
         createPage({
           path: blog.url,
           component: './src/templates/BlogPage.vue',
           context: {
             ...global,
             blog,
+            breadcrumb,
+            translatedPages: translatedBlogs,
           },
         });
       });

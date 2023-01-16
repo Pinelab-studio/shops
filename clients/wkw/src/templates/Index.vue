@@ -78,7 +78,7 @@
               vid="cLblUjpFdfU"
               thumb-quality="hq"
               :params="{ start: 0 }"
-              aspect="0.4"
+              :aspect="0.4"
             />
           </template>
         </div>

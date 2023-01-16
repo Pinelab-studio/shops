@@ -19,6 +19,7 @@ module.exports = {
     return {
       title: page.titel,
       slug: page.slug,
+      url: page.url,
       language: page.language,
     };
   },

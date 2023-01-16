@@ -42,8 +42,8 @@
         </div>
         <div class="column">
           <h4 class="has-text-weight-bold is-5 mb-3">FAQ</h4>
-          <template v-for="page in $context.pageLinks">
-            <g-link :to="page.slug">
+          <template v-for="page in pages">
+            <g-link :to="page.url">
               <p class="has-text-white hover-underline">
                 {{ page.title }}
               </p>
