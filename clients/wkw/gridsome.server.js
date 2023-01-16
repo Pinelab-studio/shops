@@ -51,13 +51,13 @@ module.exports = async function (api) {
     const {
       wkw_home: home,
       wkw_algemeen: common,
-      wkw_paginas: all_pages,
+      wkw_paginas: allPages,
       wkw_blogs: allBlogs,
       wkw_reviews: reviews,
     } = await directus.request(GET_CONTENT);
 
-    const pages_nl = all_pages.filter((p) => p.language === 'nl');
-    const pages_en = all_pages.filter((p) => p.language === 'en');
+    const pages_nl = allPages.filter((p) => p.language === 'nl');
+    const pages_en = allPages.filter((p) => p.language === 'en');
 
     const blogs_nl = allBlogs.filter((b) => b.language === 'nl');
     const blogs_en = allBlogs.filter((b) => b.language === 'en');
