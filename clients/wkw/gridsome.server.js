@@ -206,7 +206,6 @@ module.exports = async function (api) {
 
       // ----------------- Blog pages ------------
       blogs.forEach((blog) => {
-        console.log(blog.url);
         createPage({
           path: blog.url,
           component: './src/templates/BlogPage.vue',
