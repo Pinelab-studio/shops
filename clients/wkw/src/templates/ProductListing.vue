@@ -33,8 +33,7 @@
       <h2 class="title is-4">{{ $l('common.products') }}</h2>
       <div class="columns is-multiline is-mobile" v-if="$context.products">
         <div
-          class="column is-6-mobile"
-          :class="getColumnWidth()"
+          class="column is-6-mobile is-4-tablet is-one-fifth-desktop"
           v-for="product of $context.products"
         >
           <ProductCard

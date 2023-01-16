@@ -95,7 +95,7 @@
                   class="column is-6-mobile is-4-tablet is-one-fifth-desktop"
                 >
                   <ProductCard
-                    :title="product.title"
+                    :title="product.name"
                     :image="product.featuredAsset.thumbnail"
                     :slug="product.url"
                     :price="product.lowestPrice"
