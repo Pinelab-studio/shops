@@ -1,6 +1,7 @@
 <template>
   <DefaultLayout>
     <template #content>
+      <br />
       <div class="card">
         <div class="card-image">
           <b-image

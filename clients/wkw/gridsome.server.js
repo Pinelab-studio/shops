@@ -216,7 +216,7 @@ module.exports = async function (api) {
         const breadcrumb = {
           Home,
           [informationUrlTitle]: `${slugPrefix}/${global.informationUrl}`,
-          [blog.name]: '', // Not clickable anyway
+          [blog.title]: '', // Not clickable anyway
         };
         createPage({
           path: blog.url,
