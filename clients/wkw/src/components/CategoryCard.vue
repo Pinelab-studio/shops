@@ -6,7 +6,7 @@
           <img :src="image" />
         </figure>
         <div class="overlay"></div>
-        <div class="centered">
+        <div class="centered" style="width: 100%">
           <p
             class="title has-text-weight-bold has-text-white has-text-centered is-5"
           >

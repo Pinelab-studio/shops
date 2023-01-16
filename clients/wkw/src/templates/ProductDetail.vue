@@ -11,9 +11,9 @@
           </div>
           <div class="tile is-parent is-vertical">
             <article class="tile is-child">
-              <p class="title has-text-black mb-0">
+              <h1 class="title">
                 {{ $context.product.name }}
-              </p>
+              </h1>
 
               <div class="is-flex">
                 <b-rate
@@ -22,17 +22,14 @@
                   :disabled="true"
                   :show-score="true"
                 ></b-rate>
-                <div v-if="$context.reviews.length > 0">
+                <div>
                   <a class="my-3 is-flex" href="#reviews">
                     - {{ $context.reviews.length }} Reviews</a
                   >
                 </div>
-                <div v-else>
-                  <a class="my-3 is-flex" href="#reviews"> - No reviews</a>
-                </div>
               </div>
 
-              <p class="subtitle has-text-black">
+              <p class="subtitle">
                 {{ variant.priceWithTax | euro }}
               </p>
               <ReadMoreDescription
@@ -75,7 +72,7 @@
         <span class="anchor" id="full-description"></span>
 
         <div class="tile is-parent">
-          <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+          <h4 class="title has-text-weight-bold py-3 my-0">
             {{ $l('product.description') }}
           </h4>
         </div>
@@ -87,7 +84,7 @@
 
         <section id="popular-products">
           <div class="tile is-parent">
-            <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+            <h4 class="title has-text-weight-bold py-3 my-0">
               {{ $l('product.related') }}
             </h4>
           </div>
@@ -98,7 +95,7 @@
                   class="column is-6-mobile is-4-tablet is-one-fifth-desktop"
                 >
                   <ProductCard
-                    :title="product.title"
+                    :title="product.name"
                     :image="product.featuredAsset.thumbnail"
                     :slug="product.url"
                     :price="product.lowestPrice"
@@ -111,9 +108,7 @@
         <span class="anchor" id="reviews"></span>
         <div class="columns is-mobile mt-3">
           <div class="column">
-            <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
-              Reviews
-            </h4>
+            <h4 class="title has-text-weight-bold py-3 my-0">Reviews</h4>
           </div>
           <div class="column">
             <WriteReviewButton :product="$context.product" />
