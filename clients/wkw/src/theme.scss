@@ -246,6 +246,18 @@ a.navbar-burger.burger {
   visibility: hidden;
 }
 
+strong {
+  color: unset;
+}
+
+.has-text-white h1,
+.has-text-white h2,
+.has-text-white h3,
+.has-text-white h4,
+.has-text-white h5 {
+  @extend .has-text-white;
+}
+
 #side-basket button,
 .checkout-steps a,
 .checkout-steps button {

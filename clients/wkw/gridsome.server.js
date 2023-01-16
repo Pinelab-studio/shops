@@ -10,6 +10,7 @@ const {
   mapToMinimalBlogPage,
   setFullUrl,
   getProductCollections,
+  findTranslatedFields,
 } = require('./util');
 const { GET_CONTENT } = require('./content.queries');
 const fs = require('fs');
@@ -49,8 +50,8 @@ module.exports = async function (api) {
     } = await vendureEN.getShopData();
 
     const {
-      wkw_home: home,
-      wkw_algemeen: common,
+      wkw_home: home_all, // _all means it contains all languages
+      wkw_algemeen: common_all,
       wkw_paginas: allPages,
       wkw_blogs: allBlogs,
       wkw_reviews: reviews,
@@ -62,6 +63,10 @@ module.exports = async function (api) {
     const blogs_nl = allBlogs.filter((b) => b.language === 'nl');
     const blogs_en = allBlogs.filter((b) => b.language === 'en');
 
+    // Find '_en' counterpart of fields if they exist
+    const common_en = findTranslatedFields(common_all, 'en');
+    const home_en = findTranslatedFields(home_all, 'en');
+
     const languages = [
       {
         lang: 'nl',
@@ -72,6 +77,8 @@ module.exports = async function (api) {
         blogs: blogs_nl,
         availableCountries: availableCountriesNL,
         slugPrefix: getlabel('urls.slug-prefix', 'nl'),
+        common: common_all,
+        homeContent: home_all,
       },
       {
         lang: 'en',
@@ -82,6 +89,8 @@ module.exports = async function (api) {
         blogs: blogs_en,
         availableCountries: availableCountriesEN,
         slugPrefix: getlabel('urls.slug-prefix', 'en'),
+        common: common_en,
+        homeContent: home_en,
       },
     ];
 
@@ -130,6 +139,8 @@ module.exports = async function (api) {
       pages,
       blogs,
       slugPrefix,
+      common,
+      homeContent,
     } of languages) {
       const collections = vendureNL.unflatten(allCollections);
       const navbarCollections = collections.map(mapToMinimalCollection);
@@ -137,7 +148,7 @@ module.exports = async function (api) {
       const blogPageLinks = blogs.map(mapToMinimalBlogPage);
 
       // Breadcrumb pages
-      const Home = '/';
+      const Home = `${slugPrefix}/`;
 
       const global = {
         navbarCollections,
@@ -189,7 +200,7 @@ module.exports = async function (api) {
           popularProducts,
           popularCollections,
           blogs: blogPageLinks.slice(0, 10),
-          home,
+          homeContent,
         },
       });
 

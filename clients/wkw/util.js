@@ -56,4 +56,15 @@ module.exports = {
       return allCollections.filter((c) => c.id === collectionMap.collection.id);
     }
   },
+  /**
+   * Find translated fields from Directus if they exist. If not, use the default.
+   * I.E. for the field 'obj.intro' we also check if there is a 'obj.intro_en' and assign that to obj.intro
+   */
+  findTranslatedFields: function (obj, lang) {
+    const translatedObj = {};
+    Object.entries(obj).forEach(([key, value]) => {
+      translatedObj[key] = obj[`${key}_${lang}`] || obj[key];
+    });
+    return translatedObj;
+  },
 };

@@ -69,18 +69,16 @@
     <template #fullwidth>
       <div class="columns is-centered is-vcentered content">
         <div class="column p-4">
-          <div class="has-text-white" v-html="$context.home.intro"></div>
+          <div class="has-text-white" v-html="$context.homeContent.intro"></div>
         </div>
         <div class="column p-4">
-          <template>
-            <YoutubeEmbedLite
-              id="youtubeEmbed"
-              vid="cLblUjpFdfU"
-              thumb-quality="hq"
-              :params="{ start: 0 }"
-              :aspect="0.4"
-            />
-          </template>
+          <YoutubeEmbedLite
+            id="youtubeEmbed"
+            vid="cLblUjpFdfU"
+            thumb-quality="hq"
+            :params="{ start: 0 }"
+            :aspect="0.4"
+          />
         </div>
       </div>
     </template>
