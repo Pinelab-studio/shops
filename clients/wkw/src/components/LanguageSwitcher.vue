@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!$context.hideLanguageSwitcher">
     <a v-if="$context.lang === 'en'" @click="goTo('nl')"
       ><img src="/img/nl.svg" class="lang-flag" alt="Nederlands"
     /></a>

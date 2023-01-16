@@ -295,6 +295,16 @@ module.exports = async function (api) {
           translatedPages: checkoutTranslations,
         },
       });
+
+      // -------------------- Order confirmation -----------------------------------
+      createPage({
+        path: `${slugPrefix}/order/:code`,
+        component: './src/templates/OrderConfirmation.vue',
+        context: {
+          ...global,
+          hideLanguageSwitcher: true, // Language is chosen based on the shipping country
+        },
+      });
     }
   });
 };

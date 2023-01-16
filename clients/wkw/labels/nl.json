@@ -94,5 +94,9 @@
     "rating": "Hoeveel sterren geeft u dit product?",
     "thank-you": "Bedankt voor uw review!",
     "submit": "Plaats review"
+  },
+  "order-confirmation": {
+    "thanks": "Bedankt voor je bestelling!",
+    "error": " Er is helaas iets mis gegaan. Neem contact op met ons en vermeld bestelnummer"
   }
 }

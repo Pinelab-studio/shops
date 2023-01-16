@@ -57,14 +57,14 @@
     "popular-categories": "Popular categories",
     "popular-products": "Popular products",
     "products": "Products",
-    "made-by": "Happily made by Pinelab",
+    "made-by": "Made with joy by Pinelab",
     "read-more": "Read more",
     "add-to-cart": "Add to cart",
     "sold-out": "Sold out",
     "items-found": "items found"
   },
   "error": {
-    "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
+    "INSUFFICIENT_STOCK_ERROR": "We don't have any more of those items!"
   },
   "urls": {
     "home": "Home",
@@ -94,5 +94,9 @@
     "rating": "How would you rate this product?",
     "thank-you": "Thank you!",
     "submit": "Submit review"
+  },
+  "order-confirmation": {
+    "thanks": "Thank you for your order",
+    "error": "Something weent wrong. Please contact us and mention your order number: "
   }
 }
