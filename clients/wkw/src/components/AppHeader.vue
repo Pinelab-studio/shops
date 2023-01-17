@@ -4,7 +4,7 @@
       id="banner"
       class="notification is-dark-green p-1 m-0 has-text-centered"
     >
-      <p class="has-text-white">
+      <p id="banner-text" class="has-text-white">
         {{ $context.common.banner }}
       </p>
     </div>
@@ -217,6 +217,16 @@ export default {
   position: fixed;
   top: 0;
   width: 100%;
+}
+
+#banner.notification {
+  border-radius: 0px;
+}
+
+#banner-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .navbar-item,
