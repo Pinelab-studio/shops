@@ -282,6 +282,12 @@ strong {
   @extend .title;
 }
 
+.consent-block h4 {
+  @extend .has-text-white;
+  @extend .is-4;
+  @extend .title;
+}
+
 .order-summary h4,
 #side-basket h4,
 .checkout-steps h4 {

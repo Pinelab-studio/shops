@@ -11,6 +11,7 @@ import {
   VendureClient,
 } from 'pinelab-storefront';
 import mitt from 'mitt';
+import VueGtag from 'vue-gtag';
 
 export default function (Vue, { router, head, isClient }) {
   // Get image by ID from directus
@@ -54,6 +55,21 @@ export default function (Vue, { router, head, isClient }) {
         return this?.$context?.lang == 'nl' ? vendureClientNl : vendureClientEn;
       },
     });
+    // Analytics
+    Vue.use(
+      VueGtag,
+      {
+        config: {
+          id: 'UA-57308319-7',
+          params: {
+            anonymize_ip: true,
+          },
+        },
+        includes: [{ id: 'AW-869905982' }],
+        bootstrap: false,
+      },
+      router
+    );
   }
   Vue.use(Buefy);
   Vue.component('QuantityInput', QuantityInput);

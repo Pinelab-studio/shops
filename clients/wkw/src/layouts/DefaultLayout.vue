@@ -41,6 +41,19 @@
       :collections="$context.navbarCollections"
       :pages="$context.pageLinks"
     />
+    <Consent
+      class="consent pb-6"
+      accept-text="Ja, dat is goed"
+      decline-text="Nee"
+      thank-you-message="Bedankt!"
+      v-on:approved="activateAnalytics()"
+    >
+      <br />
+      <h4>Cookies</h4>
+      Vind je het goed dat we geanonimiseerde data naar Google Analytics sturen,
+      om de website te verbeteren?
+      <br />
+    </Consent>
   </div>
 </template>
 
@@ -48,9 +61,11 @@
 import AppHeader from '@/components/AppHeader.vue';
 import AppFooter from '@/components/AppFooter.vue';
 import Breadcrumb from 'pinelab-storefront/lib/components/Breadcrumb';
+import Consent from 'pinelab-storefront/lib/components/Consent';
+import { bootstrap } from 'vue-gtag';
 
 export default {
-  components: { AppHeader, AppFooter, Breadcrumb },
+  components: { AppHeader, AppFooter, Breadcrumb, Consent },
   props: {
     showNewsletter: {
       default: true,
@@ -59,6 +74,12 @@ export default {
   },
   async mounted() {
     await this.$vendure.getActiveOrder();
+  },
+  methods: {
+    async activateAnalytics() {
+      console.log(`Cookies approved`);
+      await bootstrap();
+    },
   },
   // Create href lang tags
   metaInfo() {
