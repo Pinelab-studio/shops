@@ -100,5 +100,9 @@
   "order-confirmation": {
     "thanks": "Thank you for your order",
     "error": "Something weent wrong. Please contact us and mention your order number: "
+  },
+  "faq": {
+    "title": "FAQ - Questions, reactions and comments",
+    "message": "Do you have any questions, reactions or comments? Feel free to drop us a message below:"
   }
 }

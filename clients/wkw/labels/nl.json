@@ -100,5 +100,9 @@
   "order-confirmation": {
     "thanks": "Bedankt voor je bestelling!",
     "error": " Er is helaas iets mis gegaan. Neem contact op met ons en vermeld bestelnummer"
+  },
+  "faq": {
+    "title": "FAQ - Vragen, reacties, opmerkingen",
+    "message": "Heeft u vragen, reactie, opmerkingen of wilt u gewoon wat kwijt? Laat het weten via een reactie op deze pagina."
   }
 }

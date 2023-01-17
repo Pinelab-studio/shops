@@ -17,7 +17,8 @@
     "fuse.js": "^6.6.2",
     "graphql-tag": "^2.12.6",
     "pinelab-storefront": "0.64.0",
-    "vue-gtag": "1.X"
+    "vue-gtag": "1.X",
+    "vue-disqus": "4.X"
   },
   "devDependencies": {
     "@gridsome/source-graphql": "^0.1.0",

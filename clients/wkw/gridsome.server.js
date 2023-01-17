@@ -335,7 +335,6 @@ module.exports = async function (api) {
         component: './src/templates/Cart.vue',
         context: {
           ...global,
-          popularCollections,
           translatedPages: cartTranslations,
         },
       });
@@ -362,6 +361,20 @@ module.exports = async function (api) {
         context: {
           ...global,
           hideLanguageSwitcher: true, // Language is chosen based on the shipping country
+        },
+      });
+
+      // -------------------- Faq -----------------------------------
+      const faqTranslations = {};
+      languages.forEach(({ lang, slugPrefix }) => {
+        faqTranslations[lang] = `${slugPrefix}/faq/`;
+      });
+      createPage({
+        path: `${slugPrefix}/faq`,
+        component: './src/templates/Faq.vue',
+        context: {
+          ...global,
+          translatedPages: faqTranslations,
         },
       });
     }
