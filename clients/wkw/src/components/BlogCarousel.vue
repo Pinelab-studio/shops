@@ -12,7 +12,7 @@
             <div class="card-image">
               <b-image
                 ratio="image is-2by1"
-                :src="getDefaultImage(blog.image.id)"
+                :src="getDefaultImage(blog.image)"
               ></b-image>
             </div>
             <div class="overlay"></div>

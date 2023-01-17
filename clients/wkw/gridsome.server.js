@@ -245,6 +245,16 @@ module.exports = async function (api) {
         });
       });
 
+      // -------------------- BlogOverview -----------------------------------
+      createPage({
+        path: `${slugPrefix}/${global.informationUrl}`,
+        component: './src/templates/BlogOverview.vue',
+        context: {
+          ...global,
+          blogs: blogPageLinks,
+        },
+      });
+
       // -------------------- ProductDetail -----------------------------------
       products.forEach((product) => {
         const reviewsForThisProduct = reviews.filter(
