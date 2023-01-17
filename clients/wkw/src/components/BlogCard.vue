@@ -14,7 +14,7 @@
             </p>
           </figure>
           <div class="media-content">
-            <p class="has-text-weight-bold is-size-4">
+            <p class="has-text-weight-bold is-size-6">
               {{ fName }}
               {{ lName }}
             </p>
