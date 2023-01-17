@@ -14,12 +14,12 @@
         </div>
         <div class="column">
           <h4 class="has-text-weight-bold is-5 mb-3">Info</h4>
-            <div
-              class="has-text-white"
-              v-html="$context.common.openingstijden"
-            ></div>
+          <div
+            class="has-text-white"
+            v-html="$context.common.openingstijden"
+          ></div>
           <br />
-          <p class="has-text-white" v-html="$context.common.adres"></p>
+          <div class="has-text-white" v-html="$context.common.adres"></div>
         </div>
         <div class="column">
           <h4 class="has-text-weight-bold is-5 mb-3">Contact</h4>

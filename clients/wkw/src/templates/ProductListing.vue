@@ -52,7 +52,7 @@
       <span class="anchor" id="full-description"></span>
       <div class="columns">
         <div class="column">
-          <p class="content" v-html="$context.collection.description"></p>
+          <div class="content" v-html="$context.collection.description"></div>
         </div>
       </div>
     </section>

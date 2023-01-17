@@ -15,7 +15,11 @@
             <!-- LOGO -->
             <div class="column is-4-mobile">
               <g-link :to="$context.homeUrl">
-                <img src="/img/logo-wormenkwekerijwasse.png" width="100px" />
+                <img
+                  src="/img/logo-wormenkwekerijwasse.png"
+                  alt="logo"
+                  width="100"
+                />
               </g-link>
             </div>
             <!-- SEARCH -->

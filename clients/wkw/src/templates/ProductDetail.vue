@@ -78,7 +78,7 @@
         </div>
         <div class="tile is-parent py-0">
           <article class="tile is-child">
-            <p class="content" v-html="$context.product.description"></p>
+            <div class="content" v-html="$context.product.description"></div>
           </article>
         </div>
 
