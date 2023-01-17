@@ -9,7 +9,7 @@
               class="column is-one-third-desktop is-half-tablet is-12-mobile"
             >
               <BlogCard
-                :image="getDefaultImage(blog.image)"
+                :image="getSquareImage(blog.image)"
                 :title="blog.title"
                 :fName="blog.fName"
                 :lName="blog.lName"
