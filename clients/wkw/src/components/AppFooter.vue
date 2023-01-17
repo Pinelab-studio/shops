@@ -15,10 +15,10 @@
         <div class="column">
           <h4 class="has-text-weight-bold is-5 mb-3">Info</h4>
           <g-link to="/">
-            <p
+            <div
               class="has-text-white"
               v-html="$context.common.openingstijden"
-            ></p>
+            ></div>
           </g-link>
           <br />
           <g-link to="/">

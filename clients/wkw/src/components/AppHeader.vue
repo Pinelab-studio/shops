@@ -33,7 +33,7 @@
                 :checkoutUrl="$context.checkoutUrl"
                 v-slot="{ nrOfItems, open }"
               >
-                <div @click="open()">
+                <span @click="open()">
                   <b-button type="is-primary is-shadowless is-hovered">
                     <i
                       class="mdi mdi-basket-outline mdi-26px has-text-white"
@@ -42,7 +42,7 @@
                   <a id="cart-badge" class="tag is-black is-rounded">
                     {{ nrOfItems }}
                   </a>
-                </div>
+                </span>
               </Basket>
               <!--- mobile search -->
               <b-button
