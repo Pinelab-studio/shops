@@ -63,8 +63,35 @@ export default {
     try {
       this.loading = true;
       this.order = await getOrderByCode(this.$vendure, this.$route.params.code);
-      if (this.order?.shippingAddress?.country?.toLowerCase() !== 'nederland') {
-        await this.$router.push(this.getPath('en')).catch(() => {});
+      const path = this.getPath('en');
+      if (
+        this.order?.shippingAddress?.country?.toLowerCase() !== 'nederland' &&
+        this.$route.path !== path
+      ) {
+        // We will be redirected to EN order page if we arent there yet
+        await this.$router.push(path).catch(() => {});
+      } else {
+        // Means we are on the page we should be, so we can push purchase event
+        const items = this.order.lines.map((line) => ({
+          item_id: line.productVariant.sku,
+          item_name: line.productVariant.name,
+          quantity: line.quantity,
+          price: line.productVariant.priceWithTax / 100,
+        }));
+        const purchase = {
+          transaction_id: this.order.id,
+          value: this.order.totalWithTax / 100,
+          currency: 'EUR',
+          items: items,
+        };
+        this.$gtag.event('conversion', {
+          send_to: 'AW-869905982/nhm9CP_w_ocDEL7s5p4D',
+          value: purchase.value,
+          currency: purchase.currency,
+          transaction_id: purchase.transaction_id,
+        });
+        console.log(purchase);
+        this.$gtag.purchase(purchase);
       }
     } catch (e) {
       console.error(e);
