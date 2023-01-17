@@ -7,7 +7,7 @@ import {
 /**
  * Generate numeric order codes for these channels
  */
-const numericCodeChannels = ['wormenkwekerij-wasse', 'demo'];
+const numericCodeChannels = ['wkw-default', 'demo'];
 
 /**
  * Generates id's like 6149-2990-78 for hardcoded channels,
