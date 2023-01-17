@@ -4,8 +4,8 @@
       id="banner"
       class="notification is-dark-green p-1 m-0 has-text-centered"
     >
-      <p class="mdi mdi-truck-outline has-text-white">
-        Vanaf €50,- gratis verzenden binnen NL
+      <p class="has-text-white">
+        {{ $context.common.banner }}
       </p>
     </div>
     <b-navbar class="is-fixed-top" style="padding-top: 27px">
@@ -20,17 +20,7 @@
             </div>
             <!-- SEARCH -->
             <div class="column is-hidden-mobile">
-              <b-field position="is-centered">
-                <b-input
-                  placeholder="Zoek producten..."
-                  type="search"
-                ></b-input>
-                <p class="control">
-                  <b-button type="is-primary is-shadowless is-hovered">
-                    <i class="mdi mdi-magnify mdi-26px has-text-white"></i>
-                  </b-button>
-                </p>
-              </b-field>
+              <Search />
             </div>
             <!-- ICONS -->
             <div class="column">
@@ -43,7 +33,7 @@
                 :checkoutUrl="$context.checkoutUrl"
                 v-slot="{ nrOfItems, open }"
               >
-                <div @click="open()">
+                <span @click="open()">
                   <b-button type="is-primary is-shadowless is-hovered">
                     <i
                       class="mdi mdi-basket-outline mdi-26px has-text-white"
@@ -52,10 +42,12 @@
                   <a id="cart-badge" class="tag is-black is-rounded">
                     {{ nrOfItems }}
                   </a>
-                </div>
+                </span>
               </Basket>
+              <!--- mobile search -->
               <b-button
                 type="is-primary is-shadowless is-hovered is-hidden-tablet is-pulled-right mr-2"
+                @click="isSearchModalActive = true"
               >
                 <i class="mdi mdi-magnify mdi-26px has-text-white"></i>
               </b-button>
@@ -128,10 +120,13 @@
               <div class="container section py-1">
                 <div class="columns has-text-left">
                   <div class="column">
-                    <g-link to="/" class="navbar-item px-0">
+                    <g-link
+                      :to="$context.informationUrl"
+                      class="navbar-item px-0"
+                    >
                       {{ $l('nav.advice') }}
                     </g-link>
-                    <g-link to="/" class="navbar-item px-0">
+                    <g-link to="/faq/" class="navbar-item px-0">
                       {{ $l('nav.faq') }}</g-link
                     >
                   </div>
@@ -148,16 +143,38 @@
         </div>
       </template>
     </b-navbar>
+
+    <!-------------- search modal for mobile search------------------->
+    <b-modal
+      v-model="isSearchModalActive"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      aria-role="dialog"
+      aria-label="Example Modal"
+      close-button-aria-label="Close"
+      aria-modal
+    >
+      <div class="card">
+        <Search />
+      </div>
+    </b-modal>
   </div>
 </template>
 
 <script>
 import Basket from 'pinelab-storefront/lib/components/Basket';
 import LanguageSwitcher from './LanguageSwitcher';
+import Search from './Search';
 
 export default {
   props: ['collections'],
-  components: { LanguageSwitcher, Basket },
+  components: { Search, LanguageSwitcher, Basket },
+  data() {
+    return {
+      isSearchModalActive: false,
+    };
+  },
 };
 </script>
 <style>

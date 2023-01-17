@@ -1066,6 +1066,13 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@miyaoka/vue-youtube-embed-lite@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@miyaoka/vue-youtube-embed-lite/-/vue-youtube-embed-lite-1.1.0.tgz#ee049b1f1f790a8698bba51d17ff847db2b1fef1"
+  integrity sha512-YBkw9Z7UjHexjMUZ/CORA4gqeJtL069OjIGJwdyowSjrua5KTZx5h9/7UFeLkehyfNcGaNZwNmHAjRzA9b747Q==
+  dependencies:
+    bulma "^0.6.2"
+
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@mrmlnc/readdir-enhanced/-/readdir-enhanced-2.2.1.tgz#524af240d1a360527b730475ecfa1344aa540dde"
@@ -2242,6 +2249,11 @@ bulma@0.9.4:
   version "0.9.4"
   resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.9.4.tgz#0ca8aeb1847a34264768dba26a064c8be72674a1"
   integrity sha512-86FlT5+1GrsgKbPLRRY7cGDg8fsJiP/jzTqXXVqiUZZ2aZT8uemEOHlU1CDU+TxklPEZ11HZNNWclRBBecP4CQ==
+
+bulma@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/bulma/-/bulma-0.6.2.tgz#f4b1d11d5acc51a79644eb0a2b0b10649d3d71f5"
+  integrity sha512-yafowWQ41npuzO9UFIO22Yquc1pKtUU2fDULJwl6ouRsuMJWGdjukfzpHr7uyhiz59vfhMsAt7F0D06l0NsW5w==
 
 bytes@3.1.2:
   version "3.1.2"
@@ -7033,10 +7045,10 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinelab-storefront@0.62.2:
-  version "0.62.2"
-  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.62.2.tgz#66c79e4048a56a76fdbb9a6514b928de598d0bdc"
-  integrity sha512-Vl4w4kSfqLxHTrRAX48oC/w+FKz2Isc8yelpm6fPrAd/1O47M1vjQvPBsxqWqJR0Gv+26+lmXFipO6Pnz63hCg==
+pinelab-storefront@0.64.0:
+  version "0.64.0"
+  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.64.0.tgz#0ae0150c814ec44d8e47729abcdf070876f8f15b"
+  integrity sha512-A5IHwGvbBRYL3cIQkv3m6DDhg7cfaFej0U5wMBpC6oYfmkKRZD3wyNfthGsbUJ891zqLa99hebdo6XVryeTBog==
   dependencies:
     graphql "15.3.0"
     graphql-request "^3.4.0"
@@ -9424,6 +9436,16 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
+
+vue-disqus@4.X:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/vue-disqus/-/vue-disqus-4.0.1.tgz#9ec040c575f3b87f3ef4bf43477ff20f06cc57dc"
+  integrity sha512-LCmEF4UqLMmMZaZwdMWZ5OO0imu/Cy0pZcr7c0QV7iJk1H9VWKUyxqO7+NNY8hhlAQXTdEq+Hv5tzOA9CfpjdA==
+
+vue-gtag@1.X:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/vue-gtag/-/vue-gtag-1.16.1.tgz#edb2f20ab4f6c4d4d372dfecf8c1fcc8ab890181"
+  integrity sha512-5vs0pSGxdqrfXqN1Qwt0ZFXG0iTYjRMu/saddc7QIC5yp+DKgjWQRpGYVa7Pq+KbThxwzzMfo0sGi7ISa6NowA==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
