@@ -4,15 +4,14 @@
       <Highlighted />
     </DefaultLayout>
   </div>
- </template>
-
+</template>
 
 <script>
-  import Highlighted from '@/components/Highlighted.vue'
+import Highlighted from '@/components/Highlighted.vue';
 
-  export default {
-        components: {
-            Highlighted,
-        },
-  }
+export default {
+  components: {
+    Highlighted,
+  },
+};
 </script>

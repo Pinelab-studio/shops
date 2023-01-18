@@ -1,4 +1,4 @@
-require('dotenv').config({ path: process.env.LOCAL_ENV });
+require('dotenv').config({ path: process.env.ENV_FILE });
 import { MyparcelService } from 'vendure-plugin-myparcel/dist/api/myparcel.service';
 import {
   bootstrap,

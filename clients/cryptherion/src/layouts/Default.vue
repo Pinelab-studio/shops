@@ -16,6 +16,8 @@
       cart-link="/cart/"
       cart-icon="basket"
       :activeOrder="activeOrder"
+      itemAddedActionText="Naar winkelmand"
+      itemAddedText="toegevoegd"
     >
       <template v-for="collection of $context.collections">
         <!-- collections with children-->
@@ -143,9 +145,9 @@
   </div>
 </template>
 <script>
-import ShopNavBar from 'pinelab-storefront-client/lib/buefy-components/ShopNavbar';
-import Breadcrumb from 'pinelab-storefront-client/lib/buefy-components/Breadcrumb';
-import Consent from 'pinelab-storefront-client/lib/buefy-components/Consent';
+import ShopNavBar from 'pinelab-storefront/lib/components/ShopNavbar';
+import Breadcrumb from 'pinelab-storefront/lib/components/Breadcrumb';
+import Consent from 'pinelab-storefront/lib/components/Consent';
 import { bootstrap } from 'vue-gtag';
 
 export default {
@@ -164,7 +166,9 @@ export default {
       return this.$store?.activeOrder;
     },
   },
-  mounted() {},
+  async mounted() {
+    await this.$vendure.getActiveOrder();
+  },
   methods: {
     activate() {
       console.log('Cookies approved');

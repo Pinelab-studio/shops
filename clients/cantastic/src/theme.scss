@@ -1,18 +1,18 @@
 // Import Bulma's core
-@import "~bulma/sass/utilities/_all";
+@import '~bulma/sass/utilities/_all';
 
 // https://bulma.io/documentation/customize/variables/
 
 $loop-dark: #131520;
 $loop-soft-dark: #333232;
-$loop-blue: #23395B;
+$loop-blue: #23395b;
 $loop-blue2: #3b5f98;
-$loop-red: #DF3837;
-$loop-red2: #E55F5E;
+$loop-red: #df3837;
+$loop-red2: #e55f5e;
 $loop-grey: #e7e7e7;
 $loop-white: #ffffff;
-$loop-green: #0CCE6B;
-$loop-orange: #F7DBA7;
+$loop-green: #0cce6b;
+$loop-orange: #f7dba7;
 :root {
   --loop-soft-dark: #333232;
 }
@@ -34,14 +34,16 @@ $title-color: $loop-soft-dark;
 $footer-background-color: $primary;
 $footer-color: $primary-invert;
 
-$rate-color-active: #51B27E;
+$rate-color-active: #51b27e;
 
 // Lists and maps
 $custom-colors: null !default;
 $custom-shades: null !default;
 
-$family-primary: "Open Sans", "Segoe UI", "Apple SD Gothic Neo", "Lucida Grande", "Lucida Sans Unicode", "sans‑serif";
-$family-secondary: "Roboto", "-apple-system", "BlinkMacSystemFont", "Tahoma", "sans‑serif";
+$family-primary: 'Open Sans', 'Segoe UI', 'Apple SD Gothic Neo', 'Lucida Grande',
+  'Lucida Sans Unicode', 'sans‑serif';
+$family-secondary: 'Roboto', '-apple-system', 'BlinkMacSystemFont', 'Tahoma',
+  'sans‑serif';
 
 $body-line-height: 1.7;
 $control-radius: 6px;
@@ -58,67 +60,66 @@ $link-focus-border: $primary;*/
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
-                (
-                        "white": (
-                                $white,
-                                $black,
-                        ),
-                        "black": (
-                                $black,
-                                $white,
-                        ),
-                        "light": (
-                                $light,
-                                $light-invert,
-                        ),
-                        "dark": (
-                                $dark,
-                                $dark-invert,
-                        ),
-                        "primary": (
-                                $primary,
-                                $primary-invert,
-                                $primary-light,
-                                $primary-dark,
-                        ),
-                        "link": (
-                                $link,
-                                $link-invert,
-                                $link-light,
-                                $link-dark,
-                        ),
-                        "info": (
-                                $info,
-                                $info-invert,
-                                $info-light,
-                                $info-dark,
-                        ),
-                        "success": (
-                                $success,
-                                $success-invert,
-                                $success-light,
-                                $success-dark,
-                        ),
-                        "warning": (
-                                $warning,
-                                $warning-invert,
-                                $warning-light,
-                                $warning-dark,
-                        ),
-                        "danger": (
-                                $danger,
-                                $danger-invert,
-                                $danger-light,
-                                $danger-dark,
-                        ),
-                ),
-                $custom-colors
+  (
+    'white': (
+      $white,
+      $black,
+    ),
+    'black': (
+      $black,
+      $white,
+    ),
+    'light': (
+      $light,
+      $light-invert,
+    ),
+    'dark': (
+      $dark,
+      $dark-invert,
+    ),
+    'primary': (
+      $primary,
+      $primary-invert,
+      $primary-light,
+      $primary-dark,
+    ),
+    'link': (
+      $link,
+      $link-invert,
+      $link-light,
+      $link-dark,
+    ),
+    'info': (
+      $info,
+      $info-invert,
+      $info-light,
+      $info-dark,
+    ),
+    'success': (
+      $success,
+      $success-invert,
+      $success-light,
+      $success-dark,
+    ),
+    'warning': (
+      $warning,
+      $warning-invert,
+      $warning-light,
+      $warning-dark,
+    ),
+    'danger': (
+      $danger,
+      $danger-invert,
+      $danger-light,
+      $danger-dark,
+    ),
+  ),
+  $custom-colors
 );
 
-
 // Import Bulma and Buefy styles
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 
 .title {
   font-weight: 900;
@@ -183,8 +184,7 @@ h6 {
 .has-text-light h3,
 .has-text-light h4,
 .has-text-light h5,
-.has-text-light h6,
-{
+.has-text-light h6 {
   color: $loop-grey;
 }
 
@@ -201,7 +201,7 @@ section {
 
 /** Make all buttons black **/
 .button .is-primary {
-  @extend .is-dark
+  @extend .is-dark;
 }
 
 #side-basket button,

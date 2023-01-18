@@ -27,6 +27,8 @@ module.exports = async function (api) {
       directus.request(GET_CONTENT),
     ]);
 
+    products.reverse();
+
     const featuredProducts = products.filter((p) =>
       p.facetValues.find((value) => value.code === 'featured')
     );
@@ -184,6 +186,12 @@ module.exports = async function (api) {
       path: '/order/:code',
       component: './src/templates/Order.vue',
       context: { global },
+    });
+
+    // Under construction
+    createPage({
+      path: '/under-construction/',
+      component: './src/templates/UnderConstruction.vue',
     });
   });
 };

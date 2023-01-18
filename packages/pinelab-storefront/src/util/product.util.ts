@@ -4,16 +4,18 @@ import { ProductFieldsFragment, ProductVariant } from '../generated/graphql';
 import { CalculatedProduct, MinimalProduct } from '../vendure/types';
 
 /**
- * Sets a .lowestPrice=1233 and .soldOut=true/false on the product
+ * Enrich given product with additional fields
  */
 export function setCalculatedFields<T extends MinimalProduct>(
   product: T
 ): CalculatedProduct<T> {
-  const lowesPrice = Math.min(...product.variants.map((v) => v.priceWithTax));
+  const lowestPrice = Math.min(...product.variants.map((v) => v.priceWithTax));
+  const highestPrice = Math.max(...product.variants.map((v) => v.priceWithTax));
   const allVariantsOutOfStock = product.variants.every((v) => isOutOfStock(v));
   return {
     ...product,
-    lowestPrice: lowesPrice,
+    lowestPrice,
+    highestPrice,
     soldOut: allVariantsOutOfStock,
   };
 }

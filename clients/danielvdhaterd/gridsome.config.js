@@ -6,6 +6,7 @@
 
 module.exports = {
   siteName: 'Daniël van de Haterd',
+  siteUrl: 'https://dvandehaterd.nl',
   siteDescription:
     'Artist Daniël van de Haterd. Art adventures. Abstract artist with a graffiti background.',
   configureWebpack: {
@@ -15,14 +16,7 @@ module.exports = {
   },
   plugins: [
     {
-      use: '@gridsome/source-graphql',
-      options: {
-        url: process.env.GRIDSOME_VENDURE_API,
-        fieldName: 'Vendure',
-        headers: {
-          'vendure-token': process.env.GRIDSOME_VENDURE_TOKEN,
-        },
-      },
+      use: '@gridsome/plugin-sitemap',
     },
   ],
 };

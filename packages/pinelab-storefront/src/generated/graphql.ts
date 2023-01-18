@@ -916,6 +916,7 @@ export enum ErrorCode {
   CouponCodeLimitError = 'COUPON_CODE_LIMIT_ERROR',
   OrderModificationError = 'ORDER_MODIFICATION_ERROR',
   IneligibleShippingMethodError = 'INELIGIBLE_SHIPPING_METHOD_ERROR',
+  NoActiveOrderError = 'NO_ACTIVE_ORDER_ERROR',
   OrderPaymentStateError = 'ORDER_PAYMENT_STATE_ERROR',
   IneligiblePaymentMethodError = 'INELIGIBLE_PAYMENT_METHOD_ERROR',
   PaymentFailedError = 'PAYMENT_FAILED_ERROR',
@@ -931,7 +932,6 @@ export enum ErrorCode {
   PasswordResetTokenInvalidError = 'PASSWORD_RESET_TOKEN_INVALID_ERROR',
   PasswordResetTokenExpiredError = 'PASSWORD_RESET_TOKEN_EXPIRED_ERROR',
   NotVerifiedError = 'NOT_VERIFIED_ERROR',
-  NoActiveOrderError = 'NO_ACTIVE_ORDER_ERROR',
   MolliePaymentIntentError = 'MOLLIE_PAYMENT_INTENT_ERROR',
 }
 
@@ -1065,10 +1065,17 @@ export type Fulfillment = Node & {
   createdAt: Scalars['DateTime'];
   updatedAt: Scalars['DateTime'];
   orderItems: Array<OrderItem>;
+  summary: Array<FulfillmentLineSummary>;
   state: Scalars['String'];
   method: Scalars['String'];
   trackingCode?: Maybe<Scalars['String']>;
   customFields?: Maybe<Scalars['JSON']>;
+};
+
+export type FulfillmentLineSummary = {
+  __typename?: 'FulfillmentLineSummary';
+  orderLine: OrderLine;
+  quantity: Scalars['Int'];
 };
 
 export enum GlobalFlag {
@@ -1585,6 +1592,12 @@ export type MissingPasswordError = ErrorResult & {
   message: Scalars['String'];
 };
 
+export type MollieAmount = {
+  __typename?: 'MollieAmount';
+  value?: Maybe<Scalars['String']>;
+  currency?: Maybe<Scalars['String']>;
+};
+
 export type MolliePaymentIntent = {
   __typename?: 'MolliePaymentIntent';
   url: Scalars['String'];
@@ -1598,11 +1611,33 @@ export type MolliePaymentIntentError = ErrorResult & {
 
 export type MolliePaymentIntentInput = {
   paymentMethodCode: Scalars['String'];
+  molliePaymentMethodCode?: Maybe<Scalars['String']>;
 };
 
 export type MolliePaymentIntentResult =
   | MolliePaymentIntent
   | MolliePaymentIntentError;
+
+export type MolliePaymentMethod = {
+  __typename?: 'MolliePaymentMethod';
+  id: Scalars['ID'];
+  code: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  minimumAmount?: Maybe<MollieAmount>;
+  maximumAmount?: Maybe<MollieAmount>;
+  image?: Maybe<MolliePaymentMethodImages>;
+};
+
+export type MolliePaymentMethodImages = {
+  __typename?: 'MolliePaymentMethodImages';
+  size1x?: Maybe<Scalars['String']>;
+  size2x?: Maybe<Scalars['String']>;
+  svg?: Maybe<Scalars['String']>;
+};
+
+export type MolliePaymentMethodsInput = {
+  paymentMethodCode: Scalars['String'];
+};
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -1983,6 +2018,7 @@ export type OrderAddress = {
 
 export type OrderCustomFields = {
   __typename?: 'OrderCustomFields';
+  customerNote?: Maybe<Scalars['String']>;
   pickupLocationNumber?: Maybe<Scalars['String']>;
   pickupLocationCarrier?: Maybe<Scalars['String']>;
   pickupLocationName?: Maybe<Scalars['String']>;
@@ -2009,6 +2045,7 @@ export type OrderFilterParameter = {
   shippingWithTax?: Maybe<NumberOperators>;
   total?: Maybe<NumberOperators>;
   totalWithTax?: Maybe<NumberOperators>;
+  customerNote?: Maybe<StringOperators>;
   pickupLocationNumber?: Maybe<StringOperators>;
   pickupLocationCarrier?: Maybe<StringOperators>;
   pickupLocationName?: Maybe<StringOperators>;
@@ -2122,6 +2159,7 @@ export type OrderLine = Node & {
   discounts: Array<Discount>;
   taxLines: Array<TaxLine>;
   order: Order;
+  fulfillments?: Maybe<Array<Fulfillment>>;
   customFields?: Maybe<Scalars['JSON']>;
 };
 
@@ -2172,6 +2210,7 @@ export type OrderSortParameter = {
   shippingWithTax?: Maybe<SortOrder>;
   total?: Maybe<SortOrder>;
   totalWithTax?: Maybe<SortOrder>;
+  customerNote?: Maybe<SortOrder>;
   pickupLocationNumber?: Maybe<SortOrder>;
   pickupLocationCarrier?: Maybe<SortOrder>;
   pickupLocationName?: Maybe<SortOrder>;
@@ -2322,7 +2361,7 @@ export type PaymentMethodQuote = {
  *
  * ## Understanding Permission.Owner
  *
- * `Permission.Owner` is a special permission which is used in some of the Vendure resolvers to indicate that that resolver should only
+ * `Permission.Owner` is a special permission which is used in some Vendure resolvers to indicate that that resolver should only
  * be accessible to the "owner" of that resource.
  *
  * For example, the Shop API `activeCustomer` query resolver should only return the Customer object for the "owner" of that Customer, i.e.
@@ -2528,6 +2567,10 @@ export enum Permission {
   SetMyparcelConfig = 'SetMyparcelConfig',
   /** Allows setting Goedgepickt configurations */
   SetGoedgepicktConfig = 'SetGoedgepicktConfig',
+  /** Allows administrator to export orders */
+  ExportOrders = 'ExportOrders',
+  /** Allows setting SendCloud configuration */
+  SetSendCloudConfig = 'SetSendCloudConfig',
 }
 
 /** The price range where the result has more than one price */
@@ -2568,6 +2611,8 @@ export type ProductCustomFields = {
   metaTitle?: Maybe<Scalars['String']>;
   metaDescription?: Maybe<Scalars['String']>;
   keywords?: Maybe<Scalars['String']>;
+  hsCode?: Maybe<Scalars['String']>;
+  weight?: Maybe<Scalars['Int']>;
 };
 
 export type ProductFilterParameter = {
@@ -2581,6 +2626,8 @@ export type ProductFilterParameter = {
   metaTitle?: Maybe<StringOperators>;
   metaDescription?: Maybe<StringOperators>;
   keywords?: Maybe<StringOperators>;
+  hsCode?: Maybe<StringOperators>;
+  weight?: Maybe<NumberOperators>;
 };
 
 export type ProductList = PaginatedList & {
@@ -2657,6 +2704,8 @@ export type ProductSortParameter = {
   metaTitle?: Maybe<SortOrder>;
   metaDescription?: Maybe<SortOrder>;
   keywords?: Maybe<SortOrder>;
+  hsCode?: Maybe<SortOrder>;
+  weight?: Maybe<SortOrder>;
 };
 
 export type ProductTranslation = {
@@ -2699,7 +2748,12 @@ export type ProductVariant = Node & {
   options: Array<ProductOption>;
   facetValues: Array<FacetValue>;
   translations: Array<ProductVariantTranslation>;
-  customFields?: Maybe<Scalars['JSON']>;
+  customFields?: Maybe<ProductVariantCustomFields>;
+};
+
+export type ProductVariantCustomFields = {
+  __typename?: 'ProductVariantCustomFields';
+  maxPerOrder?: Maybe<Scalars['Int']>;
 };
 
 export type ProductVariantFilterParameter = {
@@ -2714,6 +2768,7 @@ export type ProductVariantFilterParameter = {
   currencyCode?: Maybe<StringOperators>;
   priceWithTax?: Maybe<NumberOperators>;
   stockLevel?: Maybe<StringOperators>;
+  maxPerOrder?: Maybe<NumberOperators>;
 };
 
 export type ProductVariantList = PaginatedList & {
@@ -2745,6 +2800,7 @@ export type ProductVariantSortParameter = {
   price?: Maybe<SortOrder>;
   priceWithTax?: Maybe<SortOrder>;
   stockLevel?: Maybe<SortOrder>;
+  maxPerOrder?: Maybe<SortOrder>;
 };
 
 export type ProductVariantTranslation = {
@@ -2827,6 +2883,7 @@ export type Query = {
   /** Search Products based on the criteria set by the `SearchInput` */
   search: SearchResponse;
   dutchAddressLookup?: Maybe<DutchAddressLookupResult>;
+  molliePaymentMethods: Array<MolliePaymentMethod>;
   myparcelDropOffPoints: Array<MyparcelDropOffPoint>;
 };
 
@@ -2870,6 +2927,10 @@ export type QuerySearchArgs = {
 
 export type QueryDutchAddressLookupArgs = {
   input: DutchPostalCodeInput;
+};
+
+export type QueryMolliePaymentMethodsArgs = {
+  input: MolliePaymentMethodsInput;
 };
 
 export type QueryMyparcelDropOffPointsArgs = {
@@ -3040,6 +3101,7 @@ export type SetOrderShippingMethodResult =
 
 export type ShippingLine = {
   __typename?: 'ShippingLine';
+  id: Scalars['ID'];
   shippingMethod: ShippingMethod;
   price: Scalars['Int'];
   priceWithTax: Scalars['Int'];
@@ -3263,6 +3325,7 @@ export type UpdateCustomerPasswordResult =
   | NativeAuthStrategyError;
 
 export type UpdateOrderCustomFieldsInput = {
+  customerNote?: Maybe<Scalars['String']>;
   pickupLocationNumber?: Maybe<Scalars['String']>;
   pickupLocationCarrier?: Maybe<Scalars['String']>;
   pickupLocationName?: Maybe<Scalars['String']>;
@@ -3379,6 +3442,12 @@ export type ProductFieldsFragment = { __typename?: 'Product' } & Pick<
               'id' | 'preview' | 'thumbnail'
             >
           >;
+          customFields?: Maybe<
+            { __typename?: 'ProductVariantCustomFields' } & Pick<
+              ProductVariantCustomFields,
+              'maxPerOrder'
+            >
+          >;
         }
     >;
     customFields?: Maybe<
@@ -3455,12 +3524,12 @@ export type OrderFieldsFragment = { __typename?: 'Order' } & Pick<
       >
     >;
     shippingLines: Array<
-      { __typename?: 'ShippingLine' } & {
-        shippingMethod: { __typename?: 'ShippingMethod' } & Pick<
-          ShippingMethod,
-          'id' | 'code' | 'name'
-        >;
-      }
+      { __typename?: 'ShippingLine' } & Pick<ShippingLine, 'priceWithTax'> & {
+          shippingMethod: { __typename?: 'ShippingMethod' } & Pick<
+            ShippingMethod,
+            'id' | 'code' | 'name'
+          >;
+        }
     >;
     lines: Array<
       { __typename?: 'OrderLine' } & Pick<
@@ -3766,19 +3835,6 @@ export type RemoveAllOrderLinesMutationVariables = Exact<{
 
 export type RemoveAllOrderLinesMutation = { __typename?: 'Mutation' } & {
   removeAllOrderLines:
-    | ({ __typename?: 'Order' } & OrderFieldsFragment)
-    | ({ __typename?: 'OrderModificationError' } & Pick<
-        OrderModificationError,
-        'errorCode' | 'message'
-      >);
-};
-
-export type RemoveOrderLineMutationVariables = Exact<{
-  orderLineId: Scalars['ID'];
-}>;
-
-export type RemoveOrderLineMutation = { __typename?: 'Mutation' } & {
-  removeOrderLine:
     | ({ __typename?: 'Order' } & OrderFieldsFragment)
     | ({ __typename?: 'OrderModificationError' } & Pick<
         OrderModificationError,

@@ -1,18 +1,13 @@
-const { GridsomeService } = require('pinelab-storefront-client');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { VendureServer } = require('pinelab-storefront');
 
 module.exports = async function (api) {
-  /*
-  api.chainWebpack(config => {
-    config
-      .plugin('BundleAnalyzerPlugin')
-      .use(BundleAnalyzerPlugin, [{ analyzerMode: 'static' }]);
-  });
-*/
-
   api.createPages(async ({ createPage, graphql }) => {
-    const gridsome = new GridsomeService(graphql);
-    const { products, availableCountries } = await gridsome.getShopData();
+    const vendureServer = new VendureServer(
+      process.env.GRIDSOME_VENDURE_API,
+      process.env.GRIDSOME_VENDURE_TOKEN
+    );
+
+    const { products, availableCountries } = await vendureServer.getShopData();
 
     // ----------------- ProductOverview ---------------------
     createPage({
@@ -39,9 +34,7 @@ module.exports = async function (api) {
     createPage({
       path: '/cart/',
       component: './src/templates/Cart.vue',
-      context: {
-        back: '/',
-      },
+      context: {},
     });
 
     // ----------------- Checkout ---------------------
@@ -55,7 +48,7 @@ module.exports = async function (api) {
     createPage({
       path: '/order/:code',
       component: './src/templates/Order.vue',
-      context: { back: '/' },
+      context: {},
     });
   });
 };

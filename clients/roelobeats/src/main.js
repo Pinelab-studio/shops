@@ -5,9 +5,8 @@ import QuantityInput from 'pinelab-storefront/lib/components/QuantityInput';
 import PopupImage from 'pinelab-storefront/lib/components/PopupImage';
 import '@fontsource/poppins';
 import Basket from 'pinelab-storefront/lib/components/Basket';
-import {setLabelFunction} from 'pinelab-storefront';
-import DefaultLayout from '/src/layouts/DefaultLayout.vue'
-
+import { setLabelFunction } from 'pinelab-storefront';
+import DefaultLayout from '/src/layouts/DefaultLayout.vue';
 
 export default function (Vue, { router, head, isClient }) {
   head.link.push(...preconnectLinks);
@@ -25,5 +24,4 @@ export default function (Vue, { router, head, isClient }) {
   }
   setLabelFunction(Vue, require('../labels.json'));
   Vue.filter('euro', formatEuro);
-
 }

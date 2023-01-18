@@ -1,0 +1,56 @@
+name: Deploy Vendure Production and Test envs
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: vendure
+    steps:
+      - uses: actions/checkout@v3
+      - uses: google-github-actions/auth@v0
+        with:
+          project_id: pinelab-shops
+          credentials_json: ${{ secrets.PINELAB_SHOPS_GCLOUD_KEY }}
+      - uses: 'google-github-actions/setup-gcloud@v0'
+        with:
+          project_id: pinelab-shops
+      - name: Build Docker container
+        run: ./build-docker.sh
+
+  deploy:
+    name: Deploying ${{ matrix.instances.name }} with ${{ matrix.instances.secret }}
+    needs: [ build ]
+    strategy:
+      matrix:
+        instances: [
+          { name: "shops-api", db: "shops-prod", secret: "ENV_PROD", memory: "2G"},
+          { name: "worker", db: "shops-prod", secret: "ENV_PROD", memory: "2G"},
+          { name: "shops-test", db: "pinelab2", secret: "ENV_TEST", memory: "1G"},
+          { name: "worker-test", db: "pinelab2", secret: "ENV_TEST", memory: "1G"},
+          { name: "wkw-test-api", db: "pinelab2", secret: "ENV_WKW_TEST", memory: "1G" },
+          { name: "wkw-test-worker", db: "pinelab2", secret: "ENV_WKW_TEST", memory: "1G" }
+        ]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: vendure
+    steps:
+      - uses: actions/checkout@v3
+      - uses: google-github-actions/auth@v0
+        with:
+          project_id: pinelab-shops
+          credentials_json: ${{ secrets.PINELAB_SHOPS_GCLOUD_KEY }}
+      - uses: 'google-github-actions/setup-gcloud@v0'
+        with:
+          project_id: pinelab-shops
+      - run: 'echo "$SECRET_VARS" > .env'
+        env:
+          SECRET_VARS: ${{secrets[matrix.instances.secret]}}
+      - run: ./deploy.sh ${{ matrix.instances.name }} ${{ matrix.instances.db }} ${{ matrix.instances.memory }}

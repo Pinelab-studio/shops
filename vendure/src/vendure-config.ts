@@ -27,7 +27,7 @@ import { CloudTasksPlugin } from 'vendure-plugin-google-cloud-tasks';
 import { cloudLogger } from './logger';
 import { MyparcelPlugin } from 'vendure-plugin-myparcel/dist/myparcel.plugin';
 import { ShippingBasedTaxZoneStrategy } from './tax/shipping-based-tax-zone.strategy';
-import { cartTaxShippingCalculator } from './tax/shipping-tax-calculator';
+import { cartTaxShippingCalculator } from './shipping/shipping-tax-calculator';
 import { eligibleByZoneChecker } from './shipping/shipping-by-zone-checker';
 import { MolliePlugin } from '@vendure/payments-plugin/package/mollie';
 import { PlaceOrderOnSettlementStrategy } from './order/place-order-on-settlement.strategy';
@@ -45,9 +45,26 @@ import { OrderExportPlugin } from 'vendure-plugin-order-export';
 import { TaxExportStrategy } from './tax/tax-export-strategy';
 import { orderConfirmationHandler } from './email/order-confirmation.handlers';
 import { json } from 'body-parser';
+import { ShippingByWeightAndCountryPlugin } from 'vendure-plugin-shipping-by-weight-and-country';
+import {
+  createLowStockEmailHandler,
+  StockMonitoringPlugin,
+} from 'vendure-plugin-stock-monitoring';
+import { SendcloudPlugin } from 'vendure-plugin-sendcloud';
+import { sendcloudConfig } from './sendcloud/sendcloud.config';
+import { ChannelSpecificOrderCodeStrategy } from './order/order-code-strategy';
+import {
+  AverageOrderValueMetric,
+  ConversionRateMetric,
+  MetricsPlugin,
+  NrOfOrdersMetric,
+} from 'vendure-plugin-metrics';
+import { RevenueMetric } from './metrics/revenue-metric';
+import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
 
 let logger: VendureLogger;
 export let runningLocal = false;
+export let isProd = false;
 export let runningInWorker = false;
 if (process.env.K_SERVICE) {
   // This means we are in CloudRun
@@ -57,12 +74,16 @@ if (process.env.K_SERVICE) {
   logger = new DefaultLogger({ level: LogLevel.Debug });
   runningLocal = true;
 }
+if (process.env.SHOP_ENV === 'prod' || process.env.SHOP_ENV === 'wkw-prod') {
+  isProd = true;
+}
 
 export const config: VendureConfig = {
   logger,
   orderOptions: {
     stockAllocationStrategy: new AllocateStockOnSettlementStrategy(),
     orderPlacedStrategy: new PlaceOrderOnSettlementStrategy(),
+    orderCodeStrategy: new ChannelSpecificOrderCodeStrategy(),
   },
   apiOptions: {
     port: (process.env.PORT! as unknown as number) || 3000,
@@ -95,6 +116,7 @@ export const config: VendureConfig = {
     type: 'mysql',
     synchronize: false,
     logging: false,
+    // logging: 'all',
     username: process.env.DATABASE_USER!,
     password: process.env.DATABASE_PASSWORD!,
     host: process.env.DATABASE_HOST!,
@@ -119,6 +141,14 @@ export const config: VendureConfig = {
     paymentMethodHandlers: [],
   },
   customFields: {
+    Order: [
+      {
+        name: 'customerNote',
+        label: [{ value: 'Customer note', languageCode: LanguageCode.en }],
+        ui: { component: 'textarea-form-input' },
+        type: 'text',
+      },
+    ],
     Product: [
       {
         name: 'metaTitle',
@@ -164,12 +194,28 @@ export const config: VendureConfig = {
           }
         },
       },
+      {
+        name: 'hsCode',
+        label: [{ value: 'HS code', languageCode: LanguageCode.en }],
+        type: 'string',
+        ui: { component: 'text-form-input', tab: 'Physical properties' },
+      },
     ],
   },
   plugins: [
+    LimitVariantPerOrderPlugin,
+    MetricsPlugin.init({
+      metrics: [
+        new NrOfOrdersMetric(),
+        new AverageOrderValueMetric(),
+        new ConversionRateMetric(),
+        new RevenueMetric(),
+      ],
+    }),
     EBoekhoudenPlugin,
     EBookPlugin.init(process.env.VENDURE_HOST!),
     InvoicePlugin.init({
+      licenseKey: process.env.INVOICE_LICENSE,
       vendureHost: process.env.VENDURE_HOST!,
       storageStrategy: new GoogleStorageInvoiceStrategy({
         bucketName: 'pinelab-invoices',
@@ -202,16 +248,33 @@ export const config: VendureConfig = {
     CoinbasePlugin,
     MyparcelPlugin.init({
       vendureHost: process.env.VENDURE_HOST!,
-      syncWebhookOnStartup: process.env.SHOP_ENV === 'prod' && !runningLocal, // Don't sync for envs except prod
+      syncWebhookOnStartup: isProd && !runningLocal, // Only sync for prod,
+      getCustomsInformationFn: (orderLine) => {
+        return {
+          weightInGrams:
+            (orderLine.productVariant.product.customFields as any).weight || 0,
+          classification: (orderLine.productVariant.product.customFields as any)
+            .hsCode,
+          countryCodeOfOrigin: 'NL',
+        };
+      },
     }),
     GoedgepicktPlugin.init({
       vendureHost: process.env.VENDURE_HOST!,
       endpointSecret: process.env.WEBHOOK_TOKEN!,
-      setWebhook: process.env.SHOP_ENV === 'prod' && !runningLocal, // Only set webhook for prod
+      setWebhook: isProd && !runningLocal, // Only set webhook for prod
     }),
     OrderExportPlugin.init({
       exportStrategies: [new TaxExportStrategy()],
     }),
+    ShippingByWeightAndCountryPlugin.init({
+      customFieldsTab: 'Physical properties',
+      weightUnit: 'grams',
+    }),
+    StockMonitoringPlugin.init({
+      threshold: 5,
+    }),
+    SendcloudPlugin.init(sendcloudConfig),
     AssetServerPlugin.init({
       storageStrategyFactory: () =>
         new GoogleStorageStrategy({
@@ -238,7 +301,14 @@ export const config: VendureConfig = {
           pass: process.env.ZOHO_PASS!,
         },
       },
-      handlers: [orderConfirmationHandler],
+      handlers: [
+        orderConfirmationHandler,
+        createLowStockEmailHandler({
+          threshold: 10,
+          subject: 'Lage voorraad',
+          emailRecipients: ['martijn@pinelab.studio'],
+        }),
+      ],
       templatePath: path.join(__dirname, '../static/email/templates'),
       globalTemplateVars: {
         fromAddress: '"Webshop" <noreply@pinelab.studio>',

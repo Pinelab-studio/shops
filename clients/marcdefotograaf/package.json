@@ -1,21 +1,16 @@
 {
   "name": "marcdefotograaf",
-  "version": "0.58.5",
+  "version": "0.64.0",
   "private": true,
   "scripts": {
-    "serve": "yarn link-there && yarn link-here && concurrently \"cd ../../packages/pinelab-storefront-client && yarn watch\" \"gridsome develop\"",
-    "link-here": "yarn link pinelab-storefront-client",
-    "link-there": "cd ../../packages/pinelab-storefront-client && yarn link",
+    "serve": "yarn link-there && yarn link-here && concurrently \"cd ../../packages/pinelab-storefront && yarn watch\" \"gridsome develop\"",
+    "link-here": "yarn link pinelab-storefront",
+    "link-there": "cd ../../packages/pinelab-storefront && yarn link",
     "serve:static": "yarn concurrently \"nodemon --ext js,vue --watch '.src/' --exec 'yarn gridsome build && yarn http-server ./dist/'\""
-  },
-  "resolutions": {
-    "graphql": "^14.7.0"
   },
   "dependencies": {
     "graphql": "^14.7.0",
-    "graphql-request": "3.4.0",
-    "pinelab-storefront-client": "0.58.0",
-    "rollbar": "^2.21.0"
+    "graphql-request": "3.4.0"
   },
   "devDependencies": {
     "@gridsome/source-graphql": "^0.1.0",

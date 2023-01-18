@@ -32,7 +32,7 @@
               type="is-success"
             >
             </b-icon>
-            <span>Voor 19:00 besteld dezelfde dag verzonden</span>
+            <span>Voor 17:00 besteld, dezelfde dag verzonden</span>
           </span>
 
           <span class="line">
@@ -137,8 +137,8 @@
 </template>
 
 <script>
-import ProductCard from 'pinelab-storefront-client/lib/buefy-components/ProductCard';
-import { hydrate } from 'pinelab-storefront-client';
+import ProductCard from 'pinelab-storefront/lib/components/ProductCard';
+import { hydrate } from 'pinelab-storefront';
 
 export default {
   components: {
@@ -157,8 +157,9 @@ export default {
 </script>
 <style>
 #featured-image > img {
+  object-fit: contain;
   width: auto;
-  height: auto;
+  height: 100%;
   max-width: 100%;
   max-height: 100%;
 }

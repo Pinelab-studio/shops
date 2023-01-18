@@ -1,0 +1,11 @@
+{
+  "order-summary": {
+    "title": "Samenvatting",
+    "shipping-cost": "Verzendkosten",
+    "subtotal": "Subtotaal",
+    "total": "Totaal"
+  },
+  "error": {
+    "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
+  }
+}

@@ -53,7 +53,7 @@ const strategies: { [key: string]: CsvToProductFn } = {
 
 let app: INestApplication;
 (async () => {
-  require('dotenv').config({ path: process.env.LOCAL_ENV });
+  require('dotenv').config({ path: process.env.ENV_FILE });
   const filePath = process.argv[2];
   const action = process.argv[3];
   const channelToken = path.basename(filePath, '.csv');

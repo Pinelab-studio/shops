@@ -21,6 +21,11 @@ export default {
   background-size: contain;
   background-position: center;
   height: 100%;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
   transition: transform 0.2s; /* Animation */
 }
 

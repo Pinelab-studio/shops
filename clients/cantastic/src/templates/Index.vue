@@ -5,22 +5,22 @@
         <div class="columns">
           <div class="column is-7">
             <HighlightCard
-              v-if="$context.highlight1"
-              :collection="$context.highlight1"
+              v-if="$context.highlights[0]"
+              :highlight="$context.highlights[0]"
             />
           </div>
           <div class="column is-5">
             <div class="columns is-mobile is-multiline">
               <div class="column is-12-tablet is-6-mobile">
                 <HighlightCard
-                  v-if="$context.highlight2"
-                  :collection="$context.highlight2"
+                  v-if="$context.highlights[1]"
+                  :highlight="$context.highlights[1]"
                 />
               </div>
               <div class="column is-12-tablet is-6-mobile">
                 <HighlightCard
-                  v-if="$context.highlight3"
-                  :collection="$context.highlight3"
+                  v-if="$context.highlights[2]"
+                  :highlight="$context.highlights[2]"
                 />
               </div>
             </div>
@@ -108,15 +108,7 @@ export default {
   },
   async mounted() {
     await this.$vendure.getActiveOrder();
-    await hydrate(
-      [
-        this.$context.highlight1,
-        this.$context.highlight2,
-        this.$context.highlight3,
-        ...this.$context.favorites,
-      ],
-      this.$vendure
-    );
+    await hydrate(this.$context.favorites, this.$vendure);
   },
 };
 </script>

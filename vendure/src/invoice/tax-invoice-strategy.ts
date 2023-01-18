@@ -1,6 +1,6 @@
 import { DataFnInput, InvoiceData } from 'vendure-plugin-invoices';
 import { TaxHelper } from '../tax/tax.helper';
-import { DefaultDataStrategy } from 'vendure-plugin-invoices/dist/api/strategies/default-data-strategy';
+import { DefaultDataStrategy } from 'vendure-plugin-invoices';
 
 export class TaxInvoiceStrategy extends DefaultDataStrategy {
   async getData(input: DataFnInput): Promise<InvoiceData> {

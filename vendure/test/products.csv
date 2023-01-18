@@ -1,0 +1,2 @@
+name            , slug            , description               , assets                      , facets                              , optionGroups    , optionValues , sku         , price   , taxCategory , stockOnHand , trackInventory , variantAssets , variantFacets
+Laptop          , laptop          , "Description of laptop"   ,                             , category:electronics|brand:Apple    , screen size|RAM , 13 inch|8GB  , L2201308    , 1299.00 , standard    , 100         , true          ,               ,

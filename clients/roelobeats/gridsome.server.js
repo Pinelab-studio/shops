@@ -8,29 +8,30 @@ module.exports = async function (api) {
     );
     let { products, availableCountries, collections, productsPerCollection } =
       await vendureServer.getShopData();
-      collections = vendureServer.unflatten(collections);
+    collections = vendureServer.unflatten(collections);
 
-    const highlight1 = products.find(p => {
-      return p.facetValues.find(f => f.code === 'highlights-1')
-    })
+    const highlight1 = products.find((p) => {
+      return p.facetValues.find((f) => f.code === 'highlights-1');
+    });
 
-    const highlight2 = products.find(p => {
-      return p.facetValues.find(f => f.code === 'highlights-2')
-    })
+    const highlight2 = products.find((p) => {
+      return p.facetValues.find((f) => f.code === 'highlights-2');
+    });
 
-    const highlight3 = products.find(p => {
-      return p.facetValues.find(f => f.code === 'highlights-3')
-    })
+    const highlight3 = products.find((p) => {
+      return p.facetValues.find((f) => f.code === 'highlights-3');
+    });
 
-
-    console.log(highlight1)
+    console.log(highlight1);
     createPage({
       path: '/',
       component: './src/templates/Index.vue',
       context: {
-        products, 
-        highlight1, highlight2, highlight3,
-        topproducts: products.slice(0,5),
+        products,
+        highlight1,
+        highlight2,
+        highlight3,
+        topproducts: products.slice(0, 5),
         categories: collections,
       },
     });

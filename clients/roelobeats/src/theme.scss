@@ -1,5 +1,5 @@
 // Import Bulma's core
-@import "~bulma/sass/utilities/_all";
+@import '~bulma/sass/utilities/_all';
 
 // https://bulma.io/documentation/customize/variables/
 
@@ -15,8 +15,8 @@ $body-background-color: white;
 $primary-invert: white;
 $dark: grey;
 $light: grey;
-$purple: #966FA4;
-$light-purple: #B093BB;
+$purple: #966fa4;
+$light-purple: #b093bb;
 $title-color: $text;
 $footer-background-color: $primary;
 $footer-color: $primary-invert;
@@ -29,7 +29,7 @@ $footer-background-color: $purple;
 $custom-colors: null !default;
 $custom-shades: null !default;
 
-$family-primary: "Poppins";
+$family-primary: 'Poppins';
 
 // Links
 /*$link: $primary;
@@ -40,68 +40,66 @@ $link-focus-border: $primary;*/
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
-                (
-                        "white": (
-                                $white,
-                                $black,
-                        ),
-                        "black": (
-                                $black,
-                                $white,
-                        ),
-                        "light": (
-                                $light,
-                                $light-invert,
-                        ),
-                        "dark": (
-                                $dark,
-                                $dark-invert,
-                        ),
-                        "primary": (
-                                $primary,
-                                $primary-invert,
-                                $primary-light,
-                                $primary-dark,
-                        ),
-                        "link": (
-                                $link,
-                                $link-invert,
-                                $link-light,
-                                $link-dark,
-                        ),
-                        "info": (
-                                $info,
-                                $info-invert,
-                                $info-light,
-                                $info-dark,
-                        ),
-                        "success": (
-                                $success,
-                                $success-invert,
-                                $success-light,
-                                $success-dark,
-                        ),
-                        "warning": (
-                                $warning,
-                                $warning-invert,
-                                $warning-light,
-                                $warning-dark,
-                        ),
-                        "danger": (
-                                $danger,
-                                $danger-invert,
-                                $danger-light,
-                                $danger-dark,
-                        ),
-                ),
-        $custom-colors: ()
+  (
+    'white': (
+      $white,
+      $black,
+    ),
+    'black': (
+      $black,
+      $white,
+    ),
+    'light': (
+      $light,
+      $light-invert,
+    ),
+    'dark': (
+      $dark,
+      $dark-invert,
+    ),
+    'primary': (
+      $primary,
+      $primary-invert,
+      $primary-light,
+      $primary-dark,
+    ),
+    'link': (
+      $link,
+      $link-invert,
+      $link-light,
+      $link-dark,
+    ),
+    'info': (
+      $info,
+      $info-invert,
+      $info-light,
+      $info-dark,
+    ),
+    'success': (
+      $success,
+      $success-invert,
+      $success-light,
+      $success-dark,
+    ),
+    'warning': (
+      $warning,
+      $warning-invert,
+      $warning-light,
+      $warning-dark,
+    ),
+    'danger': (
+      $danger,
+      $danger-invert,
+      $danger-light,
+      $danger-dark,
+    ),
+  ),
+  $custom-colors: ()
 );
 
-
 // Import Bulma and Buefy styles
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
-
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 
 h4 {
   font-size: large;
@@ -140,7 +138,6 @@ section {
   justify-content: space-between;
   padding-top: 0;
   padding-bottom: 0;
-
 }
 
 .navbar-start {
@@ -149,24 +146,28 @@ section {
   width: 100%;
 }
 
-.navbar-item a:hover, .navbar-item a:focus {
+.navbar-item a:hover,
+.navbar-item a:focus {
   text-decoration: underline;
   font-weight: 800;
   color: $black;
   background-color: transparent !important;
 }
 
-
 /* SEARCHBAR */
 
-.input, .input:hover, .input:focus, .input:focus-within {
+.input,
+.input:hover,
+.input:focus,
+.input:focus-within {
   color: $black;
   border: solid 2px $black;
   background-color: $purple;
   box-shadow: none !important;
 }
 
-.control.has-icons-left .icon, .control.has-icons-right .icon {
+.control.has-icons-left .icon,
+.control.has-icons-right .icon {
   color: $black;
 }
 
@@ -202,7 +203,8 @@ section {
 
 /* FOOTER */
 
-a.navbar-item:focus, a.navbar-item:hover {
+a.navbar-item:focus,
+a.navbar-item:hover {
   font-weight: 800;
   color: $black;
 }
@@ -239,7 +241,8 @@ a.navbar-item:focus, a.navbar-item:hover {
 
 /* */
 
-.content figure, .content figure:not(:last-child) {
+.content figure,
+.content figure:not(:last-child) {
   margin-left: 0px;
   margin-right: 1em;
   margin-bottom: 0;
@@ -263,7 +266,7 @@ a.navbar-item:focus, a.navbar-item:hover {
 .button {
   text-align: center;
   opacity: 0;
-  transition: opacity .35s ease;
+  transition: opacity 0.35s ease;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -271,7 +274,6 @@ a.navbar-item:focus, a.navbar-item:hover {
   transform: translate(-50%, -50%);
   outline: 2px $purple;
   box-shadow: none;
-  
 }
 
 .hover-container:hover .button {
@@ -296,6 +298,6 @@ a.navbar-item:focus, a.navbar-item:hover {
 .line-clamp-4 {
   display: -webkit-box;
   -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;  
+  -webkit-box-orient: vertical;
   overflow: hidden;
 }

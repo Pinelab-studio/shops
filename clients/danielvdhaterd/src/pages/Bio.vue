@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <div>
+    <div class="content">
       <h3>Over Daniël van de Haterd</h3>
 
       <p>

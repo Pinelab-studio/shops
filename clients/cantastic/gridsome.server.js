@@ -47,6 +47,7 @@ module.exports = async function (api) {
           review_rating,
         },
         cantastic_paginas: pages,
+        cantastic_highlight: highlights,
       },
     ] = await Promise.all([
       vendureServer.getShopData(),
@@ -179,15 +180,12 @@ module.exports = async function (api) {
     const highlightsParent = allCollections.find(
       (col) => col.slug === 'highlights'
     );
-    const highlights = getChildCollections(highlightsParent?.id);
     createPage({
       path: '/',
       component: './src/templates/Index.vue',
       context: {
         ...global,
-        highlight1: highlights?.[0],
-        highlight2: highlights?.[1],
-        highlight3: highlights?.[2],
+        highlights,
         shortAbout,
         blogs: blogs.slice(0, 3).map(mapToMinimalBlog),
         brands: collections.find((collection) => collection.slug === 'merken')

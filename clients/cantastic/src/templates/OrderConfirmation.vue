@@ -22,14 +22,7 @@
               </b-notification>
             </template>
             <template v-if="order">
-              <OrderSummary
-                class="mb-5"
-                shipping-label="Verzendkosten"
-                subtotal-label="Subtotaal (incl. korting)"
-                total-label="Totaal"
-                summary-title="Samenvatting"
-                :order="order"
-              />
+              <OrderSummary class="mb-5" :order="order" />
               <h4>Producten</h4>
               <CartItemsTable disabled :active-order="order" />
             </template>

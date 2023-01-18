@@ -10,6 +10,11 @@ export default {
 </script>
 <style>
 .logo-card img {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
   transition: transform 0.2s; /* Animation */
 }
 .logo-card img:hover {

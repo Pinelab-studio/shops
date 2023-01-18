@@ -1,5 +1,5 @@
 // Import Bulma's core
-@import "~bulma/sass/utilities/_all";
+@import '~bulma/sass/utilities/_all';
 
 // Set your colors
 $text: #1a1a1a;
@@ -19,8 +19,8 @@ $pagination-current-background-color: $primary;
 $custom-colors: null !default;
 $custom-shades: null !default;
 
-$family-sans-serif: "Montserrat";
-$family-primary: "Montserrat";
+$family-sans-serif: 'Montserrat';
+$family-primary: 'Montserrat';
 
 $control-radius: 0;
 $control-radius-small: 0;
@@ -28,53 +28,53 @@ $control-radius-small: 0;
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
   (
-    "white": (
+    'white': (
       $white,
       $black,
     ),
-    "black": (
+    'black': (
       $black,
       $white,
     ),
-    "light": (
+    'light': (
       $light,
       $light-invert,
     ),
-    "dark": (
+    'dark': (
       $dark,
       $dark-invert,
     ),
-    "primary": (
+    'primary': (
       $primary,
       $primary-invert,
       $primary-light,
       $primary-dark,
     ),
-    "link": (
+    'link': (
       $link,
       $link-invert,
       $link-light,
       $link-dark,
     ),
-    "info": (
+    'info': (
       $info,
       $info-invert,
       $info-light,
       $info-dark,
     ),
-    "success": (
+    'success': (
       $success,
       $success-invert,
       $success-light,
       $success-dark,
     ),
-    "warning": (
+    'warning': (
       $warning,
       $warning-invert,
       $warning-light,
       $warning-dark,
     ),
-    "danger": (
+    'danger': (
       $danger,
       $danger-invert,
       $danger-light,
@@ -90,15 +90,17 @@ $link-invert: $primary-invert;
 $link-focus-border: $primary;*/
 
 // Import Bulma and Buefy styles
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 
 .title {
   text-transform: uppercase;
   margin-top: 2rem;
 }
 
-.button {
+#side-basket button,
+.checkout-steps a,
+.checkout-steps button {
   @extend .is-primary;
 }
 
@@ -138,6 +140,6 @@ h4 {
 }
 
 hr {
-    height: 2px;
-    background-color: $primary;
+  height: 2px;
+  background-color: $primary;
 }

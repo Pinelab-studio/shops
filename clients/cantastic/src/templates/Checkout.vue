@@ -6,11 +6,7 @@
         :vendure="$vendure"
         :emitter="$emitter"
         :store="$store"
-        :available-countries="[
-          { name: 'Nederland', code: 'nl' },
-          { name: 'België', code: 'be' },
-          { name: 'Duitsland', code: 'de' },
-        ]"
+        :available-countries="$context.availableCountries"
       >
         <template #orderSummaryFooter>
           <h5>Betaalmogelijkheden</h5>

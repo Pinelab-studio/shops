@@ -48,6 +48,9 @@ export const PRODUCT_FIELDS = gql`
         preview
         thumbnail
       }
+      customFields {
+        maxPerOrder
+      }
     }
     customFields {
       metaTitle

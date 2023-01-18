@@ -34,9 +34,9 @@
   </Layout>
 </template>
 <script>
-import ProductFilter from 'pinelab-storefront-client/lib/buefy-components/ProductFilter';
-import ProductCard from 'pinelab-storefront-client/lib/buefy-components/ProductCard';
-import { hydrate } from 'pinelab-storefront-client';
+import ProductFilter from 'pinelab-storefront/lib/components/ProductFilter';
+import ProductCard from 'pinelab-storefront/lib/components/ProductCard';
+import { hydrate } from 'pinelab-storefront';
 
 export default {
   components: {

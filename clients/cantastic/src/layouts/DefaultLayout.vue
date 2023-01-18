@@ -1,6 +1,12 @@
 <template>
   <div>
-    <b-navbar type="is-danger" centered transparent class="is-fixed-top">
+    <b-navbar
+      type="is-danger"
+      centered
+      transparent
+      class="is-fixed-top"
+      :shadow="false"
+    >
       <template #brand>
         <div class="container is-widescreen section" id="top-navbar">
           <div class="columns is-mobile pt-2" style="width: 100%">
@@ -34,14 +40,18 @@
                 :vendure="$vendure"
                 :store="$store"
                 :emitter="$emitter"
-                @cart-button-clicked="
-                  $router.push('/winkelmand/').catch((e) => {})
-                "
-                @checkout-button-clicked="
-                  $router.push('/checkout/').catch((e) => {})
-                "
+                cartUrl="/winkelmand/"
+                checkoutUrl="/checkout/"
+                v-slot="{ nrOfItems, open }"
               >
-                <i class="mdi mdi-basket mdi-36px has-text-white"></i>
+                <span class="icon is-large">
+                  <a @click="open()">
+                    <i class="mdi mdi-basket mdi-36px has-text-white"></i>
+                  </a>
+                </span>
+                <a @click="open()">
+                  <span class="cart-badge">{{ nrOfItems }}</span>
+                </a>
               </Basket>
             </div>
           </div>
@@ -240,38 +250,7 @@
             </h4>
           </div>
           <div class="column is-5">
-            <form
-              action="https://cantastic.us15.list-manage.com/subscribe/post?u=4e226c3fa7ab1fc8dad78c479&amp;id=73fb352924"
-              method="post"
-              id="mc-embedded-subscribe-form"
-              name="mc-embedded-subscribe-form"
-              class="validate"
-              target="_blank"
-              novalidate
-            >
-              <b-field
-                message="Geen spam - 1 mail per maand. Je kunt je altijd weer afmelden."
-              >
-                <b-input
-                  id="mce-EMAIL"
-                  placeholder="Vul je e-mailadres in"
-                  icon="email"
-                  size="is-small"
-                  type="email"
-                  name="EMAIL"
-                >
-                </b-input>
-                <p class="control">
-                  <b-button
-                    id="mc-embedded-subscribe"
-                    type="is-dark"
-                    native-type="submit"
-                    label="Count me in"
-                    size="is-small"
-                  />
-                </p>
-              </b-field>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
       </div>
@@ -348,12 +327,14 @@
 import Breadcrumb from 'pinelab-storefront/lib/components/Breadcrumb';
 import Basket from 'pinelab-storefront/lib/components/Basket';
 import Search from '../components/Search';
+import NewsletterForm from '../components/NewsletterForm';
 
 export default {
   components: {
     Search,
     Breadcrumb,
     Basket,
+    NewsletterForm,
   },
   methods: {
     hasChildren(collection) {
@@ -423,6 +404,12 @@ export default {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
+}
+
+.navbar-dropdown {
+  border-top: none !important;
+  border-bottom: 1px solid #dbdbdb;
+  box-shadow: none !important;
 }
 
 .navbar-item {
@@ -497,10 +484,20 @@ a.navbar-item:hover,
 #icons .icon {
   color: white !important;
 }
+
 .consent {
   background-color: var(--loop-soft-dark) !important;
 }
+
 .consent h4 {
+  color: white;
+}
+.cart-badge {
+  background: black;
+  border-radius: 50%;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 12px;
   color: white;
 }
 </style>

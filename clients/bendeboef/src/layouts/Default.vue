@@ -38,8 +38,8 @@
   </div>
 </template>
 <script>
-import ShopNavBar from 'pinelab-storefront-client/lib/buefy-components/ShopNavbar';
-import Breadcrumb from 'pinelab-storefront-client/lib/buefy-components/Breadcrumb';
+import ShopNavBar from 'pinelab-storefront/lib/components/ShopNavbar';
+import Breadcrumb from 'pinelab-storefront/lib/components/Breadcrumb';
 
 export default {
   props: {
@@ -93,6 +93,9 @@ export default {
     activeOrder() {
       return this.$store?.activeOrder;
     },
+  },
+  mounted() {
+    this.$vendure.getActiveOrder();
   },
 };
 </script>

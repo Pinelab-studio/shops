@@ -8,6 +8,7 @@
     "email": "Email",
     "postalcode": "Postalcode",
     "housenr": "Housenr.",
+    "housenrAddition": "Addition",
     "street": "Street",
     "city": "City",
     "country": "Country",
@@ -18,7 +19,7 @@
   "shipping": {
     "step-title": "Shipping",
     "page-title": "Pick a shippingmethod",
-    "submit": "Go to confirmation"
+    "submit": "Review order"
   },
   "order-summary": {
     "title": "Summary",
@@ -27,12 +28,12 @@
     "total": "Total"
   },
   "checkup": {
-    "title": "Confirm your order",
+    "title": "Review",
     "shipping-address": "Shipping address",
     "billing-address": "Billing address",
     "items": "Items",
     "disclaimer": "You can select a payment method in the next step",
-    "pay": "Go to payment"
+    "pay": "Payment"
   },
   "finished": {
     "title": "Success!"

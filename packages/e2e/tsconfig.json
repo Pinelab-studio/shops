@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es2017",
+    "strict": true,
+    "sourceMap": false,
+    "skipLibCheck": true,
+    "outDir": "./dist",
+    "baseUrl": "./src/"
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "migration", "script", "src/__admin-ui"]
+}

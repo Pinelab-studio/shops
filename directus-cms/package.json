@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "yarn directus start"
+    "start": "CONFIG_PATH=config.js yarn directus start"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "directus": "9.0.0-rc.95",
+    "directus": "9.17.1",
     "mysql": "^2.18.1"
   }
 }

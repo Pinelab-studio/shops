@@ -1,18 +1,23 @@
 {
   "name": "e2e",
-  "version": "0.58.5",
+  "version": "0.64.0",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "scripts": {
-    "e2e": "nightwatch --test test/place-order.js",
-    "e2e:local": "TESTENV=local nightwatch --test test/place-order.js",
-    "test:checkout": "nightwatch --test test/checkout.js --testcase $TESTCASE"
+    "nightwatch:e2e": "nightwatch --config nightwatch-firefox.config.js  --test nightwatch/place-order.js",
+    "nightwatch:checkout": "nightwatch --test nightwatch/checkout.js --testcase $TESTCASE",
+    "jest:e2e": "jest --forceExit"
   },
   "devDependencies": {
-    "chromedriver": "^103.0.0",
+    "@types/jest": "^27.4.0",
+    "chromedriver": "108.0.0",
     "dotenv": "^10.0.0",
+    "geckodriver": "^3.2.0",
+    "jest": "^27.4.6",
     "linkinator": "^4.0.2",
-    "nightwatch": "^1.7.6"
+    "nightwatch": "^1.7.6",
+    "ts-jest": "^28.0.8",
+    "typescript": "4.3.5"
   }
 }

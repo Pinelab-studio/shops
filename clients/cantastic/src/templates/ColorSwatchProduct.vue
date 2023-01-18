@@ -6,7 +6,17 @@
       </div>
       <div class="column">
         <h1 class="title">{{ $context.product.name }}</h1>
-        <h5 class="is-size-5">{{ $context.product.lowestPrice | euro }}</h5>
+        <h5 class="is-size-5">
+          {{ $context.product.lowestPrice | euro }}
+          <template
+            v-if="
+              $context.product.lowestPrice !== $context.product.highestPrice
+            "
+          >
+            -
+            {{ $context.product.highestPrice | euro }}
+          </template>
+        </h5>
         <template v-if="$context.product.description">
           <ReadMoreDescription
             :description="$context.product.description"
@@ -46,8 +56,7 @@
 import ProductImages from 'pinelab-storefront/lib/components/ProductImages';
 import SwatchBlock from '../components/SwatchBlock';
 import ReadMoreDescription from '../components/ReadMoreDescription';
-import { hydrate } from 'pinelab-storefront';
-import { getMetaInfo } from 'pinelab-storefront';
+import { getMetaInfo, hydrate } from 'pinelab-storefront';
 
 export default {
   components: {

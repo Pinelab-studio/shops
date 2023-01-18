@@ -1,10 +1,43 @@
 import Layout from '~/layouts/Default.vue';
-import 'pinelab-storefront-client/lib/ministore/styles.css';
+import '~/theme.scss';
 import '@fontsource/roboto-mono';
-import { configureVue } from 'pinelab-storefront-client';
+import {
+  formatEuro,
+  preconnectLinks,
+  setLabelFunction,
+  setStore,
+} from 'pinelab-storefront';
+import Buefy from 'buefy';
+import VueGtag from 'vue-gtag';
+import QuantityInput from 'pinelab-storefront/lib/components/QuantityInput';
+import PopupImage from 'pinelab-storefront/lib/components/PopupImage';
 
 export default function (Vue, { router, head, isClient }) {
-  // Set default layout as a global component
+  head.link.push(...preconnectLinks);
+  setLabelFunction(Vue, require('../labels.json'));
+  Vue.filter('euro', formatEuro);
   Vue.component('Layout', Layout);
-  configureVue(Vue, { router, head, isClient });
+  Vue.component('QuantityInput', QuantityInput);
+  Vue.component('PopupImage', PopupImage);
+  Vue.use(Buefy);
+  if (isClient) {
+    setStore(
+      Vue,
+      process.env.GRIDSOME_VENDURE_API,
+      process.env.GRIDSOME_VENDURE_TOKEN
+    );
+    Vue.use(
+      VueGtag,
+      {
+        config: {
+          id: 'G-ZKR4WKCS0N',
+          params: {
+            anonymize_ip: true,
+          },
+          bootstrap: false,
+        },
+      },
+      router
+    );
+  }
 }

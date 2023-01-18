@@ -5,7 +5,10 @@
     "total": "Totaal",
     "go-to-cart": "Naar winkelmand",
     "go-to-checkout": "Bestellen",
-    "empty-cart": "Je winkelmand is leeg... "
+    "empty-cart": "Je winkelmand is leeg... ",
+    "added": "toegevoegd aan winkelmand",
+    "removed": "verwijderd uit winkelmand",
+    "to-cart": "Naar winkelmand"
   },
   "customer-details": {
     "title": "Gegevens",
@@ -16,6 +19,7 @@
     "email": "Email adres",
     "postalcode": "Postcode",
     "housenr": "Huisnr.",
+    "housenrAddition": "Toevoeging",
     "street": "Straat",
     "city": "Plaats",
     "country": "Land",

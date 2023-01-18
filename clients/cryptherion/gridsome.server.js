@@ -1,19 +1,17 @@
-const { GridsomeService } = require('pinelab-storefront-client');
+const { VendureServer } = require('pinelab-storefront');
+const { GraphQLClient } = require('graphql-request');
 const _ = require('lodash');
 const { GET_CONTENT } = require('./content.queries');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = async function (api) {
-  /*
-  api.chainWebpack(config => {
-    config
-      .plugin('BundleAnalyzerPlugin')
-      .use(BundleAnalyzerPlugin, [{ analyzerMode: 'static' }]);
-  });
-*/
-
-  api.createPages(async ({ createPage, graphql }) => {
-    const gridsome = new GridsomeService(graphql);
+  api.createPages(async ({ createPage }) => {
+    const vendureServer = new VendureServer(
+      process.env.GRIDSOME_VENDURE_API,
+      process.env.GRIDSOME_VENDURE_TOKEN
+    );
+    const directus = new GraphQLClient(
+      `${process.env.GRIDSOME_DIRECTUS_HOST}/graphql`
+    );
 
     const [
       {
@@ -22,24 +20,22 @@ module.exports = async function (api) {
         collections: allCollections,
         productsPerCollection,
       },
-      content,
-    ] = await Promise.all([gridsome.getShopData(), graphql(GET_CONTENT)]);
-
-    const {
-      data: {
-        Directus: {
-          cryptherion_algemeen: {
-            telefoon,
-            email,
-            adres,
-            algemene_voorwaarden,
-            privacy_beleid,
-            highlighted_product,
-            banner,
-          },
+      {
+        cryptherion_algemeen: {
+          telefoon,
+          email,
+          adres,
+          algemene_voorwaarden,
+          privacy_beleid,
+          highlighted_product,
+          banner,
         },
       },
-    } = content;
+    ] = await Promise.all([
+      vendureServer.getShopData(),
+      directus.request(GET_CONTENT),
+    ]);
+
     const global = { telefoon, adres, email, banner };
 
     const featuredProduct = products.find((p) =>
@@ -47,12 +43,11 @@ module.exports = async function (api) {
     );
 
     // Get toplevel collections
-    const collections = gridsome.unflatten(allCollections);
+    const collections = vendureServer.unflatten(allCollections);
 
     // Breadcrumb
     const Home = '/';
     const Winkelmand = '/cart/';
-    const Checkout = '/cart/checkout';
 
     // ----------------- Index ---------------------
     createPage({
@@ -146,7 +141,6 @@ module.exports = async function (api) {
       context: {
         global,
         collections,
-        back: '/',
         breadcrumb: { Home, Winkelmand },
       },
     });
@@ -165,7 +159,6 @@ module.exports = async function (api) {
       context: {
         global,
         collections,
-        back: '/',
       },
     });
 

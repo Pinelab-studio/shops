@@ -23,6 +23,7 @@
                   :alt="image.directus_files_id.title"
                   :large="getDefaultImage(image.directus_files_id.id)"
                   placeholder="/img/placeholder.png"
+                  :assets="mapToImageUrl(project.images)"
                 />
               </div>
             </div>
@@ -96,6 +97,9 @@ export default {
       setTimeout(function () {
         window.scrollTo(0, 0);
       }, 100);
+    },
+    mapToImageUrl(images) {
+      return images.map((i) => this.getDefaultImage(i.directus_files_id?.id));
     },
   },
 };

@@ -1,0 +1,58 @@
+{
+  "basket": {
+    "title": "Cart",
+    "shipping-cost": "Shipping",
+    "total": "Total",
+    "go-to-cart": "View cart",
+    "go-to-checkout": "Order now",
+    "empty-cart": "No items in cart... ",
+    "added": "added to cart",
+    "removed": "removed from cart",
+    "to-cart": "View cart"
+  },
+  "customer-details": {
+    "title": "Details",
+    "firstname": "Firstname",
+    "lastname": "Lastname",
+    "company": "Company",
+    "phone": "Phonenr.",
+    "email": "Email",
+    "postalcode": "Postalcode",
+    "housenr": "Housenr.",
+    "housenrAddition": "Addition",
+    "street": "Street",
+    "city": "City",
+    "country": "Country",
+    "different-billing-address": "Different billing address",
+    "billing-address": "Billing address",
+    "submit": "Select shipping"
+  },
+  "shipping": {
+    "step-title": "Shipping",
+    "page-title": "Select shipping",
+    "submit": "Review order"
+  },
+  "order-summary": {
+    "title": "Summary",
+    "shipping-cost": "Shipping",
+    "subtotal": "Subtotal",
+    "total": "Total"
+  },
+  "checkup": {
+    "title": "Review",
+    "shipping-address": "Shipping address",
+    "billing-address": "Billing address",
+    "items": "Items",
+    "disclaimer": "You can select a payment method in the next step",
+    "pay": "Payment"
+  },
+  "finished": {
+    "title": "Success!"
+  },
+  "common": {
+    "couponcode": "Couponcode"
+  },
+  "error": {
+    "INSUFFICIENT_STOCK_ERROR": "That's all we have!"
+  }
+}
