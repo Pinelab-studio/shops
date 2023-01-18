@@ -1,6 +1,9 @@
 <template>
   <div>
-    <AppHeader :collections="$context.navbarCollections" />
+    <AppHeader
+      :collections="$context.navbarCollections"
+      :key="$route.fullPath"
+    />
     <div class="container is-widescreen section navbar-margin pb-6">
       <Breadcrumb v-if="$context.breadcrumb" :crumbs="$context.breadcrumb" />
       <slot name="content" />
