@@ -1,3 +1,8 @@
 /order/* /order/_code.html 200
 /admin/ https://wkw-test.pinelab.studio/admin/ 302
 /cms/ https://content.pinelab.studio/ 302
+/assortiment/ / 301
+/en/assortiment/ /en/ 301
+/en/informatie/ /en/information/ 301
+/en/informatie/escaping-worms/ /en/information/escaping-worms/ 301
+/en/informatie/what-do-worms-eat/ /en/information/what-do-worms-eat/ 301
