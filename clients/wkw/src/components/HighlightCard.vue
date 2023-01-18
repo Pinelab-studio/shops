@@ -11,7 +11,8 @@
             <p class="title has-text-white has-text-weight-bold is-5">
               {{ title }}
             </p>
-            <HomeButton>Koop nu</HomeButton>
+            <p class="subtitle mb-2 is-6 has-text-white">{{ price | euro }}</p>
+            <HomeButton>{{ $l('common.buy-now') }}</HomeButton>
           </div>
         </div>
       </div>
@@ -22,7 +23,7 @@
 import HomeButton from '@/components/HomeButton';
 
 export default {
-  props: ['title', 'image', 'slug'],
+  props: ['title', 'image', 'slug', 'price'],
   components: { HomeButton },
 };
 </script>

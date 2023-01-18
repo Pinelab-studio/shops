@@ -56,16 +56,20 @@
     "buy-now": "Buy now",
     "popular-categories": "Popular categories",
     "popular-products": "Popular products",
-    "made-by": "Happily made by Pinelab",
+    "products": "Products",
+    "made-by": "Made with joy by Pinelab",
     "read-more": "Read more",
     "add-to-cart": "Add to cart",
-    "sold-out": "Sold out"
+    "sold-out": "Sold out",
+    "items-found": "items found",
+    "subscribe": "Subscribe"
   },
   "error": {
-    "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
+    "INSUFFICIENT_STOCK_ERROR": "We don't have any more of those items!"
   },
   "urls": {
     "home": "Home",
+    "information": "information",
     "category-prefix": "product-category",
     "product-prefix": "product",
     "domain": "https://wormenkwekerijwasse.nl",
@@ -78,8 +82,27 @@
     "faq": "FAQ"
   },
   "product": {
-    "no-reviews": "Er zijn nog geen reviews voor dit product.",
+    "no-reviews": "No reviews yet.",
     "description": "Product description",
     "related": "Others also purchased"
+  },
+  "review": {
+    "write-button": "Write review",
+    "title": "Write a review for ",
+    "name": "Name",
+    "email": "Email (will never be shown on the site)",
+    "message": "Review",
+    "message-placeholder": "What do you think about ",
+    "rating": "How would you rate this product?",
+    "thank-you": "Thank you!",
+    "submit": "Submit review"
+  },
+  "order-confirmation": {
+    "thanks": "Thank you for your order",
+    "error": "Something weent wrong. Please contact us and mention your order number: "
+  },
+  "faq": {
+    "title": "FAQ - Questions, reactions and comments",
+    "message": "Do you have any questions, reactions or comments? Feel free to drop us a message below:"
   }
 }

@@ -12,6 +12,7 @@ export interface SearchItem {
   collections?: string[];
   keywords?: string[];
   thumbnail?: string;
+  url?: string;
 }
 
 export interface SearchIndexObject {

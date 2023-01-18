@@ -23,9 +23,9 @@ $custom-shades: null !default;
 $family-sans-serif: 'Poppins';
 $family-primary: 'Poppins';
 
-$control-radius: 2px;
+$control-radius: 5px;
 
-$notification-radius: 0px;
+$notification-radius: 5px;
 
 $navbar-item-hover-background-color: $primary;
 $navbar-item-active-background-color: $primary;
@@ -129,6 +129,15 @@ html {
   height: auto;
 }
 
+.lang-flag,
+.card img {
+  border-radius: 0;
+}
+
+img {
+  border-radius: $control-radius;
+}
+
 /* The overlay effect - lays on top of the container and over the image */
 .hover-overlay {
   position: absolute;
@@ -139,11 +148,7 @@ html {
   height: 100%;
   transition: 0.3s ease;
   opacity: 0;
-}
-
-/* When you mouse over the container, fade in the overlay*/
-.container-overlay:hover .hover-overlay {
-  opacity: 0.5;
+  border-radius: 0.25rem;
 }
 
 .overlay {
@@ -155,11 +160,17 @@ html {
   height: 100%;
   transition: 0.3s ease;
   opacity: 0.5;
+  border-radius: 0.25rem;
 }
 
 /* When you mouse over the container, fade in the overlay*/
 .container-overlay:hover .overlay {
   opacity: 1;
+}
+
+/* When you mouse over the container, fade in the overlay*/
+.container-overlay:hover .hover-overlay {
+  opacity: 0.5;
 }
 
 .centered {
@@ -235,6 +246,18 @@ a.navbar-burger.burger {
   visibility: hidden;
 }
 
+strong {
+  color: unset;
+}
+
+.has-text-white h1,
+.has-text-white h2,
+.has-text-white h3,
+.has-text-white h4,
+.has-text-white h5 {
+  @extend .has-text-white;
+}
+
 #side-basket button,
 .checkout-steps a,
 .checkout-steps button {
@@ -259,6 +282,13 @@ a.navbar-burger.burger {
   @extend .title;
 }
 
+.consent-block h4 {
+  @extend .has-text-white;
+  @extend .is-4;
+  @extend .title;
+}
+
+.order-summary h4,
 #side-basket h4,
 .checkout-steps h4 {
   @extend .is-4;

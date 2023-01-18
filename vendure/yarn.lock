@@ -12769,10 +12769,10 @@ vendure-plugin-order-export@4.3.0:
   dependencies:
     csv-writer "^1.6.0"
 
-vendure-plugin-sendcloud@4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-4.3.0.tgz#7f8df7562fdd3010df93d6ea67d67472cba9ee3b"
-  integrity sha512-GDzYqQQu46wQD+bTjDtsdTiX3yUkb428T1zl5e3SBfnUMDoXFw0uNZMHId6TH0bwKqGgLuoilg9XhSTG+vMGVA==
+vendure-plugin-sendcloud@4.7.2:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-4.7.2.tgz#3aade8c38b109f83fe193ffbf4269264d336861b"
+  integrity sha512-Kog/Q56B0DzeM2MgBblGlBOpdX69ERPncJvDyK+GxKRaTfn8AH7/pKMCRdy3jzHkN28HFtH043OCmAHiXe1OoA==
 
 vendure-plugin-shipping-by-weight-and-country@4.3.0:
   version "4.3.0"
@@ -12784,10 +12784,10 @@ vendure-plugin-stock-monitoring@4.3.0:
   resolved "https://registry.yarnpkg.com/vendure-plugin-stock-monitoring/-/vendure-plugin-stock-monitoring-4.3.0.tgz#fa61d20307e54fa259089e5d2e7b7af68303ae2e"
   integrity sha512-MDK0Q369sfzDjhKR95sS/ese3+2xPEbz1x2XN+HcOKlEFz5Q5VQw5O++wauZ34vscHE7MOpOYJ015FQw7fUVbQ==
 
-vendure-plugin-webhook@4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-webhook/-/vendure-plugin-webhook-4.3.0.tgz#dc4c2cbc0473859e6431cf5fdf46be2a1b566da6"
-  integrity sha512-xom6XkH9ENPuOmUGQqv6tsog9W+p4cYd6SVb6k3cb33u7rOzO0RpgcqBwCdI8Vj8Mw7q5ekUk2BUQNVs5TRCpg==
+vendure-plugin-webhook@4.7.2:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-webhook/-/vendure-plugin-webhook-4.7.2.tgz#d6fe89b98c7ab85419b210d1437dc2972a08ed56"
+  integrity sha512-h89quBHt74zjVu6K/v8w9tzntIpgt9fIwv/5gA9YKdUAFpyPSew3cuQWnI1v7R1lZugyejqtJ+NFAJ16z05RVQ==
 
 verror@1.10.0:
   version "1.10.0"

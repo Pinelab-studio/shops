@@ -7,7 +7,7 @@
             <p>
               <strong
                 >{{ review.author_name }} -
-                {{ review.date_created | date }}</strong
+                {{ review.review_date | date }}</strong
               >
               <b-rate
                 v-model="review.rating"
@@ -16,14 +16,14 @@
                 size="is-small"
               >
               </b-rate>
-              {{ review.message }}
+              <CollapsedText :text="review.message" />
               <br />
             </p>
           </div>
 
           <div v-if="review.response">
             <article class="media">
-              <figure class="media-left my-1 mx-3">
+              <figure class="media-left">
                 <p class="image is-48x48">
                   <img
                     class="is-rounded"
@@ -36,7 +36,7 @@
                   <p>
                     <strong>Frank van Wormenkwekerijwasse</strong>
                     <br />
-                    {{ review.response }}
+                    <CollapsedText :text="review.response" />
                     <br />
                   </p>
                 </div>
@@ -50,7 +50,9 @@
 </template>
 
 <script>
+import CollapsedText from './CollapsedText';
 export default {
+  components: { CollapsedText },
   props: ['reviews'],
 };
 </script>

@@ -11,9 +11,9 @@
           </div>
           <div class="tile is-parent is-vertical">
             <article class="tile is-child">
-              <p class="title has-text-black mb-0">
+              <h1 class="title">
                 {{ $context.product.name }}
-              </p>
+              </h1>
 
               <div class="is-flex">
                 <b-rate
@@ -22,17 +22,14 @@
                   :disabled="true"
                   :show-score="true"
                 ></b-rate>
-                <div v-if="$context.reviews.length > 0">
+                <div>
                   <a class="my-3 is-flex" href="#reviews">
                     - {{ $context.reviews.length }} Reviews</a
                   >
                 </div>
-                <div v-else>
-                  <a class="my-3 is-flex"> - No reviews</a>
-                </div>
               </div>
 
-              <p class="subtitle has-text-black">
+              <p class="subtitle">
                 {{ variant.priceWithTax | euro }}
               </p>
               <ReadMoreDescription
@@ -75,19 +72,19 @@
         <span class="anchor" id="full-description"></span>
 
         <div class="tile is-parent">
-          <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+          <h4 class="title has-text-weight-bold py-3 my-0">
             {{ $l('product.description') }}
           </h4>
         </div>
         <div class="tile is-parent py-0">
           <article class="tile is-child">
-            <p class="content" v-html="$context.product.description"></p>
+            <div class="content" v-html="$context.product.description"></div>
           </article>
         </div>
 
         <section id="popular-products">
           <div class="tile is-parent">
-            <h4 class="title has-text-black has-text-weight-bold py-3 my-0">
+            <h4 class="title has-text-weight-bold py-3 my-0">
               {{ $l('product.related') }}
             </h4>
           </div>
@@ -98,10 +95,10 @@
                   class="column is-6-mobile is-4-tablet is-one-fifth-desktop"
                 >
                   <ProductCard
-                    :title="product.title"
-                    image="https://storage.googleapis.com/wassets/preview/36/ebooks__preview.jpeg"
-                    slug="wormenkwekerij-stickers"
-                    price="14900"
+                    :title="product.name"
+                    :image="product.featuredAsset.thumbnail"
+                    :slug="product.url"
+                    :price="product.lowestPrice"
                   />
                 </div>
               </template>
@@ -109,34 +106,13 @@
           </div>
         </section>
         <span class="anchor" id="reviews"></span>
-        <div class="tile is-parent">
-          <h4
-            class="title has-text-black has-text-weight-bold py-3 my-0"
-            style="width: 100%"
-          >
-            Reviews
-            <b-button
-              label="Review schrijven"
-              type="is-primary is-pulled-right"
-              @click="isReviewComponentModalActive = true"
-            />
-            <b-modal
-              v-model="isReviewComponentModalActive"
-              has-modal-card
-              trap-focus
-              aria-role="dialog"
-              aria-label="Review Modal"
-              close-button-aria-label="Close"
-              aria-modal
-            >
-              <template #default="props">
-                <modal-form
-                  v-bind="formProps"
-                  @close="props.close"
-                ></modal-form>
-              </template>
-            </b-modal>
-          </h4>
+        <div class="columns is-mobile mt-3">
+          <div class="column">
+            <h4 class="title has-text-weight-bold py-3 my-0">Reviews</h4>
+          </div>
+          <div class="column">
+            <WriteReviewButton :product="$context.product" />
+          </div>
         </div>
 
         <div class="tile is-parent py-0">
@@ -159,15 +135,15 @@ import VariantSelector from 'pinelab-storefront/lib/components/VariantSelector';
 import ReadMoreDescription from '@/components/ReadMoreDescription';
 import ProductCard from '@/components/ProductCard.vue';
 import Reviews from '@/components/Reviews';
-import { buy, hydrate, isOutOfStock, getMetaInfo } from 'pinelab-storefront';
-import ModalForm from '@/components/ModalForm';
+import { buy, getMetaInfo, hydrate, isOutOfStock } from 'pinelab-storefront';
+import WriteReviewButton from '../components/WriteReviewButton';
 
 export default {
   components: {
+    WriteReviewButton,
     ProductImages,
     VariantSelector,
     ReadMoreDescription,
-    ModalForm,
     Reviews,
     ProductCard,
   },
@@ -189,9 +165,6 @@ export default {
       selectedVariant: undefined,
       isLoading: false,
       quantity: 1,
-
-      // REVIEW MODAL DATA
-      isReviewComponentModalActive: false,
     };
   },
   async mounted() {
@@ -220,11 +193,6 @@ export default {
 <style scoped>
 .tile {
   height: min-content;
-}
-
-.carousel-item {
-  object-fit: cover;
-  height: 500px;
 }
 
 .columns {

@@ -1,7 +1,20 @@
-const { VendureServer, createLabelFunction } = require('pinelab-storefront');
+const {
+  VendureServer,
+  createLabelFunction,
+  SearchUtil,
+} = require('pinelab-storefront');
 const { GraphQLClient } = require('graphql-request');
-const { mapToMinimalCollection, setFullUrl } = require('./util');
+const {
+  mapToMinimalCollection,
+  mapToMinimalPage,
+  mapToMinimalBlogPage,
+  setFullUrl,
+  getProductCollections,
+  findTranslatedFields,
+} = require('./util');
 const { GET_CONTENT } = require('./content.queries');
+const fs = require('fs');
+const Fuse = require('fuse.js');
 
 module.exports = async function (api) {
   const getlabel = createLabelFunction([
@@ -37,18 +50,22 @@ module.exports = async function (api) {
     } = await vendureEN.getShopData();
 
     const {
-      wkw_home: home,
-      wkw_algemeen: common,
-      wkw_paginas: pages,
-      wkw_blogs: blogs,
+      wkw_home: home_all, // _all means it contains all languages
+      wkw_algemeen: common_all,
+      wkw_paginas: allPages,
+      wkw_blogs: allBlogs,
       wkw_reviews: reviews,
     } = await directus.request(GET_CONTENT);
 
-    const pages_nl = pages.filter((p) => p.language === 'nl');
-    const pages_en = pages.filter((p) => p.language === 'en');
+    const pages_nl = allPages.filter((p) => p.language === 'nl');
+    const pages_en = allPages.filter((p) => p.language === 'en');
 
-    const blogs_nl = blogs.filter((b) => b.language === 'nl');
-    const blogs_en = blogs.filter((b) => b.language === 'en');
+    const blogs_nl = allBlogs.filter((b) => b.language === 'nl');
+    const blogs_en = allBlogs.filter((b) => b.language === 'en');
+
+    // Find '_en' counterpart of fields if they exist
+    const common_en = findTranslatedFields(common_all, 'en');
+    const home_en = findTranslatedFields(home_all, 'en');
 
     const languages = [
       {
@@ -60,6 +77,8 @@ module.exports = async function (api) {
         blogs: blogs_nl,
         availableCountries: availableCountriesNL,
         slugPrefix: getlabel('urls.slug-prefix', 'nl'),
+        common: common_all,
+        homeContent: home_all,
       },
       {
         lang: 'en',
@@ -70,6 +89,8 @@ module.exports = async function (api) {
         blogs: blogs_en,
         availableCountries: availableCountriesEN,
         slugPrefix: getlabel('urls.slug-prefix', 'en'),
+        common: common_en,
+        homeContent: home_en,
       },
     ];
 
@@ -80,10 +101,15 @@ module.exports = async function (api) {
         collections: allCollections,
         productsPerCollection,
         lang,
+        blogs,
+        pages,
       }) => {
         const slugPrefix = getlabel('urls.slug-prefix', lang);
         const categoryPrefix = getlabel('urls.category-prefix', lang);
         const productPrefix = getlabel('urls.product-prefix', lang);
+        const informationUrl = getlabel('urls.information', lang);
+        pages.forEach((p) => setFullUrl(p, `${slugPrefix}`));
+        blogs.forEach((b) => setFullUrl(b, `${slugPrefix}/${informationUrl}/`));
         allCollections.forEach((c) =>
           setFullUrl(c, `${slugPrefix}/${categoryPrefix}`)
         );
@@ -113,12 +139,16 @@ module.exports = async function (api) {
       pages,
       blogs,
       slugPrefix,
+      common,
+      homeContent,
     } of languages) {
       const collections = vendureNL.unflatten(allCollections);
       const navbarCollections = collections.map(mapToMinimalCollection);
+      const pageLinks = pages.map(mapToMinimalPage);
+      const blogPageLinks = blogs.map(mapToMinimalBlogPage);
 
       // Breadcrumb pages
-      const Home = '/';
+      const Home = `${slugPrefix}/`;
 
       const global = {
         navbarCollections,
@@ -126,12 +156,45 @@ module.exports = async function (api) {
         cartUrl: `${slugPrefix}/cart/`,
         checkoutUrl: `${slugPrefix}/checkout/`,
         homeUrl: `${slugPrefix}/`,
+        informationUrl: getlabel('urls.information', lang),
+        common,
+        pageLinks,
       };
 
       const popularProducts = products.slice(0, 5);
-      const popularCollections = collections.slice(0, 5);
+      const popularCollections = collections.slice(0, 6);
 
-      // -------------------- Home -----------------------------------
+      // ----------------- Search ---------------------
+      const searchProducts = products.map((p) => ({
+        ...p,
+        collections:
+          getProductCollections(productsPerCollection, allCollections, p.id) ||
+          [],
+      }));
+      const searchUtil = new SearchUtil(Fuse);
+      const indexObject = searchUtil.createSearchIndex(searchProducts, [
+        {
+          name: 'keywords',
+          weight: 3,
+        },
+        {
+          name: 'name',
+          weight: 2,
+        },
+        {
+          name: 'collections',
+          weight: 1,
+        },
+      ]);
+      fs.writeFileSync(
+        `./static/_${lang}_search.json`,
+        JSON.stringify(indexObject)
+      );
+
+      // -------------------- Home / Index -----------------------------------
+      const featured = products.filter((p) =>
+        p.facetValues.find((facetValue) => facetValue.code === 'featured')
+      );
       createPage({
         path: global.homeUrl,
         component: './src/templates/Index.vue',
@@ -139,6 +202,56 @@ module.exports = async function (api) {
           ...global,
           popularProducts,
           popularCollections,
+          blogs: blogPageLinks.slice(0, 10),
+          homeContent,
+          featuredProducts: featured.slice(0, 3),
+        },
+      });
+
+      // ----------------- Static pages ------------
+      pages.forEach((page) => {
+        createPage({
+          path: page.url,
+          component: './src/templates/StaticPage.vue',
+          context: {
+            ...global,
+            page,
+          },
+        });
+      });
+
+      // ----------------- Blog pages ------------
+      blogs.forEach((blog) => {
+        const translatedBlogs = {};
+        languages.forEach((language) => {
+          let translatedBlog = language.blogs.find((b) => b.name === blog.name);
+          translatedBlogs[language.lang] = translatedBlog.url;
+        });
+        const informationUrlTitle = getlabel('nav.advice', lang);
+        const breadcrumb = {
+          Home,
+          [informationUrlTitle]: `${slugPrefix}/${global.informationUrl}`,
+          [blog.titel]: '', // Not clickable anyway
+        };
+        createPage({
+          path: blog.url,
+          component: './src/templates/BlogPage.vue',
+          context: {
+            ...global,
+            blog,
+            breadcrumb,
+            translatedPages: translatedBlogs,
+          },
+        });
+      });
+
+      // -------------------- BlogOverview -----------------------------------
+      createPage({
+        path: `${slugPrefix}/${global.informationUrl}`,
+        component: './src/templates/BlogOverview.vue',
+        context: {
+          ...global,
+          blogs: blogPageLinks,
         },
       });
 
@@ -178,6 +291,50 @@ module.exports = async function (api) {
         });
       });
 
+      // -------------------- ProductListing -----------------------------------
+      productsPerCollection.forEach(
+        ({ products: directProducts, collection }) => {
+          const translatedPages = {};
+          languages.forEach((language) => {
+            let translatedCollection = language.collections.find(
+              (c) => c.id == collection.id
+            );
+            translatedPages[language.lang] = translatedCollection.url;
+          });
+          const breadcrumb = {
+            Home,
+            [collection.name]: collection.url,
+          };
+          let childCollections = [];
+          const childProducts = []; // products of childCollections
+          collection.children?.forEach((childCol) => {
+            const childCollectionMap = productsPerCollection.find(
+              ({ collection: colWithProducts }) =>
+                colWithProducts.id == childCol.id
+            );
+            if (childCollectionMap) {
+              childCollections.push(childCollectionMap.collection);
+              childProducts.push(...childCollectionMap.products);
+            }
+          });
+          createPage({
+            path: collection.url,
+            component: './src/templates/ProductListing.vue',
+            context: {
+              ...global,
+              breadcrumb,
+              collection,
+              translatedPages,
+              childCollections:
+                childCollections.length > 0
+                  ? childCollections.map(mapToMinimalCollection)
+                  : undefined,
+              products: directProducts.concat(childProducts), // Merge direct products and childProducts
+            },
+          });
+        }
+      );
+
       // -------------------- Cart -----------------------------------
       const cartTranslations = {};
       languages.forEach(({ lang, slugPrefix }) => {
@@ -188,7 +345,6 @@ module.exports = async function (api) {
         component: './src/templates/Cart.vue',
         context: {
           ...global,
-          popularCollections,
           translatedPages: cartTranslations,
         },
       });
@@ -205,6 +361,30 @@ module.exports = async function (api) {
           ...global,
           availableCountries,
           translatedPages: checkoutTranslations,
+        },
+      });
+
+      // -------------------- Order confirmation -----------------------------------
+      createPage({
+        path: `${slugPrefix}/order/:code`,
+        component: './src/templates/OrderConfirmation.vue',
+        context: {
+          ...global,
+          hideLanguageSwitcher: true, // Language is chosen based on the shipping country
+        },
+      });
+
+      // -------------------- Faq -----------------------------------
+      const faqTranslations = {};
+      languages.forEach(({ lang, slugPrefix }) => {
+        faqTranslations[lang] = `${slugPrefix}/faq/`;
+      });
+      createPage({
+        path: `${slugPrefix}/faq`,
+        component: './src/templates/Faq.vue',
+        context: {
+          ...global,
+          translatedPages: faqTranslations,
         },
       });
     }
