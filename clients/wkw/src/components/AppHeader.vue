@@ -63,7 +63,7 @@
               v-if="collection.children && collection.children.length > 0"
             >
               <!-- Collection with child collections -->
-              <div class="navbar-item has-dropdown is-hoverable shadow">
+              <div class="navbar-item has-dropdown shadow is-hoverable">
                 <g-link :to="collection.url" class="navbar-link">
                   {{ collection.name }}
                 </g-link>
