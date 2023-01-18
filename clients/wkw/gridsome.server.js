@@ -255,6 +255,15 @@ module.exports = async function (api) {
         },
       });
 
+      // -------------------- ContactPage -----------------------------------
+      createPage({
+        path: `${slugPrefix}/contact`,
+        component: './src/templates/ContactPage.vue',
+        context: {
+          ...global,
+        },
+      });
+
       // -------------------- ProductDetail -----------------------------------
       products.forEach((product) => {
         const reviewsForThisProduct = reviews.filter(
