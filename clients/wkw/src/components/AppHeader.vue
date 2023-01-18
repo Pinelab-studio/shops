@@ -139,7 +139,9 @@
             </div>
           </div>
           <div class="navbar-item is-hoverable shadow">
-            <g-link to="/" class="navbar-link is-arrowless"> Contact</g-link>
+            <g-link :to="$context.contactUrl" class="navbar-link is-arrowless">
+              Contact</g-link
+            >
           </div>
           <div class="navbar-item is-hoverable shadow">
             <LanguageSwitcher />
