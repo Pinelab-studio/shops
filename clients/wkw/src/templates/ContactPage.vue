@@ -4,7 +4,6 @@
       <h2 class="has-text-weight-bold is-5">Contact</h2>
       <br />
       <section class="content">
-        <br />
         <g-link to="tel:0031 6 18441825">
           <p class="has-text-black hover-underline">
             {{ $context.common.telefoon }}
@@ -17,6 +16,7 @@
           </p>
         </g-link>
         <br />
+        <div class="has-text-black" v-html="$context.common.adres"></div>
       </section>
     </template>
   </DefaultLayout>
