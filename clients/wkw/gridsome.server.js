@@ -157,6 +157,7 @@ module.exports = async function (api) {
         checkoutUrl: `${slugPrefix}/checkout/`,
         homeUrl: `${slugPrefix}/`,
         informationUrl: getlabel('urls.information', lang),
+        contactUrl: `${slugPrefix}/contact/`,
         common,
         pageLinks,
       };
@@ -252,15 +253,6 @@ module.exports = async function (api) {
         context: {
           ...global,
           blogs: blogPageLinks,
-        },
-      });
-
-      // -------------------- ContactPage -----------------------------------
-      createPage({
-        path: `${slugPrefix}/contact`,
-        component: './src/templates/ContactPage.vue',
-        context: {
-          ...global,
         },
       });
 
@@ -394,6 +386,20 @@ module.exports = async function (api) {
         context: {
           ...global,
           translatedPages: faqTranslations,
+        },
+      });
+
+      // -------------------- ContactPage -----------------------------------
+      const contactTranslations = {};
+      languages.forEach(({ lang, slugPrefix }) => {
+        contactTranslations[lang] = `${slugPrefix}/contact/`;
+      });
+      createPage({
+        path: `${slugPrefix}/contact`,
+        component: './src/templates/ContactPage.vue',
+        context: {
+          ...global,
+          translatedPages: contactTranslations,
         },
       });
     }

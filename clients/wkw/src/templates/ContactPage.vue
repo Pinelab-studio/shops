@@ -16,7 +16,9 @@
           </p>
         </g-link>
         <br />
-        <div class="has-text-black" v-html="$context.common.adres"></div>
+        <div v-html="$context.common.openingstijden"></div>
+        <br />
+        <div v-html="$context.common.adres"></div>
       </section>
     </template>
   </DefaultLayout>
