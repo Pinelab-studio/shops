@@ -310,9 +310,6 @@ export const config: VendureConfig = {
         }),
       ],
       templatePath: path.join(__dirname, '../static/email/templates'),
-      /*      globalTemplateVars: {
-        fromAddress: '"Webshop" <noreply@pinelab.studio>',
-      },*/
     }),
     // Production ready, precompiled admin UI
     AdminUiPlugin.init({
