@@ -298,7 +298,7 @@ export const config: VendureConfig = {
         debug: true,
         auth: {
           user: 'emailapikey',
-          pass: 'yA6KbHtfuFrzymtSSRFs1ZWO+4swpaowgSW24XrrLJQiIoXnjqE310U9IIa8cjbT2tfY46JQb4gVIdu8ttoLfpg8Y99We5TGTuv4P2uV48xh8ciEYNYhhZqoB7cWGqZOdxsnAykzRPAmWA==',
+          pass: process.env.ZEPTOMAIL_KEY,
         },
       },
       handlers: [
