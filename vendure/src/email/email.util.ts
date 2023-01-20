@@ -6,15 +6,27 @@ import {
   TransactionalConnection,
 } from '@vendure/core';
 
+export interface ChannelEmailAdresses {
+  sender: {
+    name: string;
+    emailAddress: string;
+  };
+  additionalRecipients: string[];
+}
+
 export class EmailUtil {
-  static async getAdminEmailsForChannel(
+  /**
+   * Get sender and additional recipients for a given channel
+   */
+  static async getAdminEmailAddressesForChannel(
     injector: Injector,
     ctx: RequestContext
-  ): Promise<string[]> {
+  ): Promise<ChannelEmailAdresses> {
     const admins = await injector
       .get(TransactionalConnection)
       .getRepository(ctx, Administrator)
       .createQueryBuilder('admin')
+      .where('admin.deletedAt IS NULL')
       .innerJoin('admin.user', 'user')
       .innerJoin('user.roles', 'role')
       .innerJoinAndSelect(
@@ -26,8 +38,17 @@ export class EmailUtil {
         }
       )
       .execute();
-    return admins
-      .filter((admin: any) => admin.admin_emailAddress.includes('@'))
-      .map((admin: any) => admin.admin_emailAddress);
+    const sender = admins.find(
+      (admin: any) => admin.admin_lastName === 'email-sender'
+    );
+    return {
+      sender: {
+        name: sender?.admin_firstName || 'Webshop',
+        emailAddress: sender?.admin_emailAddress || 'noreply@pinelab.studio',
+      },
+      additionalRecipients: admins
+        .filter((admin: any) => admin.admin_emailAddress.includes('@'))
+        .map((admin: any) => admin.admin_emailAddress),
+    };
   }
 }
