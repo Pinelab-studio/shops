@@ -156,7 +156,7 @@ module.exports = async function (api) {
         cartUrl: `${slugPrefix}/cart/`,
         checkoutUrl: `${slugPrefix}/checkout/`,
         homeUrl: `${slugPrefix}/`,
-        informationUrl: getlabel('urls.information', lang),
+        informationUrl: `${slugPrefix}/${getlabel('urls.information', lang)}`,
         contactUrl: `${slugPrefix}/contact/`,
         common,
         pageLinks,
@@ -247,12 +247,20 @@ module.exports = async function (api) {
       });
 
       // -------------------- BlogOverview -----------------------------------
+      const informationTranslations = {};
+      languages.forEach(({ lang, slugPrefix }) => {
+        informationTranslations[lang] = `${slugPrefix}/${getlabel(
+          'urls.information',
+          lang
+        )}/`;
+      });
       createPage({
-        path: `${slugPrefix}/${global.informationUrl}`,
+        path: global.informationUrl,
         component: './src/templates/BlogOverview.vue',
         context: {
           ...global,
           blogs: blogPageLinks,
+          translatedPages: informationTranslations,
         },
       });
 
