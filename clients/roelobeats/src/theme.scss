@@ -101,6 +101,19 @@ $colors: mergeColorMaps(
   $custom-colors: ()
 );
 
+// STYLING
+
+a.navbar-burger.burger {
+  background-color: #000000;
+  color: white;
+  height: auto;
+  margin-top: 19px;
+  margin-bottom: 19px;
+  margin-right: 19px;
+  border-radius: 9999px;
+  width: 66px;
+}
+
 // Import Bulma and Buefy styles
 @import '~bulma';
 @import '~buefy/src/scss/buefy';
