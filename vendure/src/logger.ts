@@ -37,7 +37,7 @@ export class CloudLogger implements VendureLogger {
 }
 
 const cloudLoggingWinston = new LoggingWinston({
-  logName: `winston_${process.env.SHOP_ENV}`,
+  logName: `winston_${process.env.LOG_FILE}`,
 });
 
 const winstonLogger = winston.createLogger({
