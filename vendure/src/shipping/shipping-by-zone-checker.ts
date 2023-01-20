@@ -22,6 +22,7 @@ export const eligibleByZoneChecker = new ShippingEligibilityChecker({
         component: 'select-form-input',
         options: [
           { value: 'NL' },
+          { value: 'BE' },
           { value: 'EU' },
           { value: 'Asia' },
           { value: 'Europe' },

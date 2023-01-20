@@ -1,0 +1,58 @@
+{
+  "basket": {
+    "title": "Winkelmand",
+    "shipping-cost": "Verzendkosten",
+    "total": "Totaal",
+    "go-to-cart": "Winkelmand",
+    "go-to-checkout": "bestellen",
+    "empty-cart": "Je hebt nog geen producten in je mand... ",
+    "added": "toegevoegd",
+    "removed": "verwijderd",
+    "to-cart": "Winkelmand"
+  },
+  "customer-details": {
+    "title": "Adres",
+    "firstname": "Voornaam",
+    "lastname": "Achternaam",
+    "company": "Bedrijfsnaam",
+    "phone": "Telefoonnr.",
+    "email": "Emailadres",
+    "postalcode": "Postcode",
+    "housenr": "Huisnr.",
+    "housenrAddition": "Toevoeging",
+    "street": "Straat",
+    "city": "Plaats",
+    "country": "Land",
+    "different-billing-address": "Ander factuuradres",
+    "billing-address": "Factuuradres",
+    "submit": "Kies verzendwijze"
+  },
+  "shipping": {
+    "step-title": "Verzending",
+    "page-title": "Selecteer een verzendwijze",
+    "submit": "Controleer je bestelling"
+  },
+  "order-summary": {
+    "title": "Samenvatting",
+    "shipping-cost": "Verzendkosten",
+    "subtotal": "Subtotaal",
+    "total": "Totaal"
+  },
+  "checkup": {
+    "title": "Controleren",
+    "shipping-address": "Bezorgadres",
+    "billing-address": "Factuuradres",
+    "items": "Producten",
+    "disclaimer": " ",
+    "pay": "€ Betalen"
+  },
+  "finished": {
+    "title": "Gelukt!"
+  },
+  "common": {
+    "couponcode": "Kortingscode"
+  },
+  "error": {
+    "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer"
+  }
+}

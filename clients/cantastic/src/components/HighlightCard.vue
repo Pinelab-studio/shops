@@ -1,12 +1,17 @@
 <template>
-  <g-link :to="`/categorie/${collection.slug}/`">
+  <g-link :to="highlight.button_link">
     <div
       class="box card-background-image is-flex is-align-items-end highlight-card"
-      :style="`background-image: url(${image});`"
+      :style="`background-image: url(${getDefaultImage(highlight.image.id)});`"
     >
       <div>
-        <h3 class="has-text-white pt-5">{{ collection.name }}</h3>
-        <CantasticButton is-div="true"> Bekijk product</CantasticButton>
+        <h3 class="has-text-white pt-5 mb-0">{{ highlight.title }}</h3>
+        <p v-if="highlight.subtitle" class="has-text-white pb-3">
+          {{ highlight.subtitle }}
+        </p>
+        <CantasticButton class="mt-3" is-div="true">{{
+          highlight.button_text
+        }}</CantasticButton>
       </div>
     </div>
   </g-link>
@@ -16,12 +21,7 @@ import CantasticButton from './CantasticButton';
 
 export default {
   components: { CantasticButton },
-  props: ['collection'],
-  computed: {
-    image() {
-      return this.collection?.featuredAsset?.preview;
-    },
-  },
+  props: ['highlight'],
 };
 </script>
 <style>

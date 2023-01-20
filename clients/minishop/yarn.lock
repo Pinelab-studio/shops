@@ -6300,10 +6300,10 @@ mississippi@^3.0.0:
     stream-each "^1.1.0"
     through2 "^2.0.0"
 
-mitt@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/mitt/-/mitt-2.1.0.tgz#f740577c23176c6205b121b2973514eade1b2230"
-  integrity sha512-ILj2TpLiysu2wkBbWjAmww7TkZb65aiQO+DkVdUTBpBXq+MHYiETENkKFMtsJZX1Lf4pe4QOrTSjIfUwN5lRdg==
+mitt@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
 
 mixin-deep@^1.2.0:
   version "1.3.2"
@@ -7048,15 +7048,14 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinelab-storefront-client@0.58.0:
-  version "0.58.0"
-  resolved "https://registry.yarnpkg.com/pinelab-storefront-client/-/pinelab-storefront-client-0.58.0.tgz#85f969270026e9bdcfecec2ab704b9eba629f9ab"
-  integrity sha512-rl3HKedCprmQKS3n+5DMpUEZ4YuxxgpTuXWd9c0r8YjEguFAicmgZDikn8/HhCuLS624JJjuxR/09xICc6r2dw==
+pinelab-storefront@0.60.1:
+  version "0.60.1"
+  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.60.1.tgz#3bd5e8124ce94869e4b449e86b3beffd91c3a96f"
+  integrity sha512-5z40v7Jd8XD2dieFr+pT3CcekrSUvLmXREoA+ndbuYQExQ19mAWZlQDwpSmRIT/LUtIpA7DcKYH9t8KZms64fQ==
   dependencies:
-    debounce "^1.2.1"
     graphql "15.3.0"
     graphql-request "^3.4.0"
-    mitt "^2.1.0"
+    mitt "^3.0.0"
 
 pinkie-promise@^2.0.0:
   version "2.0.1"

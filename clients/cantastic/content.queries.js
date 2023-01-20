@@ -35,6 +35,16 @@ const GET_CONTENT = gql`
       categorie
       content
     }
+    cantastic_highlight {
+      image {
+        id
+        title
+      }
+      title
+      subtitle
+      button_text
+      button_link
+    }
   }
 `;
 

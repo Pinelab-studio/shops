@@ -57,13 +57,25 @@
             </div>
 
             <!----------------Products ------------->
-            <div class="columns is-6 is-variable is-multiline is-mobile">
-              <template v-for="product of products">
-                <div class="column is-6-mobile is-4-tablet is-3-desktop">
-                  <ProductCard :product="product" />
-                </div>
-              </template>
-            </div>
+            <template v-if="products && products.length">
+              <div class="columns is-6 is-variable is-multiline is-mobile">
+                <template v-for="product of products">
+                  <div class="column is-6-mobile is-4-tablet is-3-desktop">
+                    <ProductCard :product="product" />
+                  </div>
+                </template>
+              </div>
+            </template>
+            <template v-else>
+              <div>
+                We hebben op dit moment geen producten in
+                {{ $context.collection.name }}. <br />
+                Je kan je inschrijven op de nieuwsbrief om op de hoogte te
+                blijven:
+              </div>
+              <br />
+              <NewsletterForm />
+            </template>
 
             <!-------------- Pagination ----------------------->
             <br />
@@ -91,8 +103,10 @@
 import Pagination from '../components/Pagination';
 import ReadMoreDescription from '../components/ReadMoreDescription';
 import { getMetaInfo, hydrate } from 'pinelab-storefront';
+import NewsletterForm from '../components/NewsletterForm';
+
 export default {
-  components: { ReadMoreDescription, Pagination },
+  components: { NewsletterForm, ReadMoreDescription, Pagination },
   data() {
     return {
       itemsPerPage: 24,

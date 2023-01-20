@@ -1,13 +1,17 @@
 <template>
   <Layout #content>
     <CheckoutSteps
-      previousPage="/cart/"
-      :availableCountries="$context.availableCountries"
+      class="checkout-steps"
+      :vendure="$vendure"
+      :emitter="$emitter"
+      :store="$store"
+      :available-countries="$context.availableCountries"
+      :paymentMethods="['mollie']"
     />
   </Layout>
 </template>
 <script>
-import CheckoutSteps from 'pinelab-storefront-client/lib/buefy-components/CheckoutSteps';
+import CheckoutSteps from 'pinelab-storefront/lib/components/CheckoutSteps';
 
 export default {
   components: {

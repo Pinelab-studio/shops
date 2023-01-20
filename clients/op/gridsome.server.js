@@ -1,59 +1,13 @@
-const { setCalculatedFields } = require('pinelab-storefront-client');
+const { VendureServer } = require('pinelab-storefront');
+
 module.exports = async function (api) {
   api.createPages(async ({ createPage, graphql }) => {
-    let {
-      data: {
-        Vendure: {
-          products: { items: products },
-        },
-      },
-    } = await graphql(`
-      query products {
-        Vendure {
-          products {
-            totalItems
-            items {
-              id
-              name
-              slug
-              assets {
-                preview
-                thumbnail
-                source
-              }
-              facetValues {
-                code
-                name
-                facet {
-                  code
-                  name
-                }
-              }
-              featuredAsset {
-                id
-                preview
-                thumbnail
-                source
-              }
-              variants {
-                id
-                name
-                priceWithTax
-                productId
-              }
-              description
-              customFields {
-                metaTitle
-                metaDescription
-                keywords
-              }
-            }
-          }
-        }
-      }
-    `);
+    const vendureServer = new VendureServer(
+      process.env.GRIDSOME_VENDURE_API,
+      process.env.GRIDSOME_VENDURE_TOKEN
+    );
 
-    products = products.map((p) => setCalculatedFields(p));
+    const { products } = await vendureServer.getShopData();
 
     const global = {
       email: 'info@ophetboek.nl',

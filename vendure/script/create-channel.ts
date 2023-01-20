@@ -96,7 +96,7 @@ defaultPermissions.push(Permission.ReadTaxRate);
 defaultPermissions.push(Permission.ReadZone);
 
 (async () => {
-  require('dotenv').config({ path: process.env.LOCAL_ENV });
+  require('dotenv').config({ path: process.env.ENV_FILE });
   const { config } = require('../src/vendure-config');
   const app = await bootstrap(config);
   // Prompt input

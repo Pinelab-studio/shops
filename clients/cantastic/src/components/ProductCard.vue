@@ -31,14 +31,35 @@
         >
         <template v-else>{{ product.lowestPrice | euro }}</template>
       </h5>
-      <b-button
-        type="is-info"
-        size="default"
-        icon-right="basket-plus-outline"
-        :loading="isLoading"
-        :disabled="product.soldOut"
-        @click="buyOrGoToDetails()"
-      />
+      <template v-if="hasMultipleVariants">
+        <b-button
+          type="is-info"
+          size="default"
+          :disabled="product.soldOut"
+          @click="$router.push(`/product/${product.slug}/`)"
+          >Bekijken</b-button
+        >
+      </template>
+      <template v-else>
+        <!-- quantity -->
+        <input
+          type="number"
+          min="0"
+          max="999"
+          :disabled="product.soldOut"
+          v-model="quantity"
+          v-on:keyup.enter="buy()"
+          class="input mr-3 listing-quantity"
+        />
+        <b-button
+          type="is-info"
+          size="default"
+          icon-right="basket-plus-outline"
+          :loading="isLoading"
+          :disabled="product.soldOut"
+          @click="buy()"
+        />
+      </template>
     </div>
   </div>
 </template>
@@ -50,22 +71,26 @@ export default {
   data() {
     return {
       isLoading: false,
+      hasMultipleVariants: this.product.variants.length > 1,
+      quantity: 1,
     };
   },
   methods: {
-    async buyOrGoToDetails() {
-      if (this.product.variants.length === 1) {
-        return await this.buy(this.product.variants[0]);
+    async buy() {
+      try {
+        this.isLoading = true;
+        const variant = this.product.variants[0];
+        await buy(
+          variant,
+          {
+            vendure: this.$vendure,
+            emitter: this.$emitter,
+          },
+          Number(this.quantity)
+        );
+      } finally {
+        this.isLoading = false;
       }
-      await this.$router.push(`/product/${this.product.slug}/`);
-    },
-    async buy(variant) {
-      this.isLoading = true;
-      await buy(variant, {
-        vendure: this.$vendure,
-        emitter: this.$emitter,
-      });
-      this.isLoading = false;
     },
   },
   computed: {
@@ -128,12 +153,34 @@ export default {
     rgba(252, 176, 69, 1) 100%
   );
 }
+
 .product-zoom-hover img {
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  transform-style: preserve-3d;
   transition: transform 0.2s; /* Animation */
 }
 
 .product-zoom-hover img:hover,
 .product-zoom-hover img:focus {
   transform: scale(1.05);
+}
+
+.listing-quantity {
+  height: 38px;
+  width: 44px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
 }
 </style>

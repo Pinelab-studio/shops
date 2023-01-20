@@ -1,0 +1,62 @@
+{
+  "basket": {
+    "title": "Winkelmand",
+    "shipping-cost": "Verzendkosten",
+    "total": "Totaal",
+    "go-to-cart": "Naar winkelmand",
+    "go-to-checkout": "Bestellen",
+    "empty-cart": "Je winkelmand is leeg... ",
+    "added": "toegevoegd aan winkelmand",
+    "removed": "verwijderd uit winkelmand",
+    "to-cart": "Naar winkelmand"
+  },
+  "customer-details": {
+    "title": "Adres",
+    "firstname": "Voornaam",
+    "lastname": "Achternaam",
+    "company": "Bedrijfsnaam",
+    "phone": "Telefoonnr.",
+    "email": "Email",
+    "postalcode": "Postcode",
+    "housenr": "Huisnr.",
+    "housenrAddition": "Toevoeging",
+    "street": "Straat",
+    "city": "Plaats",
+    "country": "Land",
+    "different-billing-address": "Ander factuuradres",
+    "billing-address": "Factuuradres",
+    "submit": "Kies verzendwijze"
+  },
+  "shipping": {
+    "step-title": "Verzending",
+    "page-title": "Kies verzendwijze",
+    "submit": "Controleer je bestelling"
+  },
+  "order-summary": {
+    "title": "Samenvatting",
+    "shipping-cost": "Verzending",
+    "subtotal": "Subtotaal",
+    "total": "Totaal"
+  },
+  "payment": {
+    "title": "Betaalwijze",
+    "choose": "Kies je betaalwijze"
+  },
+  "checkup": {
+    "title": "Controleer je bestelling",
+    "shipping-address": "Bezorgadres",
+    "billing-address": "Factuuradres",
+    "items": "Producten",
+    "disclaimer": "Je kan in de volgende stap een betaalwijze kiezen",
+    "pay": "Afrekenen"
+  },
+  "finished": {
+    "title": "Gelukt!"
+  },
+  "common": {
+    "couponcode": "Kortingscode"
+  },
+  "error": {
+    "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer!"
+  }
+}

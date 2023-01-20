@@ -4,20 +4,20 @@
   "scripts": {
     "serve:static": "yarn nodemon --ext js,vue,html,md --watch src --exec 'yarn gridsome build && yarn http-server ./dist/'",
     "serve:local": "export VENDURE_ENV=local && yarn gridsome develop",
-    "dev": "yarn link-there && yarn link-here && concurrently \"cd ../../packages/pinelab-storefront-client && yarn watch\" \"gridsome develop\"",
-    "link-here": "yarn link pinelab-storefront-client",
-    "link-there": "cd ../../packages/pinelab-storefront-client && yarn link"
+    "dev": "yarn link-there && yarn link-here && concurrently \"cd ../../packages/pinelab-storefront && yarn watch\" \"gridsome develop\"",
+    "link-here": "yarn link pinelab-storefront",
+    "link-there": "cd ../../packages/pinelab-storefront && yarn link"
   },
   "dependencies": {
     "@fontsource/roboto": "^4.5.3",
     "@fontsource/titillium-web": "^4.5.1",
     "@gridsome/plugin-sitemap": "^0.4.0",
     "buefy": "^0.9.14",
-    "pinelab-storefront-client": "0.58.0",
+    "debounce": "^1.2.1",
+    "pinelab-storefront": "0.64.0",
     "vue-gtag": "^1.16.1"
   },
   "devDependencies": {
-    "@gridsome/source-graphql": "^0.1.0",
     "concurrently": "^6.2.0",
     "graphql-tag": "^2.12.6",
     "gridsome": "^0.7.23",
@@ -26,10 +26,9 @@
     "nodemon": "^2.0.7",
     "rimraf": "^3.0.2",
     "sass": "^1.32.13",
-    "sass-loader": "^10.1.1",
-    "webpack-bundle-analyzer": "^4.4.1"
+    "sass-loader": "^10.1.1"
   },
-  "version": "0.58.5",
+  "version": "0.64.0",
   "resolutions": {
     "graphql": "^14.7.0"
   }

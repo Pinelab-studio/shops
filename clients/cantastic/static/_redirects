@@ -1,5 +1,6 @@
 /order/* /order/_code.html 200
-/admin/ https://api.pinelab.studio/admin/ 301
+/admin/ https://api.pinelab.studio/admin/ 302
+/cms/ https://content.pinelab.studio/ 302
 
 /product/loop-colors-asphalt/ /product/loop-colors-asphalt-400ml/ 301
 /product/loop-colors-600ml/ /product/loop-colors-maxi-600ml/ 301

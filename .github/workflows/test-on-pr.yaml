@@ -4,15 +4,14 @@ on:
 
 jobs:
   test:
-    name: Test Pinelab-stoprefront <> Vendure communication
+    name: Test Pinelab-storefront x Vendure
     runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash
         working-directory: packages/e2e
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
           node-version: '16'

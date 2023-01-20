@@ -6,8 +6,8 @@
       cart-link="/cart/"
       :activeOrder="activeOrder"
     >
-      <g-link to="https://pinelab.studio/minishop/" class="navbar-item">
-        Ik wil ook een minishop
+      <g-link to="https://pinelab.studio/" class="navbar-item">
+        Ik wil ook een shop
       </g-link>
     </ShopNavBar>
 
@@ -30,8 +30,8 @@
   </div>
 </template>
 <script>
-import ShopNavBar from 'pinelab-storefront-client/lib/buefy-components/ShopNavbar';
-import Breadcrumb from 'pinelab-storefront-client/lib/buefy-components/Breadcrumb';
+import ShopNavBar from 'pinelab-storefront/lib/components/ShopNavbar';
+import Breadcrumb from 'pinelab-storefront/lib/components/Breadcrumb';
 
 export default {
   props: {
@@ -42,6 +42,9 @@ export default {
   components: {
     ShopNavBar,
     Breadcrumb,
+  },
+  mounted() {
+    this.$vendure.getActiveOrder();
   },
   computed: {
     activeOrder() {

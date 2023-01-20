@@ -85,7 +85,7 @@
       </div>
     </div>
     <div class="columns is-mobile">
-      <div class="column">
+      <div class="column is-6">
         <div class="field">
           <p class="control is-expanded has-icons-left">
             <b-input
@@ -102,13 +102,13 @@
           </p>
         </div>
       </div>
-      <div class="column">
+      <div class="column is-4">
         <div class="field is-small-field">
           <p class="control is-expanded has-icons-left">
             <b-input
               :placeholder="`${$l('customer-details.housenr')}*`"
               aria-label="housenumber"
-              type="text"
+              type="number"
               required
               v-model="address.streetLine2"
               v-on:input="lookupShippingAddress()"
@@ -116,6 +116,18 @@
             <span class="icon is-small is-left">
               <i class="mdi mdi-home"></i>
             </span>
+          </p>
+        </div>
+      </div>
+      <div class="column is-2">
+        <div class="field is-small-field">
+          <p class="control is-expanded">
+            <b-input
+              :placeholder="`${$l('customer-details.housenrAddition')}`"
+              aria-label="addition"
+              type="text"
+              v-model="address.houseNumberAddition"
+            />
           </p>
         </div>
       </div>
@@ -334,6 +346,7 @@ export default {
         city: undefined,
         streetLine1: undefined,
         streetLine2: undefined,
+        houseNumberAddition: undefined,
         postalCode: undefined,
         countryCode: 'nl',
       },
@@ -348,6 +361,11 @@ export default {
     };
   },
   async mounted() {
+    const defaultCountry = this.$context?.availableCountries?.find(
+      (c) => c.code.toUpperCase() === 'NL'
+    );
+    this.address.countryCode = defaultCountry?.code || 'nl';
+    this.billingAddress.countryCode = defaultCountry?.code || 'nl';
     const activeOrder = await this.vendure.getActiveOrder();
     this.hasDifferentBillingAddress = !!activeOrder?.billingAddress?.postalCode;
     // Prepolutate customer
@@ -367,6 +385,7 @@ export default {
     this.address.company = address?.company;
     this.address.streetLine1 = address?.streetLine1;
     this.address.streetLine2 = address?.streetLine2;
+    this.address.houseNumberAddition = address?.houseNumberAddition;
     this.address.city = address?.city;
     this.address.postalCode = address?.postalCode;
     this.shippingMethods = await this.vendure.getEligibleShippingMethods();
@@ -401,7 +420,14 @@ export default {
       e.preventDefault();
       this.loadingShipping = true;
       const address = {
-        ...this.address,
+        company: this.address.company,
+        city: this.address.city,
+        streetLine1: this.address.streetLine1,
+        streetLine2: `${this.address.streetLine2}${
+          this.address.houseNumberAddition || ''
+        }`,
+        postalCode: this.address.postalCode,
+        countryCode: this.address.countryCode,
         fullName: `${this.customer.firstName} ${this.customer.lastName}`,
         defaultBillingAddress: !this.hasDifferentBillingAddress,
         defaultShippingAddress: true,

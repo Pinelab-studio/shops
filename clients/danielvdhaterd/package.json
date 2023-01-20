@@ -1,7 +1,7 @@
 {
   "name": "danielvdhaterd",
   "private": true,
-  "version": "0.58.5",
+  "version": "0.64.0",
   "scripts": {
     "serve": "yarn gridsome develop",
     "serve:static": "yarn concurrently \"nodemon --ext js,vue --watch '.src/' --exec 'yarn gridsome build && yarn http-server ./dist/'\""
@@ -11,17 +11,19 @@
   },
   "dependencies": {
     "@fontsource/roboto-mono": "^4.0.1",
-    "graphql": "^14.7.0",
+    "buefy": "^0.9.22",
+    "debounce": "^1.2.1",
     "graphql-request": "3.4.0",
-    "pinelab-storefront-client": "0.58.0"
+    "pinelab-storefront": "0.64.0",
+    "vue-gtag": "^1.16.1"
   },
   "devDependencies": {
-    "@gridsome/cli": "^0.3.4",
-    "@gridsome/source-graphql": "^0.1.0",
+    "@gridsome/plugin-sitemap": "^0.4.0",
     "concurrently": "^5.3.0",
     "gridsome": "^0.7.23",
     "http-server": "^0.12.3",
     "nodemon": "^2.0.7",
-    "webpack-bundle-analyzer": "^4.3.0"
+    "sass": "1.32.13",
+    "sass-loader": "^10.1.1"
   }
 }

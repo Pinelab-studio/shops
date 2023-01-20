@@ -19,10 +19,12 @@ const address = {
 };
 const prices = {
   itemFE: '67,50',
+  subtotalFE: '67,50',
   shippingOutsideEU: '14,-',
   totalOutsideEU: '74,15',
   shippingFE: '5,-',
   totalFE: '65,75',
+  dicountWithTaxFE: '- €6,75',
   itemBE: '67.50',
   itemWithoutTaxBE: '61.93',
   shippingWithoutTaxBE: '4.59',
@@ -39,24 +41,23 @@ module.exports = {
     const buyButton = 'button[aria-label="Add to cart"]';
     const checkoutSnackbar =
       'body > div.notices.is-top > div > div.action.is-light > button';
-    const couponField = 'input[placeholder="Coupon code"]';
+    const couponField = 'input[placeholder="Kortingscode"]';
     const orderNowButton = 'a[href="/checkout/"]';
     const customerForm = {
-      firstname: 'input[placeholder="Firstname*"]',
-      lastname: 'input[placeholder="Lastname*"]',
-      phone: 'input[placeholder="Phonenumber"]',
-      email: 'input[placeholder="Emailaddress*"]',
-      postalCode: 'input[placeholder="Postalcode*"]',
-      houseNr: 'input[placeholder="HouseNr*"]',
-      street: 'input[placeholder="Street*"]',
-      city: 'input[placeholder="City*"]',
+      firstname: 'input[placeholder="Voornaam*"]',
+      lastname: 'input[placeholder="Achternaam*"]',
+      phone: 'input[placeholder="Telefoonnr."]',
+      email: 'input[placeholder="Email adres*"]',
+      postalCode: 'input[placeholder="Postcode*"]',
+      houseNr: 'input[placeholder="Huisnr.*"]',
+      street: 'input[placeholder="Straat*"]',
+      city: 'input[placeholder="Plaats*"]',
       submit: 'button[type="submit"]',
     };
     const ideal = 'button[value="ideal"]';
     const ing = 'button[value="ideal_INGBNL2A"]';
     const paid = 'input[value="paid"]';
     const continueBtn = 'button[class="button form__button"]';
-    const success = 'table[class="table is-fullwidth"]';
     browser
       .url(site)
       .waitForElementVisible(theJaunt)
@@ -92,13 +93,12 @@ module.exports = {
       .pause(200)
       // Shipping
       .pause(500)
-      .assert.containsText('body', 'Payment')
       .useXpath()
       .click("//*[contains(text(), 'Verzenden (€14,-)')]")
       .useCss()
       .assert.containsText('body', prices.totalOutsideEU)
       // Back to customer details
-      .click('div > div > div > div:nth-child(1) > a')
+      .click('button[aria-label="back to customer details"]')
       .waitForElementVisible(customerForm.firstname)
       .pause(500)
       .click('select[name="country"] option[value="nl"]')
@@ -111,7 +111,14 @@ module.exports = {
       .useCss()
       .assert.containsText('body', prices.totalFE)
       // Payment
-      .click('button[type="button"]')
+      .click('button[aria-label="submit shippingmethod"]')
+      .assert.containsText('body', prices.subtotalFE)
+      .assert.containsText('body', prices.shippingFE)
+      .assert.containsText('body', prices.dicountWithTaxFE)
+      .assert.containsText('body', prices.totalFE)
+      .pause(500)
+      .click('button[aria-label="go to payment"]')
+      .pause(500)
       .waitForElementVisible(ideal, 10000)
       .click(ideal)
       .waitForElementVisible(ing)
@@ -119,12 +126,13 @@ module.exports = {
       .waitForElementVisible(paid)
       .click(paid)
       .click(continueBtn)
-      .waitForElementVisible(success)
+      .pause(500)
       .url(({ value }) => {
         orderId = value.replace(`https://minishop.studio/order/`, '');
       })
-      .assert.containsText('body', prices.itemFE)
+      .assert.containsText('body', prices.subtotalFE)
       .assert.containsText('body', prices.shippingFE)
+      .assert.containsText('body', prices.dicountWithTaxFE)
       .assert.containsText('body', prices.totalFE)
       .end();
   },

@@ -96,7 +96,7 @@
 </template>
 <script>
 import { bootstrap } from 'vue-gtag';
-import Consent from 'pinelab-storefront-client/lib/buefy-components/Consent';
+import Consent from 'pinelab-storefront/lib/components/Consent';
 
 export default {
   components: {

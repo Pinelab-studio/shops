@@ -31,16 +31,27 @@
         icon="truck"
         :clickable="false"
       >
-        <b-button
-          class="is-outlined"
-          aria-label="back to customer details"
-          :disable="hasShippingSelected"
-          @click="activeStep = 0"
-        >
-          <
-        </b-button>
-        <br />
-        <br />
+        <div class="columns is-mobile">
+          <div class="column">
+            <b-button
+              class="is-outlined"
+              aria-label="back to customer details"
+              :disable="hasShippingSelected"
+              @click="goToStep(0)"
+            >
+              <
+            </b-button>
+          </div>
+          <div class="column has-text-right">
+            <b-button
+              aria-label="submit shippingmethod"
+              :disable="hasShippingSelected"
+              @click="goToStep(2)"
+            >
+              {{ $l('shipping.submit') }}
+            </b-button>
+          </div>
+        </div>
         <div class="columns">
           <div class="column is-6">
             <h3>{{ $l('shipping.page-title') }}</h3>
@@ -66,7 +77,7 @@
                   class="is-fullwidth"
                   aria-label="submit shippingmethod"
                   :disable="hasShippingSelected"
-                  @click="activeStep = 2"
+                  @click="goToStep(2)"
                 >
                   {{ $l('shipping.submit') }}
                 </b-button>
@@ -85,16 +96,27 @@
         :clickable="false"
         disabled
       >
-        <b-button
-          class="is-outlined"
-          aria-label="back to shipping"
-          :disable="hasShippingSelected"
-          @click="activeStep = 1"
-        >
-          <
-        </b-button>
-        <br />
-        <br />
+        <div class="columns is-mobile">
+          <div class="column">
+            <b-button
+              class="is-outlined"
+              aria-label="back to shipping"
+              :disable="hasShippingSelected"
+              @click="goToStep(1)"
+            >
+              <
+            </b-button>
+          </div>
+          <div class="column has-text-right">
+            <b-button
+              aria-label="go to payment"
+              :disable="hasShippingSelected"
+              @click="choosePayment()"
+            >
+              {{ $l('checkup.pay') }}
+            </b-button>
+          </div>
+        </div>
         <div class="columns">
           <div class="column is-8">
             <div class="columns">
@@ -136,7 +158,7 @@
                   class="is-fullwidth"
                   aria-label="go to payment"
                   :disable="hasShippingSelected"
-                  @click="startPayment()"
+                  @click="choosePayment()"
                 >
                   {{ $l('checkup.pay') }}
                 </b-button>
@@ -145,6 +167,62 @@
               </template>
             </OrderSummary>
             <slot name="orderSummaryFooter" />
+          </div>
+        </div>
+      </b-step-item>
+
+      <!-------------------- PAYMENT ---------------------------->
+      <b-step-item
+        v-if="paymentMethods.length > 1"
+        step="3"
+        :label="$l('payment.title')"
+        icon="currency-eur"
+        :clickable="false"
+        disabled
+      >
+        <div class="columns">
+          <div class="column is-offset-one-quarter">
+            <br />
+            <h5>{{ $l('payment.choose') }}</h5>
+            <br />
+            <section>
+              <b-field>
+                <b-radio v-model="selectedPaymentMethod" native-value="mollie">
+                  <slot name="mollie">Mollie (iDeal, Creditcard)</slot>
+                </b-radio>
+              </b-field>
+              <b-field>
+                <b-radio
+                  v-model="selectedPaymentMethod"
+                  native-value="coinbase"
+                >
+                  <slot name="coinbase"
+                    >Coinbase (Bitcoin, Ethereum, Litecoin and more)
+                  </slot>
+                </b-radio>
+              </b-field>
+            </section>
+            <br />
+            <p>
+              {{ $l('order-summary.total') }}:
+              <strong>{{ activeOrder.totalWithTax | euro }}</strong>
+            </p>
+            <br />
+            <div class="columns is-mobile">
+              <div class="column">
+                <a @click="goToStep(2)" class="button is-outlined"><</a>
+              </div>
+              <div class="column">
+                <b-button
+                  type="is-primary"
+                  icon-left="currency-eur"
+                  :loading="loadingPayment"
+                  @click="startPayment()"
+                >
+                  {{ $l('checkup.pay') }}
+                </b-button>
+              </div>
+            </div>
           </div>
         </div>
       </b-step-item>
@@ -190,6 +268,16 @@ export default {
       type: Array,
       required: true,
     },
+    paymentMethods: {
+      type: Array,
+      validator(values) {
+        // The values must match one of these strings
+        return values.every((value) => ['mollie', 'coinbase'].includes(value));
+      },
+      default() {
+        return ['mollie'];
+      },
+    },
   },
   components: {
     CustomerDetailsForm,
@@ -212,17 +300,34 @@ export default {
       activeStep: 0,
       shippingMethods: [],
       loadingPayment: false,
+      selectedPaymentMethod: this.paymentMethods[0],
     };
   },
   methods: {
+    scrollToTop() {
+      setTimeout(function () {
+        window.scrollTo(0, 0);
+      }, 100);
+    },
+    goToStep(step) {
+      this.activeStep = step;
+      this.scrollToTop();
+    },
     async gotToShipping() {
-      this.activeStep = 1;
+      this.goToStep(1);
       this.shippingMethods = await this.vendure.getEligibleShippingMethods();
+    },
+    async choosePayment() {
+      if (this.paymentMethods.length > 1) {
+        this.goToStep(3);
+      } else {
+        await this.startPayment();
+      }
     },
     async startPayment() {
       this.loadingPayment = true;
       try {
-        await startPayment(this.vendure, 'mollie');
+        await startPayment(this.vendure, this.selectedPaymentMethod);
       } catch (e) {
         this.emitter.emit('error', e);
       } finally {

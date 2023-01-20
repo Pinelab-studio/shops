@@ -1,16 +1,28 @@
-import 'buefy/dist/buefy.css';
 import Buefy from 'buefy';
 import Layout from '~/layouts/Default.vue';
-import { configureVue } from 'pinelab-storefront-client';
+import {
+  formatEuro,
+  preconnectLinks,
+  setLabelFunction,
+  setStore,
+} from 'pinelab-storefront';
 import '@fontsource/roboto';
 import '@fontsource/titillium-web';
 import '~/theme.scss';
-import QuantityInput from 'pinelab-storefront-client/lib/buefy-components/QuantityInput';
-import PopupImage from 'pinelab-storefront-client/lib/buefy-components/PopupImage';
+import QuantityInput from 'pinelab-storefront/lib/components/QuantityInput';
+import PopupImage from 'pinelab-storefront/lib/components/PopupImage';
 import VueGtag from 'vue-gtag';
 
 export default function (Vue, { router, head, isClient }) {
+  head.link.push(...preconnectLinks);
+  setLabelFunction(Vue, require('../labels.json'));
+  Vue.filter('euro', formatEuro);
   if (isClient) {
+    setStore(
+      Vue,
+      process.env.GRIDSOME_VENDURE_API,
+      process.env.GRIDSOME_VENDURE_TOKEN
+    );
     Vue.use(
       VueGtag,
       {
@@ -29,5 +41,4 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('QuantityInput', QuantityInput);
   Vue.component('Layout', Layout);
   Vue.component('PopupImage', PopupImage);
-  configureVue(Vue, { router, head, isClient });
 }

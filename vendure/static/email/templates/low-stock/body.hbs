@@ -1,0 +1,27 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Arial, Verdana" color="#343434" />
+    </mj-attributes>
+  </mj-head>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-text font-size="30px">Lage voorraad</mj-text>
+        <mj-divider border-color="#343434"></mj-divider>
+
+        <mj-text>
+          De volgende producten hebben een lage voorraad:
+          <br />
+          <br />
+          {{#each lines }}
+            {{ productVariant.name }} - {{ productVariant.stockOnHand }} stuks
+            <br />
+          {{/each}}
+        </mj-text>
+
+      </mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>

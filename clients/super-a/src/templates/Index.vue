@@ -59,9 +59,9 @@
             />
           </div>
         </div>
-        <hr />
       </section>
-      <section id="news">
+      <section v-if="$context.news && $context.news.length" id="news">
+        <hr />
         <h2>{{ $context.home.news_section_title }}</h2>
 
         <div class="columns is-multiline">
@@ -97,7 +97,7 @@ export default {
   },
   data: () => ({
     videoUrl: undefined,
-    videos: ['/video/s.mp4', '/video/logo.mp4', '/video/spiral.mp4'],
+    videos: ['/video/square.mp4', '/video/logo.mp4', '/video/spiral.mp4'],
   }),
   async mounted() {
     this.videoUrl = this.videos[Math.floor(Math.random() * this.videos.length)]; // Random video

@@ -5646,7 +5646,7 @@ keyv@^3.0.0:
   dependencies:
     json-buffer "3.0.0"
 
-kind-of@^3.0.2, kind-of@^3.0.3:
+kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
   integrity sha512-NOW9QQXMoZGg/oqnVNoNTTIFEIid1627WCffUBJEdMxYApq7mNE7CpzucIPc+ZQg25Phej7IJSmX3hO+oblOtQ==
@@ -6892,10 +6892,10 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinelab-storefront@^0.57.5:
-  version "0.57.5"
-  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.57.5.tgz#fee85cee9461c36f5a3f484f9fd57a8f6d1094e0"
-  integrity sha512-xE2QG16SL3xa4Q+1rZZqv/O7cIwii/X5Ll87KdcsOm0fKutUG7nfxuSha/486RrRk1eJ/7dzfPFqH/aaZBTeQg==
+pinelab-storefront@0.63.0:
+  version "0.63.0"
+  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.63.0.tgz#daa9c603196fc2eba6752abeb5198c93aaf73399"
+  integrity sha512-V1PeDUqJwtECJH+fss7OnwSKLaGIcoPONvMFqLJVSL0NlPNG3WXvXcmatgQk6uYeMkNrK+Afy8U9/HEw/h3Vhg==
   dependencies:
     graphql "15.3.0"
     graphql-request "^3.4.0"
@@ -8152,6 +8152,17 @@ snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
   integrity sha512-O27l4xaMYt/RSQ5TR3vpWCAB5Kb/czIcqUFOM/C4fYcLnbZUc1PkjTAMjof2pBWaSTwOUd6qUHcFGVGj7aIwnw==
+  dependencies:
+    define-property "^1.0.0"
+    isobject "^3.0.0"
+    snapdragon-util "^3.0.1"
+
+snapdragon-util@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/snapdragon-util/-/snapdragon-util-3.0.1.tgz#f956479486f2acd79700693f6f7b805e45ab56e2"
+  integrity sha512-mbKkMdQKsjX4BAL4bRYTj21edOf8cN7XHdYUJEe+Zn99hVEYcMvKPct1IqNe7+AZPirn8BCDOQBHQZknqmKlZQ==
+  dependencies:
+    kind-of "^3.2.0"
 
 snapdragon-util@^5.0.1:
   version "5.0.1"

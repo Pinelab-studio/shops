@@ -1,26 +1,29 @@
-const { GridsomeService } = require('pinelab-storefront-client');
 const { GET_CONTENT } = require('./content.queries');
-
+const { VendureServer } = require('pinelab-storefront');
+const { GraphQLClient } = require('graphql-request');
 module.exports = async function (api) {
-  api.createPages(async ({ createPage, graphql }) => {
-    const gridsome = new GridsomeService(graphql);
-    const [shopData, content] = await Promise.all([
-      gridsome.getShopData(),
-      graphql(GET_CONTENT),
-    ]);
-    const { products, collections, productsPerCollection, availableCountries } =
-      shopData;
-    const {
-      data: {
-        Directus: {
-          bdb_algemeen: global,
-          bdb_home: home,
-          bdb_news: news,
-          bdb_bio: bio,
-          bdb_tattoos: tattoos,
-        },
+  api.createPages(async ({ createPage }) => {
+    const vendureServer = new VendureServer(
+      process.env.GRIDSOME_VENDURE_API,
+      process.env.GRIDSOME_VENDURE_TOKEN
+    );
+    const directus = new GraphQLClient(
+      `${process.env.GRIDSOME_DIRECTUS_HOST}/graphql`
+    );
+
+    const [
+      { products, collections, productsPerCollection, availableCountries },
+      {
+        bdb_algemeen: global,
+        bdb_home: home,
+        bdb_news: news,
+        bdb_bio: bio,
+        bdb_tattoos: tattoos,
       },
-    } = content;
+    ] = await Promise.all([
+      vendureServer.getShopData(),
+      directus.request(GET_CONTENT),
+    ]);
 
     // Static pages should never have soldOut products, this is updated when mounted()
     products.forEach((p) => (p.soldOut = false));

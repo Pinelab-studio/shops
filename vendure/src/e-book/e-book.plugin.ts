@@ -65,7 +65,7 @@ export class EBookController {
       throw new ForbiddenException();
     }
     await this.hydrator.hydrate(ctx, order, {
-      relations: ['lines.productVariant.product.facetValues'],
+      relations: ['lines.productVariant.product.facetValues.facet'],
     });
     const variant = order.lines.find(
       (line) => line.productVariant.id == variantId
@@ -78,12 +78,12 @@ export class EBookController {
       throw new ForbiddenException();
     }
     const facet = variant.product.facetValues.find(
-      (facet) => facet.code === 'e-book'
+      (facetValue) => facetValue.facet.code === 'e-book'
     );
     const assetId = facet?.translations?.[0]?.name;
     if (!assetId) {
       Logger.warn(
-        `Product ${variant.product.slug} does not have a facetValue 'e-book'`,
+        `Product "${variant.name}" does not have a facet 'e-book'`,
         loggerCtx
       );
       throw new ForbiddenException();

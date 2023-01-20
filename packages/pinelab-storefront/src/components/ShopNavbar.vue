@@ -105,8 +105,13 @@ export default {
       });
     },
     showError(e) {
+      console.error(e);
+      let label = this.$l(`error.${e.errorCode}`);
+      label = label === `error.${e.errorCode}` ? undefined : label;
       this.$buefy.toast.open({
-        message: `Error: ${e?.message}`,
+        message: label || e.message,
+        duration: 5000,
+        position: 'is-bottom',
         type: 'is-danger',
       });
     },

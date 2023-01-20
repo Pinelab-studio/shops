@@ -29,11 +29,14 @@ export default {
       this.loading = true;
       try {
         await this.$vendure.adjustOrderLine(this.lineId, this.newValue);
-        this.newValue = this.value;
       } catch (e) {
         console.error(e);
+        this.$emitter.emit('error', e);
+        await this.$vendure.getActiveOrder();
+      } finally {
+        this.loading = false;
+        this.newValue = this.value;
       }
-      this.loading = false;
     },
   },
 };

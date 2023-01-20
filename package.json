@@ -10,8 +10,8 @@
     "build": "yarn && yarn lerna exec yarn && yarn lerna run build",
     "bootstrap": "yarn build && yarn lerna bootstrap",
     "lerna:publish": "yarn lerna run test && yarn lerna run build && yarn lerna publish --exact",
-    "prettier:check": "prettier --check --single-quote \"./**/*.{ts,tsx,js,vue}\"",
-    "prettier:write": "prettier --write --single-quote \"./**/*.{ts,tsx,js,vue}\"",
+    "prettier:check": "prettier --check --single-quote \"./**/*.{ts,tsx,js,vue,scss}\"",
+    "prettier:write": "prettier --write --single-quote \"./**/*.{ts,tsx,js,vue,scss}\"",
     "e2e": "cd packages/e2e && yarn e2e"
   },
   "license": "MIT",
@@ -32,6 +32,7 @@
         "always",
         [
           "vendure",
+          "directus",
           "e2e",
           "seo",
           "storefront-client",
@@ -44,9 +45,11 @@
           "marcdefotograaf",
           "minishop",
           "op",
-          "super-a"
+          "super-a",
+          "wkw"
         ]
       ]
     }
-  }
+  },
+  "dependencies": {}
 }

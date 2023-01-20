@@ -1,4 +1,4 @@
-require('dotenv').config({ path: process.env.LOCAL_ENV });
+require('dotenv').config({ path: process.env.ENV_FILE });
 import { bootstrap } from '@vendure/core';
 import { populate } from '@vendure/core/cli';
 import { config } from '../src/vendure-config';

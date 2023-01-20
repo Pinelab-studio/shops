@@ -1,4 +1,4 @@
-require('dotenv').config({ path: process.env.LOCAL_ENV || '.env.test' });
+require('dotenv').config({ path: process.env.ENV_FILE || '.env.test' });
 
 import {
   generateMigration,
@@ -9,7 +9,7 @@ import program from 'commander';
 import { config } from './src/vendure-config';
 
 console.log(
-  `\x1b[46mMIGRATING FOR DATABASE ${process.env.DATABASE_NAME} \x1b[0m`
+  `MIGRATING FOR DATABASE \x1b[46m ${process.env.DATABASE_NAME} \x1b[0m`
 );
 
 program

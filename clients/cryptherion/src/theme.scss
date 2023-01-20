@@ -1,14 +1,14 @@
 // Import Bulma's core
-@import "~bulma/sass/utilities/_all";
+@import '~bulma/sass/utilities/_all';
 
 // Color palette
 $cr-black: #000000;
 $cr-grey: #2c2c2c;
-$cr-red: #E03616;
+$cr-red: #e03616;
 $cr-light-grey: #efefef;
-$cr-dark-blue: #0496FF;
-$cr-green: #69DC9E;
-$cr-orange: #FAA916;
+$cr-dark-blue: #0496ff;
+$cr-green: #69dc9e;
+$cr-orange: #faa916;
 
 // Set your colors
 $text: $cr-grey;
@@ -26,68 +26,68 @@ $footer-color: $primary-invert;
 $custom-colors: null !default;
 $custom-shades: null !default;
 
-$family-sans-serif: "Titillium Web";
-$family-primary: "Titillium Web";
+$family-sans-serif: 'Titillium Web';
+$family-primary: 'Titillium Web';
 
 $control-radius: 2px;
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
-                (
-                        "white": (
-                                $white,
-                                $black,
-                        ),
-                        "black": (
-                                $black,
-                                $white,
-                        ),
-                        "light": (
-                                $light,
-                                $light-invert,
-                        ),
-                        "dark": (
-                                $dark,
-                                $dark-invert,
-                        ),
-                        "primary": (
-                                $primary,
-                                $primary-invert,
-                                $primary-light,
-                                $primary-dark,
-                        ),
-                        "link": (
-                                $link,
-                                $link-invert,
-                                $link-light,
-                                $link-dark,
-                        ),
-                        "info": (
-                                $info,
-                                $info-invert,
-                                $info-light,
-                                $info-dark,
-                        ),
-                        "success": (
-                                $success,
-                                $success-invert,
-                                $success-light,
-                                $success-dark,
-                        ),
-                        "warning": (
-                                $warning,
-                                $warning-invert,
-                                $warning-light,
-                                $warning-dark,
-                        ),
-                        "danger": (
-                                $danger,
-                                $danger-invert,
-                                $danger-light,
-                                $danger-dark,
-                        ),
-                ),
-                $custom-colors
+  (
+    'white': (
+      $white,
+      $black,
+    ),
+    'black': (
+      $black,
+      $white,
+    ),
+    'light': (
+      $light,
+      $light-invert,
+    ),
+    'dark': (
+      $dark,
+      $dark-invert,
+    ),
+    'primary': (
+      $primary,
+      $primary-invert,
+      $primary-light,
+      $primary-dark,
+    ),
+    'link': (
+      $link,
+      $link-invert,
+      $link-light,
+      $link-dark,
+    ),
+    'info': (
+      $info,
+      $info-invert,
+      $info-light,
+      $info-dark,
+    ),
+    'success': (
+      $success,
+      $success-invert,
+      $success-light,
+      $success-dark,
+    ),
+    'warning': (
+      $warning,
+      $warning-invert,
+      $warning-light,
+      $warning-dark,
+    ),
+    'danger': (
+      $danger,
+      $danger-invert,
+      $danger-light,
+      $danger-dark,
+    ),
+  ),
+  $custom-colors
 );
 
 // Links
@@ -96,14 +96,17 @@ $link-invert: $primary-invert;
 $link-focus-border: $primary;*/
 
 // Import Bulma and Buefy styles
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 
 .cr-heading {
   font-weight: bold;
   font-style: italic;
 }
 
+.button {
+  @extend .is-primary;
+}
 
 h1 {
   @extend .is-size-1;
@@ -137,6 +140,6 @@ h5 {
   }
 }
 #usps a,
-.category a  {
+.category a {
   color: $text;
 }

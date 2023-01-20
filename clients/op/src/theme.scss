@@ -1,88 +1,89 @@
 // Import Bulma's core
-@import "~bulma/sass/utilities/_all";
+@import '~bulma/sass/utilities/_all';
 
 // Set your colors
 //https://coolors.co/474448-fdedf2-de369d-8ee3ef-02a9ea
 // $background: #E4FDE1;
 $background: rgba(248, 202, 217, 0.5);
 $text: #474448;
-$primary: rgb(247,168,18);
-$info: rgb(0,72,137);
+$primary: rgb(247, 168, 18);
+$info: rgb(0, 72, 137);
 $success: rgb(0, 153, 63);
-$warning: #E3D26F;
+$warning: #e3d26f;
 $danger: rgb(229, 0, 106);
 
-$link: #02A9EA;
+$link: #02a9ea;
 $link-hover: #028bc0;
 
 $footer-background-color: $info;
 $footer-color: white;
 
-$family-primary: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, "Arial Narrow", Arial, "Lucida Grande", sans-serif;
-$family-heading: "Playfair Display";
+$family-primary: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue',
+  Helvetica, 'Arial Narrow', Arial, 'Lucida Grande', sans-serif;
+$family-heading: 'Playfair Display';
 
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
-                (
-                        "white": (
-                                $white,
-                                $black,
-                        ),
-                        "black": (
-                                $black,
-                                $white,
-                        ),
-                        "light": (
-                                $light,
-                                $light-invert,
-                        ),
-                        "dark": (
-                                $dark,
-                                $dark-invert,
-                        ),
-                        "primary": (
-                                $primary,
-                                $primary-invert,
-                                $primary-light,
-                                $primary-dark,
-                        ),
-                        "link": (
-                                $link,
-                                $link-invert,
-                                $link-light,
-                                $link-dark,
-                        ),
-                        "info": (
-                                $info,
-                                $info-invert,
-                                $info-light,
-                                $info-dark,
-                        ),
-                        "success": (
-                                $success,
-                                $success-invert,
-                                $success-light,
-                                $success-dark,
-                        ),
-                        "warning": (
-                                $warning,
-                                $warning-invert,
-                                $warning-light,
-                                $warning-dark,
-                        ),
-                        "danger": (
-                                $danger,
-                                $danger-invert,
-                                $danger-light,
-                                $danger-dark,
-                        ),
-                ),
-                $custom-colors
+  (
+    'white': (
+      $white,
+      $black,
+    ),
+    'black': (
+      $black,
+      $white,
+    ),
+    'light': (
+      $light,
+      $light-invert,
+    ),
+    'dark': (
+      $dark,
+      $dark-invert,
+    ),
+    'primary': (
+      $primary,
+      $primary-invert,
+      $primary-light,
+      $primary-dark,
+    ),
+    'link': (
+      $link,
+      $link-invert,
+      $link-light,
+      $link-dark,
+    ),
+    'info': (
+      $info,
+      $info-invert,
+      $info-light,
+      $info-dark,
+    ),
+    'success': (
+      $success,
+      $success-invert,
+      $success-light,
+      $success-dark,
+    ),
+    'warning': (
+      $warning,
+      $warning-invert,
+      $warning-light,
+      $warning-dark,
+    ),
+    'danger': (
+      $danger,
+      $danger-invert,
+      $danger-light,
+      $danger-dark,
+    ),
+  ),
+  $custom-colors
 );
 
 // Import Bulma and Buefy styles
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+@import '~bulma';
+@import '~buefy/src/scss/buefy';
 
 html {
   background: $background;

@@ -3,7 +3,7 @@ import { GoedgepicktService } from 'vendure-plugin-goedgepickt/dist/vendure-plug
 
 // Use like yarn script:prod script/send-to-myparcel.ts bendeboef 6ENWC7GRJWYCAQXN
 (async () => {
-  require('dotenv').config({ path: process.env.LOCAL_ENV });
+  require('dotenv').config({ path: process.env.ENV_FILE });
   const app = await bootstrap(require('../src/vendure-config').config);
   const channelToken = process.argv[2];
   const channel = await app

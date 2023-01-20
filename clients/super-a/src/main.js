@@ -1,5 +1,4 @@
 import Buefy from 'buefy';
-import 'buefy/dist/buefy.css';
 import Layout from '~/layouts/Default.vue';
 import '~/theme.scss';
 import '@fontsource/montserrat';
