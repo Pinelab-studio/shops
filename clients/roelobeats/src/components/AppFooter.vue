@@ -26,17 +26,6 @@
           </template>
         </div>
 
-        <!--QUICK LINKS COLUMN-->
-        <div class="column is-3">
-          <div class="has-text-weight-bold is-size-5">Quick links</div>
-          <br />
-          <template v-for="index in 7">
-            <g-link to="/">
-              <div class="has-text-black hover-underline">About Wavkits</div>
-            </g-link>
-          </template>
-        </div>
-
         <!--HELP COLUMN-->
         <div class="column is-3">
           <div class="has-text-weight-bold is-size-5">Help</div>
