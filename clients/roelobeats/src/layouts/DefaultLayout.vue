@@ -8,7 +8,7 @@
     <br />
     <br />
     <br />
-    <br />
+    <NewsLetter />
     <br />
     <br />
     <br />
@@ -22,8 +22,9 @@
 <script>
 import AppFooter from '@/components/AppFooter.vue';
 import AppHeader from '@/components/AppHeader.vue';
+import NewsLetter from '@/components/NewsLetter.vue';
 
 export default {
-  components: { AppFooter, AppHeader },
+  components: { AppFooter, AppHeader, NewsLetter },
 };
 </script>
