@@ -60,7 +60,7 @@
     "vendure-plugin-metrics": "4.3.0",
     "vendure-plugin-myparcel": "4.5.0",
     "vendure-plugin-order-export": "4.3.0",
-    "vendure-plugin-sendcloud": "4.7.2",
+    "vendure-plugin-sendcloud": "4.8.0",
     "vendure-plugin-shipping-by-weight-and-country": "4.3.0",
     "vendure-plugin-stock-monitoring": "4.3.0",
     "vendure-plugin-webhook": "4.7.2",
