@@ -117,10 +117,6 @@ iframe {
   min-height: 200px;
 }
 
-.content h3 {
-  color: white;
-}
-
 #youtubeEmbed {
   position: relative;
   z-index: 1;

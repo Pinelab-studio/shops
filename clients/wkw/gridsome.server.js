@@ -109,7 +109,7 @@ module.exports = async function (api) {
         const productPrefix = getlabel('urls.product-prefix', lang);
         const informationUrl = getlabel('urls.information', lang);
         pages.forEach((p) => setFullUrl(p, `${slugPrefix}`));
-        blogs.forEach((b) => setFullUrl(b, `${slugPrefix}/${informationUrl}/`));
+        blogs.forEach((b) => setFullUrl(b, `${informationUrl}`));
         allCollections.forEach((c) =>
           setFullUrl(c, `${slugPrefix}/${categoryPrefix}`)
         );
@@ -231,7 +231,7 @@ module.exports = async function (api) {
         const informationUrlTitle = getlabel('nav.advice', lang);
         const breadcrumb = {
           Home,
-          [informationUrlTitle]: `${slugPrefix}/${global.informationUrl}`,
+          [informationUrlTitle]: global.informationUrl,
           [blog.titel]: '', // Not clickable anyway
         };
         createPage({
