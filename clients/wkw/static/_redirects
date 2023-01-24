@@ -1,5 +1,5 @@
 /order/* /order/_code.html 200
-/admin/ https://wkw-test.pinelab.studio/admin/ 302
+/admin/ https://wkw-prod.pinelab.studio/admin/ 302
 /cms/ https://content.pinelab.studio/ 302
 /assortiment/ / 301
 /en/assortiment/ /en/ 301
