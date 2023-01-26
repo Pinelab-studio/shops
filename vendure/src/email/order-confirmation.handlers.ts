@@ -5,6 +5,7 @@ import { InvoiceService } from 'vendure-plugin-invoices';
 import { EBookController } from '../e-book/e-book.plugin';
 import { EmailUtil } from './email.util';
 import { logOrderHistory } from '../util/history.util';
+import { mockOrderStateTransitionEvent } from '@vendure/email-plugin/lib/src/mock-events';
 
 const loggerCtx = 'OrderConfirmationHandler';
 
@@ -88,6 +89,9 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
     .addTemplate({
       languageCode: 'default',
       channelCode: '__default_channel__',
+      // channelCode: undefined as any,
       subject: 'Bedankt voor je bestelling bij Wormenkwekerij Wasse',
-      templateFile: 'body.hbs',
-    });
+      templateFile: 'wkw.hbs',
+    })
+    // Only used for testing emails with devMode:true
+    .setMockEvent(mockOrderStateTransitionEvent);

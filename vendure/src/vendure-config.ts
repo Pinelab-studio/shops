@@ -289,7 +289,10 @@ export const config: VendureConfig = {
     }),
     DefaultSearchPlugin,
     EmailPlugin.init({
-      transport: {
+      devMode: true,
+      route: 'mailbox',
+      outputPath: path.join(__dirname, 'test-emails'),
+      /*      transport: {
         type: 'smtp',
         host: 'smtp.zeptomail.eu',
         port: 587,
@@ -300,7 +303,7 @@ export const config: VendureConfig = {
           user: 'emailapikey',
           pass: process.env.ZEPTOMAIL_KEY,
         },
-      },
+      },*/
       handlers: [
         orderConfirmationHandler,
         createLowStockEmailHandler({

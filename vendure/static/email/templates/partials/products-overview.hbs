@@ -1,0 +1,55 @@
+<mj-section>
+  <mj-column>
+    <mj-text font-weight="800" padding-bottom="0px">Dit heb je besteld: </mj-text>
+
+    <mj-table cellpadding="6px">
+      {{#each order.lines }}
+        <tr padding-bottom="0px">
+          <td>{{ quantity }} x</td>
+          <td>
+            {{ productVariant.name }}
+          </td>
+          <td align="right">€ {{ formatMoney linePrice }}</td>
+        </tr>
+      {{/each}}
+
+      <tr>
+        <td>Verzendkosten</td>
+        <td></td>
+        <td align="right">€ {{ formatMoney order.shipping }}</td>
+      </tr>
+
+      {{#each order.discounts }}
+        <tr>
+          <td>{{ description }}</td>
+          <td></td>
+          <td align="right">€{{ formatMoney amount }}</td>
+        </tr>
+      {{/each}}
+
+      <tr></tr>
+    </mj-table>
+
+    <mj-divider border-color="#343434" border-width="1px"></mj-divider>
+
+    <mj-table cellpadding="6px">
+
+      <tr>
+        <td>Totaal excl.</td>
+        <td align="right">€ {{ formatMoney summary.totalExVAT }}</td>
+      </tr>
+      {{#each summary.taxTotal}}
+        <tr>
+          <td>{{ @key }}% BTW</td>
+          <td align="right">€ {{ formatMoney this }}</td>
+        </tr>
+      {{/each}}
+      <tr>
+        <td><strong>Totaal incl.</strong></td>
+        <td align="right"><strong>€ {{ formatMoney summary.totalIncVAT }}</strong></td>
+      </tr>
+
+    </mj-table>
+
+  </mj-column>
+</mj-section>

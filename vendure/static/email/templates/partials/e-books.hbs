@@ -1,0 +1,19 @@
+{{#if ebooks}}
+  <mj-section>
+    <mj-column>
+      <mj-text>
+        <h2>
+          Download hier je e-book
+        </h2>
+      </mj-text>
+      <mj-divider border-color="#343434"></mj-divider>
+
+      {{#each ebooks}}
+        <mj-button background-color="#3cb371" color="#ffffff" href="{{ downloadLink }}">
+          Download {{ title }}
+        </mj-button>
+      {{/each}}
+
+    </mj-column>
+  </mj-section>
+{{/if}}
