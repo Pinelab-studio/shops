@@ -289,6 +289,10 @@ export const config: VendureConfig = {
     }),
     DefaultSearchPlugin,
     EmailPlugin.init({
+      // Dev settings
+      /*      devMode: true,
+            route: 'mailbox',
+            outputPath: path.join(__dirname, 'test-emails'),*/
       transport: {
         type: 'smtp',
         host: 'smtp.zeptomail.eu',

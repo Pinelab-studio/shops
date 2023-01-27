@@ -1,0 +1,27 @@
+<mj-section>
+  <mj-column>
+    <mj-text font-weight="800" padding-bottom="0px">Bezorgadres</mj-text>
+    {{#with order.shippingAddress }}
+      {{#if fullName}}
+        <mj-text padding-bottom="0px">{{ fullName }}</mj-text>
+      {{/if}}
+      {{#if company}}
+        <mj-text padding-bottom="0px">{{ company }}</mj-text>
+      {{/if}}
+      {{#if streetLine1}}
+        <mj-text padding-bottom="0px">{{ streetLine1 }} {{ streetLine2 }}</mj-text>
+      {{/if}}
+      {{#if postalCode}}
+        <mj-text padding-bottom="0px">{{ postalCode }}, {{ city }}</mj-text>
+      {{/if}}
+      {{#if country}}
+        <mj-text>{{ country }}</mj-text>
+      {{/if}}
+    {{/with}}
+  </mj-column>
+  <mj-column>
+    <mj-text font-weight="800" padding-bottom="0px">Bestelling</mj-text>
+    <mj-text padding-bottom="0px">Nr. {{ order.code }}</mj-text>
+    <mj-text padding-bottom="0px">{{ formatDate order.orderPlacedAt }}</mj-text>
+  </mj-column>
+</mj-section>
