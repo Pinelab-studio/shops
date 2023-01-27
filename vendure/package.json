@@ -35,8 +35,8 @@
     "revert-migration:wkw-prod": "export ENV_FILE=.env.wkw-prod && yarn revert-migration"
   },
   "dependencies": {
-    "@google-cloud/logging-winston": "5.2.2",
-    "@google-cloud/storage": "^6.7.0",
+    "@google-cloud/logging-winston": "5.3.0",
+    "@google-cloud/storage": "^6.9.1",
     "@mollie/api-client": "3.6.0",
     "@vendure/admin-ui-plugin": "1.8.4",
     "@vendure/asset-server-plugin": "1.8.4",
@@ -61,8 +61,9 @@
     "vendure-plugin-myparcel": "4.5.0",
     "vendure-plugin-order-export": "4.3.0",
     "vendure-plugin-sendcloud": "4.8.0",
-    "vendure-plugin-shipping-by-weight-and-country": "4.3.0",
+    "vendure-plugin-shipping-by-weight-and-country": "4.9.0",
     "vendure-plugin-stock-monitoring": "4.3.0",
+    "vendure-plugin-variant-bulk-update": "^4.9.0",
     "vendure-plugin-webhook": "4.7.2",
     "winston": "3.8.2"
   },

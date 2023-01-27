@@ -61,6 +61,7 @@ import {
 } from 'vendure-plugin-metrics';
 import { RevenueMetric } from './metrics/revenue-metric';
 import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
+import { VariantBulkUpdatePlugin } from 'vendure-plugin-variant-bulk-update';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -203,6 +204,7 @@ export const config: VendureConfig = {
     ],
   },
   plugins: [
+    VariantBulkUpdatePlugin,
     LimitVariantPerOrderPlugin,
     MetricsPlugin.init({
       metrics: [

@@ -1460,10 +1460,10 @@
     retry-request "^5.0.0"
     teeny-request "^8.0.0"
 
-"@google-cloud/logging-winston@5.2.2":
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/@google-cloud/logging-winston/-/logging-winston-5.2.2.tgz#2d42cc5d71945a9f15bec0d938a19df6621f83ba"
-  integrity sha512-x8RctQ8cr8tA5NkAqCfOlGcIIs+WTGVJsW6p6nYwTlspVdO4WiOMp9IMdj7tJ4k9Yy9gqd2HfmGQLkXullm/mA==
+"@google-cloud/logging-winston@5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@google-cloud/logging-winston/-/logging-winston-5.3.0.tgz#8252100d6349dce69f7add4bfc30e2fd02e670e2"
+  integrity sha512-i7rh4h6YU9RVowtaGU1Da+ShoFy5ueKJQMpE/+grW/NoU+vvzDSIC8GOBhr1ZGqFU2QhETSlt2d50htbFYW8Vw==
   dependencies:
     "@google-cloud/logging" "^10.2.2"
     google-auth-library "^8.0.2"
@@ -1556,10 +1556,10 @@
     uuid "^8.0.0"
     xdg-basedir "^4.0.0"
 
-"@google-cloud/storage@^6.7.0":
-  version "6.7.0"
-  resolved "https://registry.yarnpkg.com/@google-cloud/storage/-/storage-6.7.0.tgz#c164d70e2b485b9db52e91fcf34609e047c1eeda"
-  integrity sha512-iEit3dvUhGQV3pPC8aci/Y+F6K2QJ/UvcXhymj8gnO8IYQfZSZvFf361yX4BWNUlbHzanUQVQdF9RvgEM8fwpw==
+"@google-cloud/storage@^6.9.1":
+  version "6.9.1"
+  resolved "https://registry.yarnpkg.com/@google-cloud/storage/-/storage-6.9.1.tgz#8b2d7e24afefcec1e6b4f48c9dfcaf15c5b351a7"
+  integrity sha512-mhbRfrDgV7qM8HGn12p3dpT87Azt94s9YRzr8qR+o/ptksAkCApspzlNS2mUEeoXUMmnpwcdF2GGNpd4+6NuVw==
   dependencies:
     "@google-cloud/paginator" "^3.0.7"
     "@google-cloud/projectify" "^3.0.0"
@@ -12774,15 +12774,20 @@ vendure-plugin-sendcloud@4.8.0:
   resolved "https://registry.yarnpkg.com/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-4.8.0.tgz#77263fb11d30e6f3fa1e3c43c4e0297870d37b1a"
   integrity sha512-J8wejY6gfrdvxmir6SnTZXN6PF2Pq1jsnvM4Z7NVHINWiovm56LKm/V6kewceaIJJqkHUoRvOKK75uUuNEG3tg==
 
-vendure-plugin-shipping-by-weight-and-country@4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-shipping-by-weight-and-country/-/vendure-plugin-shipping-by-weight-and-country-4.3.0.tgz#7422a88a48eeb7e795408a12f90ed64c496deab6"
-  integrity sha512-zm2GEIJarXALk0Cd9QvXmPPu18Uq6ATnENPsXYBYtDMX23d3jKFZVxVt77yRsYY1OWn1jrZm2c9mYABJdspsMQ==
+vendure-plugin-shipping-by-weight-and-country@4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-shipping-by-weight-and-country/-/vendure-plugin-shipping-by-weight-and-country-4.9.0.tgz#c5155c6f787906f1a49bb3af448419c276f4b021"
+  integrity sha512-VNrlOgVjy3xs6MTho8pR02YUYEcoavtsw1CMUR8XWN46EzGQlUAp6d/AIbak2H5IQkeHxCHE64YzAunohbzKOA==
 
 vendure-plugin-stock-monitoring@4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/vendure-plugin-stock-monitoring/-/vendure-plugin-stock-monitoring-4.3.0.tgz#fa61d20307e54fa259089e5d2e7b7af68303ae2e"
   integrity sha512-MDK0Q369sfzDjhKR95sS/ese3+2xPEbz1x2XN+HcOKlEFz5Q5VQw5O++wauZ34vscHE7MOpOYJ015FQw7fUVbQ==
+
+vendure-plugin-variant-bulk-update@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-variant-bulk-update/-/vendure-plugin-variant-bulk-update-4.9.0.tgz#58d327e589bdef52b8cad8a223a413d5a57b38b2"
+  integrity sha512-YR0WHTPpYWYwRGFBDnPPPu/KKG2tAP3R5c5DfBjQ8HPw7I3lDggag3jj80AR2l+GihC9YU9D9W/NOYjHbj/izg==
 
 vendure-plugin-webhook@4.7.2:
   version "4.7.2"
