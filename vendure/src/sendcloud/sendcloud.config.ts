@@ -14,7 +14,9 @@ export const sendcloudConfig: SendcloudPluginOptions = {
   additionalParcelItemsFn: async (ctx, injector, order) => {
     const additionalInputs: ParcelInputItem[] = [];
     // Add nr of orders from customer
-    additionalInputs.push(await getNrOfOrders(ctx, injector, order));
+    const nrOfOrders = await getNrOfOrders(ctx, injector, order);
+    nrOfOrders.sku = 'Points';
+    additionalInputs.push(nrOfOrders);
     // Add couponcodes
     const couponCodes = getCouponCodes(order);
     if (couponCodes) {
