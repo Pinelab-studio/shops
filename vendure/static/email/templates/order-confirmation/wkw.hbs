@@ -7,6 +7,7 @@
   <mj-body>
     <mj-section>
       <mj-column>
+        <mj-image href="https://wormenkwekerijwasse.nl" align="center" width="200px" src="https://wormenkwekerijwasse.nl/img/logo-wormenkwekerijwasse.png"></mj-image>
         <mj-text>
           <h1>
             Je bestelling bij Wormenkwekerij Wasse
@@ -14,7 +15,7 @@
         </mj-text>
         <mj-divider border-color="#343434"></mj-divider>
 
-        <mj-text>Bedankt voor je bestelling!</mj-text>
+        <mj-text><a href="https://wormenkwekerijwasse.nl/wanneer-komt-pakket-aan/">Wanneer komt mijn bestelling aan?</a></mj-text>
 
       </mj-column>
     </mj-section>
@@ -23,9 +24,20 @@
 
     {{> products-overview }}
 
+    {{> invoice }}
+
     {{> address }}
 
-    {{> invoice }}
+    <mj-section>
+      <mj-column>
+        <mj-divider border-color="#343434" border-width="1px"></mj-divider>
+        <mj-text>
+          Vragen of opmerkingen? Neem contact op via
+          <a href="mailto:info@wormenkwekerijwasse.nl">info@wormenkwekerijwasse.nl</a>
+        </mj-text>
+
+      </mj-column>
+    </mj-section>
 
   </mj-body>
 </mjml>

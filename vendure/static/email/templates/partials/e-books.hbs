@@ -1,19 +1,17 @@
 {{#if ebooks}}
   <mj-section>
     <mj-column>
-      <mj-text>
-        <h2>
-          Download hier je e-book
-        </h2>
+      <mj-divider border-color="#343434" border-width="1px"></mj-divider>
+      <mj-text font-weight="800" padding-bottom="0px">
+        <br>
+        Download hier je e-book:
       </mj-text>
-      <mj-divider border-color="#343434"></mj-divider>
-
       {{#each ebooks}}
         <mj-button background-color="#3cb371" color="#ffffff" href="{{ downloadLink }}">
-          Download {{ title }}
+          {{ title }}
         </mj-button>
       {{/each}}
-
+      <mj-divider border-color="#343434" border-width="1px"></mj-divider>
     </mj-column>
   </mj-section>
 {{/if}}
