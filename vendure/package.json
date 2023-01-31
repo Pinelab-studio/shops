@@ -48,7 +48,7 @@
     "mysql": "^2.18.1",
     "tmp": "^0.2.1",
     "typescript": "4.3.5",
-    "vendure-plugin-admin-ui-helpers": "4.3.0",
+    "vendure-plugin-admin-ui-helpers": "4.9.2",
     "vendure-plugin-coinbase": "4.3.0",
     "vendure-plugin-dutch-postalcode": "4.3.0",
     "vendure-plugin-e-boekhouden": "4.3.0",
