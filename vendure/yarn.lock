@@ -12686,10 +12686,10 @@ vary@^1, vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
   integrity sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==
 
-vendure-plugin-admin-ui-helpers@4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-admin-ui-helpers/-/vendure-plugin-admin-ui-helpers-4.3.0.tgz#fefb8675e9ddcf617341bb98e188674d22981681"
-  integrity sha512-b2oUgBtXmb8b5TN5G1Dv7JI9n3oXFQb4tDxA3Uy+uIZUyS4YwjXDUEu1/V1XZ4g5kvj72/dYg7BdsruzLdaDSQ==
+vendure-plugin-admin-ui-helpers@4.9.2:
+  version "4.9.2"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-admin-ui-helpers/-/vendure-plugin-admin-ui-helpers-4.9.2.tgz#a909590f86e47759921fccc56f55bf5a5967fb22"
+  integrity sha512-cRdpB5mq5wIDihrBFU8uvx83UH52AVGD6yhDAr1p3nSuvzxwIhDwWJYszgnqPeLMi89jHMIrmE8ffu7g5yNwwQ==
 
 vendure-plugin-coinbase@4.3.0:
   version "4.3.0"
