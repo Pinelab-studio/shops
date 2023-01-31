@@ -10,6 +10,7 @@
               type="text"
               required
               v-model="customer.firstName"
+              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-account"></i>
@@ -26,6 +27,7 @@
               type="text"
               required
               v-model="customer.lastName"
+              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-account"></i>
@@ -43,6 +45,7 @@
               type="text"
               aria-label="company"
               v-model="address.company"
+              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-office-building"></i>
@@ -57,7 +60,8 @@
           <p class="control is-expanded has-icons-left">
             <b-input
               :placeholder="$l('customer-details.phone')"
-              type="text"
+              type="number"
+              maxlength="19"
               aria-label="phonenumber"
               v-model="customer.phoneNumber"
             />
@@ -73,9 +77,10 @@
             <b-input
               :placeholder="`${$l('customer-details.email')}*`"
               aria-label="emailaddress"
-              type="text"
+              type="email"
               required
               v-model="customer.emailAddress"
+              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-email"></i>
@@ -91,6 +96,7 @@
             <b-input
               :placeholder="`${$l('customer-details.postalcode')}*`"
               aria-label="postalcode"
+              maxlength="28"
               type="text"
               required
               v-model="address.postalCode"
@@ -112,6 +118,7 @@
               required
               v-model="address.streetLine2"
               v-on:input="lookupShippingAddress()"
+              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-home"></i>
@@ -126,6 +133,7 @@
               :placeholder="`${$l('customer-details.housenrAddition')}`"
               aria-label="addition"
               type="text"
+              maxlength="20"
               v-model="address.houseNumberAddition"
             />
           </p>
@@ -142,6 +150,7 @@
               type="text"
               required
               v-model="address.streetLine1"
+              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-home"></i>
@@ -158,6 +167,7 @@
               type="text"
               required
               v-model="address.city"
+              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-city"></i>
@@ -206,6 +216,7 @@
                 aria-label="billing company"
                 type="text"
                 v-model="billingAddress.company"
+                maxlength="28"
               />
               <span class="icon is-small is-left">
                 <i class="mdi mdi-office-building"></i>
@@ -222,6 +233,7 @@
                 :placeholder="`${$l('customer-details.postalcode')}`"
                 type="text"
                 v-model="billingAddress.postalCode"
+                maxlength="28"
                 aria-label="billing postalcode"
                 v-on:input="lookupBillingAddress()"
               />
@@ -239,6 +251,7 @@
                 aria-label="billing housenumber"
                 type="text"
                 v-model="billingAddress.streetLine2"
+                maxlength="28"
                 v-on:input="lookupBillingAddress()"
               />
               <span class="icon is-small is-left">
@@ -257,6 +270,7 @@
                 aria-label="billing streetname"
                 type="text"
                 v-model="billingAddress.streetLine1"
+                maxlength="28"
               />
               <span class="icon is-small is-left">
                 <i class="mdi mdi-home"></i>
@@ -272,6 +286,7 @@
                 aria-label="billing city"
                 type="text"
                 v-model="billingAddress.city"
+                maxlength="28"
               />
               <span class="icon is-small is-left">
                 <i class="mdi mdi-city"></i>
