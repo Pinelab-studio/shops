@@ -9,7 +9,7 @@ console.log(`Running test against ${site} and ${vendure}`);
 const address = {
   firstName: 'Martijn',
   lastName: 'Pinelab',
-  phone: '06 123456788',
+  phone: '06123456788',
   email: 'martijn@pinelab.studio',
   postalCode: '1013 MM',
   houseNr: '159',
