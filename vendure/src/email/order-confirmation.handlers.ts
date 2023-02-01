@@ -90,7 +90,8 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
       languageCode: 'default',
       channelCode: '__default_channel__',
       // channelCode: undefined as any,
-      subject: 'Bedankt voor je bestelling bij Wormenkwekerij Wasse',
+      subject:
+        'Bedankt voor je bestelling {{ order.code }} bij Wormenkwekerij Wasse',
       templateFile: 'wkw.hbs',
     })
     // Only used for testing emails with devMode:true
