@@ -1,4 +1,5 @@
 import {
+  Asset,
   AssetService,
   ChannelService,
   ConfigService,
@@ -20,6 +21,8 @@ import {
   Res,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
+import AdmZip from 'adm-zip';
+import { Readable } from 'stream';
 
 const loggerCtx = 'EBookPlugin';
 export interface EBook {
@@ -77,31 +80,54 @@ export class EBookController {
       );
       throw new ForbiddenException();
     }
-    const facet = variant.product.facetValues.find(
+    const facetValues = variant.product.facetValues.filter(
       (facetValue) => facetValue.facet.code === 'e-book'
     );
-    const assetId = facet?.translations?.[0]?.name;
-    if (!assetId) {
-      Logger.warn(
-        `Product "${variant.name}" does not have a facet 'e-book'`,
-        loggerCtx
-      );
-      throw new ForbiddenException();
+    const assets: Asset[] = [];
+    for (const facetValue of facetValues) {
+      const assetId = facetValue.code;
+      const asset = await this.assetService.findOne(ctx, assetId);
+      if (!asset) {
+        Logger.warn(`No asset found with id ${assetId}`, loggerCtx);
+        throw new ForbiddenException();
+      }
+      assets.push(asset);
     }
-    const asset = await this.assetService.findOne(ctx, assetId);
-    if (!asset) {
-      Logger.warn(`No asset found with id ${assetId}`, loggerCtx);
-      throw new ForbiddenException();
+    if (assets.length === 1) {
+      // Stream single ebook
+      const asset = assets[0];
+      const stream =
+        await this.configService.assetOptions.assetStorageStrategy.readFileToStream(
+          asset.source
+        );
+      res.set({
+        'Content-Type': asset.mimeType,
+      });
+      Logger.info(`E-book downloaded for order ${orderCode}`, loggerCtx);
+      return stream.pipe(res);
     }
-    const stream =
-      await this.configService.assetOptions.assetStorageStrategy.readFileToStream(
-        asset.source
-      );
+    // Else, zip multiple ebooks
+    Logger.info(
+      `Packaging ${assets.length} e-books for order ${orderCode} and variant ${variantId} into zip.`,
+      loggerCtx
+    );
+    const zip = new AdmZip();
+    for (const asset of assets) {
+      const buffer =
+        await this.configService.assetOptions.assetStorageStrategy.readFileToBuffer(
+          asset.source
+        );
+      zip.addFile(asset.name, buffer);
+    }
     res.set({
-      'Content-Type': asset.mimeType,
+      'Content-Type': 'application/zip',
+      'Content-Disposition': `attachment; filename="${variant.name}-e-books.zip"`,
     });
-    Logger.info(`E-book downloaded for order ${orderCode}`, loggerCtx);
-    stream.pipe(res);
+    Logger.info(
+      `${assets.length} E-books downloaded as zip for order ${orderCode}`,
+      loggerCtx
+    );
+    return Readable.from(zip.toBuffer()).pipe(res);
   }
 
   static getEbookLinks(ctx: RequestContext, order: Order): EBook[] | undefined {
