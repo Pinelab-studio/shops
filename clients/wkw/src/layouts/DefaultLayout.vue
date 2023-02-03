@@ -17,28 +17,49 @@
       <slot name="content2" />
     </div>
     <div v-if="showNewsletter" class="has-background-primary">
-      <div class="container is-widescreen section p-5">
-        <div class="has-text-centered">
-          <div
-            id="newsletterMessage"
-            class="has-text-white"
-            v-html="$context.common.nieuwsbrief"
-          ></div>
+      <form
+        id="sib-form"
+        method="POST"
+        target="_blank"
+        action="https://862544ec.sibforms.com/serve/MUIEAB3bBDn3sAA_u_LMDlffqGvi9t1Hy6KzyCJmLwSlpEpZ7dKPOZl9XZLbaD8a60i16DC6mzD7XMkQWByTq6NkraoaJRpCgmxKPvhoTN8EeD4yyCwSA61_U3eSWYTqOndfcFs2A3U1MwYfY0y39eM_uza0ZEx_gcn_ujfpf7POinolkLhR4FCXHZrg7UoP_Ulu1sYtgD6F4Bsy"
+      >
+        <div class="container is-widescreen section p-5">
+          <div class="has-text-centered">
+            <div
+              id="newsletterMessage"
+              class="has-text-white"
+              v-html="$context.common.nieuwsbrief"
+            ></div>
+          </div>
+          <div class="column">
+            <b-field position="is-centered" grouped group-multiline>
+              <b-input
+                maxlength="200"
+                type="text"
+                id="FIRSTNAME"
+                name="FIRSTNAME"
+                autocomplete="off"
+                :placeholder="$l('review.name')"
+              ></b-input>
+              <b-input
+                type="email"
+                id="EMAIL"
+                name="EMAIL"
+                autocomplete="off"
+                :placeholder="$l('customer-details.email')"
+              >
+              </b-input>
+              <p class="control">
+                <b-button
+                  native-type="submit"
+                  type="is-dark-green is-shadowless is-hovered"
+                  :label="$l('common.subscribe')"
+                />
+              </p>
+            </b-field>
+          </div>
         </div>
-        <div class="column">
-          <b-field position="is-centered" grouped group-multiline>
-            <b-input :placeholder="$l('review.name')" type="name"> </b-input>
-            <b-input :placeholder="$l('customer-details.email')" type="email">
-            </b-input>
-            <p class="control">
-              <b-button
-                type="is-dark-green is-shadowless is-hovered"
-                :label="$l('common.subscribe')"
-              />
-            </p>
-          </b-field>
-        </div>
-      </div>
+      </form>
     </div>
     <AppFooter
       :collections="$context.navbarCollections"
@@ -122,6 +143,7 @@ export default {
 .navbar-margin {
   margin-top: 80px !important;
 }
+
 @media screen and (min-width: 1024px) {
   .navbar-margin {
     margin-top: 160px !important;
