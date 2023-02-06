@@ -16,6 +16,7 @@ const address = {
   street: 'IJdok',
   city: 'Amsterdam',
   country: 'Nederland',
+  note: 'Custom note for shop owner',
 };
 const prices = {
   itemFE: '67,50',
@@ -52,6 +53,7 @@ module.exports = {
       houseNr: 'input[placeholder="Huisnr.*"]',
       street: 'input[placeholder="Straat*"]',
       city: 'input[placeholder="Plaats*"]',
+      note: 'input[placeholder="Notitie"]',
       submit: 'button[type="submit"]',
     };
     const ideal = 'button[value="ideal"]';
@@ -83,6 +85,7 @@ module.exports = {
       .setValue(customerForm.email, address.email)
       .setValue(customerForm.postalCode, address.postalCode)
       .setValue(customerForm.houseNr, address.houseNr)
+      .setValue(customerForm.note, address.note)
       .pause(200)
       .assert.value(customerForm.city, address.city)
       .assert.value(customerForm.street, address.street)
@@ -170,6 +173,7 @@ module.exports = {
       .assert.containsText('body', prices.totalBE)
       .assert.containsText('body', prices.totalWithoutTaxBE)
       .assert.containsText('body', prices.dicountWithTaxBE)
+      .assert.containsText('body', address.note)
       .pause(500)
       .useXpath()
       .click("//button[text()=' Fulfill order ']")

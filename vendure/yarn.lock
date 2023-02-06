@@ -12722,10 +12722,10 @@ vendure-plugin-e-boekhouden@4.10.0:
   dependencies:
     soap "^0.43.0"
 
-vendure-plugin-goedgepickt@4.10.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-goedgepickt/-/vendure-plugin-goedgepickt-4.10.0.tgz#fea2704fff52cca6c01a9302f5730ecea12c18c2"
-  integrity sha512-b/k8PlLZZqBs8SJDf6fa3rirjugECKSXWLYzPFx83kjriU+yJufRj5NT90qhKymPdNIa634KDyrND1/phuyKdA==
+vendure-plugin-goedgepickt@4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-goedgepickt/-/vendure-plugin-goedgepickt-4.11.0.tgz#0829f30725240a676dd5e444eaea8bcb5bc4ae88"
+  integrity sha512-vZEAQ8wOxIRz4k+CFbvW8As5MXfCp5tEeF/cHEI2WWUPjbc+H105FAbQrQdn+xAZHDiilT7osRe/5x/WnD3/sg==
   dependencies:
     node-fetch "2"
 
@@ -12781,10 +12781,10 @@ vendure-plugin-order-export@4.10.0:
   dependencies:
     csv-writer "^1.6.0"
 
-vendure-plugin-sendcloud@4.10.0:
-  version "4.10.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-4.10.0.tgz#469c219b71ca60122e9d3826509849fd9d486622"
-  integrity sha512-U6GUXaTqQN38S83QClgx5YwD/g3JnByNw59b8IzRafJsfzQ7FP/HapRIIDdp1tn8H0FDXTwoW+KhTCQts78dbA==
+vendure-plugin-sendcloud@4.11.0:
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-4.11.0.tgz#7be8e5df64131756a3da1a5677e5925027d44200"
+  integrity sha512-IO5VWuOMZL/X0tUviuLgvuf9zsha6PFW+L2VjNPVHgTfomT4zpslkA4fC7bjPIW0wilOyBQOy0q0iyRU3VR2Ow==
 
 vendure-plugin-shipping-by-weight-and-country@4.10.0:
   version "4.10.0"

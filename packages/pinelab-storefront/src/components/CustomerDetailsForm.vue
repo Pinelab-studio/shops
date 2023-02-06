@@ -202,7 +202,7 @@
           <p class="control is-expanded has-icons-left">
             <b-input
               :placeholder="`${$l('customer-details.note')}`"
-              aria-label="ote"
+              aria-label="note"
               type="textarea"
               v-model="customerNote"
               maxlength="254"
