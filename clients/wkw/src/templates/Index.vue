@@ -40,7 +40,7 @@
       </section>
       <section id="popular-categories">
         <h4 class="title has-text-weight-bold is-5 pt-5">
-          {{ $l('common.popular-categories') }}
+          {{ $l('common.categories') }}
         </h4>
         <div class="columns is-multiline is-mobile">
           <template v-for="collection in $context.popularCollections">
