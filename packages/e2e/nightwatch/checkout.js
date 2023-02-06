@@ -52,4 +52,44 @@ module.exports = {
       .click('button[value="ideal"]')
       .end();
   },
+  wkw: function (browser) {
+    browser
+      .url('https://wormenkwekerijwasse.nl/product/lavameel-1000-kg-bigbag/')
+      .useXpath()
+      // Cookies
+      .click("//span[contains(text(), 'Nee')]")
+      .pause(2000)
+      // Add 'Lavameel' to cart
+      .useCss()
+      .click('button[aria-label="In winkelmand"]')
+      .useXpath()
+      .pause(2000)
+      .click("//button[contains(text(), 'Naar winkelmand')]")
+      .pause(1000)
+      .click("//a[contains(text(), 'Bestellen')]")
+      .useCss()
+      .pause(1000)
+      .setValue('input[aria-label="firstname"]', address.firstName)
+      .pause(200)
+      .setValue('input[aria-label="lastname"]', address.lastName)
+      .pause(200)
+      .setValue('input[aria-label="phonenumber"]', address.phone)
+      .pause(200)
+      .setValue('input[aria-label="emailaddress"]', address.email)
+      .pause(200)
+      .setValue('input[aria-label="postalcode"]', address.postalCode)
+      .pause(200)
+      .setValue('input[aria-label="housenumber"]', address.houseNr)
+      .pause(4000)
+      .click('button[aria-label="submit form"]')
+      .pause(1000)
+      .click('label[id="shippingmethod 0"]')
+      .pause(1000)
+      .click('button[aria-label="submit shippingmethod"]')
+      .pause(1000)
+      .click('button[aria-label="go to payment"]')
+      .pause(1000)
+      .click('button[value="ideal"]')
+      .end();
+  },
 };

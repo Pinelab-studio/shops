@@ -7,6 +7,7 @@
   "scripts": {
     "nightwatch:e2e": "nightwatch --config nightwatch-firefox.config.js  --test nightwatch/place-order.js",
     "nightwatch:checkout": "nightwatch --test nightwatch/checkout.js --testcase $TESTCASE",
+    "nightwatch:checkout:firefox": "nightwatch --config nightwatch-firefox.config.js --test nightwatch/checkout.js --testcase $TESTCASE",
     "jest:e2e": "jest --forceExit"
   },
   "devDependencies": {
