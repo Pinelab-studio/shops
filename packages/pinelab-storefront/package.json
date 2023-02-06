@@ -1,6 +1,6 @@
 {
   "name": "pinelab-storefront",
-  "version": "0.64.3",
+  "version": "0.64.4",
   "description": "Vendure helpers and Vue components for the Pinelab e-commerce storefronts",
   "author": "Martijn van de Brug <martijn@pinelab.studio>",
   "homepage": "https://pinelab.studio",
