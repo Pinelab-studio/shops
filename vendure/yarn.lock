@@ -12781,10 +12781,10 @@ vendure-plugin-order-export@4.10.0:
   dependencies:
     csv-writer "^1.6.0"
 
-vendure-plugin-sendcloud@4.11.0:
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-4.11.0.tgz#7be8e5df64131756a3da1a5677e5925027d44200"
-  integrity sha512-IO5VWuOMZL/X0tUviuLgvuf9zsha6PFW+L2VjNPVHgTfomT4zpslkA4fC7bjPIW0wilOyBQOy0q0iyRU3VR2Ow==
+vendure-plugin-sendcloud@4.11.1:
+  version "4.11.1"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-4.11.1.tgz#65cee45cad9233cd8a67ff65d18c2b53ef50d75c"
+  integrity sha512-t0mFUqbof7fd3AdgPWJ2JMA/VTMk/YRXXenYv2Agg4orugimsYG5B7VWguIM3kZ23qbJnO20/RMgOTx0Wf5izA==
 
 vendure-plugin-shipping-by-weight-and-country@4.10.0:
   version "4.10.0"
