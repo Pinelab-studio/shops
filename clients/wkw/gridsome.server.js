@@ -163,7 +163,7 @@ module.exports = async function (api) {
       };
 
       const popularProducts = products.slice(0, 5);
-      const popularCollections = collections.slice(0, 6);
+      const popularCollections = collections;
 
       // ----------------- Search ---------------------
       const searchProducts = products.map((p) => ({
@@ -281,10 +281,20 @@ module.exports = async function (api) {
           translatedPages[language.lang] = translatedProduct.url;
         });
 
+        const collection = getProductCollections(
+          productsPerCollection,
+          allCollections,
+          product.id
+        )?.[0];
         const breadcrumb = {
           Home,
-          [product.name]: product.url,
         };
+        if (collection) {
+          console.log(collection);
+          breadcrumb[collection.name] = collection.informationUrl;
+        }
+        breadcrumb[product.name] = product.url;
+
         createPage({
           path: product.url,
           component: './src/templates/ProductDetail.vue',
