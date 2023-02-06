@@ -16,8 +16,8 @@ export class PlaceOrderOnSettlementStrategy implements OrderPlacedStrategy {
     order: Order
   ): boolean {
     return (
-      (fromState === 'ArrangingPayment' || fromState === 'PaymentAuthorized') &&
-      toState === 'PaymentSettled'
+      (fromState === 'ArrangingPayment' || fromState === 'Draft') &&
+      (toState === 'PaymentSettled' || toState === 'PaymentAuthorized')
     );
   }
 }

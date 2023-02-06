@@ -133,6 +133,11 @@
                     <g-link to="/faq/" class="navbar-item px-0">
                       {{ $l('nav.faq') }}</g-link
                     >
+                    <template v-for="page in $context.pageLinks">
+                      <g-link :to="page.url" class="navbar-item px-0">
+                        {{ page.title }}
+                      </g-link>
+                    </template>
                   </div>
                 </div>
               </div>

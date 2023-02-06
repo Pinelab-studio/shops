@@ -15,7 +15,7 @@
     "fuse.js": "^6.6.2",
     "graphql-request": "^4.3.0",
     "outfront": "^1.1.1",
-    "pinelab-storefront": "0.64.1",
+    "pinelab-storefront": "0.64.4",
     "vue-gtag": "^1.16.1"
   },
   "devDependencies": {
@@ -28,7 +28,7 @@
     "sass-loader": "^10.1.1",
     "snapdragon-util": "^5.0.1"
   },
-  "version": "0.64.1",
+  "version": "0.64.4",
   "resolutions": {
     "graphql": "15.3.0"
   }

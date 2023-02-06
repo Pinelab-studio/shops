@@ -16,7 +16,8 @@ jobs:
       matrix:
         client:
           [
-              ['cantastic', 'https://cantastic.nl/' ]
+              ['cantastic', 'https://cantastic.nl/' ],
+              ['wkw', 'https://wormenkwekerijwasse.nl/' ]
           ]
     steps:
       - uses: actions/checkout@v3

@@ -1,12 +1,13 @@
 {
   "name": "e2e",
-  "version": "0.64.0",
+  "version": "0.64.4",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "scripts": {
     "nightwatch:e2e": "nightwatch --config nightwatch-firefox.config.js  --test nightwatch/place-order.js",
     "nightwatch:checkout": "nightwatch --test nightwatch/checkout.js --testcase $TESTCASE",
+    "nightwatch:checkout:firefox": "nightwatch --config nightwatch-firefox.config.js --test nightwatch/checkout.js --testcase $TESTCASE",
     "jest:e2e": "jest --forceExit"
   },
   "devDependencies": {

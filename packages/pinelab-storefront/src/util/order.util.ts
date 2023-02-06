@@ -7,7 +7,10 @@ import { OrderFieldsFragment } from '../generated/graphql';
 export async function getOrderByCode(vendure: VendureClient, code: string) {
   let order: OrderFieldsFragment | undefined | void;
   let pollingCount = 0;
-  while (order?.state !== 'PaymentSettled') {
+  while (
+    order?.state !== 'PaymentSettled' &&
+    order?.state !== 'PaymentAuthorized'
+  ) {
     if (pollingCount > 10) {
       throw Error(`Order not settled after polling 10 times`);
     }
