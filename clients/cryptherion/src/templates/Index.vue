@@ -32,7 +32,7 @@
               type="is-success"
             >
             </b-icon>
-            <span>Voor 14:00 besteld, dezelfde dag verzonden</span>
+            <span>Bestellingen worden altijd vinnen 24 uur verzonden</span>
           </span>
 
           <!--          <span class="line">
