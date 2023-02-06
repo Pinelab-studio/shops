@@ -176,23 +176,41 @@
         </div>
       </div>
     </div>
-    <b-field>
-      <b-select
-        :placeholder="$l('customer-details.country')"
-        aria-label="country"
-        name="country"
-        icon="earth"
-        v-model="address.countryCode"
-      >
-        <option
-          v-for="country of availableCountries"
-          :key="country.code"
-          :value="country.code"
-        >
-          {{ country.name }}
-        </option>
-      </b-select>
-    </b-field>
+    <div class="columns">
+      <div class="column">
+        <b-field>
+          <b-select
+            expanded
+            :placeholder="$l('customer-details.country')"
+            aria-label="country"
+            name="country"
+            icon="earth"
+            v-model="address.countryCode"
+          >
+            <option
+              v-for="country of availableCountries"
+              :key="country.code"
+              :value="country.code"
+            >
+              {{ country.name }}
+            </option>
+          </b-select>
+        </b-field>
+      </div>
+      <div class="column">
+        <div class="field">
+          <p class="control is-expanded has-icons-left">
+            <b-input
+              :placeholder="`${$l('customer-details.note')}`"
+              aria-label="ote"
+              type="textarea"
+              v-model="customerNote"
+              maxlength="254"
+            />
+          </p>
+        </div>
+      </div>
+    </div>
 
     <!--------------------- Billing address ----------------------------->
     <div class="has-text-right has-text-left-mobile my-4">
@@ -348,6 +366,7 @@ export default {
   },
   data() {
     return {
+      customerNote: undefined,
       loadingShipping: false,
       hasDifferentBillingAddress: false,
       customer: {
@@ -465,6 +484,13 @@ export default {
             streetLine2: null,
             postalCode: null,
             city: null,
+          });
+        }
+        if (this.customerNote) {
+          await this.vendure.setOrderCustomFields({
+            customFields: {
+              customerNote: this.customerNote,
+            },
           });
         }
         this.vendure.setDefaultShippingMethod(); // async

@@ -14,7 +14,8 @@
     "country": "Country",
     "different-billing-address": "Different billing address",
     "billing-address": "Billing address",
-    "submit": "Select shipping"
+    "submit": "Select shipping",
+    "note": "Note"
   },
   "shipping": {
     "step-title": "Shipping",

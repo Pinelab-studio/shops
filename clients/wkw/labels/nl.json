@@ -26,7 +26,8 @@
     "country": "Land",
     "different-billing-address": "Ander factuuradres",
     "billing-address": "Factuuradres",
-    "submit": "Bezorging"
+    "submit": "Bezorging",
+    "note": "Notitie"
   },
   "shipping": {
     "step-title": "Bezorging",

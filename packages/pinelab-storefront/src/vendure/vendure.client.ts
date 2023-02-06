@@ -16,6 +16,7 @@ import {
   REMOVE_ALL_ORDER_LINES,
   REMOVE_COUPON_CODE,
   SET_CUSTOMER_FOR_ORDER,
+  SET_ORDER_CUSTOMFIELDS,
   SET_ORDERBILLINGADDRESS,
   SET_ORDERSHIPPINGADDRESS,
   SET_ORDERSHIPPINGMETHOD,
@@ -40,6 +41,7 @@ import {
   DutchPostalCodeInput,
   EligibleShippingMethodsQuery,
   MolliePaymentIntent,
+  MutationSetOrderCustomFieldsArgs,
   MyparcelDropOffPoint,
   MyparcelDropOffPointInput,
   MyparcelDropOffPointsQuery,
@@ -68,6 +70,7 @@ import {
   TransitionOrderToStateMutation,
   TransitionOrderToStateMutationVariables,
   UpdateOrderCustomFieldsInput,
+  UpdateOrderInput,
 } from '../generated/graphql';
 import { CalculatedProduct, Store, VendureError } from './types';
 import { setCalculatedFields } from '../util/product.util';
@@ -185,6 +188,20 @@ export class VendureClient {
     await this.validateResult(setOrderShippingMethod);
     this.store.activeOrder = setOrderShippingMethod as OrderFieldsFragment;
     return setOrderShippingMethod as OrderFieldsFragment;
+  }
+
+  async setOrderCustomFields(
+    input: UpdateOrderInput
+  ): Promise<OrderFieldsFragment> {
+    const { setOrderCustomFields } = await this.request<
+      SetOrderCustomFieldsMutation,
+      MutationSetOrderCustomFieldsArgs
+    >(SET_ORDER_CUSTOMFIELDS, {
+      input,
+    });
+    await this.validateResult(setOrderCustomFields);
+    this.store.activeOrder = setOrderCustomFields as OrderFieldsFragment;
+    return setOrderCustomFields as OrderFieldsFragment;
   }
 
   @NoConcurrentRequests()

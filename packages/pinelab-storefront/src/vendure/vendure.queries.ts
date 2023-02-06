@@ -305,6 +305,21 @@ export const SET_ORDERBILLINGADDRESS = gql`
   }
 `;
 
+export const SET_ORDER_CUSTOMFIELDS = gql`
+  ${ORDER_FIELDS}
+  mutation setOrderCustomFields($input: UpdateOrderInput!) {
+    setOrderCustomFields(input: $input) {
+      ... on Order {
+        ...OrderFields
+      }
+      ... on ErrorResult {
+        errorCode
+        message
+      }
+    }
+  }
+`;
+
 export const GET_NEXT_ORDERSTATES = gql`
   query nextOrderStates {
     nextOrderStates
