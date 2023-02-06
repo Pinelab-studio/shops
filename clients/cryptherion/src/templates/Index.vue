@@ -32,10 +32,10 @@
               type="is-success"
             >
             </b-icon>
-            <span>Voor 17:00 besteld, dezelfde dag verzonden</span>
+            <span>Bestellingen worden altijd vinnen 24 uur verzonden</span>
           </span>
 
-          <span class="line">
+          <!--          <span class="line">
             <b-icon
               class="mx-2"
               icon="phone"
@@ -45,7 +45,7 @@
             <a :href="`tel:${$context.global.telefoon}`">{{
               $context.global.telefoon
             }}</a>
-          </span>
+          </span>-->
 
           <span class="line">
             <b-icon
@@ -75,7 +75,7 @@
 
     <section
       v-if="$context.featuredProduct"
-      class="hero is-halfheight main-feature px-5 is-light-grey mb-2"
+      class="hero is-halfheight main-feature px-5 is-light-grey mb-2 py-4"
     >
       <div class="columns">
         <div class="column">
@@ -97,13 +97,18 @@
           </g-link>
         </div>
 
-        <div class="column">
-          <b-image
+        <div class="column has-text-centered">
+          <img
+            :src="maybe($context.featuredProduct.featuredAsset, 'preview')"
+            :alt="$context.featuredProduct.name"
+            id="featured-image"
+          />
+          <!--          <b-image
             :src="maybe($context.featuredProduct.featuredAsset, 'preview')"
             :alt="$context.featuredProduct.name"
             ratio="1by1"
             id="featured-image"
-          />
+          />-->
         </div>
       </div>
     </section>
@@ -156,11 +161,11 @@ export default {
 };
 </script>
 <style>
-#featured-image > img {
+#featured-image {
   object-fit: contain;
   width: auto;
   height: 100%;
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 300px;
+  max-height: 500px;
 }
 </style>

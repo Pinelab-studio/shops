@@ -43,7 +43,7 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
         event.ctx,
         injector,
         event.order.id,
-        `Sent order confirmation email to ${event.order.customer?.emailAddress}`
+        `Sent order confirmation email to ${event.order.customer?.emailAddress} via email ${sender.emailAddress}`
       ).catch(() => {
         Logger.warn(
           `Failed to log email-sent history entry for order ${event.order.code}`,
@@ -90,7 +90,8 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
       languageCode: 'default',
       channelCode: '__default_channel__',
       // channelCode: undefined as any,
-      subject: 'Bedankt voor je bestelling bij Wormenkwekerij Wasse',
+      subject:
+        'Bedankt voor je bestelling {{ order.code }} bij Wormenkwekerij Wasse',
       templateFile: 'wkw.hbs',
     })
     // Only used for testing emails with devMode:true

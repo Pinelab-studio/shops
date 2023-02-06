@@ -11,6 +11,7 @@ if (process.env.VENDURE_ENV === 'local') {
 module.exports = {
   siteName: 'Cryptherion.io',
   siteUrl: 'https://cryptherion.io',
+  siteDescription: 'De expert in hardware wallets en metal seed wallets',
   configureWebpack: {
     resolve: {
       symlinks: false, //npm link

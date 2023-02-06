@@ -175,26 +175,6 @@ export default {
       bootstrap();
     },
   },
-  metaInfo() {
-    const description = this.$context.collections
-      .map((col) => col.name)
-      .join(', ');
-    return {
-      title: 'Cryptherion.io',
-      meta: [
-        { key: 'description', name: 'description', content: description },
-        { key: 'og:title', name: 'og:title', content: 'Cryptherion.io' },
-        { key: 'og:description', name: 'og:description', content: description },
-        {
-          key: 'og:image',
-          name: 'og:image',
-          content: '/img/cryptherion-logo-black.svg',
-        },
-        { key: 'og:type', name: 'og:type', content: 'website' },
-        { key: 'og:url', name: 'og:url', content: process.env.GRIDSOME_HOST },
-      ],
-    };
-  },
 };
 </script>
 <style>
