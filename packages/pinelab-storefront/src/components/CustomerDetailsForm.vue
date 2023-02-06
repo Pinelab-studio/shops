@@ -10,7 +10,6 @@
               type="text"
               required
               v-model="customer.firstName"
-              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-account"></i>
@@ -27,7 +26,6 @@
               type="text"
               required
               v-model="customer.lastName"
-              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-account"></i>
@@ -45,7 +43,6 @@
               type="text"
               aria-label="company"
               v-model="address.company"
-              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-office-building"></i>
@@ -80,7 +77,7 @@
               type="email"
               required
               v-model="customer.emailAddress"
-              maxlength="28"
+              maxlength="120"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-email"></i>
@@ -96,7 +93,6 @@
             <b-input
               :placeholder="`${$l('customer-details.postalcode')}*`"
               aria-label="postalcode"
-              maxlength="28"
               type="text"
               required
               v-model="address.postalCode"
@@ -118,7 +114,6 @@
               required
               v-model="address.streetLine2"
               v-on:input="lookupShippingAddress()"
-              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-home"></i>
@@ -150,7 +145,6 @@
               type="text"
               required
               v-model="address.streetLine1"
-              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-home"></i>
@@ -167,7 +161,6 @@
               type="text"
               required
               v-model="address.city"
-              maxlength="28"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-city"></i>
