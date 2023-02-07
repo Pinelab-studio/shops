@@ -67,7 +67,7 @@
         <br />
         <br />
         <div class="content has-text-centered is-dark has-text-grey-light">
-          OP! • Jet van Nieuwkerk • KVK 58499091 •
+          OP! • Jet van Nieuwkerk • KVK 88706842 •
           <a
             href="https://pinelab.studio/"
             target="_blank"

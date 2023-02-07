@@ -210,6 +210,8 @@ export default {
       await this.$vendure.setOrderShippingAddress({
         fullName: this.emailAddress,
         streetLine1: 'E-book',
+        city: 'Amsterdam',
+        postalCode: '1234AB',
         countryCode: 'nl',
       });
       console.log('Added address');
