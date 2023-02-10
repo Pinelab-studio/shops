@@ -6,6 +6,7 @@ on:
 
 jobs:
   nightly-test:
+    if: always()
     name: ${{ matrix.client[0] }}
     runs-on: ubuntu-latest
     defaults:
@@ -34,4 +35,5 @@ jobs:
           max_attempts: 2
           command: cd packages/e2e && TESTCASE=${{ matrix.client[0] }} yarn nightwatch:checkout
       - name: Check for 404's on ${{ matrix.client[1] }}
+        if: always()
         run: yarn linkinator ${{ matrix.client[1] }} --skip '^(?!${{ matrix.client[1] }})' --recurse --verbosity 'error'
