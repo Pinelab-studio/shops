@@ -32,7 +32,7 @@
               type="is-success"
             >
             </b-icon>
-            <span>Bestellingen worden altijd vinnen 24 uur verzonden</span>
+            <span>Bestellingen worden altijd binnen 24 uur verzonden</span>
           </span>
 
           <!--          <span class="line">

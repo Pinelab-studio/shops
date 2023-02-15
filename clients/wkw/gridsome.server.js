@@ -290,7 +290,6 @@ module.exports = async function (api) {
           Home,
         };
         if (collection) {
-          console.log(product.name + ' ---- ' + collection.name);
           breadcrumb[collection.name] = collection.url;
         }
         breadcrumb[product.name] = product.url;
