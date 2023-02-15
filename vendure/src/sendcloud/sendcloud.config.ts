@@ -7,7 +7,7 @@ import {
 
 export const sendcloudConfig: SendcloudPluginOptions = {
   weightFn: (line) =>
-    (line.productVariant.product?.customFields as any)?.weight,
+    (line.productVariant.product?.customFields as any)?.weight / 1000,
   hsCodeFn: (line) =>
     (line.productVariant.product?.customFields as any)?.hsCode,
   originCountryFn: (line) => 'NL',
