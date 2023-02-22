@@ -32,6 +32,7 @@ export function getMetaInfo(
     | ProductFieldsFragment
     | CalculatedProduct<ProductFieldsFragment>,
   url?: string,
+  review?: { averageRating: number; reviewCount: number },
   type: 'product' | 'article' | 'blog' | 'website' = 'product'
 ): MetaInfo | undefined {
   if (!item) {
@@ -46,24 +47,35 @@ export function getMetaInfo(
   let script: any = [];
   const calculatedProduct = item as CalculatedProduct<ProductFieldsFragment>;
   if (calculatedProduct.lowestPrice) {
-    script = [
-      {
-        type: 'application/ld+json',
-        json: {
-          '@context': 'http://schema.org',
-          '@type': 'Product',
-          name: item.name,
-          image: image,
-          description: seoDescription,
-          offers: {
-            '@type': 'Offer',
-            price: (calculatedProduct.lowestPrice / 100).toFixed(2),
-            priceCurrency: 'EUR',
-          },
+    let jsonLD: any = {
+      type: 'application/ld+json',
+      json: {
+        '@context': 'http://schema.org',
+        '@type': 'Product',
+        name: item.name,
+        image: image,
+        description: seoDescription,
+        offers: {
+          '@type': 'Offer',
+          price: (calculatedProduct.lowestPrice / 100).toFixed(2),
+          priceCurrency: 'EUR',
         },
       },
-    ];
+    };
+    if (review) {
+      jsonLD = {
+        ...jsonLD,
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: review.averageRating,
+          bestRating: '5',
+          ratingCount: review.reviewCount,
+        },
+      };
+    }
+    script.push(jsonLD);
   }
+
   return {
     title: title || item.slug,
     meta: [
