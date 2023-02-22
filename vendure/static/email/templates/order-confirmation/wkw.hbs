@@ -22,7 +22,35 @@
 
     {{> e-books }}
 
-    {{> products-overview }}
+    <mj-section>
+
+  <mj-column>
+    <mj-text font-weight="800" padding-bottom="0px">Dit heb je besteld: </mj-text>
+
+    <mj-table cellpadding="6px">
+      {{#each order.lines }}
+        <tr padding-bottom="0px">
+          <td>{{ quantity }} x</td>
+          <td>
+            {{ productVariant.name }}
+          </td>
+        </tr>
+      {{/each}}
+
+    </mj-table>
+
+    <mj-divider border-color="#343434" border-width="1px"></mj-divider>
+
+    <mj-table cellpadding="6px">
+      <tr>
+        <td><strong>Totaal incl.</strong></td>
+        <td align="right"><strong>€ {{ formatMoney summary.totalIncVAT }}</strong></td>
+      </tr>
+
+    </mj-table>
+
+  </mj-column>
+</mj-section>
 
     {{> invoice }}
 
