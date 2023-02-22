@@ -1,4 +1,4 @@
-import { isProd, runningLocal } from 'vendure-config';
+import { isProd, runningLocal } from '../vendure-config';
 import {
   getCouponCodes,
   getNrOfOrders,
