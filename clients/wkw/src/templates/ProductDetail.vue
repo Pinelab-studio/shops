@@ -186,7 +186,14 @@ export default {
   },
   metaInfo() {
     const url = `${process.env.GRIDSOME_HOST}${this.$route.fullPath}`;
-    return getMetaInfo(this.$context.product, url);
+    let review;
+    if (this.$context.reviews?.length) {
+      review = {
+        averageRating: this.$context.avgRating,
+        reviewCount: this.$context.reviews.length,
+      };
+    }
+    return getMetaInfo(this.$context.product, url, review);
   },
 };
 </script>

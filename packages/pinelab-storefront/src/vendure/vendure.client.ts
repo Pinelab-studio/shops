@@ -147,14 +147,6 @@ export class VendureClient {
 
   async setDefaultShippingMethod() {
     const methods = await this.getEligibleShippingMethods();
-    const selectedShippingMethodId =
-      this.store.activeOrder?.shippingLines?.[0]?.shippingMethod?.id;
-    const isSelectedEligible = methods.some(
-      (method) => method.id === selectedShippingMethodId
-    );
-    if (isSelectedEligible) {
-      return; // Selected is still eligible for this order
-    }
     let defaultMethod = methods.find(
       (method) => method.code?.indexOf('default') > -1
     );
@@ -239,6 +231,7 @@ export class VendureClient {
     >(SET_ORDERSHIPPINGADDRESS, { input });
     await this.validateResult(order);
     this.store.activeOrder = order as OrderFieldsFragment;
+    await this.setDefaultShippingMethod();
     return order as OrderFieldsFragment;
   }
 

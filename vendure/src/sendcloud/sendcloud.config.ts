@@ -1,3 +1,4 @@
+import { isProd, runningLocal } from '../vendure-config';
 import {
   getCouponCodes,
   getNrOfOrders,
@@ -6,6 +7,7 @@ import {
 } from 'vendure-plugin-sendcloud';
 
 export const sendcloudConfig: SendcloudPluginOptions = {
+  disabled: isProd && !runningLocal, // Only enable for prod
   weightFn: (line) =>
     (line.productVariant.product?.customFields as any)?.weight / 1000,
   hsCodeFn: (line) =>
