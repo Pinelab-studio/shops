@@ -187,13 +187,12 @@ export default {
   metaInfo() {
     const url = `${process.env.GRIDSOME_HOST}${this.$route.fullPath}`;
     let review;
-    if (this.$context.reviws?.length) {
+    if (this.$context.reviews?.length) {
       review = {
         averageRating: this.$context.avgRating,
         reviewCount: this.$context.reviews.length,
       };
     }
-    console.log(review);
     return getMetaInfo(this.$context.product, url, review);
   },
 };

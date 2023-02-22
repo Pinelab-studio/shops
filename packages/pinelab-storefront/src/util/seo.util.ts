@@ -47,6 +47,8 @@ export function getMetaInfo(
   let script: any = [];
   const calculatedProduct = item as CalculatedProduct<ProductFieldsFragment>;
   if (calculatedProduct.lowestPrice) {
+    const date = new Date();
+    date.setFullYear(date.getFullYear() + 1);
     let jsonLD: any = {
       type: 'application/ld+json',
       json: {
@@ -59,18 +61,17 @@ export function getMetaInfo(
           '@type': 'Offer',
           price: (calculatedProduct.lowestPrice / 100).toFixed(2),
           priceCurrency: 'EUR',
+          priceValidUntil: date.toISOString(),
+          availability: 'InStock',
         },
       },
     };
     if (review) {
-      jsonLD = {
-        ...jsonLD,
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: review.averageRating,
-          bestRating: '5',
-          ratingCount: review.reviewCount,
-        },
+      jsonLD.json.aggregateRating = {
+        '@type': 'AggregateRating',
+        ratingValue: review.averageRating,
+        bestRating: '5',
+        ratingCount: review.reviewCount,
       };
     }
     script.push(jsonLD);
