@@ -149,6 +149,12 @@ export const config: VendureConfig = {
         ui: { component: 'textarea-form-input' },
         type: 'text',
       },
+      {
+        name: 'referralCode',
+        label: [{ value: 'Referral code', languageCode: LanguageCode.en }],
+        ui: { component: 'text-form-input' },
+        type: 'text',
+      },
     ],
     Product: [
       {
