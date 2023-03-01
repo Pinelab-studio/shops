@@ -60,6 +60,7 @@ export class ProductsSoldExportStrategy implements ExportStrategy {
     const csvWriter = createObjectCsvWriter({
       path: exportFile,
       fieldDelimiter: ';',
+      alwaysQuote: true,
       header: [
         {
           id: 'product',

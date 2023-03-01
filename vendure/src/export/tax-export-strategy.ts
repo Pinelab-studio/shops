@@ -65,6 +65,7 @@ export class TaxExportStrategy implements ExportStrategy {
     const csvWriter = createObjectCsvWriter({
       path: exportFile,
       fieldDelimiter: ';',
+      alwaysQuote: true,
       header: [
         { id: 'total', title: 'totalen' },
         { id: 'code', title: 'bestelling' },
