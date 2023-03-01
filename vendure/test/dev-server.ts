@@ -25,7 +25,6 @@ import { PlaceOrderOnSettlementStrategy } from '../src/order/place-order-on-sett
 import { InvoicePlugin, LocalFileStrategy } from 'vendure-plugin-invoices';
 import { TaxInvoiceStrategy } from '../src/invoice/tax-invoice-strategy';
 import { OrderExportPlugin } from 'vendure-plugin-order-export';
-import { TaxExportStrategy } from '../src/tax/tax-export-strategy';
 import { EmailPlugin } from '@vendure/email-plugin';
 import { orderConfirmationHandler } from '../src/email/order-confirmation.handlers';
 import path from 'path';
@@ -33,6 +32,8 @@ import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import { GoogleStoragePlugin } from 'vendure-plugin-google-storage-assets/dist/google-storage-plugin';
 import { GoedgepicktPlugin } from 'vendure-plugin-goedgepickt';
 import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
+import { TaxExportStrategy } from '../src/export/tax-export-strategy';
+import { ProductsSoldExportStrategy } from '../src/export/products-sold-export-strategy';
 import {
   AverageOrderValueMetric,
   ConversionRateMetric,
@@ -153,7 +154,10 @@ export async function startDevServer(): Promise<TestEnv> {
         setWebhook: false,
       }),
       OrderExportPlugin.init({
-        exportStrategies: [new TaxExportStrategy()],
+        exportStrategies: [
+          new TaxExportStrategy(),
+          new ProductsSoldExportStrategy(),
+        ],
       }),
       GoogleStoragePlugin,
       DefaultSearchPlugin,
