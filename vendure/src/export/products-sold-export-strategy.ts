@@ -1,22 +1,11 @@
 import { ExportInput, ExportStrategy } from 'vendure-plugin-order-export';
 import path from 'path';
 import os from 'os';
-import { Logger, Order, ProductVariant, RequestContext } from '@vendure/core';
+import { Logger, ProductVariant, RequestContext } from '@vendure/core';
 import { createObjectCsvWriter } from 'csv-writer';
-import { TaxHelper } from '../tax/tax.helper';
-import { promises as fs } from 'fs';
 import { OrderExportHelper } from './order-export-helper';
 
 const loggerCtx = 'ProductsSoldExportStrategy';
-
-export interface OrderRow {
-  code: string;
-  date: string;
-  orderTotal: string;
-  orderTotalWithTax: string;
-
-  [key: string]: string;
-}
 
 export class ProductsSoldExportStrategy implements ExportStrategy {
   readonly name = 'products-sold';
