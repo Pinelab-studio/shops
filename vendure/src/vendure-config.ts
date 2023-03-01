@@ -42,7 +42,7 @@ import { EBoekhoudenPlugin } from 'vendure-plugin-e-boekhouden';
 import { EBookPlugin } from './e-book/e-book.plugin';
 import { eligibleWithoutAddressChecker } from './shipping/eligible-without-address-checker';
 import { OrderExportPlugin } from 'vendure-plugin-order-export';
-import { TaxExportStrategy } from './tax/tax-export-strategy';
+import { TaxExportStrategy } from './export/tax-export-strategy';
 import { orderConfirmationHandler } from './email/order-confirmation.handlers';
 import { json } from 'body-parser';
 import { ShippingByWeightAndCountryPlugin } from 'vendure-plugin-shipping-by-weight-and-country';
@@ -62,6 +62,7 @@ import {
 import { RevenueMetric } from './metrics/revenue-metric';
 import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
 import { VariantBulkUpdatePlugin } from 'vendure-plugin-variant-bulk-update';
+import { ProductsSoldExportStrategy } from './export/products-sold-export-strategy';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -273,7 +274,10 @@ export const config: VendureConfig = {
       setWebhook: isProd && !runningLocal, // Only set webhook for prod
     }),
     OrderExportPlugin.init({
-      exportStrategies: [new TaxExportStrategy()],
+      exportStrategies: [
+        new TaxExportStrategy(),
+        new ProductsSoldExportStrategy(),
+      ],
     }),
     ShippingByWeightAndCountryPlugin.init({
       customFieldsTab: 'Physical properties',
