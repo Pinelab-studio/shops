@@ -7,7 +7,7 @@ import { TaxHelper } from '../tax/tax.helper';
 import { promises as fs } from 'fs';
 import { OrderExportHelper } from './order-export-helper';
 
-const loggerCtx = 'TaxExportStrategy';
+const loggerCtx = 'ProductsSoldExportStrategy';
 
 export interface OrderRow {
   code: string;
