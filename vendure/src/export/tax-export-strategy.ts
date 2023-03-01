@@ -64,6 +64,7 @@ export class TaxExportStrategy implements ExportStrategy {
     // FIXME this breaks headers await fs.writeFile(exportFile, 'sep=,\n'); // Fix for excel
     const csvWriter = createObjectCsvWriter({
       path: exportFile,
+      fieldDelimiter: ';',
       header: [
         { id: 'total', title: 'totalen' },
         { id: 'code', title: 'bestelling' },

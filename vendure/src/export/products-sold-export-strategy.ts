@@ -59,6 +59,7 @@ export class ProductsSoldExportStrategy implements ExportStrategy {
     const exportFile = path.join(os.tmpdir(), fileName);
     const csvWriter = createObjectCsvWriter({
       path: exportFile,
+      fieldDelimiter: ';',
       header: [
         {
           id: 'product',
