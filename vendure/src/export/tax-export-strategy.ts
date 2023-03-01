@@ -3,8 +3,9 @@ import path from 'path';
 import os from 'os';
 import { Logger, Order } from '@vendure/core';
 import { createObjectCsvWriter } from 'csv-writer';
-import { TaxHelper } from './tax.helper';
+import { TaxHelper } from '../tax/tax.helper';
 import { promises as fs } from 'fs';
+import { OrderExportHelper } from './order-export-helper';
 
 const loggerCtx = 'TaxExportStrategy';
 
@@ -28,35 +29,13 @@ export class TaxExportStrategy implements ExportStrategy {
     endDate,
     orderService,
   }: ExportInput): Promise<string> {
-    const orders: Order[] = [];
-    let hasMoreOrders = true;
-    let skip = 0;
-    while (hasMoreOrders) {
-      const orderList = await orderService.findAll(ctx, {
-        filter: {
-          orderPlacedAt: {
-            between: {
-              start: startDate,
-              end: endDate,
-            },
-          },
-          state: {
-            in: ['Delivered', 'Shipped', 'PaymentSettled'],
-          },
-        },
-        skip,
-      });
-      Logger.info(
-        `Fetched orders ${skip} - ${orderList.items.length}`,
-        loggerCtx
-      );
-      orders.push(...orderList.items);
-      skip += orderList.items.length;
-      hasMoreOrders = orderList.totalItems > skip;
-    }
-    Logger.info(
-      `Exporting ${orders.length} orders from ${startDate} to ${endDate}`,
-      loggerCtx
+    Logger.info(`Exporting orders from ${startDate} to ${endDate}`, loggerCtx);
+    const orderExporter = new OrderExportHelper(orderService, loggerCtx);
+    const orders = await orderExporter.getPlacedOrders(
+      ctx,
+      startDate,
+      endDate,
+      ['lines', 'shippingLines']
     );
     const uniqueTaxRates = new Set<string>();
     const totalTaxOfAllOrders: Record<string, number> = {};
@@ -82,10 +61,9 @@ export class TaxExportStrategy implements ExportStrategy {
       this.fileExtension
     }`;
     const exportFile = path.join(os.tmpdir(), fileName);
-    await fs.writeFile(exportFile, 'sep=,\n'); // Fix for excel
+    // FIXME this breaks headers await fs.writeFile(exportFile, 'sep=,\n'); // Fix for excel
     const csvWriter = createObjectCsvWriter({
       path: exportFile,
-      append: true,
       header: [
         { id: 'total', title: 'totalen' },
         { id: 'code', title: 'bestelling' },
