@@ -62,7 +62,7 @@
     "vendure-plugin-metrics": "5.0.1",
     "vendure-plugin-myparcel": "5.0.1",
     "vendure-plugin-order-export": "5.0.1",
-    "vendure-plugin-sendcloud": "5.1.0",
+    "vendure-plugin-sendcloud": "5.2.2",
     "vendure-plugin-shipping-by-weight-and-country": "5.0.1",
     "vendure-plugin-stock-monitoring": "5.0.1",
     "vendure-plugin-variant-bulk-update": "^5.0.1",
