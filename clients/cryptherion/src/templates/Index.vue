@@ -115,7 +115,7 @@
 
     <section
       class="py-4 category"
-      v-for="collection of $context.collections"
+      v-for="collection of $context.global.navbarCollections"
       :key="collection.slug"
     >
       <g-link :to="`/categorie/${collection.slug}`">

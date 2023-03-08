@@ -19,29 +19,22 @@
       itemAddedActionText="Naar winkelmand"
       itemAddedText="toegevoegd"
     >
-      <template v-for="collection of $context.collections">
+      <template v-for="collection of $context.global.navbarCollections">
         <!-- collections with children-->
-        <div
+        <b-navbar-dropdown
           v-if="collection.children"
-          class="navbar-item has-dropdown is-hoverable"
+          hoverable
+          collapsible
+          :label="collection.name"
         >
-          <g-link
-            class="navbar-link is-arrowless"
-            :to="`/categorie/${collection.slug}`"
+          <b-navbar-item
+            v-for="subCollection of collection.children"
+            :key="subCollection.slug"
+            :href="`/categorie/${subCollection.slug}`"
           >
-            {{ collection.name }}
-          </g-link>
-          <div class="navbar-dropdown">
-            <g-link
-              v-for="subCollection of collection.children"
-              :key="subCollection.slug"
-              class="navbar-item"
-              :to="`/categorie/${subCollection.slug}`"
-            >
-              {{ subCollection.name }}
-            </g-link>
-          </div>
-        </div>
+            {{ subCollection.name }}
+          </b-navbar-item>
+        </b-navbar-dropdown>
         <!-- flat no-children collections -->
         <g-link
           v-else
@@ -52,11 +45,22 @@
           {{ collection.name }}
         </g-link>
       </template>
+      <!-- Blogs in navbar-->
+      <b-navbar-dropdown hoverable collapsible label="Blog">
+        <b-navbar-item
+          v-for="blog of $context.global.navbarBlogs"
+          :key="blog.slug"
+          :href="`/blog/${blog.slug}`"
+        >
+          {{ blog.title }}
+        </b-navbar-item>
+        <b-navbar-item href="/blog/"> Alle blogs bekijken </b-navbar-item>
+      </b-navbar-dropdown>
     </ShopNavBar>
 
     <div class="container is-widescreen section" style="min-height: 90vh">
       <b-button v-if="$context.back" tag="a" :href="$context.back">
-        <
+        &lt;
       </b-button>
 
       <template v-if="$context.breadcrumb">
@@ -73,10 +77,13 @@
 
     <footer class="footer">
       <div class="columns">
-        <div class="column" v-for="collection of $context.collections">
-          <g-link :to="`/categorie/${collection.slug}`"
-            ><h4>{{ collection.name }}</h4></g-link
-          >
+        <div
+          class="column"
+          v-for="collection of $context.global.navbarCollections"
+        >
+          <g-link :to="`/categorie/${collection.slug}`">
+            <h4>{{ collection.name }}</h4>
+          </g-link>
           <g-link
             v-for="childCollection of collection.children"
             :to="`/categorie/${childCollection.slug}`"
@@ -84,6 +91,33 @@
           >
             {{ childCollection.name }}<br />
           </g-link>
+        </div>
+        <div class="column">
+          <h4 class="mb-2">Betaalmogelijkheden</h4>
+          <span class="payment-methods">
+            <img src="/img/payment/bitcoin.png" alt="bitcoin" /><img
+              src="/img/payment/bitcoincash.svg"
+              alt="bitcoincash"
+            /><img src="/img/payment/dai.svg" alt="dai" /><img
+              src="/img/payment/dogecoin.png"
+              alt="dogecoin"
+            />
+            <br />
+            <img src="/img/payment/ethereum.png" alt="ethereum" /><img
+              src="/img/payment/litecoin.png"
+              alt="litecoin"
+            />
+            <br />
+            <img src="/img/payment/ideal.svg" alt="ideal" /><img
+              src="/img/payment/maestro.svg"
+              alt="maestro"
+            /><img src="/img/payment/mastercard.svg" alt="mastercard" />
+            <br />
+            <img src="/img/payment/visa.svg" alt="visa" /><img
+              src="/img/payment/sofort.svg"
+              alt="sofort"
+            /><img src="/img/payment/bancontact.svg" alt="bancontact" />
+          </span>
         </div>
       </div>
       <section id="contact" class="content has-text-centered is-dark">
