@@ -50,7 +50,7 @@
       >
         <ProductCard
           :product="product"
-          buy-label="In winkelmand"
+          buy-label="Plaats in winkelmand"
           product-url-prefix="product"
           soldoutLabel="Uitverkocht"
         />
