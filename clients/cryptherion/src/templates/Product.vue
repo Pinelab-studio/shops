@@ -7,8 +7,8 @@
         <ProductImages :product="$context.product" :variant="variant" />
       </div>
       <div class="column">
-        <h5 class="has-text-grey is-size-5">{{ variant.name }}</h5>
-        <h5 class="is-size-5 mb-4">{{ variant.priceWithTax | euro }}</h5>
+        <h2 class="has-text-grey is-size-5">{{ variant.name }}</h2>
+        <h3 class="is-size-5 mb-4">{{ variant.priceWithTax | euro }}</h3>
         <VariantSelector
           :product="$context.product"
           :variant="variant"
@@ -21,7 +21,7 @@
           :disabled="isSoldOut"
           aria-label="In winkelmand"
           v-on:click="buy()"
-          >{{ isSoldOut ? 'Uitverkocht' : 'In winkelmand' }}
+          >{{ isSoldOut ? 'Uitverkocht' : 'Plaats in winkelmand' }}
         </b-button>
         <br />
         <div class="content" v-html="$context.product.description"></div>

@@ -41,4 +41,22 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('QuantityInput', QuantityInput);
   Vue.component('Layout', Layout);
   Vue.component('PopupImage', PopupImage);
+  // Get image by ID from directus
+  Vue.mixin({
+    methods: {
+      getDefaultImage: (id) =>
+        `${process.env.GRIDSOME_DIRECTUS_HOST}/assets/${id}?key=default`,
+      getSquareImage: (id) =>
+        `${process.env.GRIDSOME_DIRECTUS_HOST}/assets/${id}?key=square`,
+    },
+  });
+  Vue.filter('formatDate', function (date) {
+    if (date) {
+      return new Date(date).toLocaleDateString('nl', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      });
+    }
+  });
 }

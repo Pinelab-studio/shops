@@ -42,14 +42,4 @@ export default {
   },
 };
 </script>
-<style>
-.payment-methods img {
-  height: 40px;
-  padding-right: 5px;
-}
-
-.payment-methods span {
-  display: block;
-  padding: 5px 0 5px 0;
-}
-</style>
+<style></style>
