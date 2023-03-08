@@ -16,7 +16,7 @@ export interface ChannelEmailAdresses {
 
 export class EmailUtil {
   /**
-   * Get sender and additional recipients for a given channel
+   * Admins with lastName 'email-sender' are used as sender, all other admins are used as additional recipients
    */
   static async getAdminEmailAddressesForChannel(
     injector: Injector,
