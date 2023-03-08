@@ -16,14 +16,13 @@ const GET_CONTENT = gql`
       date_created
       user_created {
         first_name
-        last_name
         avatar {
           id
         }
       }
       title
       slug
-      description
+      summary
       featured_image {
         id
         title

@@ -30,6 +30,7 @@ module.exports = async function (api) {
           highlighted_product,
           banner,
         },
+        cryptherion_blogs: blogs,
       },
     ] = await Promise.all([
       vendureServer.getShopData(),
@@ -160,6 +161,19 @@ module.exports = async function (api) {
         global,
         collections,
       },
+    });
+
+    // ----------------- Blogs ------------
+    blogs.forEach((blog) => {
+      createPage({
+        path: `/blog/${blog.slug}`,
+        component: './src/templates/Blog.vue',
+        context: {
+          global,
+          collections,
+          blog,
+        },
+      });
     });
 
     // ------------------ 404 ---------------
