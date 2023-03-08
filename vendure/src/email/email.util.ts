@@ -41,12 +41,15 @@ export class EmailUtil {
     const sender = admins.find(
       (admin: any) => admin.admin_lastName === 'email-sender'
     );
+    const additionalRecipients = admins.filter(
+      (admin: any) => admin.admin_emailAddress !== sender?.admin_emailAddress
+    );
     return {
       sender: {
         name: sender?.admin_firstName || 'Webshop',
         emailAddress: sender?.admin_emailAddress || 'noreply@pinelab.studio',
       },
-      additionalRecipients: admins
+      additionalRecipients: additionalRecipients
         .filter((admin: any) => admin.admin_emailAddress.includes('@'))
         .map((admin: any) => admin.admin_emailAddress),
     };
