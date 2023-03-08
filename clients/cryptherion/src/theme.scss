@@ -31,6 +31,8 @@ $family-primary: 'Titillium Web';
 
 $control-radius: 2px;
 
+$navbar-dropdown-arrow: $text;
+
 // Setup $colors to use as bulma classes (e.g. 'is-twitter')
 $colors: mergeColorMaps(
   (
@@ -142,4 +144,13 @@ h5 {
 #usps a,
 .category a {
   color: $text;
+}
+.payment-methods img {
+  height: 40px;
+  padding-right: 5px;
+}
+
+.payment-methods span {
+  display: block;
+  padding: 5px 0 5px 0;
 }

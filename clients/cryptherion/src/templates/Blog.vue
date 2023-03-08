@@ -36,11 +36,26 @@
 
       <main class="content" v-html="$context.blog.content"></main>
     </section>
+
+    <br />
+    <br />
+
+    <section id="related-blogs" v-if="$context.relatedBlogs">
+      <h3 class="mb-2">Meer blogs van Cryptherion</h3>
+      <div class="columns">
+        <template v-for="blog of $context.relatedBlogs">
+          <div class="column is-one-third">
+            <BlogCard :blog="blog" />
+          </div>
+        </template>
+      </div>
+    </section>
   </Layout>
 </template>
 <script>
+import BlogCard from '../components/BlogCard';
 export default {
-  components: {},
+  components: { BlogCard },
   methods: {
     maybeGetId(idHolder) {
       return idHolder?.id;

@@ -3,6 +3,37 @@ const { GraphQLClient } = require('graphql-request');
 const _ = require('lodash');
 const { GET_CONTENT } = require('./content.queries');
 
+/**
+ * Optimizes a blog for card previews to save KB size
+ */
+function mapToMinimalBlog(blog) {
+  return {
+    id: blog.id,
+    slug: blog.slug,
+    title: blog.title,
+    featured_image: blog.featured_image,
+    date_created: blog.date_created,
+    user_created: blog.user_created,
+    summary: blog.summary,
+  };
+}
+
+/**
+ * Optimizes a collection for menu display to save KB size
+ */
+function mapToMinimalCollection(col) {
+  return {
+    id: col.id,
+    slug: col.slug,
+    name: col.name,
+    featuredAsset: col.featuredAsset,
+    parent: col.parent ? mapToMinimalCollection(col.parent) : undefined,
+    children: col.children
+      ? col.children.map(mapToMinimalCollection)
+      : undefined,
+  };
+}
+
 module.exports = async function (api) {
   api.createPages(async ({ createPage }) => {
     const vendureServer = new VendureServer(
@@ -37,7 +68,8 @@ module.exports = async function (api) {
       directus.request(GET_CONTENT),
     ]);
 
-    const global = { telefoon, adres, email, banner };
+    const navbarBlogs = blogs.slice(0, 8).map(mapToMinimalBlog);
+    const global = { telefoon, adres, email, banner, navbarBlogs };
 
     const featuredProduct = products.find((p) =>
       p.facetValues.find((value) => value.code === 'main-feature')
@@ -57,7 +89,7 @@ module.exports = async function (api) {
       context: {
         global,
         featuredProduct,
-        collections,
+        collections: collections.map(mapToMinimalCollection),
         featuredText: highlighted_product,
       },
     });
@@ -87,7 +119,7 @@ module.exports = async function (api) {
         component: './src/templates/Product.vue',
         context: {
           global,
-          collections,
+          collections: collections.map(mapToMinimalCollection),
           product,
           breadcrumb,
         },
@@ -129,7 +161,7 @@ module.exports = async function (api) {
           parentCollection: parent,
           siblingCollections: siblings,
           childCollections: children,
-          collections,
+          collections: collections.map(mapToMinimalCollection),
           breadcrumb,
         },
       });
@@ -141,7 +173,7 @@ module.exports = async function (api) {
       component: './src/templates/Cart.vue',
       context: {
         global,
-        collections,
+        collections: collections.map(mapToMinimalCollection),
         breadcrumb: { Home, Winkelmand },
       },
     });
@@ -159,19 +191,34 @@ module.exports = async function (api) {
       component: './src/templates/Order.vue',
       context: {
         global,
-        collections,
+        collections: collections.map(mapToMinimalCollection),
       },
     });
 
-    // ----------------- Blogs ------------
+    // ----------------- Blog overview ------------
+    createPage({
+      path: `/blog/`,
+      component: './src/templates/BlogListing.vue',
+      context: {
+        global,
+        collections: collections.map(mapToMinimalCollection),
+        blogs: blogs.map(mapToMinimalBlog),
+      },
+    });
+
+    // ----------------- Blog details ------------
     blogs.forEach((blog) => {
       createPage({
         path: `/blog/${blog.slug}`,
         component: './src/templates/Blog.vue',
         context: {
           global,
-          collections,
+          collections: collections.map(mapToMinimalCollection),
           blog,
+          relatedBlogs: blogs
+            .filter((b) => b.id !== blog.id)
+            .slice(0, 3)
+            .map(mapToMinimalBlog),
         },
       });
     });
@@ -180,26 +227,34 @@ module.exports = async function (api) {
     createPage({
       path: '/404',
       component: './src/templates/404.vue',
-      context: { global, collections },
+      context: { global, collections: collections.map(mapToMinimalCollection) },
     });
 
     // ----------------- Static pages ---------------------
     createPage({
       path: '/algemene-voorwaarden/',
       component: './src/templates/ContentPage.vue',
-      context: { global, collections, content: algemene_voorwaarden },
+      context: {
+        global,
+        collections: collections.map(mapToMinimalCollection),
+        content: algemene_voorwaarden,
+      },
     });
     createPage({
       path: '/privacy-beleid/',
       component: './src/templates/ContentPage.vue',
-      context: { global, collections, content: privacy_beleid },
+      context: {
+        global,
+        collections: collections.map(mapToMinimalCollection),
+        content: privacy_beleid,
+      },
     });
     createPage({
       path: '/tot-snel/',
       component: './src/templates/UnderConstruction.vue',
       context: {
         global,
-        collections,
+        collections: collections.map(mapToMinimalCollection),
         content: `
       <h1>We zijn er even tussen uit. 1 mei zijn we er weer!</h1>
       `,

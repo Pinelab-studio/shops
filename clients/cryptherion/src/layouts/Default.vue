@@ -23,6 +23,7 @@
         <!-- collections with children-->
         <b-navbar-dropdown
           v-if="collection.children"
+          hoverable
           collapsible
           :label="collection.name"
         >
@@ -44,6 +45,17 @@
           {{ collection.name }}
         </g-link>
       </template>
+      <!-- Blogs in navbar-->
+      <b-navbar-dropdown hoverable collapsible label="Blog">
+        <b-navbar-item
+          v-for="blog of $context.global.navbarBlogs"
+          :key="blog.slug"
+          :href="`/blog/${blog.slug}`"
+        >
+          {{ blog.title }}
+        </b-navbar-item>
+        <b-navbar-item href="/blog/"> Alle blogs bekijken </b-navbar-item>
+      </b-navbar-dropdown>
     </ShopNavBar>
 
     <div class="container is-widescreen section" style="min-height: 90vh">
