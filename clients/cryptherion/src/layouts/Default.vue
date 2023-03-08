@@ -19,7 +19,7 @@
       itemAddedActionText="Naar winkelmand"
       itemAddedText="toegevoegd"
     >
-      <template v-for="collection of $context.collections">
+      <template v-for="collection of $context.global.navbarCollections">
         <!-- collections with children-->
         <b-navbar-dropdown
           v-if="collection.children"
@@ -77,7 +77,10 @@
 
     <footer class="footer">
       <div class="columns">
-        <div class="column" v-for="collection of $context.collections">
+        <div
+          class="column"
+          v-for="collection of $context.global.navbarCollections"
+        >
           <g-link :to="`/categorie/${collection.slug}`">
             <h4>{{ collection.name }}</h4>
           </g-link>

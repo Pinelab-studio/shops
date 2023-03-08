@@ -68,15 +68,23 @@ module.exports = async function (api) {
       directus.request(GET_CONTENT),
     ]);
 
+    // Get toplevel collections
+    const collections = vendureServer.unflatten(allCollections);
+
     const navbarBlogs = blogs.slice(0, 8).map(mapToMinimalBlog);
-    const global = { telefoon, adres, email, banner, navbarBlogs };
+    const navbarCollections = collections.map(mapToMinimalCollection);
+    const global = {
+      telefoon,
+      adres,
+      email,
+      banner,
+      navbarBlogs,
+      navbarCollections,
+    };
 
     const featuredProduct = products.find((p) =>
       p.facetValues.find((value) => value.code === 'main-feature')
     );
-
-    // Get toplevel collections
-    const collections = vendureServer.unflatten(allCollections);
 
     // Breadcrumb
     const Home = '/';
@@ -89,7 +97,6 @@ module.exports = async function (api) {
       context: {
         global,
         featuredProduct,
-        collections: collections.map(mapToMinimalCollection),
         featuredText: highlighted_product,
       },
     });
@@ -119,7 +126,6 @@ module.exports = async function (api) {
         component: './src/templates/Product.vue',
         context: {
           global,
-          collections: collections.map(mapToMinimalCollection),
           product,
           breadcrumb,
         },
@@ -161,7 +167,6 @@ module.exports = async function (api) {
           parentCollection: parent,
           siblingCollections: siblings,
           childCollections: children,
-          collections: collections.map(mapToMinimalCollection),
           breadcrumb,
         },
       });
@@ -173,7 +178,6 @@ module.exports = async function (api) {
       component: './src/templates/Cart.vue',
       context: {
         global,
-        collections: collections.map(mapToMinimalCollection),
         breadcrumb: { Home, Winkelmand },
       },
     });
@@ -191,7 +195,6 @@ module.exports = async function (api) {
       component: './src/templates/Order.vue',
       context: {
         global,
-        collections: collections.map(mapToMinimalCollection),
       },
     });
 
@@ -201,7 +204,6 @@ module.exports = async function (api) {
       component: './src/templates/BlogListing.vue',
       context: {
         global,
-        collections: collections.map(mapToMinimalCollection),
         blogs: blogs.map(mapToMinimalBlog),
       },
     });
@@ -213,7 +215,6 @@ module.exports = async function (api) {
         component: './src/templates/Blog.vue',
         context: {
           global,
-          collections: collections.map(mapToMinimalCollection),
           blog,
           relatedBlogs: blogs
             .filter((b) => b.id !== blog.id)
@@ -227,7 +228,7 @@ module.exports = async function (api) {
     createPage({
       path: '/404',
       component: './src/templates/404.vue',
-      context: { global, collections: collections.map(mapToMinimalCollection) },
+      context: { global },
     });
 
     // ----------------- Static pages ---------------------
@@ -236,7 +237,6 @@ module.exports = async function (api) {
       component: './src/templates/ContentPage.vue',
       context: {
         global,
-        collections: collections.map(mapToMinimalCollection),
         content: algemene_voorwaarden,
       },
     });
@@ -245,7 +245,6 @@ module.exports = async function (api) {
       component: './src/templates/ContentPage.vue',
       context: {
         global,
-        collections: collections.map(mapToMinimalCollection),
         content: privacy_beleid,
       },
     });
@@ -254,7 +253,6 @@ module.exports = async function (api) {
       component: './src/templates/UnderConstruction.vue',
       context: {
         global,
-        collections: collections.map(mapToMinimalCollection),
         content: `
       <h1>We zijn er even tussen uit. 1 mei zijn we er weer!</h1>
       `,
