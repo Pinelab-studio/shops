@@ -107,9 +107,15 @@ export default {
   },
   // Create href lang tags
   metaInfo() {
+    console.log(this.$route);
     const lang = this.$context.lang || 'nl';
     const links = [];
     const domain = process.env.GRIDSOME_HOST;
+    // Set canonical always for current page
+    links.push({
+      rel: 'canonical',
+      href: `${domain}${this.$route.fullPath}`,
+    });
     // Set hreflang if translated page is set
     Object.entries(this.$context.translatedPages || []).forEach(
       ([key, value]) => {
