@@ -37,6 +37,19 @@
             <br />
             <div v-html="$context.blog.content"></div>
           </div>
+
+          <div v-if="$context.disqusSlug" id="migrated-comments">
+            <!--- Get migrated comments -->
+            <Disqus
+              shortname="wormenkwekerijwasse"
+              :page-config="{ slug: $context.disqusSlug }"
+              lang="nl"
+            />
+          </div>
+          <div v-else id="new-thread">
+            <!--- Otherwise create new disciossion -->
+            <Disqus shortname="wormenkwekerijwasse" lang="nl" />
+          </div>
         </div>
       </div>
     </template>

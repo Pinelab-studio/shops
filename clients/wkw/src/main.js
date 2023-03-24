@@ -12,6 +12,7 @@ import {
 } from 'pinelab-storefront';
 import mitt from 'mitt';
 import VueGtag from 'vue-gtag';
+import VueDisqus from 'vue-disqus';
 
 export default function (Vue, { router, head, isClient }) {
   // Get image by ID from directus
@@ -75,6 +76,7 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('QuantityInput', QuantityInput);
   Vue.component('DefaultLayout', DefaultLayout);
   Vue.component('PopupImage', PopupImage);
+  Vue.use(VueDisqus);
 
   // Add date filter for global use
   Vue.filter('date', function (value) {

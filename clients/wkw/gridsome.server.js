@@ -228,7 +228,41 @@ module.exports = async function (api) {
       });
 
       // ----------------- Blog pages ------------
+
+      // Slugs from old website. We need these to reuse disquss threads
+      const migratedComments = [
+        'zieke_wormen_en_oplossingen',
+        'zieke_wormen_en_oplossingen',
+        'vrolijk_pasen_01',
+        'wormentoren_in_de_winter',
+        'beestjes_in_de_wormenbak',
+        '3_jarig_jubileum',
+        'compost_maken',
+        'plastic_in_koffiepads',
+        'groene_passie_beurs_2018',
+        'buxus_mot_bestrijden',
+        'landleven',
+        'heermoes_verantwoordt_bestrijden',
+        'wormen_courant_q_1_2018',
+        'wormer_courant_q3_van_oktober',
+        'meelwormen',
+        'compostwormen_op_de_televisie',
+        'baby_knoflook_oogst',
+        'wormencompost_vermicompost_wormenmest',
+        'vrolijk_pasen',
+        'wormen_kweken_78',
+        'een_axolotl_die_het_wormpje_wel_ziet_zitten',
+        'wormen_viswormen_en_compostwormen_bewaren',
+        'viswormen_of_compostwormen_en_uitleg_verpakkings_keuze',
+        'wormen_in_de_zomer',
+      ];
+
       blogs.forEach((blog) => {
+        let disqusSlug;
+        const oldSlugFormat = blog.slug.split('-').join('_');
+        if (migratedComments.indexOf(oldSlugFormat) > -1) {
+          disqusSlug = oldSlugFormat;
+        }
         const translatedBlogs = {};
         languages.forEach((language) => {
           let translatedBlog = language.blogs.find((b) => b.name === blog.name);
@@ -246,6 +280,7 @@ module.exports = async function (api) {
           context: {
             ...global,
             blog,
+            disqusSlug,
             breadcrumb,
             translatedPages: translatedBlogs,
           },
