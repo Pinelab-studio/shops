@@ -24,7 +24,7 @@
             >
           </span>-->
 
-          <span class="line">
+          <!-- <span class="line">
             <b-icon
               class="mx-2"
               icon="check-circle"
@@ -33,7 +33,7 @@
             >
             </b-icon>
             <span>Bestellingen worden altijd binnen 24 uur verzonden</span>
-          </span>
+          </span> -->
 
           <!--          <span class="line">
             <b-icon
