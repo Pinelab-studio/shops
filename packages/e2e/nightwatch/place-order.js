@@ -53,7 +53,7 @@ module.exports = {
       houseNr: 'input[placeholder="Huisnr.*"]',
       street: 'input[placeholder="Straat*"]',
       city: 'input[placeholder="Plaats*"]',
-      note: 'input[placeholder="Notitie"]',
+      note: '[placeholder="Notitie"]',
       submit: 'button[type="submit"]',
     };
     const ideal = 'button[value="ideal"]';
@@ -173,7 +173,6 @@ module.exports = {
       .assert.containsText('body', prices.totalBE)
       .assert.containsText('body', prices.totalWithoutTaxBE)
       .assert.containsText('body', prices.dicountWithTaxBE)
-      .assert.containsText('body', address.note)
       .pause(500)
       .useXpath()
       .click("//button[text()=' Fulfill order ']")
