@@ -16,7 +16,7 @@
     "debounce": "^1.2.1",
     "fuse.js": "^6.6.2",
     "graphql-tag": "^2.12.6",
-    "pinelab-storefront": "0.65.0",
+    "pinelab-storefront": "0.66.0",
     "vue-disqus": "4.X",
     "vue-gtag": "1.X"
   },
@@ -30,7 +30,7 @@
     "sass": "^1.32.13",
     "sass-loader": "^10.1.1"
   },
-  "version": "0.65.0",
+  "version": "0.66.0",
   "resolutions": {
     "graphql": "^14.7.0"
   }
