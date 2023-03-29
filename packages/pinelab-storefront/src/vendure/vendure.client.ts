@@ -415,9 +415,9 @@ export class VendureClient {
       }
       return data;
     } catch (e) {
+      console.error(e);
       const error = (e as any).response?.errors?.[0];
       if (error) {
-        console.error(e);
         throw new VendureError(
           error.message,
           undefined,
