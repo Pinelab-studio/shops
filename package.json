@@ -9,7 +9,7 @@
     "postinstall": "yarn husky install",
     "build": "yarn && yarn lerna exec yarn && yarn lerna run build",
     "bootstrap": "yarn build && yarn lerna bootstrap",
-    "lerna:publish": "yarn lerna run test && yarn lerna run build && yarn lerna publish --exact",
+    "lerna:publish": "yarn lerna run test && yarn lerna run build && yarn lerna publish --exact --no-verify-access",
     "prettier:check": "prettier --check --single-quote \"./**/*.{ts,tsx,js,vue,scss}\"",
     "prettier:write": "prettier --write --single-quote \"./**/*.{ts,tsx,js,vue,scss}\"",
     "e2e": "cd packages/e2e && yarn e2e"

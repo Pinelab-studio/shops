@@ -389,7 +389,7 @@ export class VendureClient {
         await this.getActiveOrder();
       }
       throw new VendureError(
-        `${result.errorCode} - ${result.message}`,
+        result.message,
         this.store.activeOrder?.code,
         result.errorCode
       );
@@ -415,6 +415,7 @@ export class VendureClient {
       }
       return data;
     } catch (e) {
+      console.error(e);
       const error = (e as any).response?.errors?.[0];
       if (error) {
         throw new VendureError(
