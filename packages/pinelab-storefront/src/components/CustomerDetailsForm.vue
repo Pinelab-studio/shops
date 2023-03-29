@@ -1,5 +1,6 @@
 <template>
   <form v-on:submit="setCustomerDetails($event)">
+    <h4>{{ $l('checkup.shipping-address') }}</h4>
     <div class="columns">
       <div class="column">
         <div class="field">
@@ -59,6 +60,7 @@
               :placeholder="$l('customer-details.phone')"
               type="number"
               maxlength="19"
+              :has-counter="false"
               aria-label="phonenumber"
               v-model="customer.phoneNumber"
             />
@@ -78,6 +80,7 @@
               required
               v-model="customer.emailAddress"
               maxlength="120"
+              :has-counter="false"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-email"></i>
@@ -86,8 +89,8 @@
         </div>
       </div>
     </div>
-    <div class="columns is-mobile">
-      <div class="column is-6">
+    <div class="columns is-mobile is-multiline">
+      <div class="column is-12-mobile is-6-tablet">
         <div class="field">
           <p class="control is-expanded has-icons-left">
             <b-input
@@ -104,7 +107,7 @@
           </p>
         </div>
       </div>
-      <div class="column is-4">
+      <div class="column is-6-mobile is-3-tablet">
         <div class="field is-small-field">
           <p class="control is-expanded has-icons-left">
             <b-input
@@ -121,7 +124,7 @@
           </p>
         </div>
       </div>
-      <div class="column is-2">
+      <div class="column is-6-mobile is-3-tablet">
         <div class="field is-small-field">
           <p class="control is-expanded">
             <b-input
@@ -129,6 +132,7 @@
               aria-label="addition"
               type="text"
               maxlength="20"
+              :has-counter="false"
               v-model="address.houseNumberAddition"
             />
           </p>
@@ -199,6 +203,7 @@
               type="textarea"
               v-model="customerNote"
               maxlength="254"
+              :has-counter="false"
             />
           </p>
         </div>
@@ -212,7 +217,9 @@
           v-model="hasDifferentBillingAddress"
           aria-label="different billingaddress"
         >
-          {{ $l('customer-details.different-billing-address') }}
+          <strong>{{
+            $l('customer-details.different-billing-address')
+          }}</strong>
         </b-checkbox>
       </b-field>
     </div>
@@ -228,6 +235,7 @@
                 type="text"
                 v-model="billingAddress.company"
                 maxlength="28"
+                :has-counter="false"
               />
               <span class="icon is-small is-left">
                 <i class="mdi mdi-office-building"></i>
@@ -245,6 +253,7 @@
                 type="text"
                 v-model="billingAddress.postalCode"
                 maxlength="28"
+                :has-counter="false"
                 aria-label="billing postalcode"
                 v-on:input="lookupBillingAddress()"
               />
@@ -263,6 +272,7 @@
                 type="text"
                 v-model="billingAddress.streetLine2"
                 maxlength="28"
+                :has-counter="false"
                 v-on:input="lookupBillingAddress()"
               />
               <span class="icon is-small is-left">
@@ -282,6 +292,7 @@
                 type="text"
                 v-model="billingAddress.streetLine1"
                 maxlength="28"
+                :has-counter="false"
               />
               <span class="icon is-small is-left">
                 <i class="mdi mdi-home"></i>
@@ -298,6 +309,7 @@
                 type="text"
                 v-model="billingAddress.city"
                 maxlength="28"
+                :has-counter="false"
               />
               <span class="icon is-small is-left">
                 <i class="mdi mdi-city"></i>

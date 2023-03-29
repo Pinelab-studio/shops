@@ -41,7 +41,7 @@
   },
   "checkup": {
     "title": "Controleer",
-    "shipping-address": "Verzendadres",
+    "shipping-address": "Bezorgadres",
     "billing-address": "Factuuradres",
     "items": "Producten",
     "disclaimer": " ",

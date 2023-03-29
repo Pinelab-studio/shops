@@ -201,7 +201,7 @@ export default {
           : `${event.quantity * -1} ${this.$l(`basket.removed`)}`;
       this.$buefy.snackbar.open({
         message,
-        position: 'is-top-right',
+        position: 'is-top',
         type: 'is-light',
         actionText: this.$l(`basket.go-to-cart`),
         pauseOnHover: true,
@@ -214,11 +214,14 @@ export default {
     showError(e) {
       console.error(e);
       let label = this.$l(`error.${e.errorCode}`);
-      label = label === `error.${e.errorCode}` ? undefined : label;
-      this.$buefy.toast.open({
-        message: label || e.message,
-        duration: 5000,
-        position: 'is-bottom',
+      if (label === `error.${e.errorCode}`) {
+        // This means unresolved label, so we display the error message
+        label = e.message;
+      }
+      this.$buefy.snackbar.open({
+        message: label,
+        indefinite: true,
+        position: 'is-top',
         type: 'is-danger',
       });
     },

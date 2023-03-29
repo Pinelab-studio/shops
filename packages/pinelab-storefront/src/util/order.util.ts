@@ -11,8 +11,8 @@ export async function getOrderByCode(vendure: VendureClient, code: string) {
     order?.state !== 'PaymentSettled' &&
     order?.state !== 'PaymentAuthorized'
   ) {
-    if (pollingCount > 10) {
-      throw Error(`Order not settled after polling 10 times`);
+    if (pollingCount > 30) {
+      throw Error(`Order not settled after polling 30 times`);
     }
     order = await vendure
       .getOrderByCode(code)
