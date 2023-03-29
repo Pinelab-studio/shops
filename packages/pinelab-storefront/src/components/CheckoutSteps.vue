@@ -104,7 +104,7 @@
               :disable="hasShippingSelected"
               @click="goToStep(1)"
             >
-              <
+              &lt;
             </b-button>
           </div>
           <div class="column has-text-right">
@@ -119,6 +119,11 @@
         </div>
         <div class="columns">
           <div class="column is-8">
+            <div v-if="$slots.aboveCheckup" class="columns">
+              <div class="column">
+                <slot name="aboveCheckup" />
+              </div>
+            </div>
             <div class="columns">
               <div class="column">
                 <AddressDisplay

@@ -8,6 +8,12 @@
         :store="$store"
         :available-countries="$context.availableCountries"
       >
+        <!-- Goodies slot -->
+        <!-- <template #aboveCheckup>
+          <h5>{{ $l('checkup.goodie-title') }}</h5>
+          {{ $l('checkup.goodie-message') }}
+        </template> -->
+
         <template #orderSummaryFooter>
           <h5>{{ $l('order-summary.payments') }}</h5>
           <img src="/img/payments.png" :alt="$l('order-summary.payments')" />

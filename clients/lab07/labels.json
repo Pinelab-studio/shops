@@ -41,7 +41,7 @@
   },
   "checkup": {
     "title": "Bestellen en betalen",
-    "shipping-address": "Verzendadres",
+    "shipping-address": "Bezorgadres",
     "billing-address": "Factuuradres",
     "items": "Producten",
     "disclaimer": "",
