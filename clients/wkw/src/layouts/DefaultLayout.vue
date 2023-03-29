@@ -68,7 +68,7 @@
     <Consent
       class="consent pb-6"
       accept-text="Ja, dat is goed"
-      decline-text="Nee"
+      decline-text="Nee, ik wurm me er liever omheen"
       thank-you-message="Bedankt!"
       v-on:approved="activateAnalytics()"
     >
@@ -107,7 +107,6 @@ export default {
   },
   // Create href lang tags
   metaInfo() {
-    console.log(this.$route);
     const lang = this.$context.lang || 'nl';
     const links = [];
     const domain = process.env.GRIDSOME_HOST;

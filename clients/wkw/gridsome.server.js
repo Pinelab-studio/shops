@@ -460,6 +460,16 @@ module.exports = async function (api) {
           translatedPages: contactTranslations,
         },
       });
+
+      // -------------------- 404 -----------------------------------
+      createPage({
+        path: `${slugPrefix}/404/`,
+        component: './src/templates/404.vue',
+        context: {
+          ...global,
+          popularProducts,
+        },
+      });
     }
   });
 };
