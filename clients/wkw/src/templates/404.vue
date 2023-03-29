@@ -3,6 +3,13 @@
     <template #content>
       <h1 class="title is-1">404 - Not found</h1>
 
+      <div class="has-text-centered">
+        <video width="320" height="240" autoplay muted loop>
+          <source src="404.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
       <section id="popular-products">
         <h4 class="title has-text-weight-bold is-5 pt-5">
           {{ $l('common.popular-products') }}
