@@ -28,7 +28,6 @@ export class CouponsUsedExportStrategy implements ExportStrategy {
     );
     const couponsUsed: Record<string, number> = {};
     orders.forEach((order) => {
-      console.log(order.couponCodes);
       order.couponCodes.forEach((coupon) => {
         let quantity = couponsUsed[coupon] || 0;
         quantity += 1;

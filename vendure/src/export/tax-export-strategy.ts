@@ -56,7 +56,6 @@ export class TaxExportStrategy implements ExportStrategy {
                 'customer.addresses',
                 'customer.addresses.country',
               ]);
-              console.log(JSON.stringify(updatedOrder?.customer?.addresses));
               countryCode =
                 updatedOrder?.customer?.addresses?.[0]?.country.code ||
                 `onbekend (${order.code})`;
