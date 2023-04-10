@@ -39,29 +39,49 @@ export class TaxExportStrategy implements ExportStrategy {
     );
     const uniqueTaxRates = new Set<string>();
     const totalTaxOfAllOrders: Record<string, number> = {};
-    const rows: OrderRow[] = orders.map((order) => {
-      const { taxTotal } = TaxHelper.getTaxSummary(order);
-      Object.keys(taxTotal).forEach((taxRate) => uniqueTaxRates.add(taxRate));
-      const formattedTaxTotal: any = {};
-      Object.entries(taxTotal).forEach(([key, value]) => {
-        formattedTaxTotal[key] = this.formatCurrency(value);
-        const existingTotal = totalTaxOfAllOrders[key] || 0;
-        totalTaxOfAllOrders[key] = existingTotal + value;
-      });
-      return {
-        code: order.code,
-        date: order.orderPlacedAt?.toLocaleDateString('nl-NL') || '',
-        orderTotal: this.formatCurrency(order.total),
-        orderTotalWithTax: this.formatCurrency(order.totalWithTax),
-        ...formattedTaxTotal,
-      };
-    });
+    // Loop all orders
+    const rows: OrderRow[] = await Promise.all(
+      orders.map(async (order) => {
+        const { taxTotal } = TaxHelper.getTaxSummary(order);
+        Object.keys(taxTotal).forEach((taxRate) => uniqueTaxRates.add(taxRate));
+        const formattedTaxTotal: any = {};
+        // Loop all tax rates
+        await Promise.all(
+          Object.entries(taxTotal).map(async ([taxRate, value]) => {
+            let countryCode = order.shippingAddress?.countryCode;
+            if (!order.shippingAddress.countryCode) {
+              // Try to resolve country by customers address
+              const updatedOrder = await orderService.findOne(ctx, order.id, [
+                'customer',
+                'customer.addresses',
+                'customer.addresses.country',
+              ]);
+              console.log(JSON.stringify(updatedOrder?.customer?.addresses));
+              countryCode =
+                updatedOrder?.customer?.addresses?.[0]?.country.code ||
+                `onbekend (${order.code})`;
+            }
+            const keyName = `${countryCode?.toUpperCase()} ${taxRate}`;
+            formattedTaxTotal[taxRate] = this.formatCurrency(value);
+            // Check if "NL 9%" exists and set or update
+            const existingTotal = totalTaxOfAllOrders[keyName] || 0;
+            totalTaxOfAllOrders[keyName] = existingTotal + value;
+          })
+        );
+        return {
+          code: order.code,
+          date: order.orderPlacedAt?.toLocaleDateString('nl-NL') || '',
+          orderTotal: this.formatCurrency(order.total),
+          orderTotalWithTax: this.formatCurrency(order.totalWithTax),
+          ...formattedTaxTotal,
+        };
+      })
+    );
     // Write to file
     const fileName = `${new Date().getTime()}-${startDate.getTime()}-${endDate.getTime()}.${
       this.fileExtension
     }`;
     const exportFile = path.join(os.tmpdir(), fileName);
-    // FIXME this breaks headers await fs.writeFile(exportFile, 'sep=,\n'); // Fix for excel
     const csvWriter = createObjectCsvWriter({
       path: exportFile,
       fieldDelimiter: ';',
