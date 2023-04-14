@@ -18,7 +18,7 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
     .loadData(async ({ event, injector }) => {
       const channel = event.ctx.channel;
 
-      // Fix: Context with the default locale
+      // Fix to translate productVariants to default language
       // Should be fixed in: https://github.com/vendure-ecommerce/vendure/issues/2124
       event.order.lines.forEach((line) => {
         line.productVariant = translateDeep(
