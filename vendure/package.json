@@ -1,6 +1,6 @@
 {
   "name": "shops-vendure-backend",
-  "version": "0.66.1",
+  "version": "0.66.2",
   "private": true,
   "scripts": {
     "start": "node ./dist/index",
