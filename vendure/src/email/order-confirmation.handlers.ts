@@ -1,11 +1,11 @@
+import { Logger, OrderPlacedEvent, translateDeep } from '@vendure/core';
 import { EmailEventHandler, EmailEventListener } from '@vendure/email-plugin';
-import { ID, Logger, OrderPlacedEvent } from '@vendure/core';
-import { TaxHelper } from '../tax/tax.helper';
+import { mockOrderStateTransitionEvent } from '@vendure/email-plugin/lib/src/mock-events';
 import { InvoiceService } from 'vendure-plugin-invoices';
 import { EBookController } from '../e-book/e-book.plugin';
-import { EmailUtil } from './email.util';
+import { TaxHelper } from '../tax/tax.helper';
 import { logOrderHistory } from '../util/history.util';
-import { mockOrderStateTransitionEvent } from '@vendure/email-plugin/lib/src/mock-events';
+import { EmailUtil } from './email.util';
 
 const loggerCtx = 'OrderConfirmationHandler';
 
@@ -17,6 +17,16 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
     .on(OrderPlacedEvent)
     .loadData(async ({ event, injector }) => {
       const channel = event.ctx.channel;
+
+      // Fix to translate productVariants to default language
+      // Should be fixed in: https://github.com/vendure-ecommerce/vendure/issues/2124
+      event.order.lines.forEach((line) => {
+        line.productVariant = translateDeep(
+          line.productVariant,
+          channel.defaultLanguageCode
+        );
+      });
+
       const [{ sender, additionalRecipients }, invoicesEnabled] =
         await Promise.all([
           EmailUtil.getAdminEmailAddressesForChannel(injector, event.ctx),
