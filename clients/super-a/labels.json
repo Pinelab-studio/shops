@@ -15,7 +15,8 @@
     "different-billing-address": "Different billing address",
     "billing-address": "Billing address",
     "submit": "Select shipping",
-    "note": "Note"
+    "note": "Note",
+    "invalid-country-for-postalcode": "Postcode niet geldig voor dit land"
   },
   "shipping": {
     "step-title": "Shipping",
