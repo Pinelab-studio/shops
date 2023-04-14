@@ -39,7 +39,7 @@
               :disable="hasShippingSelected"
               @click="goToStep(0)"
             >
-              <
+              &lt;
             </b-button>
           </div>
           <div class="column has-text-right">

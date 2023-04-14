@@ -219,7 +219,7 @@ export default {
         label = e.message;
       }
       this.$buefy.snackbar.open({
-        message: label,
+        message: label || 'Unknown error',
         indefinite: true,
         position: 'is-top',
         type: 'is-danger',

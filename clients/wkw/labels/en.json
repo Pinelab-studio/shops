@@ -27,7 +27,8 @@
     "different-billing-address": "Different billing address",
     "billing-address": "Billing address",
     "submit": "Shipping",
-    "note": "Notitie"
+    "note": "Notitie",
+    "invalid-country-for-postalcode": "Invalid country for postalcode"
   },
   "shipping": {
     "step-title": "Shipping",
