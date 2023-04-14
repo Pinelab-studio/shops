@@ -34,7 +34,6 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
             .get(InvoiceService)
             .isInvoicePluginEnabled(channel.id as string),
         ]);
-
       if (additionalRecipients.length === 0) {
         Logger.warn(
           `No admin found to send confirmation email for channel ${channel.code}`,
