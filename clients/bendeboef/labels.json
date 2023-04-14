@@ -26,7 +26,8 @@
     "different-billing-address": "Different billing address",
     "billing-address": "Billing address",
     "submit": "Select shipping",
-    "note": "Note"
+    "note": "Note",
+    "invalid-country-for-postalcode": "Invalid postalcode for country"
   },
   "shipping": {
     "step-title": "Shipping",

@@ -26,7 +26,8 @@
     "different-billing-address": "Ander factuuradres",
     "billing-address": "Factuuradres",
     "submit": "Kies verzendwijze",
-    "note": "Notitie"
+    "note": "Notitie",
+    "invalid-country-for-postalcode": "Postcode niet geldig voor dit land"
   },
   "shipping": {
     "step-title": "Verzending",

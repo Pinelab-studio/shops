@@ -35,16 +35,23 @@ export default {
       availableOptions: {},
     };
   },
+  watch: {
+    product(neVal, oldVal) {
+      this.init();
+    },
+  },
   created() {
-    this.selectedVariant = this.variant;
-    this.selectedOptions = getOptionsFromVariant(this.selectedVariant);
-    this.availableOptions = getAvailableOptions(this.product.variants);
+    this.init();
   },
   methods: {
+    init() {
+      this.selectedVariant = this.variant;
+      this.selectedOptions = getOptionsFromVariant(this.selectedVariant);
+      this.availableOptions = getAvailableOptions(this.product.variants);
+    },
     select(groupId, optionId) {
       this.selectedOptions[groupId] = optionId;
       const variant = findVariant(this.selectedOptions, this.product.variants);
-      console.log(`Selected ${variant?.name}`);
       if (variant) {
         this.$emit('select', variant);
       } else {

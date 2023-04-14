@@ -99,7 +99,10 @@
               type="text"
               required
               v-model="address.postalCode"
-              v-on:input="lookupShippingAddress()"
+              v-on:input="
+                validateCountryForPostalCode();
+                lookupShippingAddress();
+              "
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-mailbox"></i>
@@ -175,13 +178,21 @@
     </div>
     <div class="columns">
       <div class="column">
-        <b-field>
+        <b-field
+          :message="
+            isInvalidCountry
+              ? $l('customer-details.invalid-country-for-postalcode')
+              : ''
+          "
+        >
           <b-select
             expanded
+            required
             :placeholder="$l('customer-details.country')"
             aria-label="country"
             name="country"
             icon="earth"
+            @input="validateCountryForPostalCode"
             v-model="address.countryCode"
           >
             <option
@@ -255,7 +266,7 @@
                 maxlength="28"
                 :has-counter="false"
                 aria-label="billing postalcode"
-                v-on:input="lookupBillingAddress()"
+                @input="lookupBillingAddress"
               />
               <span class="icon is-small is-left">
                 <i class="mdi mdi-mailbox"></i>
@@ -339,7 +350,7 @@
 
     <div class="columns is-mobile mt-2">
       <div class="column">
-        <a @click="$emit('back')" class="button is-outlined"><</a>
+        <a @click="$emit('back')" class="button is-outlined">&lt;</a>
       </div>
       <div class="column has-text-right">
         <b-button
@@ -371,6 +382,7 @@ export default {
   },
   data() {
     return {
+      isInvalidCountry: false,
       customerNote: undefined,
       loadingShipping: false,
       hasDifferentBillingAddress: false,
@@ -453,8 +465,27 @@ export default {
       );
       this.billingAddress.countryCode = country?.code || 'nl';
     }
+    this.validateCountryForPostalCode();
   },
   methods: {
+    /**
+     * Disables selecting NL if postalcodes is not dutch (6 characters)
+     */
+    validateCountryForPostalCode() {
+      const isDutchPostalCode =
+        this.address.postalCode?.length >= 6 &&
+        this.address.postalCode?.length <= 7;
+      if (
+        !isDutchPostalCode &&
+        this.address.countryCode?.toLowerCase() === 'nl'
+      ) {
+        // Ugly delay to prevent overriding the country when its already undefined
+        setTimeout(() => (this.address.countryCode = undefined), 500);
+        this.isInvalidCountry = true;
+      } else {
+        this.isInvalidCountry = false;
+      }
+    },
     setCustomerDetails: async function (e) {
       e.preventDefault();
       this.loadingShipping = true;
@@ -499,9 +530,10 @@ export default {
           });
         }
         this.vendure.setDefaultShippingMethod(); // async
+        this.$emit('submit');
       } catch (e) {
         console.error(e);
-        this.$emit('error');
+        this.$emitter.emit('error', e);
       } finally {
         this.loadingShipping = false;
       }
@@ -522,7 +554,6 @@ export default {
       } catch (e) {
         console.error(e);
       }
-      this.$emit('submit');
     },
     async lookupShippingAddress() {
       await this.lookupAddress(this.address);
