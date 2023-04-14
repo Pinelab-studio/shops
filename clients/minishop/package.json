@@ -12,7 +12,7 @@
     "@fontsource/roboto-mono": "^4.5.0",
     "buefy": "^0.9.7",
     "debounce": "^1.2.1",
-    "pinelab-storefront": "0.66.5"
+    "pinelab-storefront": "0.66.6"
   },
   "devDependencies": {
     "@gridsome/source-graphql": "^0.1.0",
