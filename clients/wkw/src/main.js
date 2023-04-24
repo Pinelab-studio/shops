@@ -61,7 +61,7 @@ export default function (Vue, { router, head, isClient }) {
       VueGtag,
       {
         config: {
-          id: 'UA-57308319-7',
+          id: 'G-SDDWHJBJPW',
           params: {
             anonymize_ip: true,
           },
