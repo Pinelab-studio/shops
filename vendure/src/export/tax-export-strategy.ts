@@ -45,21 +45,22 @@ export class TaxExportStrategy implements ExportStrategy {
         const { taxTotal } = TaxHelper.getTaxSummary(order);
         Object.keys(taxTotal).forEach((taxRate) => uniqueTaxRates.add(taxRate));
         const formattedTaxTotal: any = {};
+        let countryCode = order.shippingAddress?.countryCode;
+        if (!order.shippingAddress.countryCode) {
+          // Try to resolve country by customers address
+          const updatedOrder = await orderService.findOne(ctx, order.id, [
+            'customer',
+            'customer.addresses',
+            'customer.addresses.country',
+          ]);
+          countryCode =
+            updatedOrder?.customer?.addresses?.[0]?.country.code ||
+            `onbekend (${order.code})`;
+        }
+        countryCode = countryCode?.toUpperCase();
         // Loop all tax rates
         await Promise.all(
           Object.entries(taxTotal).map(async ([taxRate, value]) => {
-            let countryCode = order.shippingAddress?.countryCode;
-            if (!order.shippingAddress.countryCode) {
-              // Try to resolve country by customers address
-              const updatedOrder = await orderService.findOne(ctx, order.id, [
-                'customer',
-                'customer.addresses',
-                'customer.addresses.country',
-              ]);
-              countryCode =
-                updatedOrder?.customer?.addresses?.[0]?.country.code ||
-                `onbekend (${order.code})`;
-            }
             const keyName = `${countryCode?.toUpperCase()} ${taxRate}`;
             formattedTaxTotal[taxRate] = this.formatCurrency(value);
             // Check if "NL 9%" exists and set or update
@@ -70,6 +71,7 @@ export class TaxExportStrategy implements ExportStrategy {
         return {
           code: order.code,
           date: order.orderPlacedAt?.toLocaleDateString('nl-NL') || '',
+          country: countryCode,
           orderTotal: this.formatCurrency(order.total),
           orderTotalWithTax: this.formatCurrency(order.totalWithTax),
           ...formattedTaxTotal,
@@ -88,6 +90,7 @@ export class TaxExportStrategy implements ExportStrategy {
       header: [
         { id: 'total', title: 'totalen' },
         { id: 'code', title: 'bestelling' },
+        { id: 'country', title: 'Land' },
         { id: 'date', title: 'datum' },
         { id: 'orderTotal', title: 'totaal excl. btw' },
         { id: 'orderTotalWithTax', title: 'totaal incl. btw' },
