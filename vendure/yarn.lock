@@ -2599,10 +2599,10 @@
   dependencies:
     fs-extra "^10.0.0"
 
-"@vendure/admin-ui@^1.9.5":
-  version "1.9.5"
-  resolved "https://registry.yarnpkg.com/@vendure/admin-ui/-/admin-ui-1.9.5.tgz#6d9f8879fb5ddb74c9fd78d10daee5f9e4765a94"
-  integrity sha512-4IKAvP0lnvYiy4PdcNHciQVC2t4Dn1huUBzsZe+3lf3wVSaEot2C4Pb7naUJpftNsorgVk/o/mMpl5N9TfnOCA==
+"@vendure/admin-ui@^1.9.6":
+  version "1.9.6"
+  resolved "https://registry.yarnpkg.com/@vendure/admin-ui/-/admin-ui-1.9.6.tgz#335057782fd3b7aa9f6cb4880ba26c9dc064fd3c"
+  integrity sha512-UYtJke+ExHHImYEavelKfEmSKd4DWGFFI6shEsmgxxrHqQvEznfK0Y73hSap3E5t6wBnA6EVQCPgs0RNxAzPFw==
   dependencies:
     "@angular/animations" "12.2.16"
     "@angular/cdk" "12.2.13"
@@ -2623,7 +2623,7 @@
     "@ng-select/ng-select" "^7.2.0"
     "@ngx-translate/core" "^13.0.0"
     "@ngx-translate/http-loader" "^6.0.0"
-    "@vendure/common" "^1.9.5"
+    "@vendure/common" "^1.9.6"
     "@webcomponents/custom-elements" "^1.4.3"
     apollo-angular "^2.6.0"
     apollo-upload-client "^16.0.0"
@@ -2657,11 +2657,6 @@
     file-type "^16.2.0"
     fs-extra "^10.0.0"
     sharp "~0.31.2"
-
-"@vendure/common@^1.9.5":
-  version "1.9.5"
-  resolved "https://registry.yarnpkg.com/@vendure/common/-/common-1.9.5.tgz#c0689117030d3c914c85e64b456359c799e404ef"
-  integrity sha512-Wp07Lr/VFG+fJU+FZg0KsfgB67FEvea2JDIqnsL7EPnt5Dzs7TGVAbJD5xVRYy+2jZKkc06tFRBeoRQr8Ih5oQ==
 
 "@vendure/common@^1.9.6":
   version "1.9.6"
@@ -2745,17 +2740,17 @@
     node-fetch "^2.6.0"
     sql.js "1.8.0"
 
-"@vendure/ui-devkit@1.9.5":
-  version "1.9.5"
-  resolved "https://registry.yarnpkg.com/@vendure/ui-devkit/-/ui-devkit-1.9.5.tgz#4b06f95a6919bbee905a82cd6a5477602e917f97"
-  integrity sha512-MRbAmk8Q6bpMlMAmdC+T1aBK6u6o3JSrS42Vv6wNqEWkFt3/muqNcIzznwW5JmIVyLT6U3ayfcfLWpWlSRjJ+g==
+"@vendure/ui-devkit@1.9.6":
+  version "1.9.6"
+  resolved "https://registry.yarnpkg.com/@vendure/ui-devkit/-/ui-devkit-1.9.6.tgz#6415922eaa4bb7ac329ddad765aba766b8b361ee"
+  integrity sha512-PJmuUlcSWnRGfcFZLazQ55nfzOF1V/TIKAUgTEEHECmDELL1vNpyZ/2uTYlTU0ZQphbyHgVuwvbImUuYxtD0bQ==
   dependencies:
     "@angular-devkit/build-angular" "12.2.16"
     "@angular/cli" "12.2.16"
     "@angular/compiler" "12.2.16"
     "@angular/compiler-cli" "12.2.16"
-    "@vendure/admin-ui" "^1.9.5"
-    "@vendure/common" "^1.9.5"
+    "@vendure/admin-ui" "^1.9.6"
+    "@vendure/common" "^1.9.6"
     chalk "^4.1.0"
     chokidar "^3.5.1"
     fs-extra "^10.0.0"

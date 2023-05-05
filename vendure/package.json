@@ -44,7 +44,7 @@
     "@vendure/core": "1.9.6",
     "@vendure/email-plugin": "1.9.6",
     "@vendure/payments-plugin": "1.9.6",
-    "@vendure/ui-devkit": "1.9.5",
+    "@vendure/ui-devkit": "1.9.6",
     "adm-zip": "^0.5.10",
     "copyfiles": "^2.4.1",
     "mysql": "^2.18.1",
