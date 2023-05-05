@@ -34,13 +34,7 @@ import { GoedgepicktPlugin } from 'vendure-plugin-goedgepickt';
 import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
 import { TaxExportStrategy } from '../src/export/tax-export-strategy';
 import { ProductsSoldExportStrategy } from '../src/export/products-sold-export-strategy';
-import {
-  AverageOrderValueMetric,
-  ConversionRateMetric,
-  MetricsPlugin,
-  NrOfOrdersMetric,
-} from 'vendure-plugin-metrics';
-import { RevenueMetric } from '../src/metrics/revenue-metric';
+import { MetricsPlugin } from 'vendure-plugin-metrics';
 import { EBoekhoudenPlugin } from 'vendure-plugin-e-boekhouden';
 import { EBookPlugin } from '../src/e-book/e-book.plugin';
 
@@ -133,14 +127,7 @@ export async function startDevServer(): Promise<TestEnv> {
     },
     plugins: [
       LimitVariantPerOrderPlugin,
-      MetricsPlugin.init({
-        metrics: [
-          new NrOfOrdersMetric(),
-          new AverageOrderValueMetric(),
-          new ConversionRateMetric(),
-          new RevenueMetric(),
-        ],
-      }),
+      MetricsPlugin,
       EBoekhoudenPlugin,
       EBookPlugin.init(process.env.VENDURE_HOST!),
       InvoicePlugin.init({
