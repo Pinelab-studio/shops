@@ -53,17 +53,11 @@ import {
 import { SendcloudPlugin } from 'vendure-plugin-sendcloud';
 import { sendcloudConfig } from './sendcloud/sendcloud.config';
 import { ChannelSpecificOrderCodeStrategy } from './order/order-code-strategy';
-import {
-  AverageOrderValueMetric,
-  ConversionRateMetric,
-  MetricsPlugin,
-  NrOfOrdersMetric,
-} from 'vendure-plugin-metrics';
-import { RevenueMetric } from './metrics/revenue-metric';
 import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
 import { VariantBulkUpdatePlugin } from 'vendure-plugin-variant-bulk-update';
 import { ProductsSoldExportStrategy } from './export/products-sold-export-strategy';
 import { CouponsUsedExportStrategy } from './export/coupons-used-export-strategy';
+import { MetricsPlugin } from 'vendure-plugin-metrics';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -214,14 +208,7 @@ export const config: VendureConfig = {
   plugins: [
     VariantBulkUpdatePlugin,
     LimitVariantPerOrderPlugin,
-    MetricsPlugin.init({
-      metrics: [
-        new NrOfOrdersMetric(),
-        new AverageOrderValueMetric(),
-        new ConversionRateMetric(),
-        new RevenueMetric(),
-      ],
-    }),
+    MetricsPlugin,
     EBoekhoudenPlugin,
     EBookPlugin.init(process.env.VENDURE_HOST!),
     InvoicePlugin.init({
