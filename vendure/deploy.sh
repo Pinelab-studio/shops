@@ -13,4 +13,5 @@ gcloud run deploy $1 \
             --project=pinelab-shops \
             --set-env-vars=$ENV_VARS \
             --add-cloudsql-instances="pinelab-shops:europe-west1:$2" \
-            --memory=$3
+            --memory=$3 \
+            $4
