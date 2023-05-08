@@ -33,7 +33,7 @@ jobs:
           { name: "worker", db: "shops-prod", secret: "ENV_PROD", memory: "2G"},
           { name: "shops-test", db: "pinelab2", secret: "ENV_TEST", memory: "1G"},
           { name: "worker-test", db: "pinelab2", secret: "ENV_TEST", memory: "1G"},
-          { name: "wkw-prod-api", db: "shops-prod", secret: "ENV_WKW_PROD", memory: "2G" },
+          { name: "wkw-prod-api", db: "shops-prod", secret: "ENV_WKW_PROD", memory: "2G", additionalArgs: "--no-cpu-throttling" },
           { name: "wkw-prod-worker", db: "shops-prod", secret: "ENV_WKW_PROD", memory: "2G" },
           { name: "wkw-test-api", db: "pinelab2", secret: "ENV_WKW_TEST", memory: "1G" },
           { name: "wkw-test-worker", db: "pinelab2", secret: "ENV_WKW_TEST", memory: "1G" }
@@ -55,4 +55,4 @@ jobs:
       - run: 'echo "$SECRET_VARS" > .env'
         env:
           SECRET_VARS: ${{secrets[matrix.instances.secret]}}
-      - run: ./deploy.sh ${{ matrix.instances.name }} ${{ matrix.instances.db }} ${{ matrix.instances.memory }}
+      - run: ./deploy.sh ${{ matrix.instances.name }} ${{ matrix.instances.db }} ${{ matrix.instances.memory }} ${{ matrix.instances.additionalArgs }}
