@@ -28,7 +28,8 @@
     "billing-address": "Factuuradres",
     "submit": "Bezorging",
     "note": "Notitie",
-    "invalid-country-for-postalcode": "Postcode niet geldig voor dit land"
+    "invalid-country-for-postalcode": "Postcode niet geldig voor dit land",
+    "vatId": "BTW ID"
   },
   "shipping": {
     "step-title": "Bezorging",
