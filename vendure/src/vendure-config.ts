@@ -151,6 +151,14 @@ export const config: VendureConfig = {
         ui: { component: 'text-form-input' },
         type: 'text',
       },
+      {
+        name: 'vatId',
+        public: true,
+        nullable: true,
+        label: [{ value: 'VAT identification', languageCode: LanguageCode.en }],
+        ui: { component: 'text-form-input' },
+        type: 'text',
+      },
     ],
     Product: [
       {
