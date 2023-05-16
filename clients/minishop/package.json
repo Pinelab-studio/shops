@@ -12,7 +12,7 @@
     "@fontsource/roboto-mono": "^4.5.0",
     "buefy": "^0.9.7",
     "debounce": "^1.2.1",
-    "pinelab-storefront": "0.67.0"
+    "pinelab-storefront": "0.67.1"
   },
   "devDependencies": {
     "@gridsome/source-graphql": "^0.1.0",
@@ -25,7 +25,7 @@
     "sass-loader": "^10.1.1",
     "webpack-bundle-analyzer": "^4.4.1"
   },
-  "version": "0.67.0",
+  "version": "0.67.1",
   "resolutions": {
     "graphql": "^14.7.0"
   }
