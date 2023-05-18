@@ -20,7 +20,6 @@ import {
   GoogleStoragePlugin,
   GoogleStorageStrategy,
 } from 'vendure-plugin-google-storage-assets';
-import { AllocateStockOnSettlementStrategy } from './stock-allocation/allocate-stock-on-settlement.strategy';
 import { WebhookPlugin } from 'vendure-plugin-webhook';
 import { DutchPostalCodePlugin } from 'vendure-plugin-dutch-postalcode';
 import { CloudTasksPlugin } from 'vendure-plugin-google-cloud-tasks';
@@ -78,7 +77,6 @@ if (process.env.SHOP_ENV === 'prod' || process.env.SHOP_ENV === 'wkw-prod') {
 export const config: VendureConfig = {
   logger,
   orderOptions: {
-    stockAllocationStrategy: new AllocateStockOnSettlementStrategy(),
     orderPlacedStrategy: new PlaceOrderOnSettlementStrategy(),
     orderCodeStrategy: new ChannelSpecificOrderCodeStrategy(),
   },
