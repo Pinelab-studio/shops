@@ -59,7 +59,7 @@
     "vendure-plugin-google-storage-assets": "7.0.0",
     "vendure-plugin-invoices": "7.0.0",
     "vendure-plugin-limit-product-per-order": "^7.0.0",
-    "vendure-plugin-metrics": "7.0.0",
+    "vendure-plugin-metrics": "7.0.6",
     "vendure-plugin-myparcel": "7.0.0",
     "vendure-plugin-order-export": "7.0.0",
     "vendure-plugin-sendcloud": "7.0.4",

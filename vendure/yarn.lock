@@ -12810,10 +12810,10 @@ vendure-plugin-limit-product-per-order@^7.0.0:
   resolved "https://registry.yarnpkg.com/vendure-plugin-limit-product-per-order/-/vendure-plugin-limit-product-per-order-7.0.0.tgz#61a22aa039342efec96a1147791fbe749a91658e"
   integrity sha512-+ldN/T2wV9vceeBpuNEobC2HARQQ+3Lzaf5vtDStVuV6s3+80A2YA7lNIxQKFkvk8Zqkox89xztUTB4R7q1N+A==
 
-vendure-plugin-metrics@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-metrics/-/vendure-plugin-metrics-7.0.0.tgz#bde07c9dd372c380b9cdfedb5ae82fc079dfee0b"
-  integrity sha512-/bha14vSpJ+Yuz6/5kueV9PlCg13lZza2WzzMERywXvtwQ6x9hNMsrIg/1peLHv2dlINKxTeMv3w4N2RJg1uMg==
+vendure-plugin-metrics@7.0.6:
+  version "7.0.6"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-metrics/-/vendure-plugin-metrics-7.0.6.tgz#c1ccbe0c3b5e36cd87f84432b2e0d30e29825933"
+  integrity sha512-FJgcl3uhfS5ANK/vNm7A56zXcfqdJvgd3ThgnUZg154YrXSdobkeTZ1DcqInllAVF9lkzdLc1zG8dDf9qHz2HA==
   dependencies:
     chart.js "^3.9.1"
     date-fns "^2.29.3"
