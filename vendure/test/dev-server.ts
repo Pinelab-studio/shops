@@ -20,7 +20,6 @@ import {
   RequestContext,
   ShippingMethodService,
 } from '@vendure/core';
-import { AllocateStockOnSettlementStrategy } from '../src/stock-allocation/allocate-stock-on-settlement.strategy';
 import { PlaceOrderOnSettlementStrategy } from '../src/order/place-order-on-settlement.strategy';
 import { InvoicePlugin, LocalFileStrategy } from 'vendure-plugin-invoices';
 import { TaxInvoiceStrategy } from '../src/invoice/tax-invoice-strategy';
@@ -104,7 +103,6 @@ export async function startDevServer(): Promise<TestEnv> {
   const config = mergeConfig(liveConfig, {
     logger: new DefaultLogger({ level: LogLevel.Debug }),
     orderOptions: {
-      stockAllocationStrategy: new AllocateStockOnSettlementStrategy(),
       orderPlacedStrategy: new PlaceOrderOnSettlementStrategy(),
     },
     apiOptions: {
