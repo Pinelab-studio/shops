@@ -57,6 +57,7 @@ import { VariantBulkUpdatePlugin } from 'vendure-plugin-variant-bulk-update';
 import { ProductsSoldExportStrategy } from './export/products-sold-export-strategy';
 import { CouponsUsedExportStrategy } from './export/coupons-used-export-strategy';
 import { MetricsPlugin } from 'vendure-plugin-metrics';
+import { TaxPerCountryExportStrategy } from './export/tax-per-country-export-strategy';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -272,6 +273,7 @@ export const config: VendureConfig = {
         new TaxExportStrategy(),
         new ProductsSoldExportStrategy(),
         new CouponsUsedExportStrategy(),
+        new TaxPerCountryExportStrategy(),
       ],
     }),
     ShippingByWeightAndCountryPlugin.init({
