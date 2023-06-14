@@ -4,7 +4,22 @@
       :collections="$context.navbarCollections"
       :key="$route.fullPath"
     />
+
     <div class="container is-widescreen section navbar-margin pb-6">
+      <!-- Wholesale banner -->
+      <div
+        v-if="$context.lang === 'nl'"
+        class="notification is-primary p-1 m-0 mb-4 has-text-centered"
+      >
+        <p class="has-text-white banner-text">
+          Hovenier of winkeleigenaar?
+          <a href="/kan-ik-korting-krijgen-als-winkeleigenaar/"
+            >Meld je hier aan</a
+          >
+          voor 5% korting op ons hele assortiment!
+        </p>
+      </div>
+
       <Breadcrumb v-if="$context.breadcrumb" :crumbs="$context.breadcrumb" />
       <slot name="content" />
     </div>
@@ -151,7 +166,7 @@ export default {
 
 @media screen and (min-width: 1024px) {
   .navbar-margin {
-    margin-top: 160px !important;
+    margin-top: 158px !important;
   }
 }
 </style>
