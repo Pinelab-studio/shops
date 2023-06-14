@@ -300,3 +300,9 @@ strong {
   @extend .is-4;
   @extend .title;
 }
+
+.banner-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
