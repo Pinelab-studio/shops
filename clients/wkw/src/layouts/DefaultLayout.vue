@@ -16,7 +16,6 @@
           <a href="/kan-ik-korting-krijgen-als-winkeleigenaar/"
             >Meld je hier aan</a
           >
-          voor 5% korting op ons hele assortiment!
         </p>
       </div>
 
