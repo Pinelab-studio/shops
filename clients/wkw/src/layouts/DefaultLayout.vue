@@ -13,7 +13,7 @@
       >
         <p class="has-text-white banner-text">
           Hovenier of winkeleigenaar?
-          <a href="/kan-ik-korting-krijgen-als-winkeleigenaar/"
+          <a href="https://3apfzvg8mkc.typeform.com/to/yVhteG9s"
             >Meld je hier aan</a
           >
         </p>
