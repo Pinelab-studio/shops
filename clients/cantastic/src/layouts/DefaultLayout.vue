@@ -195,29 +195,17 @@
               </div>
             </template>
 
-            <a
-              href="https://www.google.com/maps/place/Cantastic.nl/@51.5643065,4.875805,7z/data=!4m8!3m7!1s0x889d21e8646057b:0x7e23472417c573b2!8m2!3d51.5643065!4d4.875805!9m1!1b1!16s%2Fg%2F11q8tfzsfw?entry=ttu"
-              target="_blank"
-              rel="noopener"
+            <b-rate
+              class="is-inline is-vcentered is-clickable"
+              v-model="$context.rating"
+              icon="star-box"
+              :max="5"
+              locale="nl-NL"
+              :show-score="false"
+              :disabled="false"
+              :change="openReviews()"
             >
-              <b-rate
-                class="is-inline is-vcentered is-clickable"
-                v-model="$context.rating"
-                icon="star-box"
-                :max="5"
-                locale="nl-NL"
-                :show-score="false"
-                :disabled="true"
-              >
-              </b-rate>
-              Reviews
-              <!-- <img
-                src="/img/trustpilot.png"
-                :alt="$context.rating"
-                style="height: 22px"
-                class="pl-4"
-              /> -->
-            </a>
+            </b-rate>
           </div>
           <br />
           <Breadcrumb
@@ -380,6 +368,14 @@ export default {
         chunks.push(collections.slice(i, i + chunkSize));
       }
       return chunks;
+    },
+    openReviews() {
+      if (window) {
+        window.open(
+          'https://www.google.com/maps/place/Cantastic.nl/@51.5643065,4.875805,7z/data=!4m8!3m7!1s0x889d21e8646057b:0x7e23472417c573b2!8m2!3d51.5643065!4d4.875805!9m1!1b1!16s%2Fg%2F11q8tfzsfw?entry=ttu',
+          '_blank'
+        );
+      }
     },
   },
   data() {
