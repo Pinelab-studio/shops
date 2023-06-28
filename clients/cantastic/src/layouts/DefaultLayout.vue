@@ -371,10 +371,8 @@ export default {
     },
     openReviews() {
       if (window) {
-        window.open(
-          'https://www.google.com/maps/place/Cantastic.nl/@51.5643065,4.875805,7z/data=!4m8!3m7!1s0x889d21e8646057b:0x7e23472417c573b2!8m2!3d51.5643065!4d4.875805!9m1!1b1!16s%2Fg%2F11q8tfzsfw?entry=ttu',
-          '_blank'
-        );
+        // Open Google Reviews URL
+        window.open('https://g.co/kgs/Xb87gg', '_blank');
       }
     },
   },
