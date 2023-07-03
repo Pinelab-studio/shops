@@ -370,7 +370,7 @@ export default {
       return chunks;
     },
     openReviews() {
-      if (window) {
+      if (process.isClient) {
         // Open Google Reviews URL
         window.open('https://g.co/kgs/Xb87gg', '_blank');
       }
@@ -487,6 +487,7 @@ a.navbar-item:hover,
 .consent h4 {
   color: white;
 }
+
 .cart-badge {
   background: black;
   border-radius: 50%;
