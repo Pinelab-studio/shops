@@ -203,7 +203,7 @@
               locale="nl-NL"
               :show-score="false"
               :disabled="false"
-              :change="openReviews()"
+              @click.native="openReviews()"
             >
             </b-rate>
           </div>
@@ -372,7 +372,10 @@ export default {
     openReviews() {
       if (process.isClient) {
         // Open Google Reviews URL
-        // window.open('https://g.co/kgs/Xb87gg', '_blank');
+        window.open(
+          'https://www.google.com/search?cs=0&output=search&q=Cantastic.nl&ludocid=9089186693307003826&gsas=1&client=ms-android-xiaomi-rvo3&lsig=AB86z5Wo46WuUsoimx7UZhamIZ4Z&kgs=9d212325fb87ec70&shndl=-1&shem=lsp&source=sh/x/kp/local/2#lrd=0x889d21e8646057b:0x7e23472417c573b2,1,,,,',
+          '_blank'
+        );
       }
     },
   },
