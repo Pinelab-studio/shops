@@ -372,7 +372,7 @@ export default {
     openReviews() {
       if (process.isClient) {
         // Open Google Reviews URL
-        window.open('https://g.co/kgs/Xb87gg', '_blank');
+        // window.open('https://g.co/kgs/Xb87gg', '_blank');
       }
     },
   },
