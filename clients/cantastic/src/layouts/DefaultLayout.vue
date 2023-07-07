@@ -195,28 +195,17 @@
               </div>
             </template>
 
-            <a
-              href="https://nl.trustpilot.com/review/cantastic.nl"
-              target="_blank"
-              rel="noopener"
+            <b-rate
+              class="is-inline is-vcentered is-clickable"
+              v-model="$context.rating"
+              icon="star-box"
+              :max="5"
+              locale="nl-NL"
+              :show-score="false"
+              :disabled="false"
+              @click.native="openReviews()"
             >
-              <b-rate
-                class="is-inline is-vcentered"
-                v-model="$context.rating"
-                icon="star-box"
-                :max="5"
-                locale="nl-NL"
-                :show-score="false"
-                :disabled="true"
-              >
-              </b-rate>
-              <img
-                src="/img/trustpilot.png"
-                :alt="$context.rating"
-                style="height: 22px"
-                class="pl-4"
-              />
-            </a>
+            </b-rate>
           </div>
           <br />
           <Breadcrumb
@@ -380,6 +369,15 @@ export default {
       }
       return chunks;
     },
+    openReviews() {
+      if (process.isClient) {
+        // Open Google Reviews URL
+        window.open(
+          'https://www.google.com/search?cs=0&output=search&q=Cantastic.nl&ludocid=9089186693307003826&gsas=1&client=ms-android-xiaomi-rvo3&lsig=AB86z5Wo46WuUsoimx7UZhamIZ4Z&kgs=9d212325fb87ec70&shndl=-1&shem=lsp&source=sh/x/kp/local/2#lrd=0x889d21e8646057b:0x7e23472417c573b2,1,,,,',
+          '_blank'
+        );
+      }
+    },
   },
   data() {
     return {
@@ -492,6 +490,7 @@ a.navbar-item:hover,
 .consent h4 {
   color: white;
 }
+
 .cart-badge {
   background: black;
   border-radius: 50%;

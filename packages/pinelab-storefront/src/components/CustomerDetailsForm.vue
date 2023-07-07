@@ -51,6 +51,21 @@
           </p>
         </div>
       </div>
+      <div class="column">
+        <div class="field">
+          <p class="control is-expanded has-icons-left">
+            <b-input
+              :placeholder="`${$l('customer-details.vatId')}`"
+              aria-label="VAT identification"
+              type="text"
+              v-model="vatId"
+            />
+            <span class="icon is-small is-left">
+              <i class="mdi mdi-finance"></i>
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
     <div class="columns">
       <div class="column">
@@ -80,6 +95,7 @@
               required
               v-model="customer.emailAddress"
               maxlength="120"
+              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,24}$"
               :has-counter="false"
             />
             <span class="icon is-small is-left">
@@ -384,6 +400,7 @@ export default {
     return {
       isInvalidCountry: false,
       customerNote: undefined,
+      vatId: undefined,
       loadingShipping: false,
       hasDifferentBillingAddress: false,
       customer: {
@@ -526,6 +543,7 @@ export default {
           await this.vendure.setOrderCustomFields({
             customFields: {
               customerNote: this.customerNote,
+              vatId: this.vatId,
             },
           });
         }

@@ -20,7 +20,6 @@ import {
   GoogleStoragePlugin,
   GoogleStorageStrategy,
 } from 'vendure-plugin-google-storage-assets';
-import { AllocateStockOnSettlementStrategy } from './stock-allocation/allocate-stock-on-settlement.strategy';
 import { WebhookPlugin } from 'vendure-plugin-webhook';
 import { DutchPostalCodePlugin } from 'vendure-plugin-dutch-postalcode';
 import { CloudTasksPlugin } from 'vendure-plugin-google-cloud-tasks';
@@ -58,6 +57,7 @@ import { VariantBulkUpdatePlugin } from 'vendure-plugin-variant-bulk-update';
 import { ProductsSoldExportStrategy } from './export/products-sold-export-strategy';
 import { CouponsUsedExportStrategy } from './export/coupons-used-export-strategy';
 import { MetricsPlugin } from 'vendure-plugin-metrics';
+import { TaxPerCountryExportStrategy } from './export/tax-per-country-export-strategy';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -78,7 +78,6 @@ if (process.env.SHOP_ENV === 'prod' || process.env.SHOP_ENV === 'wkw-prod') {
 export const config: VendureConfig = {
   logger,
   orderOptions: {
-    stockAllocationStrategy: new AllocateStockOnSettlementStrategy(),
     orderPlacedStrategy: new PlaceOrderOnSettlementStrategy(),
     orderCodeStrategy: new ChannelSpecificOrderCodeStrategy(),
   },
@@ -148,6 +147,14 @@ export const config: VendureConfig = {
       {
         name: 'referralCode',
         label: [{ value: 'Referral code', languageCode: LanguageCode.en }],
+        ui: { component: 'text-form-input' },
+        type: 'text',
+      },
+      {
+        name: 'vatId',
+        public: true,
+        nullable: true,
+        label: [{ value: 'VAT identification', languageCode: LanguageCode.en }],
         ui: { component: 'text-form-input' },
         type: 'text',
       },
@@ -266,6 +273,7 @@ export const config: VendureConfig = {
         new TaxExportStrategy(),
         new ProductsSoldExportStrategy(),
         new CouponsUsedExportStrategy(),
+        new TaxPerCountryExportStrategy(),
       ],
     }),
     ShippingByWeightAndCountryPlugin.init({

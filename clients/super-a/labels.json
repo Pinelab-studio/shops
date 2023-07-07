@@ -16,7 +16,8 @@
     "billing-address": "Billing address",
     "submit": "Select shipping",
     "note": "Note",
-    "invalid-country-for-postalcode": "Postcode niet geldig voor dit land"
+    "invalid-country-for-postalcode": "Postcode niet geldig voor dit land",
+    "vatId": "VAT ID"
   },
   "shipping": {
     "step-title": "Shipping",
