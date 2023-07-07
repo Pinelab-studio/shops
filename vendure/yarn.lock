@@ -12780,10 +12780,10 @@ vendure-plugin-goedgepickt@7.0.0:
   dependencies:
     node-fetch "2"
 
-vendure-plugin-google-cloud-tasks@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/vendure-plugin-google-cloud-tasks/-/vendure-plugin-google-cloud-tasks-7.0.0.tgz#4950e6151b1a7c3fcf9b1bc7db983f05b19f7fd0"
-  integrity sha512-t6tm2bmCewd27pYU4dji6Kwsib5eUcJHQ6COfSdxeU9IYlEJ+JsUbqhOfTOMs2IqUbFgRp6YwZnYswuGAi5JyQ==
+vendure-plugin-google-cloud-tasks@7.0.0-v1.1:
+  version "7.0.0-v1.1"
+  resolved "https://registry.yarnpkg.com/vendure-plugin-google-cloud-tasks/-/vendure-plugin-google-cloud-tasks-7.0.0-v1.1.tgz#3a913d62a7f16c8b6f6c4336b6c8c850c74e4611"
+  integrity sha512-x/OObrQD8MwFSnOq0+aJsP7Y2blz6qJYGM378jCO7hi1m9a/Wh5RiUheVH71D8nHL/0XpImB9CHHz8Qa5VK1DQ==
   dependencies:
     "@google-cloud/tasks" "^2.5.0"
     body-parser "^1.19.2"
