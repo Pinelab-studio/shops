@@ -1,6 +1,6 @@
 import { PluginCommonModule, VendurePlugin } from '@vendure/core';
 import { Controller, Get, Param, Query, Res } from '@nestjs/common';
-import fetch from 'node-fetch';
+const fetch = require('node-fetch');
 import { Response } from 'express';
 import * as Papa from 'papaparse';
 
