@@ -1,20 +1,20 @@
 import { PluginCommonModule, VendurePlugin } from '@vendure/core';
-import { Controller, Get, Param, Query, Res } from '@nestjs/common';
+import { Controller, Get, Query, Res, Req } from '@nestjs/common';
 const fetch = require('node-fetch');
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import * as Papa from 'papaparse';
 
 /**
  * 1. Copy link from SendCloud email
- * 2. Go to https://www.urlencoder.org/ and encode the url
- * 3. In your browser, type `http://localhost:3000/sendcloud-csv-parser?csv=<encoded url>`
+ * 3. In your browser, type `http://localhost:3000/sendcloud-csv-parser?csv=<sendcloud-link>`
  */
 @Controller('sendcloud-csv-parser')
 export class SendcloudCsvParserController {
   constructor() {}
 
   @Get('/')
-  async download(@Query('csv') csvUrl: string, @Res() res: Response) {
+  async download(@Res() res: Response, @Req() req: Request) {
+    const csvUrl = req.url.split('/sendcloud-csv-parser?csv=')[1];
     const csvRes = await fetch(csvUrl);
     if (!csvRes.ok) {
       return res.status(csvRes.status).send(await csvRes.text());
