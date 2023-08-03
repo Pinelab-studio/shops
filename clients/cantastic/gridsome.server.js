@@ -45,6 +45,8 @@ module.exports = async function (api) {
           facebook,
           usps,
           review_rating,
+          popup_tonen,
+          popup_content,
         },
         cantastic_paginas: pages,
         cantastic_highlight: highlights,
@@ -88,6 +90,8 @@ module.exports = async function (api) {
       phoneNr: telefoon,
       usps: usps.split(','),
       rating: review_rating,
+      popupEnabled: popup_tonen,
+      popupContent: popup_tonen ? popup_content : undefined,
     };
 
     // Helper functions

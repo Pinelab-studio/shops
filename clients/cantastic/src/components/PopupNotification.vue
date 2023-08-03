@@ -1,6 +1,7 @@
 <template>
   <b-notification
     v-if="!hasBeenClosed"
+    class="mt-3"
     type="is-primary"
     aria-close-label="Sluiten"
     v-on:close="onClose()"

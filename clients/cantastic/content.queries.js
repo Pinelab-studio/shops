@@ -28,6 +28,8 @@ const GET_CONTENT = gql`
       usps
       facebook
       review_rating
+      popup_tonen
+      popup_content
     }
     cantastic_paginas {
       title

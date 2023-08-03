@@ -180,7 +180,10 @@
       <transition name="fade" appear>
         <div class="container is-widescreen section">
           <!-- Optional modal -->
-          <PopupNotification htmlContent="<h1>Just a test<h2>" />
+          <PopupNotification
+            v-if="$context.popupEnabled"
+            :htmlContent="$context.popupContent"
+          />
 
           <div
             v-if="!$context.hideUsps"
