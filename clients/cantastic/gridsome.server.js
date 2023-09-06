@@ -50,6 +50,7 @@ module.exports = async function (api) {
         },
         cantastic_paginas: pages,
         cantastic_highlight: highlights,
+        cantastic_swatches: swatches,
       },
     ] = await Promise.all([
       vendureServer.getShopData(),
@@ -231,7 +232,7 @@ module.exports = async function (api) {
       );
       if (swatchFacet) {
         component = 'ColorSwatchProduct.vue';
-        setSwatchColors(product, swatchFacet.code, '#000000');
+        setSwatchColors(swatches, product, swatchFacet.code, '#000000');
       }
 
       // Add Home before others

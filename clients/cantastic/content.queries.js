@@ -47,6 +47,10 @@ const GET_CONTENT = gql`
       button_text
       button_link
     }
+    cantastic_swatches {
+      swatch_naam
+      colors
+    }
   }
 `;
 

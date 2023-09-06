@@ -3,33 +3,29 @@
  * inverted color for variant.textColor
  * for all variants of swatchable products
  */
-function setSwatchColors(product, facetCode, defaultColor) {
-  try {
-    const colorChart = require(`./src/swatch-colors/${facetCode}.json`);
-    product.variants.forEach((variant) => {
-      variant.bgColor = Object.entries(colorChart).find(
-        ([key, value]) =>
-          key.toLowerCase() === variant.options?.[0]?.name.toLowerCase()
-      )?.[1];
-      if (!variant.bgColor) {
-        // const colorName = variant.options[0] ? variant.options[0]
-        console.error(
-          `No color found for ${variant.options?.[0]?.name} (${variant.name}) in ${facetCode}.json, using ${defaultColor}`
-        );
-        variant.bgColor = defaultColor;
-      }
-      variant.textColor = getContrastingColor(variant.bgColor);
-    });
-    product.variants = sortByColorChart(product.variants, colorChart);
-  } catch (e) {
-    if (e.code !== 'MODULE_NOT_FOUND') {
-      // Re-throw not "Module not found" errors
-      throw e;
-    }
+function setSwatchColors(swatches, product, facetCode, defaultColor) {
+  const colorChart = swatches.find(
+    (swatch) => swatch.swatch_naam === facetCode
+  )?.colors;
+  if (!colorChart) {
     throw Error(
       `No colorChart found for product ${product.name} with name '${facetCode}.json'`
     );
   }
+  product.variants.forEach((variant) => {
+    variant.bgColor = Object.entries(colorChart).find(
+      ([key, value]) =>
+        key.toLowerCase() === variant.options?.[0]?.name.toLowerCase()
+    )?.[1];
+    if (!variant.bgColor) {
+      console.error(
+        `No color found for ${variant.options?.[0]?.name} (${variant.name}) in ${facetCode}.json, using ${defaultColor}`
+      );
+      variant.bgColor = defaultColor;
+    }
+    variant.textColor = getContrastingColor(variant.bgColor);
+  });
+  product.variants = sortByColorChart(product.variants, colorChart);
 }
 
 /**
