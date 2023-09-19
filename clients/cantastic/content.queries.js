@@ -49,7 +49,7 @@ const GET_CONTENT = gql`
     }
     cantastic_swatches {
       swatch_naam
-      colors
+      html_colors
     }
   }
 `;

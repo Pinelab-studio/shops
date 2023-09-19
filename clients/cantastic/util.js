@@ -4,13 +4,18 @@
  * for all variants of swatchable products
  */
 function setSwatchColors(swatches, product, facetCode, defaultColor) {
-  const colorChart = swatches.find(
+  let colorChart = swatches.find(
     (swatch) => swatch.swatch_naam === facetCode
-  )?.colors;
+  )?.html_colors;
   if (!colorChart) {
     throw Error(
       `No colorChart found for product ${product.name} with name '${facetCode}.json'`
     );
+  }
+  try {
+    colorChart = JSON.parse(colorChart);
+  } catch (e) {
+    throw Error(`Swatch '${facetCode}' from directus is not a valid JSON`);
   }
   product.variants.forEach((variant) => {
     variant.bgColor = Object.entries(colorChart).find(
@@ -19,7 +24,7 @@ function setSwatchColors(swatches, product, facetCode, defaultColor) {
     )?.[1];
     if (!variant.bgColor) {
       console.error(
-        `No color found for ${variant.options?.[0]?.name} (${variant.name}) in ${facetCode}.json, using ${defaultColor}`
+        `No color found for ${variant.options?.[0]?.name} (${variant.name}) in swatch ${facetCode}, using ${defaultColor}`
       );
       variant.bgColor = defaultColor;
     }
