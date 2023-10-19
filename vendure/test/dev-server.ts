@@ -21,20 +21,23 @@ import {
   ShippingMethodService,
 } from '@vendure/core';
 import { PlaceOrderOnSettlementStrategy } from '../src/order/place-order-on-settlement.strategy';
-import { InvoicePlugin, LocalFileStrategy } from 'vendure-plugin-invoices';
+import {
+  InvoicePlugin,
+  LocalFileStrategy,
+} from '@pinelab/vendure-plugin-invoices';
 import { TaxInvoiceStrategy } from '../src/invoice/tax-invoice-strategy';
-import { OrderExportPlugin } from 'vendure-plugin-order-export';
+import { OrderExportPlugin } from '@pinelab/vendure-plugin-order-export';
 import { EmailPlugin } from '@vendure/email-plugin';
 import { orderConfirmationHandler } from '../src/email/order-confirmation.handlers';
 import path from 'path';
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
-import { GoogleStoragePlugin } from 'vendure-plugin-google-storage-assets/dist/google-storage-plugin';
-import { GoedgepicktPlugin } from 'vendure-plugin-goedgepickt';
-import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
+import { GoogleStoragePlugin } from '@pinelab/vendure-plugin-google-storage-assets/dist/google-storage-plugin';
+import { GoedgepicktPlugin } from '@pinelab/vendure-plugin-goedgepickt';
+import { LimitVariantPerOrderPlugin } from '@pinelab/vendure-plugin-limit-variant-per-order';
 import { TaxExportStrategy } from '../src/export/tax-export-strategy';
 import { ProductsSoldExportStrategy } from '../src/export/products-sold-export-strategy';
-import { MetricsPlugin } from 'vendure-plugin-metrics';
-import { EBoekhoudenPlugin } from 'vendure-plugin-e-boekhouden';
+import { MetricsPlugin } from '@pinelab/vendure-plugin-metrics';
+import { EBoekhoudenPlugin } from '@pinelab/vendure-plugin-e-boekhouden';
 import { EBookPlugin } from '../src/e-book/e-book.plugin';
 
 const testPaymentMethod = new PaymentMethodHandler({

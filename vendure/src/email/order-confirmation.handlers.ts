@@ -1,7 +1,7 @@
 import { Logger, OrderPlacedEvent, translateDeep } from '@vendure/core';
 import { EmailEventHandler, EmailEventListener } from '@vendure/email-plugin';
 import { mockOrderStateTransitionEvent } from '@vendure/email-plugin/lib/src/mock-events';
-import { InvoiceService } from 'vendure-plugin-invoices';
+import { InvoiceService } from '@pinelab/vendure-plugin-invoices';
 import { EBookController } from '../e-book/e-book.plugin';
 import { TaxHelper } from '../tax/tax.helper';
 import { logOrderHistory } from '../util/history.util';

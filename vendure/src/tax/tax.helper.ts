@@ -1,5 +1,5 @@
 import { Order } from '@vendure/core';
-import { recalculateTaxFromTotalIncVAT } from 'vendure-plugin-e-boekhouden';
+import { recalculateTaxFromTotalIncVAT } from '@pinelab/vendure-plugin-e-boekhouden';
 
 /**
  * Tax summary for one or multiple orders
