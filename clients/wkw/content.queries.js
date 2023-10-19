@@ -40,7 +40,7 @@ const GET_CONTENT = gql`
       short_description
       naam
     }
-    wkw_reviews {
+    wkw_reviews(limit: 1000, sort: "-review_date") {
       vendure_product_id
       author_name
       date_created

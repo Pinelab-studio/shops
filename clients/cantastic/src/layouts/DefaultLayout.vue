@@ -179,6 +179,14 @@
     <div class="content-container">
       <transition name="fade" appear>
         <div class="container is-widescreen section">
+          <!-- Optional modal -->
+          <ClientOnly>
+            <PopupNotification
+              v-if="$context.popupEnabled"
+              :htmlContent="$context.popupContent"
+            />
+          </ClientOnly>
+
           <div
             v-if="!$context.hideUsps"
             class="usps is-flex-desktop is-vcentered is-justify-content-space-between mt-4 is-hidden-mobile is-hidden-tablet-only"
@@ -317,6 +325,7 @@ import Breadcrumb from 'pinelab-storefront/lib/components/Breadcrumb';
 import Basket from 'pinelab-storefront/lib/components/Basket';
 import Search from '../components/Search';
 import NewsletterForm from '../components/NewsletterForm';
+import PopupNotification from '../components/PopupNotification';
 
 export default {
   components: {
@@ -324,6 +333,7 @@ export default {
     Breadcrumb,
     Basket,
     NewsletterForm,
+    PopupNotification,
   },
   methods: {
     hasChildren(collection) {

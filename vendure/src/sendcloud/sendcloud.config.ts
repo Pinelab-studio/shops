@@ -1,7 +1,12 @@
+import {
+  Injector,
+  Order,
+  RequestContext,
+  TransactionalConnection,
+} from '@vendure/core';
 import { isProd, runningLocal } from '../vendure-config';
 import {
   getCouponCodes,
-  getNrOfOrders,
   ParcelInputItem,
   SendcloudPluginOptions,
 } from 'vendure-plugin-sendcloud';
@@ -37,3 +42,43 @@ export const sendcloudConfig: SendcloudPluginOptions = {
     return additionalInputs;
   },
 };
+
+/**
+ * Get nr of orders including Shipped and PaymentSettled
+ */
+export async function getNrOfOrders(
+  ctx: RequestContext,
+  injector: Injector,
+  order: Order
+): Promise<ParcelInputItem> {
+  let nrOfOrders = 0;
+  if (order.customer?.id) {
+    const orders = await injector
+      .get(TransactionalConnection)
+      .getRepository(ctx, Order)
+      .find({
+        where: [
+          {
+            customer: { id: order.customer.id },
+            state: 'Delivered',
+          },
+          {
+            customer: { id: order.customer.id },
+            state: 'PaymentSettled',
+          },
+          {
+            customer: { id: order.customer.id },
+            state: 'Shipped',
+          },
+        ],
+      });
+    nrOfOrders = orders.length;
+  }
+  return {
+    description: String(nrOfOrders),
+    quantity: 1,
+    weight: '0.1',
+    sku: `Nr of orders`,
+    value: '0',
+  };
+}

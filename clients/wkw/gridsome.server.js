@@ -54,14 +54,8 @@ module.exports = async function (api) {
       wkw_algemeen: common_all,
       wkw_paginas: allPages,
       wkw_blogs: allBlogs,
-      wkw_reviews,
+      wkw_reviews: reviews,
     } = await directus.request(GET_CONTENT);
-
-    // Sort by review_date
-    const reviews = wkw_reviews.sort(
-      (a, b) =>
-        new Date(b.review_date).getTime() - new Date(a.review_date).getTime()
-    );
 
     const pages_nl = allPages.filter((p) => p.language === 'nl');
     const pages_en = allPages.filter((p) => p.language === 'en');

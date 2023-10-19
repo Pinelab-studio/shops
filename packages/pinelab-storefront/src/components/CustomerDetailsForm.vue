@@ -539,14 +539,12 @@ export default {
             city: null,
           });
         }
-        if (this.customerNote) {
-          await this.vendure.setOrderCustomFields({
-            customFields: {
-              customerNote: this.customerNote,
-              vatId: this.vatId,
-            },
-          });
-        }
+        await this.vendure.setOrderCustomFields({
+          customFields: {
+            customerNote: this.customerNote,
+            vatId: this.vatId,
+          },
+        });
         this.vendure.setDefaultShippingMethod(); // async
         this.$emit('submit');
       } catch (e) {

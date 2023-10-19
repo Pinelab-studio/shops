@@ -28,6 +28,8 @@ const GET_CONTENT = gql`
       usps
       facebook
       review_rating
+      popup_tonen
+      popup_content
     }
     cantastic_paginas {
       title
@@ -44,6 +46,10 @@ const GET_CONTENT = gql`
       subtitle
       button_text
       button_link
+    }
+    cantastic_swatches {
+      swatch_naam
+      html_colors
     }
   }
 `;
