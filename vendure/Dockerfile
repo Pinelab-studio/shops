@@ -4,7 +4,7 @@ FROM node:16
 WORKDIR /usr/src/app
 
 COPY . .
-RUN yarn install --production
+RUN yarn install
 RUN yarn build
 
 # PhantomJS fix https://github.com/bazelbuild/rules_closure/issues/351
