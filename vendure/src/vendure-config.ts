@@ -59,6 +59,7 @@ import { CouponsUsedExportStrategy } from './export/coupons-used-export-strategy
 import { MetricsPlugin } from '@pinelab/vendure-plugin-metrics';
 import { TaxPerCountryExportStrategy } from './export/tax-per-country-export-strategy';
 import { SendcloudCsvParserPlugin } from './sendcloud/sendcloud-csv-parser.plugin';
+import { MigrationV2Plugin } from '@vendure/migrate-v2';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -214,6 +215,7 @@ export const config: VendureConfig = {
     ],
   },
   plugins: [
+    // MigrationV2Plugin,
     SendcloudCsvParserPlugin,
     VariantBulkUpdatePlugin,
     LimitVariantPerOrderPlugin,
@@ -238,7 +240,6 @@ export const config: VendureConfig = {
     }),
     DutchPostalCodePlugin.init(process.env.POSTCODE_APIKEY!),
     WebhookPlugin.init({
-      httpMethod: 'POST',
       delay: 3000,
       disabled: runningInWorker || runningLocal, // disable for 'worker' and locally
       events: [
