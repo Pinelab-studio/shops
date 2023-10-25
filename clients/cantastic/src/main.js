@@ -33,20 +33,6 @@ export default function (Vue, { router, head, isClient }) {
       vueRouter: router, // Pass the router instance to automatically sync with router (optional)
       trackOnNextTick: false, // Whether or not call trackView in Vue.nextTick
     });
-
-    Vue.use(
-      VueGtag,
-      {
-        config: {
-          id: 'G-HSHBS7YZDM',
-          params: {
-            anonymize_ip: true,
-          },
-        },
-        bootstrap: false,
-      },
-      router
-    );
     setStore(
       Vue,
       process.env.GRIDSOME_VENDURE_API,
