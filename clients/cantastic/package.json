@@ -12,6 +12,7 @@
   "dependencies": {
     "@fontsource/open-sans": "^4.5.6",
     "@fontsource/roboto": "^4.5.3",
+    "@gtm-support/vue2-gtm": "^2.0.0",
     "buefy": "^0.9.14",
     "debounce": "^1.2.1",
     "fuse.js": "^6.6.2",

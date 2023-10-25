@@ -13,7 +13,7 @@ import {
 } from 'pinelab-storefront';
 import QuantityInput from 'pinelab-storefront/lib/components/QuantityInput';
 import PopupImage from 'pinelab-storefront/lib/components/PopupImage';
-import VueGtag from 'vue-gtag';
+import VueGtm from '@gtm-support/vue2-gtm';
 
 export default function (Vue, { router, head, isClient }) {
   head.link.push(...preconnectLinks);
@@ -24,21 +24,29 @@ export default function (Vue, { router, head, isClient }) {
   Vue.component('ProductCard', ProductCard);
   Vue.component('CategoryCard', CategoryCard);
   if (isClient) {
-    if (isClient) {
-      Vue.use(
-        VueGtag,
-        {
-          config: {
-            id: 'G-HSHBS7YZDM',
-            params: {
-              anonymize_ip: true,
-            },
+    Vue.use(VueGtm, {
+      id: 'GTM-MMK8RGTW', // Your GTM single container ID, array of container ids ['GTM-xxxxxx', 'GTM-yyyyyy'] or array of objects [{id: 'GTM-xxxxxx', queryParams: { gtm_auth: 'abc123', gtm_preview: 'env-4', gtm_cookies_win: 'x'}}, {id: 'GTM-yyyyyy', queryParams: {gtm_auth: 'abc234', gtm_preview: 'env-5', gtm_cookies_win: 'x'}}], // Your GTM single container ID or array of container ids ['GTM-xxxxxx', 'GTM-yyyyyy']
+      defer: true, // Script can be set to `defer` to speed up page load at the cost of less accurate results (in case visitor leaves before script is loaded, which is unlikely but possible). Defaults to false, so the script is loaded `async` by default
+      compatibility: false, // Will add `async` and `defer` to the script tag to not block requests for old browsers that do not support `async`
+      enabled: true, // defaults to true. Plugin can be disabled by setting this to false for Ex: enabled: !!GDPR_Cookie (optional)
+      loadScript: true, // Whether or not to load the GTM Script (Helpful if you are including GTM manually, but need the dataLayer functionality in your components) (optional)
+      vueRouter: router, // Pass the router instance to automatically sync with router (optional)
+      trackOnNextTick: false, // Whether or not call trackView in Vue.nextTick
+    });
+
+    Vue.use(
+      VueGtag,
+      {
+        config: {
+          id: 'G-HSHBS7YZDM',
+          params: {
+            anonymize_ip: true,
           },
-          bootstrap: false,
         },
-        router
-      );
-    }
+        bootstrap: false,
+      },
+      router
+    );
     setStore(
       Vue,
       process.env.GRIDSOME_VENDURE_API,
