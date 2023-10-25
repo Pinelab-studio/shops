@@ -41,7 +41,8 @@ export const eligibleByZoneChecker = new ShippingEligibilityChecker({
       authorizedAsOwnerOnly: false,
       channel,
     });
-    allZones = await injector.get(ZoneService).findAll(ctx);
+    const zonesList = await injector.get(ZoneService).findAll(ctx);
+    allZones = zonesList.items;
   },
   check: (ctx, order, args) => {
     if (allZones.length === 0) {

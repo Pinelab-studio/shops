@@ -30,9 +30,7 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
       const [{ sender, additionalRecipients }, invoicesEnabled] =
         await Promise.all([
           EmailUtil.getAdminEmailAddressesForChannel(injector, event.ctx),
-          injector
-            .get(InvoiceService)
-            .isInvoicePluginEnabled(channel.id as string),
+          injector.get(InvoiceService).isInvoicePluginEnabled(event.ctx),
         ]);
       if (additionalRecipients.length === 0) {
         Logger.warn(
