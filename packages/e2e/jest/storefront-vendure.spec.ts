@@ -5,7 +5,7 @@ import {
 } from '../../pinelab-storefront/src';
 import { startDevServer, TestEnv } from '../../../vendure/test/dev-server';
 import { LocalStorageMock } from './mockWindow';
-import {describe, beforeAll, afterAll, it, expect} from 'vitest'
+import { describe, beforeAll, afterAll, it, expect } from 'vitest';
 
 describe('Test pinelab-storefront to Vendure communication', () => {
   let vendureServer: VendureServer;

@@ -2,7 +2,7 @@ name: Deploy Vendure Test envs
 on:
   push:
     branches:
-      - develop
+      - feat/vendure-v2
 
 jobs:
   build:
