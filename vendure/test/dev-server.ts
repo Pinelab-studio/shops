@@ -102,7 +102,10 @@ export async function startDevServer(): Promise<TestEnv> {
     new SqljsInitializer(path.join(__dirname, '__data__'))
   );
   // Use live config as base, but override plugins for testing
-  const liveConfig = require('../src/vendure-config').config;
+  const { config: liveConfig } = await import(
+    path.join(__dirname, '../src/vendure-config.ts')
+  );
+  // const liveConfig = require(path.join(__dirname, '../src/vendure-config.ts')).config;
   const config = mergeConfig(liveConfig, {
     logger: new DefaultLogger({ level: LogLevel.Debug }),
     orderOptions: {

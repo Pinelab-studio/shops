@@ -113,11 +113,11 @@ describe('Test pinelab-storefront to Vendure communication', () => {
     });
   });
 
-  describe('Vendure admin', () => {
-    // TODO
-    // TaxSummary voor confirmation email
-    // Taxsummary voor invoice
-    // Allocate stock on settlement
-    // TaxExport strategy
-  });
+  // describe('Vendure admin', () => {
+  //   TODO
+  //   TaxSummary voor confirmation email
+  //   Taxsummary voor invoice
+  //   Allocate stock on settlement
+  //   TaxExport strategy
+  // });
 });
