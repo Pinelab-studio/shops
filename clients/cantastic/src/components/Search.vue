@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     async loadIndex() {
-      const res = await fetch('/_search-cache.json.json');
+      const res = await fetch('/_search-cache.json');
       if (!res.ok) {
         throw Error(`Unable to fetch SearchIndex: ${res.statusText}`);
       }
