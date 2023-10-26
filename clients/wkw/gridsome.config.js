@@ -6,6 +6,8 @@
 
 if (process.env.VENDURE_ENV === 'local') {
   process.env.GRIDSOME_VENDURE_API = process.env.GRIDSOME_VENDURE_API_LOCAL;
+} else if (process.env.VENDURE_ENV === 'test') {
+  process.env.GRIDSOME_VENDURE_API = process.env.GRIDSOME_VENDURE_API_TEST;
 }
 
 module.exports = {
