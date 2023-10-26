@@ -19,46 +19,48 @@ import path from 'path';
 import {
   GoogleStoragePlugin,
   GoogleStorageStrategy,
-} from 'vendure-plugin-google-storage-assets';
-import { WebhookPlugin } from 'vendure-plugin-webhook';
-import { DutchPostalCodePlugin } from 'vendure-plugin-dutch-postalcode';
-import { CloudTasksPlugin } from 'vendure-plugin-google-cloud-tasks';
+} from '@pinelab/vendure-plugin-google-storage-assets';
+import { WebhookPlugin } from '@pinelab/vendure-plugin-webhook';
+import { DutchPostalCodePlugin } from '@pinelab/vendure-plugin-dutch-postalcode';
+import { CloudTasksPlugin } from '@pinelab/vendure-plugin-google-cloud-tasks';
 import { cloudLogger } from './logger';
-import { MyparcelPlugin } from 'vendure-plugin-myparcel/dist/myparcel.plugin';
+import { MyparcelPlugin } from '@pinelab/vendure-plugin-myparcel/dist/myparcel.plugin';
 import { ShippingBasedTaxZoneStrategy } from './tax/shipping-based-tax-zone.strategy';
 import { cartTaxShippingCalculator } from './shipping/shipping-tax-calculator';
 import { eligibleByZoneChecker } from './shipping/shipping-by-zone-checker';
 import { MolliePlugin } from '@vendure/payments-plugin/package/mollie';
 import { PlaceOrderOnSettlementStrategy } from './order/place-order-on-settlement.strategy';
-import { GoedgepicktPlugin } from 'vendure-plugin-goedgepickt';
+import { GoedgepicktPlugin } from '@pinelab/vendure-plugin-goedgepickt';
 import {
   GoogleStorageInvoiceStrategy,
   InvoicePlugin,
-} from 'vendure-plugin-invoices';
+} from '@pinelab/vendure-plugin-invoices';
 import { TaxInvoiceStrategy } from './invoice/tax-invoice-strategy';
-import { CoinbasePlugin } from 'vendure-plugin-coinbase';
-import { EBoekhoudenPlugin } from 'vendure-plugin-e-boekhouden';
+import { CoinbasePlugin } from '@pinelab/vendure-plugin-coinbase';
+import { EBoekhoudenPlugin } from '@pinelab/vendure-plugin-e-boekhouden';
 import { EBookPlugin } from './e-book/e-book.plugin';
 import { eligibleWithoutAddressChecker } from './shipping/eligible-without-address-checker';
-import { OrderExportPlugin } from 'vendure-plugin-order-export';
+import { OrderExportPlugin } from '@pinelab/vendure-plugin-order-export';
 import { TaxExportStrategy } from './export/tax-export-strategy';
 import { orderConfirmationHandler } from './email/order-confirmation.handlers';
 import { json } from 'body-parser';
-import { ShippingByWeightAndCountryPlugin } from 'vendure-plugin-shipping-by-weight-and-country';
+import { ShippingByWeightAndCountryPlugin } from '@pinelab/vendure-plugin-shipping-by-weight-and-country';
 import {
   createLowStockEmailHandler,
   StockMonitoringPlugin,
-} from 'vendure-plugin-stock-monitoring';
-import { SendcloudPlugin } from 'vendure-plugin-sendcloud';
+} from '@pinelab/vendure-plugin-stock-monitoring';
+import { SendcloudPlugin } from '@pinelab/vendure-plugin-sendcloud';
 import { sendcloudConfig } from './sendcloud/sendcloud.config';
 import { ChannelSpecificOrderCodeStrategy } from './order/order-code-strategy';
-import { LimitVariantPerOrderPlugin } from 'vendure-plugin-limit-product-per-order';
-import { VariantBulkUpdatePlugin } from 'vendure-plugin-variant-bulk-update';
+import { LimitVariantPerOrderPlugin } from '@pinelab/vendure-plugin-limit-variant-per-order';
+import { VariantBulkUpdatePlugin } from '@pinelab/vendure-plugin-variant-bulk-update';
 import { ProductsSoldExportStrategy } from './export/products-sold-export-strategy';
 import { CouponsUsedExportStrategy } from './export/coupons-used-export-strategy';
-import { MetricsPlugin } from 'vendure-plugin-metrics';
+import { MetricsPlugin } from '@pinelab/vendure-plugin-metrics';
 import { TaxPerCountryExportStrategy } from './export/tax-per-country-export-strategy';
 import { SendcloudCsvParserPlugin } from './sendcloud/sendcloud-csv-parser.plugin';
+import { MigrationV2Plugin } from '@vendure/migrate-v2';
+import { KlarnaPatchPlugin } from './klarna-patch-plugin';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -214,6 +216,8 @@ export const config: VendureConfig = {
     ],
   },
   plugins: [
+    // MigrationV2Plugin,
+    KlarnaPatchPlugin,
     SendcloudCsvParserPlugin,
     VariantBulkUpdatePlugin,
     LimitVariantPerOrderPlugin,
@@ -238,7 +242,6 @@ export const config: VendureConfig = {
     }),
     DutchPostalCodePlugin.init(process.env.POSTCODE_APIKEY!),
     WebhookPlugin.init({
-      httpMethod: 'POST',
       delay: 3000,
       disabled: runningInWorker || runningLocal, // disable for 'worker' and locally
       events: [
