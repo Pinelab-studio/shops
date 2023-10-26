@@ -8,7 +8,7 @@
     "nightwatch:e2e": "nightwatch --config nightwatch-firefox.config.js  --test nightwatch/place-order.js",
     "nightwatch:checkout": "nightwatch --test nightwatch/checkout.js --testcase $TESTCASE",
     "nightwatch:checkout:firefox": "nightwatch --config nightwatch-firefox.config.js --test nightwatch/checkout.js --testcase $TESTCASE",
-    "vitest:e2e": "vitest --forceExit"
+    "vitest:e2e": "vitest run"
   },
   "devDependencies": {
     "@swc/core": "^1.3.95",

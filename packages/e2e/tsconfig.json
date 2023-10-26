@@ -12,6 +12,5 @@
     "outDir": "./dist",
     "baseUrl": "./src/"
   },
-  "include": ["src"],
   "exclude": ["node_modules", "migration", "script", "src/__admin-ui"]
 }
