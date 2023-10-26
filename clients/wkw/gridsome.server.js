@@ -188,7 +188,7 @@ module.exports = async function (api) {
         },
       ]);
       fs.writeFileSync(
-        `./static/_${lang}_search.json`,
+        `./static/_${lang}.search-cache.json`,
         JSON.stringify(indexObject)
       );
 

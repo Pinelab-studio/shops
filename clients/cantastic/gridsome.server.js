@@ -179,7 +179,10 @@ module.exports = async function (api) {
         weight: 1,
       },
     ]);
-    fs.writeFileSync('./static/_search.json', JSON.stringify(indexObject));
+    fs.writeFileSync(
+      './static/_search-cache.json',
+      JSON.stringify(indexObject)
+    );
 
     // ----------------- Index ---------------------
     const highlightsParent = allCollections.find(
