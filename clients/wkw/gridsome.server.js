@@ -464,6 +464,12 @@ module.exports = async function (api) {
           popularProducts,
         },
       });
+
+      createPage({
+        path: `/under-construction/`,
+        component: './src/templates/UnderConstruction.vue',
+        context: {},
+      });
     }
   });
 };
