@@ -1,4 +1,4 @@
-/* /under-construction.html 302
+/* /under-construction/ 302
 
 /order/* /order/_code.html 200
 /admin/ https://wkw-prod-api.pinelab.app/admin/ 302
@@ -9,3 +9,5 @@
 /en/informatie/escaping-worms/ /en/information/escaping-worms/ 301
 /en/informatie/what-do-worms-eat/ /en/information/what-do-worms-eat/ 301
 /en/* /en/404/ 404
+
+/* /under-construction/ 302
