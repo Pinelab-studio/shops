@@ -4,8 +4,8 @@ import {
   OrderService,
   RequestContext,
 } from '@vendure/core';
-import { GoedgepicktService } from 'vendure-plugin-goedgepickt/dist/vendure-plugin-goedgepickt/src/api/goedgepickt.service';
-import { SendcloudService } from 'vendure-plugin-sendcloud/dist/vendure-plugin-sendcloud/src/api/sendcloud.service';
+import { GoedgepicktService } from '@pinelab/vendure-plugin-goedgepickt/dist/vendure-plugin-goedgepickt/src/api/goedgepickt.service';
+import { SendcloudService } from '@pinelab/vendure-plugin-sendcloud/dist/vendure-plugin-sendcloud/src/api/sendcloud.service';
 
 // Use like yarn script:prod script/push-to-sendcloud.ts __default_channel__ 6ENWC7GRJWYCAQXN
 (async () => {

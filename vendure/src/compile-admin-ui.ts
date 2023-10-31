@@ -1,18 +1,18 @@
 import { compileUiExtensions, setBranding } from '@vendure/ui-devkit/compiler';
 import * as path from 'path';
-import { WebhookPlugin } from 'vendure-plugin-webhook';
-import { MyparcelPlugin } from 'vendure-plugin-myparcel/dist/myparcel.plugin';
-import { GoedgepicktPlugin } from 'vendure-plugin-goedgepickt';
-import { InvoicePlugin } from 'vendure-plugin-invoices';
-import { EBoekhoudenPlugin } from 'vendure-plugin-e-boekhouden';
+import { WebhookPlugin } from '@pinelab/vendure-plugin-webhook';
+import { MyparcelPlugin } from '@pinelab/vendure-plugin-myparcel/dist/myparcel.plugin';
+import { GoedgepicktPlugin } from '@pinelab/vendure-plugin-goedgepickt';
+import { InvoicePlugin } from '@pinelab/vendure-plugin-invoices';
+import { EBoekhoudenPlugin } from '@pinelab/vendure-plugin-e-boekhouden';
 import {
   cancelOrderButton,
   completeOrderButton,
-} from 'vendure-plugin-admin-ui-helpers';
-import { OrderExportPlugin } from 'vendure-plugin-order-export';
-import { StockMonitoringPlugin } from 'vendure-plugin-stock-monitoring';
-import { SendcloudPlugin } from 'vendure-plugin-sendcloud';
-import { MetricsPlugin } from 'vendure-plugin-metrics';
+} from '@pinelab/vendure-plugin-admin-ui-helpers';
+import { OrderExportPlugin } from '@pinelab/vendure-plugin-order-export';
+import { StockMonitoringPlugin } from '@pinelab/vendure-plugin-stock-monitoring';
+import { SendcloudPlugin } from '@pinelab/vendure-plugin-sendcloud';
+import { MetricsPlugin } from '@pinelab/vendure-plugin-metrics';
 
 compileUiExtensions({
   outputPath: path.join(__dirname, '__admin-ui'),

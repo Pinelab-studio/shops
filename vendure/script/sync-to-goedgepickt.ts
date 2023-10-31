@@ -1,4 +1,4 @@
-import { GoedgepicktService } from 'vendure-plugin-goedgepickt/dist/vendure-plugin-goedgepickt/src/api/goedgepickt.service';
+import { GoedgepicktService } from '@pinelab/vendure-plugin-goedgepickt/dist/vendure-plugin-goedgepickt/src/api/goedgepickt.service';
 import {
   bootstrap,
   ChannelService,

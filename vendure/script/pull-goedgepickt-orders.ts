@@ -1,5 +1,5 @@
 import { bootstrap, ChannelService, RequestContext } from '@vendure/core';
-import { GoedgepicktService } from 'vendure-plugin-goedgepickt/dist/vendure-plugin-goedgepickt/src/api/goedgepickt.service';
+import { GoedgepicktService } from '@pinelab/vendure-plugin-goedgepickt/dist/vendure-plugin-goedgepickt/src/api/goedgepickt.service';
 
 // Use like yarn script:prod script/send-to-myparcel.ts bendeboef 6ENWC7GRJWYCAQXN
 (async () => {

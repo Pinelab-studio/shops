@@ -1,5 +1,5 @@
 require('dotenv').config({ path: process.env.ENV_FILE });
-import { MyparcelService } from 'vendure-plugin-myparcel/dist/api/myparcel.service';
+import { MyparcelService } from '@pinelab/vendure-plugin-myparcel/dist/api/myparcel.service';
 import {
   bootstrap,
   ChannelService,

@@ -35,6 +35,7 @@ vendure/src/__admin-ui/angular.json
 vendure/src/__admin-ui/package.json
 vendure/src/__admin-ui/README.md
 vendure/src/__admin-ui/tsconfig.json
+.angular/
 !vendure/src/__admin-ui/dist/
 vendure/static/email/test-emails/
 !.vscode/extensions.json
@@ -46,7 +47,7 @@ vendure/static/email/test-emails/
 /directus-cms/directus_key.json
 /vendure/key.json
 /vendure/migrations/
-_search.json
+*search-cache.json
 /clients/nuxt-poc/.output/
 /clients/nuxt-poc/.nuxt/
 shop.json

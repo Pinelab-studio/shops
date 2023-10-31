@@ -4,7 +4,7 @@ import {
   OrderService,
   RequestContext,
 } from '@vendure/core';
-import { EBoekhoudenService } from 'vendure-plugin-e-boekhouden/dist/api/e-boekhouden.service';
+import { EBoekhoudenService } from '@pinelab/vendure-plugin-e-boekhouden/dist/api/e-boekhouden.service';
 
 // Use like yarn script:prod script/send-to-goedgepickt.ts bendeboef 6ENWC7GRJWYCAQXN
 (async () => {
