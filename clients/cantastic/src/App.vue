@@ -29,7 +29,6 @@ siteDescription
 <script>
 import ProgressBar from './components/ProgressBar';
 import Consent from 'pinelab-storefront/lib/components/Consent';
-import { bootstrap } from 'vue-gtag';
 
 export default {
   components: {
@@ -38,7 +37,7 @@ export default {
   },
   methods: {
     async activateAnalytics() {
-      await bootstrap();
+      this.$gtm.enable(true);
     },
   },
   metaInfo() {

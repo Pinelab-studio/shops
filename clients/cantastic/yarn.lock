@@ -960,6 +960,18 @@
     micromatch "^3.1.10"
     sitemap "^2.1.0"
 
+"@gtm-support/core@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@gtm-support/core/-/core-1.3.0.tgz#125bf953795bdbc23fcf123a9010a387f3be1af6"
+  integrity sha512-+dGzsV9hu4XgtlLmUps+nxWuLmnu57ByZuoExBpc9D6KsZ3Q9gk4dFf7H1TxLqcIOtTW2KlrOtO5hPV5Hoo2JA==
+
+"@gtm-support/vue2-gtm@1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@gtm-support/vue2-gtm/-/vue2-gtm-1.3.0.tgz#f1eb7a83d71498a9f584aaa0f8993efb211d693d"
+  integrity sha512-yO7+gxSQEEcPH6gWMNcdhRDyj4ApBnG4JHIizP1HfY8y1+8SFNQIWE1icJY8l3wNW6DYVz3wtP+Ri2Wk4aF7Kw==
+  dependencies:
+    "@gtm-support/core" "1.3.0"
+
 "@hapi/address@2.x.x":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@hapi/address/-/address-2.1.4.tgz#5d67ed43f3fd41a69d4b9ff7b56e7c0d1d0a81e5"
@@ -6912,10 +6924,10 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinelab-storefront@0.67.1:
-  version "0.67.1"
-  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.67.1.tgz#a8ed83e9c14c9a73dfe08f1caceec119dbb39608"
-  integrity sha512-uam51L19LaKpuPqaJ0NvPm+Dmd9vbLEGkEVONQWYqqpPUcSWS3QNU3DIkJ8GeQNKBxvKr9bkM+LrPDofovf14w==
+pinelab-storefront@0.67.2:
+  version "0.67.2"
+  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-0.67.2.tgz#b15c799076c0320c257aec9e8aedd88f39d75f1d"
+  integrity sha512-8UV+AMqu45qU6lVRDusCsumjO6j5OL9dHB6yX13MJJyy2RN0yeHcCQj1EKBsLNc06uzKpt0m8D0Upzrkz2MbEw==
   dependencies:
     graphql "15.3.0"
     graphql-request "^3.4.0"
@@ -9297,11 +9309,6 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
-
-vue-gtag@^1.16.1:
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/vue-gtag/-/vue-gtag-1.16.1.tgz#edb2f20ab4f6c4d4d372dfecf8c1fcc8ab890181"
-  integrity sha512-5vs0pSGxdqrfXqN1Qwt0ZFXG0iTYjRMu/saddc7QIC5yp+DKgjWQRpGYVa7Pq+KbThxwzzMfo0sGi7ISa6NowA==
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
