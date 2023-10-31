@@ -4,8 +4,11 @@
   "apiPort": "auto",
   "tokenMethod": "bearer",
   "authTokenHeaderKey": "vendure-auth-token",
+  "channelTokenKey": "vendure-token",
   "defaultLanguage": "en",
   "availableLanguages": [
+    "he",
+    "ar",
     "de",
     "en",
     "es",

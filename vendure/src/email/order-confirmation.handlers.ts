@@ -1,7 +1,7 @@
 import { Logger, OrderPlacedEvent, translateDeep } from '@vendure/core';
 import { EmailEventHandler, EmailEventListener } from '@vendure/email-plugin';
 import { mockOrderStateTransitionEvent } from '@vendure/email-plugin/lib/src/mock-events';
-import { InvoiceService } from 'vendure-plugin-invoices';
+import { InvoiceService } from '@pinelab/vendure-plugin-invoices';
 import { EBookController } from '../e-book/e-book.plugin';
 import { TaxHelper } from '../tax/tax.helper';
 import { logOrderHistory } from '../util/history.util';
@@ -30,9 +30,7 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
       const [{ sender, additionalRecipients }, invoicesEnabled] =
         await Promise.all([
           EmailUtil.getAdminEmailAddressesForChannel(injector, event.ctx),
-          injector
-            .get(InvoiceService)
-            .isInvoicePluginEnabled(channel.id as string),
+          injector.get(InvoiceService).isInvoicePluginEnabled(event.ctx),
         ]);
       if (additionalRecipients.length === 0) {
         Logger.warn(

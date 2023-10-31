@@ -22,4 +22,4 @@ jobs:
       - name: Build e2e
         run: yarn
       - name: Test
-        run: yarn jest:e2e
+        run: yarn vitest:e2e

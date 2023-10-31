@@ -2,7 +2,10 @@ import { Logger } from '@vendure/core';
 import { createObjectCsvWriter } from 'csv-writer';
 import os from 'os';
 import path from 'path';
-import { ExportInput, ExportStrategy } from 'vendure-plugin-order-export';
+import {
+  ExportInput,
+  ExportStrategy,
+} from '@pinelab/vendure-plugin-order-export';
 import { OrderExportHelper } from './order-export-helper';
 
 const loggerCtx = 'TaxExportStrategy';

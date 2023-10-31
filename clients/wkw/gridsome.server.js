@@ -188,7 +188,7 @@ module.exports = async function (api) {
         },
       ]);
       fs.writeFileSync(
-        `./static/_${lang}_search.json`,
+        `./static/_${lang}.search-cache.json`,
         JSON.stringify(indexObject)
       );
 
@@ -463,12 +463,6 @@ module.exports = async function (api) {
           ...global,
           popularProducts,
         },
-      });
-
-      createPage({
-        path: `/under-construction/`,
-        component: './src/templates/UnderConstruction.vue',
-        context: {},
       });
     }
   });

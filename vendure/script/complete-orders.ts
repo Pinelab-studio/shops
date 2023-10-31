@@ -4,8 +4,8 @@ import {
   OrderService,
   RequestContext,
 } from '@vendure/core';
-import { transitionToDelivered } from 'vendure-plugin-sendcloud/dist/util/src';
-import { sendcloudHandler } from 'vendure-plugin-sendcloud';
+import { transitionToDelivered } from '@pinelab/vendure-plugin-sendcloud/dist/util/src';
+import { sendcloudHandler } from '@pinelab/vendure-plugin-sendcloud';
 
 // Usage: yarn script:wkw-test script/complete-orders __default_channel__
 (async () => {

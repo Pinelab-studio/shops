@@ -1,4 +1,7 @@
-import { ExportInput, ExportStrategy } from 'vendure-plugin-order-export';
+import {
+  ExportInput,
+  ExportStrategy,
+} from '@pinelab/vendure-plugin-order-export';
 import path from 'path';
 import os from 'os';
 import { Logger, ProductVariant, RequestContext } from '@vendure/core';

@@ -6,8 +6,7 @@ import {
   RequestContext,
   TransactionalConnection,
 } from '@vendure/core';
-import { config } from '../src/vendure-config';
-import { GoogleStorageStrategy } from 'vendure-plugin-google-storage-assets';
+import { GoogleStorageStrategy } from '@pinelab/vendure-plugin-google-storage-assets';
 import * as tmp from 'tmp';
 
 /**

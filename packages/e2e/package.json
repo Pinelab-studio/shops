@@ -8,9 +8,10 @@
     "nightwatch:e2e": "nightwatch --config nightwatch-firefox.config.js  --test nightwatch/place-order.js",
     "nightwatch:checkout": "nightwatch --test nightwatch/checkout.js --testcase $TESTCASE",
     "nightwatch:checkout:firefox": "nightwatch --config nightwatch-firefox.config.js --test nightwatch/checkout.js --testcase $TESTCASE",
-    "jest:e2e": "jest --forceExit"
+    "vitest:e2e": "vitest run"
   },
   "devDependencies": {
+    "@swc/core": "^1.3.95",
     "@types/jest": "^27.4.0",
     "chromedriver": "113.0.0",
     "dotenv": "^10.0.0",
@@ -19,6 +20,8 @@
     "linkinator": "^4.0.2",
     "nightwatch": "^1.7.6",
     "ts-jest": "^28.0.8",
-    "typescript": "4.3.5"
+    "typescript": "4.3.5",
+    "unplugin-swc": "^1.4.3",
+    "vitest": "^0.34.6"
   }
 }

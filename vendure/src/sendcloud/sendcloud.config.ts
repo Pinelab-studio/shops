@@ -9,7 +9,7 @@ import {
   getCouponCodes,
   ParcelInputItem,
   SendcloudPluginOptions,
-} from 'vendure-plugin-sendcloud';
+} from '@pinelab/vendure-plugin-sendcloud';
 
 export const sendcloudConfig: SendcloudPluginOptions = {
   disabled: isProd && !runningLocal, // Only enable for prod

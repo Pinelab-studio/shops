@@ -233,7 +233,7 @@ export const GET_ELIGIBLESHIPPINGMETHODS = gql`
 export const SET_ORDERSHIPPINGMETHOD = gql`
   ${ORDER_FIELDS}
   mutation setOrderShippingMethod($shippingMethodId: ID!) {
-    setOrderShippingMethod(shippingMethodId: $shippingMethodId) {
+    setOrderShippingMethod(shippingMethodId: [$shippingMethodId]) {
       ... on Order {
         ...OrderFields
       }
