@@ -18,12 +18,14 @@ export class ChannelSpecificOrderCodeStrategy
   implements OrderCodeStrategy
 {
   generate(ctx: RequestContext): string {
+    const defaultOrderCode = super.generate(ctx);
     if (numericCodeChannels.includes(ctx.channel.token)) {
-      return String(Date.now())
+      const numericCode = String(Date.now())
         .slice(1, 11)
         .match(/.{1,4}/g)!
         .join('-');
+      return `${numericCode}-${defaultOrderCode.slice(0, 3)}`;
     }
-    return super.generate(ctx);
+    return defaultOrderCode;
   }
 }
