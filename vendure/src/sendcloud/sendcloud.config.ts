@@ -13,8 +13,13 @@ import {
 
 export const sendcloudConfig: SendcloudPluginOptions = {
   disabled: isProd && !runningLocal, // Only enable for prod
-  weightFn: (line) =>
-    (line.productVariant.product?.customFields as any)?.weight / 1000,
+  weightFn: (line) => {
+    console.log(JSON.stringify(line.productVariant));
+    const weight =
+      (line.productVariant.product?.customFields as any)?.weight ??
+      (line.productVariant.customFields as any)?.weight;
+    return weight ? weight / 1000 : 0.01;
+  },
   hsCodeFn: (line) =>
     (line.productVariant.product?.customFields as any)?.hsCode,
   originCountryFn: (line) => 'NL',
