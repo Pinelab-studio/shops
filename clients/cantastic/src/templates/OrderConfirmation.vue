@@ -56,6 +56,18 @@ export default {
     try {
       this.loading = true;
       this.order = await getOrderByCode(this.$vendure, this.$route.params.code);
+      // Push purchase event to GTM
+      if (this.$gtm.enabled()) {
+        window?.dataLayer?.push({
+          event: 'purchase',
+          ecommerce: {
+            transaction_id: this.order.id,
+            value: (this.order.totalWithTax / 100).toFixed(2),
+            currency: 'EUR',
+            items,
+          },
+        });
+      }
     } catch (e) {
       console.error(e);
       this.failed = true;
