@@ -11,7 +11,7 @@
     />
     <br />
     <section v-if="$context.childCollections" id="sub-categories">
-      <h2 class="title is-4">{{ $l('common.popular-categories') }}</h2>
+      <h2 class="title is-4">{{ $l('common.categories') }}</h2>
       <div class="columns is-multiline is-mobile">
         <div
           class="column is-6-mobile"

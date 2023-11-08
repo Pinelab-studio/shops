@@ -71,7 +71,7 @@
                 <g-link :to="collection.url" class="navbar-link">
                   {{ collection.name }}
                 </g-link>
-                <div class="navbar-dropdown">
+                <div class="navbar-dropdown is-hidden-mobile">
                   <div class="container section py-1">
                     <div class="columns has-text-left">
                       <div class="column">
@@ -100,8 +100,20 @@
               </div>
             </template>
           </template>
-          <!-- Overflow collections -->
-          <div class="navbar-item has-dropdown is-hoverable shadow">
+          <!-- Show all collections on mobile  -->
+          <div class="is-hidden-tablet">
+            <template v-for="collection in collections.slice(4, 20)">
+              <div class="navbar-item shadow">
+                <g-link :to="collection.url" class="navbar-link is-arrowless">
+                  {{ collection.name }}
+                </g-link>
+              </div>
+            </template>
+          </div>
+          <!-- Overflow collections, but hidden for mobile -->
+          <div
+            class="navbar-item has-dropdown is-hoverable shadow is-hidden-mobile"
+          >
             <a class="navbar-link"> {{ $l('nav.more') }}</a>
             <div class="navbar-dropdown">
               <div class="container section py-1">
@@ -118,9 +130,21 @@
             </div>
           </div>
           <!-- Non-collection navigation items -->
-          <div class="navbar-item has-dropdown is-hoverable shadow">
+          <!-- Mobile -->
+          <div class="is-hidden-tablet">
+            <g-link :to="$context.informationUrl" class="navbar-item px-0">
+              {{ $l('nav.advice') }}
+            </g-link>
+            <g-link to="/faq/" class="navbar-item px-0">
+              {{ $l('nav.faq') }}</g-link
+            >
+          </div>
+          <!-- Desktop -->
+          <div
+            class="navbar-item has-dropdown is-hoverable shadow is-hidden-mobile"
+          >
             <a class="navbar-link"> {{ $l('nav.information') }} </a>
-            <div class="navbar-dropdown">
+            <div class="navbar-dropdown is-hidden-mobile">
               <div class="container section py-1">
                 <div class="columns has-text-left">
                   <div class="column">
