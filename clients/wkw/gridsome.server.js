@@ -15,8 +15,9 @@ const {
 const { GET_CONTENT } = require('./content.queries');
 const fs = require('fs');
 const Fuse = require('fuse.js');
+const { createProductFeed } = require('./create-product-feed');
 
-module.exports = async function (api) {
+module.exports = async function (api, options, context, ding) {
   const getlabel = createLabelFunction([
     require('./labels/nl.json'),
     require('./labels/en.json'),
@@ -164,6 +165,10 @@ module.exports = async function (api) {
 
       const popularProducts = products.slice(0, 5);
       const popularCollections = collections;
+
+      // ----------------- Product Feed ---------------
+      const feedUrl = `${lang}_product-feed.xml`;
+      createProductFeed(api._app.config.siteUrl, products, feedUrl);
 
       // ----------------- Search ---------------------
       const searchProducts = products.map((p) => ({
