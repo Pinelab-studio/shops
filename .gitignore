@@ -52,3 +52,4 @@ vendure/static/email/test-emails/
 /clients/nuxt-poc/.nuxt/
 shop.json
 /packages/seo-migration/data/
+*product-feed.xml
