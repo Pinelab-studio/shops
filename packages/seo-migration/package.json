@@ -1,6 +1,6 @@
 {
   "name": "seo-migration",
-  "version": "0.67.1",
+  "version": "0.67.3",
   "description": "Migration tool for checking redirect urls between old and new site",
   "main": "index.js",
   "license": "MIT",

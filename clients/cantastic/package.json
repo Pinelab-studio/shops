@@ -33,7 +33,7 @@
     "snapdragon-util": "^5.0.1",
     "webpack-bundle-analyzer": "^4.4.1"
   },
-  "version": "0.67.2",
+  "version": "0.67.3",
   "resolutions": {
     "graphql": "15.3.0"
   }
