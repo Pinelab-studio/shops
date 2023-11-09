@@ -505,13 +505,14 @@ export default {
     },
     setCustomerDetails: async function (e) {
       e.preventDefault();
+      const houseNumberAddition = this.address.houseNumberAddition;
       this.loadingShipping = true;
       const address = {
         company: this.address.company,
         city: this.address.city,
         streetLine1: this.address.streetLine1,
         streetLine2: `${this.address.streetLine2}${
-          this.address.houseNumberAddition || ''
+          houseNumberAddition ? '-' + houseNumberAddition : ''
         }`,
         postalCode: this.address.postalCode,
         countryCode: this.address.countryCode,
