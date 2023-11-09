@@ -58,15 +58,25 @@ export default {
       this.order = await getOrderByCode(this.$vendure, this.$route.params.code);
       // Push purchase event to GTM
       if (this.$gtm.enabled()) {
-        window?.dataLayer?.push({
-          event: 'purchase',
-          ecommerce: {
-            transaction_id: this.order.id,
-            value: (this.order.totalWithTax / 100).toFixed(2),
-            currency: 'EUR',
-            items,
-          },
-        });
+        try {
+          const items = this.order.lines.map((line) => ({
+            item_id: line.productVariant.sku,
+            item_name: line.productVariant.name,
+            quantity: line.quantity,
+            price: line.productVariant.priceWithTax / 100,
+          }));
+          window?.dataLayer?.push({
+            event: 'purchase',
+            ecommerce: {
+              transaction_id: this.order.id,
+              value: (this.order.totalWithTax / 100).toFixed(2),
+              currency: 'EUR',
+              items,
+            },
+          });
+        } catch (e) {
+          console.error(e);
+        }
       }
     } catch (e) {
       console.error(e);
