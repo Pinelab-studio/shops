@@ -2,7 +2,7 @@
   <Layout>
     <div class="columns">
       <div class="column">
-        <h1>Bedankt voor je bestelling!</h1>
+        <h1>Thank you for ordering!</h1>
         <template v-if="loading">
           <b-skeleton :animated="true"></b-skeleton>
           <b-skeleton :animated="true"></b-skeleton>
@@ -15,14 +15,14 @@
             type="is-danger"
             aria-close-label="Close notification"
           >
-            Er is iets misgegaan. Neem contact met ons op en vermeld het
-            volgende nummer:
+            Something went wrong. Please contact Roy and mention this order
+            number:
             {{ $route.params.code }}
           </b-notification>
         </template>
         <template v-if="order">
           <OrderSummary class="mb-5" :order="order" />
-          <h4>Dit heb je besteld:</h4>
+          <h4>You ordered:</h4>
           <CartItemsTable disabled :active-order="order" />
         </template>
       </div>

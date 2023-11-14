@@ -20,7 +20,7 @@
       <div class="has-text-centered">
         <p>
           <a href="http://eepurl.com/iCBgUM" target="_blank"
-            >Meld je hier aan voor de nieuwsbrief</a
+            >Sign up for our newsletter here</a
           >
         </p>
       </div>

@@ -21,7 +21,7 @@
           :loading="isLoading"
           :disabled="isSoldOut"
           v-on:click="buy()"
-          >{{ isSoldOut ? 'Uitverkocht' : 'In winkelmand' }}
+          >{{ isSoldOut ? 'Sold out' : 'Add to cart' }}
         </b-button>
         <br />
         <div v-html="$context.product.description"></div>

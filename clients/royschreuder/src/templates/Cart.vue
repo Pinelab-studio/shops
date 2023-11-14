@@ -7,7 +7,7 @@
         <div class="columns is-mobile">
           <div class="column"></div>
           <div class="column has-text-right">
-            <g-link to="/checkout/" class="button is-primary">Bestellen</g-link>
+            <g-link to="/checkout/" class="button is-primary">Order now</g-link>
           </div>
         </div>
         <div class="columns">
@@ -26,17 +26,17 @@
               <template #bottom>
                 <br />
                 <g-link to="/checkout/" class="button is-fullwidth is-primary">
-                  Bestellen
+                  Order now
                 </g-link>
                 <div class="has-text-centered pt-4">
-                  <g-link to="/">Verder winkelen</g-link>
+                  <g-link to="/">Continue shopping</g-link>
                 </div>
               </template>
             </OrderSummary>
           </div>
         </div>
       </div>
-      <div v-else style="height: 50vh">Geen producten in winkelmand...</div>
+      <div v-else style="height: 50vh">No items in cart</div>
     </div>
   </Layout>
 </template>

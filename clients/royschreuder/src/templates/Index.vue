@@ -8,9 +8,9 @@
         <div class="column is-half-mobile is-3-desktop mb-4">
           <ProductCard
             :product="product"
-            buy-label="In winkelmand"
+            buy-label="Add to cart"
             product-url-prefix="product"
-            soldoutLabel="Uitverkocht"
+            soldoutLabel="Sold out"
           ></ProductCard>
         </div>
       </template>
