@@ -55,7 +55,7 @@
     "@pinelab/vendure-plugin-order-export": "1.1.0",
     "@pinelab/vendure-plugin-sendcloud": "1.2.0",
     "@pinelab/vendure-plugin-shipping-by-weight-and-country": "1.1.0",
-    "@pinelab/vendure-plugin-stock-monitoring": "1.3.0",
+    "@pinelab/vendure-plugin-stock-monitoring": "1.3.1",
     "@pinelab/vendure-plugin-variant-bulk-update": "1.1.0",
     "@pinelab/vendure-plugin-webhook": "1.1.0",
     "@types/adm-zip": "0.5.0",
