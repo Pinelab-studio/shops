@@ -60,6 +60,7 @@ import { MetricsPlugin } from '@pinelab/vendure-plugin-metrics';
 import { TaxPerCountryExportStrategy } from './export/tax-per-country-export-strategy';
 import { SendcloudCsvParserPlugin } from './sendcloud/sendcloud-csv-parser.plugin';
 import { KlarnaPatchPlugin } from './klarna-patch-plugin';
+import { SelectableGiftsPlugin } from '@pinelab/vendure-plugin-selectable-gifts';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -215,6 +216,7 @@ export const config: VendureConfig = {
     ],
   },
   plugins: [
+    SelectableGiftsPlugin,
     KlarnaPatchPlugin,
     SendcloudCsvParserPlugin,
     VariantBulkUpdatePlugin,
