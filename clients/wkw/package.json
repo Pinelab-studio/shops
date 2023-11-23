@@ -6,6 +6,7 @@
     "serve:test": "export VENDURE_ENV=test && yarn gridsome develop",
     "serve:local": "export VENDURE_ENV=local && yarn gridsome develop",
     "dev": "yarn link-there && yarn link-here && concurrently \"cd ../../packages/pinelab-storefront && yarn watch\" \"gridsome develop\"",
+    "dev:local": "export VENDURE_ENV=local && yarn link-there && yarn link-here && concurrently \"cd ../../packages/pinelab-storefront && yarn watch\" \"gridsome develop\"",
     "link-here": "yarn link pinelab-storefront",
     "link-there": "cd ../../packages/pinelab-storefront && yarn link"
   },

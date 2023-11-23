@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://test-api.pinelab.studio/shop-api"
+schema: "http://localhost:3000/shop-api"
 documents: src/**/*.queries.ts
 config:
   maybeValue: T | undefined
