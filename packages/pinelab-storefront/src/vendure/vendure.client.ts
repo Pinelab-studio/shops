@@ -8,6 +8,7 @@ import {
   GET_ACTIVE_ORDER,
   GET_DROP_OFF_POINTS,
   GET_DUTCH_ADDRESS,
+  GET_ELIGIBLE_GIFTS,
   GET_ELIGIBLESHIPPINGMETHODS,
   GET_NEXT_ORDERSTATES,
   GET_ORDER_BY_CODE,
@@ -65,6 +66,8 @@ import {
   SetOrderShippingAddressMutationVariables,
   SetOrderShippingMethodMutation,
   SetOrderShippingMethodMutationVariables,
+  SetPickupLocationOnOrderMutation,
+  SetPickupLocationOnOrderMutationVariables,
   StockLevelProductsQuery,
   StockLevelProductsQueryVariables,
   TransitionOrderToStateMutation,
@@ -353,8 +356,8 @@ export class VendureClient {
     customFields: UpdateOrderCustomFieldsInput
   ): Promise<OrderFieldsFragment> {
     const { setOrderCustomFields: order } = await this.request<
-      SetOrderCustomFieldsMutation,
-      SetOrderCustomFieldsMutationVariables
+      SetPickupLocationOnOrderMutation,
+      SetPickupLocationOnOrderMutationVariables
     >(SET_PICKUP_LOCATION_FOR_ORDER, { customFields });
     await this.validateResult(order);
     this.store.activeOrder = order as OrderFieldsFragment;
@@ -374,6 +377,15 @@ export class VendureClient {
       pickupLocationCity: null, // @ts-ignore
       pickupLocationCountry: null, // @ts-ignore
     });
+  }
+
+  async getEligibleGifts(
+    customFields: UpdateOrderCustomFieldsInput
+  ): Promise<any> {
+    const { eligibleGifts } = (await this.request(GET_ELIGIBLE_GIFTS, {
+      customFields,
+    })) as any;
+    return eligibleGifts;
   }
 
   async validateResult(result: any): Promise<void> {
