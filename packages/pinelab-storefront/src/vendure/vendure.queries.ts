@@ -495,10 +495,33 @@ export const GET_ELIGIBLE_GIFTS = gql`
       id
       name
       priceWithTax
+      product {
+        name
+        featuredAsset {
+          id
+          preview
+          thumbnail
+        }
+      }
       featuredAsset {
         id
         preview
         thumbnail
+      }
+    }
+  }
+`;
+
+export const ADD_GIFT_TO_ORDER = gql`
+  ${ORDER_FIELDS}
+  mutation addSelectedGiftToOrder($productVariantId: ID!) {
+    addSelectedGiftToOrder(productVariantId: $productVariantId) {
+      ... on Order {
+        ...OrderFields
+      }
+      ... on ErrorResult {
+        errorCode
+        message
       }
     }
   }

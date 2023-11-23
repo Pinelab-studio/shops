@@ -1,5 +1,61 @@
 import { GraphQLClient } from 'graphql-request';
 import {
+  ActiveOrderQuery,
+  AdditemToOrderMutation,
+  AdditemToOrderMutationVariables,
+  AddSelectedGiftToOrderMutation,
+  AddSelectedGiftToOrderMutationVariables,
+  AdjustOrderLineMutation,
+  AdjustOrderLineMutationVariables,
+  ApplyCouponCodeMutation,
+  ApplyCouponCodeMutationVariables,
+  CreateAddressInput,
+  CreateCoinbasePaymentIntentMutation,
+  CreateCustomerInput,
+  CreateMolliePaymentIntentMutation,
+  CreateMolliePaymentIntentMutationVariables,
+  DutchAddressLookupQuery,
+  DutchAddressLookupQueryVariables,
+  DutchPostalCodeInput,
+  EligibleGiftsQuery,
+  EligibleShippingMethodsQuery,
+  MolliePaymentIntent,
+  MutationSetOrderCustomFieldsArgs,
+  MyparcelDropOffPoint,
+  MyparcelDropOffPointInput,
+  MyparcelDropOffPointsQuery,
+  MyparcelDropOffPointsQueryVariables,
+  NextOrderStatesQuery,
+  OrderByCodeQuery,
+  OrderByCodeQueryVariables,
+  OrderFieldsFragment,
+  ProductQuery,
+  ProductQueryVariables,
+  RemoveAllOrderLinesMutation,
+  RemoveCouponCodeMutation,
+  RemoveCouponCodeMutationVariables,
+  SetCustomerForOrderMutation,
+  SetCustomerForOrderMutationVariables,
+  SetOrderBillingAddressMutation,
+  SetOrderBillingAddressMutationVariables,
+  SetOrderCustomFieldsMutation,
+  SetOrderShippingAddressMutation,
+  SetOrderShippingAddressMutationVariables,
+  SetOrderShippingMethodMutation,
+  SetOrderShippingMethodMutationVariables,
+  SetPickupLocationOnOrderMutation,
+  SetPickupLocationOnOrderMutationVariables,
+  StockLevelProductsQuery,
+  StockLevelProductsQueryVariables,
+  TransitionOrderToStateMutation,
+  TransitionOrderToStateMutationVariables,
+  UpdateOrderCustomFieldsInput,
+  UpdateOrderInput,
+} from '../generated/graphql';
+import { setCalculatedFields } from '../util/product.util';
+import { CalculatedProduct, Store, VendureError } from './types';
+import {
+  ADD_GIFT_TO_ORDER,
   ADD_ITEM_TO_ORDER,
   ADJUST_ORDERLINE,
   APPLY_COUPON_CODE,
@@ -24,59 +80,6 @@ import {
   SET_PICKUP_LOCATION_FOR_ORDER,
   TRANSITION_ORDER_TO_STATE,
 } from './vendure.queries';
-import {
-  ActiveOrderQuery,
-  AdditemToOrderMutation,
-  AdditemToOrderMutationVariables,
-  AdjustOrderLineMutation,
-  AdjustOrderLineMutationVariables,
-  ApplyCouponCodeMutation,
-  ApplyCouponCodeMutationVariables,
-  CreateAddressInput,
-  CreateCoinbasePaymentIntentMutation,
-  CreateCustomerInput,
-  CreateMolliePaymentIntentMutation,
-  CreateMolliePaymentIntentMutationVariables,
-  DutchAddressLookupQuery,
-  DutchAddressLookupQueryVariables,
-  DutchPostalCodeInput,
-  EligibleShippingMethodsQuery,
-  MolliePaymentIntent,
-  MutationSetOrderCustomFieldsArgs,
-  MyparcelDropOffPoint,
-  MyparcelDropOffPointInput,
-  MyparcelDropOffPointsQuery,
-  MyparcelDropOffPointsQueryVariables,
-  NextOrderStatesQuery,
-  OrderByCodeQuery,
-  OrderByCodeQueryVariables,
-  OrderFieldsFragment,
-  ProductQuery,
-  ProductQueryVariables,
-  RemoveAllOrderLinesMutation,
-  RemoveCouponCodeMutation,
-  RemoveCouponCodeMutationVariables,
-  SetCustomerForOrderMutation,
-  SetCustomerForOrderMutationVariables,
-  SetOrderBillingAddressMutation,
-  SetOrderBillingAddressMutationVariables,
-  SetOrderCustomFieldsMutation,
-  SetOrderCustomFieldsMutationVariables,
-  SetOrderShippingAddressMutation,
-  SetOrderShippingAddressMutationVariables,
-  SetOrderShippingMethodMutation,
-  SetOrderShippingMethodMutationVariables,
-  SetPickupLocationOnOrderMutation,
-  SetPickupLocationOnOrderMutationVariables,
-  StockLevelProductsQuery,
-  StockLevelProductsQueryVariables,
-  TransitionOrderToStateMutation,
-  TransitionOrderToStateMutationVariables,
-  UpdateOrderCustomFieldsInput,
-  UpdateOrderInput,
-} from '../generated/graphql';
-import { CalculatedProduct, Store, VendureError } from './types';
-import { setCalculatedFields } from '../util/product.util';
 
 export class VendureClient {
   client: GraphQLClient;
@@ -379,13 +382,23 @@ export class VendureClient {
     });
   }
 
-  async getEligibleGifts(
-    customFields: UpdateOrderCustomFieldsInput
-  ): Promise<any> {
-    const { eligibleGifts } = (await this.request(GET_ELIGIBLE_GIFTS, {
-      customFields,
-    })) as any;
+  async getEligibleGifts(): Promise<EligibleGiftsQuery['eligibleGifts']> {
+    const { eligibleGifts } = await this.request<EligibleGiftsQuery>(
+      GET_ELIGIBLE_GIFTS
+    );
     return eligibleGifts;
+  }
+
+  async addGiftToOrder(productVariantId: string): Promise<any> {
+    const { addSelectedGiftToOrder: order } = await this.request<
+      AddSelectedGiftToOrderMutation,
+      AddSelectedGiftToOrderMutationVariables
+    >(ADD_GIFT_TO_ORDER, {
+      productVariantId,
+    });
+    await this.validateResult(order);
+    this.store.activeOrder = order as OrderFieldsFragment;
+    return order as OrderFieldsFragment;
   }
 
   async validateResult(result: any): Promise<void> {

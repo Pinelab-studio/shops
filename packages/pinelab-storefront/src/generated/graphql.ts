@@ -4142,9 +4142,42 @@ export type EligibleGiftsQuery = { __typename?: 'Query' } & {
       ProductVariant,
       'id' | 'name' | 'priceWithTax'
     > & {
+        product: { __typename?: 'Product' } & Pick<Product, 'name'> & {
+            featuredAsset?: Maybe<
+              { __typename?: 'Asset' } & Pick<
+                Asset,
+                'id' | 'preview' | 'thumbnail'
+              >
+            >;
+          };
         featuredAsset?: Maybe<
           { __typename?: 'Asset' } & Pick<Asset, 'id' | 'preview' | 'thumbnail'>
         >;
       }
   >;
+};
+
+export type AddSelectedGiftToOrderMutationVariables = Exact<{
+  productVariantId: Scalars['ID'];
+}>;
+
+export type AddSelectedGiftToOrderMutation = { __typename?: 'Mutation' } & {
+  addSelectedGiftToOrder:
+    | ({ __typename?: 'Order' } & OrderFieldsFragment)
+    | ({ __typename?: 'OrderModificationError' } & Pick<
+        OrderModificationError,
+        'errorCode' | 'message'
+      >)
+    | ({ __typename?: 'OrderLimitError' } & Pick<
+        OrderLimitError,
+        'errorCode' | 'message'
+      >)
+    | ({ __typename?: 'NegativeQuantityError' } & Pick<
+        NegativeQuantityError,
+        'errorCode' | 'message'
+      >)
+    | ({ __typename?: 'InsufficientStockError' } & Pick<
+        InsufficientStockError,
+        'errorCode' | 'message'
+      >);
 };

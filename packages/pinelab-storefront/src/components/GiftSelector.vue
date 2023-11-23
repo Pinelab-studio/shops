@@ -1,13 +1,27 @@
 <template>
-  <div v-if="eligibleGifts">
+  <div v-if="eligibleGifts?.length > 0" class="bordered p-5 mb-5 is-relative">
     <h5>{{ $l('checkup.gift-title') }}</h5>
     {{ $l('checkup.gift-message') }}
+    <br />
+    <br />
 
     <b-field v-for="gift of eligibleGifts" :key="gift.id">
-      <b-radio v-model="selectedGift" size="is-large" :native-value="gift">
-        <small>{{ gift.name }}</small>
+      <b-radio
+        v-model="selectedGiftId"
+        :native-value="gift.id"
+        @input="onGiftSelected"
+      >
+        <img :src="gift.product.featuredAsset?.thumbnail" style="width: 30px" />
+        {{ gift.product.name }} ({{ $l('checkup.gift-worth') }}
+        {{ gift.priceWithTax | euro }})
       </b-radio>
     </b-field>
+
+    <b-loading
+      :is-full-page="false"
+      v-model="loadingGiftSelection"
+      :can-cancel="true"
+    ></b-loading>
   </div>
 </template>
 <script>
@@ -28,21 +42,36 @@ export default {
       type: [Store, Object],
       required: true,
     },
-  },
-  computed: {
-    activeOrder() {
-      return this.store?.activeOrder || {};
+    eligibleGifts: {
+      type: Array,
+      required: false,
     },
   },
   data() {
     return {
-      eligibleGifts: undefined,
-      selectedGift: undefined,
+      selectedGiftId: undefined,
+      loadingGiftSelection: false,
     };
   },
-  async mounted() {
-    this.eligibleGifts = await this.vendure.getEligibleGifts();
-    console.log(this.eligibleGifts);
+  methods: {
+    async onGiftSelected() {
+      this.loadingGiftSelection = true;
+      try {
+        if (this.selectedGiftId) {
+          await this.vendure.addGiftToOrder(this.selectedGiftId);
+        }
+      } catch (e) {
+        this.emitter.emit('error', e);
+      } finally {
+        this.loadingGiftSelection = false;
+      }
+    },
   },
 };
 </script>
+<style>
+.bordered {
+  border: 1px solid lightgray;
+  border-radius: 4px;
+}
+</style>

@@ -8,15 +8,6 @@
         :store="$store"
         :available-countries="$context.availableCountries"
       >
-        <!-- Gifts slot -->
-        <template #aboveCheckup>
-          <GiftSelector
-            :vendure="$vendure"
-            :emitter="$emitter"
-            :store="$store"
-          />
-        </template>
-
         <template #orderSummaryFooter>
           <h5>{{ $l('order-summary.payments') }}</h5>
           <img src="/img/payments.png" :alt="$l('order-summary.payments')" />
