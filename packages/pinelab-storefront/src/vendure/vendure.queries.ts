@@ -442,7 +442,9 @@ export const GET_DROP_OFF_POINTS = gql`
 
 export const SET_PICKUP_LOCATION_FOR_ORDER = gql`
   ${ORDER_FIELDS}
-  mutation setOrderCustomFields($customFields: UpdateOrderCustomFieldsInput) {
+  mutation setPickupLocationOnOrder(
+    $customFields: UpdateOrderCustomFieldsInput
+  ) {
     setOrderCustomFields(input: { customFields: $customFields }) {
       ... on Order {
         ...OrderFields
@@ -483,6 +485,44 @@ export const GET_AVAILABLE_COUNTRIES = gql`
     availableCountries {
       name
       code
+    }
+  }
+`;
+
+export const GET_ELIGIBLE_GIFTS = gql`
+  query eligibleGifts {
+    eligibleGifts {
+      id
+      name
+      priceWithTax
+      product {
+        name
+        featuredAsset {
+          id
+          preview
+          thumbnail
+        }
+      }
+      featuredAsset {
+        id
+        preview
+        thumbnail
+      }
+    }
+  }
+`;
+
+export const ADD_GIFT_TO_ORDER = gql`
+  ${ORDER_FIELDS}
+  mutation addSelectedGiftToOrder($productVariantId: ID!) {
+    addSelectedGiftToOrder(productVariantId: $productVariantId) {
+      ... on Order {
+        ...OrderFields
+      }
+      ... on ErrorResult {
+        errorCode
+        message
+      }
     }
   }
 `;

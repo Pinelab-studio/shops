@@ -49,7 +49,10 @@
     "billing-address": "Billing address",
     "items": "Items",
     "disclaimer": "",
-    "pay": "Pay"
+    "pay": "Pay",
+    "gift-title": "Free gift!",
+    "gift-message": "Select your free gift here",
+    "gift-worth": "worth"
   },
   "finished": {
     "title": "Finished"

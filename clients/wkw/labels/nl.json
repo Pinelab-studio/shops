@@ -51,7 +51,10 @@
     "billing-address": "Factuuradres",
     "items": "Producten",
     "disclaimer": "Door te klikken op 'Doorgaan en betalen' ga ik akkoord met de algemene voorwaarden. Ik heb kennis genomen van de annuleringsvoorwaarden en de privacyverklaring.",
-    "pay": "Betalen"
+    "pay": "Betalen",
+    "gift-title": "Gratis cadeau!",
+    "gift-message": "Selecteer hier uw gratis cadeau",
+    "gift-worth": "t.w.v."
   },
   "finished": {
     "title": "Bestelling voltooid"

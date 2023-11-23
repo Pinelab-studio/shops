@@ -2519,6 +2519,11 @@
   dependencies:
     csv-writer "^1.6.0"
 
+"@pinelab/vendure-plugin-selectable-gifts@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-selectable-gifts/-/vendure-plugin-selectable-gifts-1.0.0.tgz#607a7b857a934554b93a1cff49bd1985d9f47c7a"
+  integrity sha512-36pxXR6dBbwHEVBMxJu1h8oLkb+5TNt/yCGWR1ecvGlorX95bn8IYIdqOXdVjqcIxPJis74aY4YLfRBqCt6pkA==
+
 "@pinelab/vendure-plugin-sendcloud@1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-1.2.0.tgz#e48730acdd7c7cc3bdd7436c04d363b39bf41dba"

@@ -119,11 +119,12 @@
         </div>
         <div class="columns">
           <div class="column is-8">
-            <div v-if="$slots.aboveCheckup" class="columns">
-              <div class="column">
-                <slot name="aboveCheckup" />
-              </div>
-            </div>
+            <GiftSelector
+              :vendure="$vendure"
+              :emitter="$emitter"
+              :store="$store"
+              :eligibleGifts="eligibleGifts"
+            />
             <div class="columns">
               <div class="column">
                 <AddressDisplay
@@ -215,7 +216,7 @@
             <br />
             <div class="columns is-mobile">
               <div class="column">
-                <a @click="goToStep(2)" class="button is-outlined"><</a>
+                <a @click="goToStep(2)" class="button is-outlined"> < </a>
               </div>
               <div class="column">
                 <b-button
@@ -254,6 +255,7 @@ import CartItemsTable from '../components/CartItemsTable';
 import { startPayment } from '../util/payment.util';
 import { VendureClient } from '../vendure/vendure.client';
 import { Store } from '../vendure/types';
+import GiftSelector from '../components/GiftSelector';
 
 export default {
   props: {
@@ -291,6 +293,12 @@ export default {
     AddressDisplay,
     CartItemsTable,
     CouponInput,
+    GiftSelector,
+  },
+  watch: {
+    async '$store.activeOrder'() {
+      this.loadGifts();
+    },
   },
   computed: {
     activeOrder() {
@@ -306,6 +314,7 @@ export default {
       shippingMethods: [],
       loadingPayment: false,
       selectedPaymentMethod: this.paymentMethods[0],
+      eligibleGifts: undefined,
     };
   },
   methods: {
@@ -314,9 +323,19 @@ export default {
         window.scrollTo(0, 0);
       }, 100);
     },
-    goToStep(step) {
+    async goToStep(step) {
       this.activeStep = step;
       this.scrollToTop();
+      // Refetch eligible gifts on every step
+      await this.loadGifts();
+    },
+    // Load gifts, without ever throwing
+    async loadGifts() {
+      try {
+        this.eligibleGifts = await this.vendure.getEligibleGifts();
+      } catch (e) {
+        console.error('Could not load gifts', e);
+      }
     },
     async gotToShipping() {
       this.goToStep(1);

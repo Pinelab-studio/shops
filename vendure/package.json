@@ -53,6 +53,7 @@
     "@pinelab/vendure-plugin-metrics": "1.2.0",
     "@pinelab/vendure-plugin-myparcel": "1.1.0",
     "@pinelab/vendure-plugin-order-export": "1.1.0",
+    "@pinelab/vendure-plugin-selectable-gifts": "1.0.0",
     "@pinelab/vendure-plugin-sendcloud": "1.2.0",
     "@pinelab/vendure-plugin-shipping-by-weight-and-country": "1.1.0",
     "@pinelab/vendure-plugin-stock-monitoring": "1.3.1",

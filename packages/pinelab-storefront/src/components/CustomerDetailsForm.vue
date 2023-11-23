@@ -95,7 +95,7 @@
               required
               v-model="customer.emailAddress"
               maxlength="120"
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,24}$"
+              pattern="^\S+@\S+\.\S+$"
               :has-counter="false"
             />
             <span class="icon is-small is-left">

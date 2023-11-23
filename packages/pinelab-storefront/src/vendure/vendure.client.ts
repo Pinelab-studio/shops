@@ -1,32 +1,10 @@
 import { GraphQLClient } from 'graphql-request';
 import {
-  ADD_ITEM_TO_ORDER,
-  ADJUST_ORDERLINE,
-  APPLY_COUPON_CODE,
-  CREATE_COINBASE_PAYMENT_INTENT,
-  CREATE_MOLLIE_PAYMENT_INTENT,
-  GET_ACTIVE_ORDER,
-  GET_DROP_OFF_POINTS,
-  GET_DUTCH_ADDRESS,
-  GET_ELIGIBLESHIPPINGMETHODS,
-  GET_NEXT_ORDERSTATES,
-  GET_ORDER_BY_CODE,
-  GET_PRICE_AND_STOCKLEVEL,
-  GET_PRODUCT,
-  REMOVE_ALL_ORDER_LINES,
-  REMOVE_COUPON_CODE,
-  SET_CUSTOMER_FOR_ORDER,
-  SET_ORDER_CUSTOMFIELDS,
-  SET_ORDERBILLINGADDRESS,
-  SET_ORDERSHIPPINGADDRESS,
-  SET_ORDERSHIPPINGMETHOD,
-  SET_PICKUP_LOCATION_FOR_ORDER,
-  TRANSITION_ORDER_TO_STATE,
-} from './vendure.queries';
-import {
   ActiveOrderQuery,
   AdditemToOrderMutation,
   AdditemToOrderMutationVariables,
+  AddSelectedGiftToOrderMutation,
+  AddSelectedGiftToOrderMutationVariables,
   AdjustOrderLineMutation,
   AdjustOrderLineMutationVariables,
   ApplyCouponCodeMutation,
@@ -39,6 +17,7 @@ import {
   DutchAddressLookupQuery,
   DutchAddressLookupQueryVariables,
   DutchPostalCodeInput,
+  EligibleGiftsQuery,
   EligibleShippingMethodsQuery,
   MolliePaymentIntent,
   MutationSetOrderCustomFieldsArgs,
@@ -60,11 +39,12 @@ import {
   SetOrderBillingAddressMutation,
   SetOrderBillingAddressMutationVariables,
   SetOrderCustomFieldsMutation,
-  SetOrderCustomFieldsMutationVariables,
   SetOrderShippingAddressMutation,
   SetOrderShippingAddressMutationVariables,
   SetOrderShippingMethodMutation,
   SetOrderShippingMethodMutationVariables,
+  SetPickupLocationOnOrderMutation,
+  SetPickupLocationOnOrderMutationVariables,
   StockLevelProductsQuery,
   StockLevelProductsQueryVariables,
   TransitionOrderToStateMutation,
@@ -72,8 +52,34 @@ import {
   UpdateOrderCustomFieldsInput,
   UpdateOrderInput,
 } from '../generated/graphql';
-import { CalculatedProduct, Store, VendureError } from './types';
 import { setCalculatedFields } from '../util/product.util';
+import { CalculatedProduct, Store, VendureError } from './types';
+import {
+  ADD_GIFT_TO_ORDER,
+  ADD_ITEM_TO_ORDER,
+  ADJUST_ORDERLINE,
+  APPLY_COUPON_CODE,
+  CREATE_COINBASE_PAYMENT_INTENT,
+  CREATE_MOLLIE_PAYMENT_INTENT,
+  GET_ACTIVE_ORDER,
+  GET_DROP_OFF_POINTS,
+  GET_DUTCH_ADDRESS,
+  GET_ELIGIBLE_GIFTS,
+  GET_ELIGIBLESHIPPINGMETHODS,
+  GET_NEXT_ORDERSTATES,
+  GET_ORDER_BY_CODE,
+  GET_PRICE_AND_STOCKLEVEL,
+  GET_PRODUCT,
+  REMOVE_ALL_ORDER_LINES,
+  REMOVE_COUPON_CODE,
+  SET_CUSTOMER_FOR_ORDER,
+  SET_ORDER_CUSTOMFIELDS,
+  SET_ORDERBILLINGADDRESS,
+  SET_ORDERSHIPPINGADDRESS,
+  SET_ORDERSHIPPINGMETHOD,
+  SET_PICKUP_LOCATION_FOR_ORDER,
+  TRANSITION_ORDER_TO_STATE,
+} from './vendure.queries';
 
 export class VendureClient {
   client: GraphQLClient;
@@ -353,8 +359,8 @@ export class VendureClient {
     customFields: UpdateOrderCustomFieldsInput
   ): Promise<OrderFieldsFragment> {
     const { setOrderCustomFields: order } = await this.request<
-      SetOrderCustomFieldsMutation,
-      SetOrderCustomFieldsMutationVariables
+      SetPickupLocationOnOrderMutation,
+      SetPickupLocationOnOrderMutationVariables
     >(SET_PICKUP_LOCATION_FOR_ORDER, { customFields });
     await this.validateResult(order);
     this.store.activeOrder = order as OrderFieldsFragment;
@@ -374,6 +380,25 @@ export class VendureClient {
       pickupLocationCity: null, // @ts-ignore
       pickupLocationCountry: null, // @ts-ignore
     });
+  }
+
+  async getEligibleGifts(): Promise<EligibleGiftsQuery['eligibleGifts']> {
+    const { eligibleGifts } = await this.request<EligibleGiftsQuery>(
+      GET_ELIGIBLE_GIFTS
+    );
+    return eligibleGifts;
+  }
+
+  async addGiftToOrder(productVariantId: string): Promise<any> {
+    const { addSelectedGiftToOrder: order } = await this.request<
+      AddSelectedGiftToOrderMutation,
+      AddSelectedGiftToOrderMutationVariables
+    >(ADD_GIFT_TO_ORDER, {
+      productVariantId,
+    });
+    await this.validateResult(order);
+    this.store.activeOrder = order as OrderFieldsFragment;
+    return order as OrderFieldsFragment;
   }
 
   async validateResult(result: any): Promise<void> {
