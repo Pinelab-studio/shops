@@ -18,12 +18,10 @@
 </template>
 <script>
 import CheckoutSteps from 'pinelab-storefront/lib/components/CheckoutSteps';
-import GiftSelector from 'pinelab-storefront/lib/components/GiftSelector';
 
 export default {
   components: {
     CheckoutSteps,
-    GiftSelector,
   },
 };
 </script>
