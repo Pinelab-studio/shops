@@ -1,7 +1,17 @@
 <template>
   <Layout>
     <div class="bio">
-      <h3>Over Daniël van de Haterd</h3>
+      <h3>Daniël van de Haterd</h3>
+      <iframe
+        width="100%"
+        height="315"
+        src="https://www.youtube.com/embed/FWKCd4BgdXk?si=LdtbLvasmfnKdNok"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+      <br />
       <p>
         Je loopt geregeld zijn street art tegen het lijf rondom Amersfoort.
         Daniël van de Haterd werkt al ruim 15 jaar als graffiti kunstenaar...
