@@ -45,10 +45,6 @@ export default function (Vue, { router, head, isClient }) {
     router.afterEach((to, from) => {
       Vue.prototype.$emitter.emit('finishedLoading');
     });
-    if (process.env.GRIDSOME_ENABLE_MOBILE_CONSOLE) {
-      require('outfront').default();
-      console.log('OutfrontJS mobile logging enabled');
-    }
   }
   setLabelFunction(Vue, require('../labels.json'));
   Vue.mixin({

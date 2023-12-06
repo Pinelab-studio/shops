@@ -4,8 +4,36 @@ import { WebhookService } from '@pinelab/vendure-plugin-webhook/dist/api/webhook
 // Add your hook URL's and channel ID's here
 const webhooks = [
   {
-    hook: 'https://api.netlify.com/build_hooks/63d26f1c6db1aa46d75cfc4c',
-    channelToken: 'wkw-default',
+    hook: 'https://api.netlify.com/build_hooks/6005a299fc21bd367da1a835',
+    channelToken: 'danielvdhaterd',
+  },
+  {
+    hook: 'https://api.netlify.com/build_hooks/6013cf7136a65b9b9f5d8026',
+    channelToken: 'marcdefotograaf',
+  },
+  {
+    hook: 'https://api.netlify.com/build_hooks/60646bd4b00f212e7fc4a521',
+    channelToken: 'lab07',
+  },
+  {
+    hook: 'https://api.netlify.com/build_hooks/621f1abc52520c733273f90e',
+    channelToken: 'super-a',
+  },
+  {
+    hook: 'https://api.netlify.com/build_hooks/622b1376c042b8487e8e36f2',
+    channelToken: 'cryptherion',
+  },
+  {
+    hook: 'https://api.netlify.com/build_hooks/6315a3b36702a7141b89dd1d',
+    channelToken: 'cantastic',
+  },
+  {
+    hook: 'https://api.netlify.com/build_hooks/628b2d9b065a4076cf60109e',
+    channelToken: 'op',
+  },
+  {
+    hook: 'https://api.netlify.com/build_hooks/655342711a7a8e41185d2512',
+    channelToken: 'roy-schreuder',
   },
 ];
 

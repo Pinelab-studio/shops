@@ -64,6 +64,7 @@
     "@vendure/asset-server-plugin": "2.1.2",
     "@vendure/core": "2.1.2",
     "@vendure/email-plugin": "2.1.2",
+    "@vendure/migrate-v2": "^0.4.0",
     "@vendure/payments-plugin": "2.1.2",
     "@vendure/ui-devkit": "2.1.2",
     "adm-zip": "0.5.10",
