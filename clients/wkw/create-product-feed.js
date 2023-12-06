@@ -31,8 +31,8 @@ function createProductFeed(domain, products, feedUrl) {
     `<?xml version="1.0" encoding="UTF-8"?>
         <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
             <channel>
-                <title>Colour Graphics</title>
-                <description>Colour Graphics' Google Product Feed</description>
+                <title>Wormenkwekerij Wass</title>
+                <description>Google Product Feed van Wormenkwekerij</description>
                 ${productXML}
             </channel>
         </rss>
