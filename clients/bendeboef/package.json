@@ -14,8 +14,7 @@
     "buefy": "^0.9.5",
     "debounce": "^1.2.1",
     "graphql-request": "^5.0.0",
-    "outfront": "^1.1.1",
-    "pinelab-storefront": "0.67.2",
+    "pinelab-storefront": "1.1.0",
     "vue-gtag": "^1.16.1"
   },
   "devDependencies": {

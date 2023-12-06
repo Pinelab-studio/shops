@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /cart/
-Disallow: /customer-details/
-Disallow: /shipping/
-Disallow: /order/
