@@ -31,6 +31,17 @@
 
     <section id="products">
       <h2 class="title is-4">{{ $l('common.products') }}</h2>
+      <div v-if="$context.products.length > 5" class="has-text-right mb-4">
+        <b>{{ $context.products.length }}</b> producten
+        <b-select
+          placeholder="Sorteer op"
+          style="display: inline-flex"
+          @input="sort($event)"
+        >
+          <option value="price-desc">Prijs</option>
+          <option value="alphabet">Alfabetische volgorde</option>
+        </b-select>
+      </div>
       <div class="columns is-multiline is-mobile" v-if="$context.products">
         <div
           class="column is-6-mobile is-4-tablet is-one-fifth-desktop"
@@ -100,6 +111,13 @@ export default {
           return 'is-3-tablet';
         default:
           return '';
+      }
+    },
+    sort(value) {
+      if (value === 'price-desc') {
+        this.$context.products.sort((a, b) => a.lowestPrice - b.lowestPrice);
+      } else if (value === 'alphabet') {
+        this.$context.products.sort((a, b) => a.name.localeCompare(b.name));
       }
     },
   },

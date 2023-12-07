@@ -29,15 +29,6 @@ export class OrderExportHelper {
                 end: endDate,
               },
             },
-            state: {
-              in: [
-                'Delivered',
-                'Shipped',
-                'PaymentSettled',
-                'PartiallyShipped',
-                'PartiallyDelivered',
-              ],
-            },
           },
           skip,
         },

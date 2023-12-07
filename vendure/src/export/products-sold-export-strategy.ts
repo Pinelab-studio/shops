@@ -4,11 +4,23 @@ import {
 } from '@pinelab/vendure-plugin-order-export';
 import path from 'path';
 import os from 'os';
-import { Logger, ProductVariant, RequestContext } from '@vendure/core';
+import {
+  Collection,
+  Logger,
+  ProductVariant,
+  RequestContext,
+} from '@vendure/core';
 import { createObjectCsvWriter } from 'csv-writer';
 import { OrderExportHelper } from './order-export-helper';
 
 const loggerCtx = 'ProductsSoldExportStrategy';
+
+interface SoldProductRow {
+  product: string;
+  sku: string;
+  quantity: number;
+  collections: string;
+}
 
 export class ProductsSoldExportStrategy implements ExportStrategy {
   readonly name = 'products-sold';
@@ -27,23 +39,33 @@ export class ProductsSoldExportStrategy implements ExportStrategy {
       ctx,
       startDate,
       endDate,
-      ['lines', 'lines.productVariant']
+      [
+        'lines',
+        'lines.productVariant',
+        'lines.productVariant.collections',
+        'lines.productVariant.collections.translations',
+      ]
     );
-    const soldProducts: Record<string, number> = {};
+    const soldProducts: Record<string, SoldProductRow> = {};
     orders.forEach((order) => {
       order.lines.forEach((line) => {
         const productName = this.getName(ctx, line.productVariant);
-        let quantity = soldProducts[productName] || 0;
-        quantity += line.quantity;
-        soldProducts[productName] = quantity;
+        let existingRow: SoldProductRow = soldProducts[productName] || {
+          product: productName,
+          sku: line.productVariant.sku,
+          quantity: 0,
+          collections: line.productVariant.collections
+            .map((c) => this.getName(ctx, c))
+            .join(', '),
+        };
+        existingRow.quantity += line.quantity;
+        soldProducts[productName] = existingRow;
       });
     });
     // Record to array and sort
-    const rows: { product: string; quantity: number }[] = Object.entries(
-      soldProducts
-    )
-      .map(([product, quantity]) => ({ product, quantity }))
-      .sort((a, b) => b.quantity - a.quantity);
+    const rows: SoldProductRow[] = Object.values(soldProducts).sort(
+      (a, b) => b.quantity - a.quantity
+    );
     // Write to file
     const fileName = `${new Date().getTime()}-${startDate.getTime()}-${endDate.getTime()}.${
       this.fileExtension
@@ -56,11 +78,19 @@ export class ProductsSoldExportStrategy implements ExportStrategy {
       header: [
         {
           id: 'product',
-          title: 'Product',
+          title: 'Product variant',
+        },
+        {
+          id: 'sku',
+          title: 'SKU',
         },
         {
           id: 'quantity',
           title: 'Quantity',
+        },
+        {
+          id: 'collections',
+          title: 'Collections',
         },
       ],
     });
@@ -69,12 +99,13 @@ export class ProductsSoldExportStrategy implements ExportStrategy {
     return exportFile;
   }
 
-  getName(ctx: RequestContext, variant: ProductVariant) {
+  getName(ctx: RequestContext, item: ProductVariant | Collection): string {
     return (
-      variant.translations.find((t) => t.languageCode === ctx.languageCode)
-        ?.name ||
-      variant.translations[0]?.name ||
-      variant.sku
+      (item.translations as any).find(
+        (t: any) => t.languageCode === ctx.languageCode
+      )?.name ||
+      item.translations[0]?.name ||
+      ''
     );
   }
 }
