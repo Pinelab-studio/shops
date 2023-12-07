@@ -375,6 +375,8 @@ module.exports = async function (api, options, context, ding) {
               childProducts.push(...childCollectionMap.products);
             }
           });
+          // Merge direct products and childProducts
+          const allproductsInCollection = directProducts.concat(childProducts);
           createPage({
             path: collection.url,
             component: './src/templates/ProductListing.vue',
@@ -387,7 +389,7 @@ module.exports = async function (api, options, context, ding) {
                 childCollections.length > 0
                   ? childCollections.map(mapToMinimalCollection)
                   : undefined,
-              products: directProducts.concat(childProducts), // Merge direct products and childProducts
+              products: allproductsInCollection,
             },
           });
         }

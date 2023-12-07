@@ -27,7 +27,7 @@ import {
   if (!order) {
     throw Error('Order not found');
   }
-  await app.get(GoedgepicktService).createOrder(ctx, order);
+  await app.get(GoedgepicktService).syncOrder(ctx, order.code);
   console.log(`Sent ${order?.code}`);
   process.exit(0);
 })();
