@@ -2,6 +2,7 @@ const {
   VendureServer,
   createLabelFunction,
   SearchUtil,
+  deduplicate,
 } = require('pinelab-storefront');
 const { GraphQLClient } = require('graphql-request');
 const {
@@ -376,7 +377,9 @@ module.exports = async function (api, options, context, ding) {
             }
           });
           // Merge direct products and childProducts
-          const allproductsInCollection = directProducts.concat(childProducts);
+          const allproductsInCollection = deduplicate(
+            directProducts.concat(childProducts)
+          );
           createPage({
             path: collection.url,
             component: './src/templates/ProductListing.vue',
