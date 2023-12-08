@@ -43,7 +43,7 @@ import { eligibleWithoutAddressChecker } from './shipping/eligible-without-addre
 import { OrderExportPlugin } from '@pinelab/vendure-plugin-order-export';
 import { TaxExportStrategy } from './export/tax-export-strategy';
 import { orderConfirmationHandler } from './email/order-confirmation.handlers';
-import { json } from 'body-parser';
+import { CustomTemplateLoader } from './email/custom-template-loader';
 import { ShippingByWeightAndCountryPlugin } from '@pinelab/vendure-plugin-shipping-by-weight-and-country';
 import {
   createLowStockEmailHandler,
@@ -94,12 +94,6 @@ export const config: VendureConfig = {
     shopApiPlayground: {}, // turn this off for production
     shopApiDebug: false, // turn this off for production
     shopListQueryLimit: 500,
-    middleware: [
-      {
-        route: `/`,
-        handler: json({ limit: '1mb' }),
-      },
-    ],
   },
   authOptions: {
     superadminCredentials: {
@@ -329,7 +323,9 @@ export const config: VendureConfig = {
           emailRecipients: ['martijn@pinelab.studio'],
         }),
       ],
-      templatePath: path.join(__dirname, '../static/email/templates'),
+      templateLoader: new CustomTemplateLoader(
+        path.join(__dirname, '../static/email/templates')
+      ),
     }),
     // Production ready, precompiled admin UI
     AdminUiPlugin.init({
