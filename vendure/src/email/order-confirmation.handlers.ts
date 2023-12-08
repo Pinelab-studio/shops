@@ -81,26 +81,26 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
         ...event.data,
       };
     })
-    .addTemplate({
-      languageCode: 'default',
-      channelCode: 'Pinelab Demo',
-      subject:
-        'Bedankt voor de Test bestelling {{ order.code }} bij de Pinelab demo shop ',
-      templateFile: 'body.hbs',
-    })
-    .addTemplate({
-      languageCode: 'default',
-      channelCode: 'Op!',
-      subject: 'Je e-boek Op! van Jet van Nieuwkerk',
-      templateFile: 'body.hbs',
-    })
-    .addTemplate({
-      languageCode: 'default',
-      channelCode: '__default_channel__',
-      // channelCode: undefined as any,
-      subject:
-        'Bedankt voor je bestelling {{ order.code }} bij Wormenkwekerij Wasse',
-      templateFile: 'wkw.hbs',
-    })
+    // .addTemplate({
+    //   languageCode: 'default',
+    //   channelCode: 'Pinelab Demo',
+    //   subject:
+    //     'Bedankt voor de Test bestelling {{ order.code }} bij de Pinelab demo shop ',
+    //   templateFile: 'body.hbs',
+    // })
+    // .addTemplate({
+    //   languageCode: 'default',
+    //   channelCode: 'Op!',
+    //   subject: 'Je e-boek Op! van Jet van Nieuwkerk',
+    //   templateFile: 'body.hbs',
+    // })
+    // .addTemplate({
+    //   languageCode: 'default',
+    //   channelCode: '__default_channel__',
+    //   // channelCode: undefined as any,
+    //   subject:
+    //     'Bedankt voor je bestelling {{ order.code }} bij Wormenkwekerij Wasse',
+    //   templateFile: 'wkw.hbs',
+    // })
     // Only used for testing emails with devMode:true
     .setMockEvent(mockOrderStateTransitionEvent);
