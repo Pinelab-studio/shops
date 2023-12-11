@@ -12,22 +12,26 @@ import {
   const { config } = require('../src/vendure-config');
   const app = await bootstrap(config);
   const channelToken = process.argv[2];
-  const orderCode = process.argv[3];
+  const orderCodes = process.argv.slice(3);
   const channel = await app
     .get(ChannelService)
     .getChannelFromToken(channelToken);
-  const ctx = new RequestContext({
-    apiType: 'admin',
-    isAuthorized: true,
-    authorizedAsOwnerOnly: false,
-    channel,
-  });
-  console.log(`Sending order ${orderCode} to Goedgepickt`);
-  const order = await app.get(OrderService).findOneByCode(ctx, orderCode);
-  if (!order) {
-    throw Error('Order not found');
+
+  for (const orderCode of orderCodes) {
+    const ctx = new RequestContext({
+      apiType: 'admin',
+      isAuthorized: true,
+      authorizedAsOwnerOnly: false,
+      channel,
+    });
+    console.log(`Sending order ${orderCode} to Goedgepickt`);
+    const order = await app.get(OrderService).findOneByCode(ctx, orderCode);
+    if (!order) {
+      throw Error('Order not found');
+    }
+    await app.get(GoedgepicktService).syncOrder(ctx, order.code);
+    console.log(`Sent ${order?.code}`);
   }
-  await app.get(GoedgepicktService).syncOrder(ctx, order.code);
-  console.log(`Sent ${order?.code}`);
+
   process.exit(0);
 })();
