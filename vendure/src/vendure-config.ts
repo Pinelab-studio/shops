@@ -326,6 +326,10 @@ export const config: VendureConfig = {
       templateLoader: new CustomTemplateLoader(
         path.join(__dirname, '../static/email/templates')
       ),
+      globalTemplateVars: {
+        // Fallback for stock emailer
+        fromAddress: 'noreply@pinelab.studio',
+      },
     }),
     // Production ready, precompiled admin UI
     AdminUiPlugin.init({
