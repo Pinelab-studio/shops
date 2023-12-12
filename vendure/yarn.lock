@@ -3164,10 +3164,10 @@
   resolved "https://registry.yarnpkg.com/@vendure/migrate-v2/-/migrate-v2-0.4.0.tgz#89fb1e5081a93aa58ede031301e6343d948c95ea"
   integrity sha512-bcnGlUV0H2p0MCTt7LAc2EJVIQuN6ZW6LBk2vcvmz4BWbCWf6VBAibIvMFv8EO6oWakscOBtF8KcIa/kT4VrTA==
 
-"@vendure/payments-plugin@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vendure/payments-plugin/-/payments-plugin-2.1.4.tgz#f6d6942ad8464225414f155330fa1e099dcd3dfe"
-  integrity sha512-bWPnGC+M9vOsqQ7FPZjAuF+ZsFC9dJq3srsKZfQZwbKZUS9UFKtvSRO5tuqpF5z6qZD1S1CZsWCro4QQedbkjQ==
+"@vendure/payments-plugin@2.0.0-beta.1":
+  version "2.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@vendure/payments-plugin/-/payments-plugin-2.0.0-beta.1.tgz#99d52517764602633a00b9f87fadaf77520bda97"
+  integrity sha512-7b1fdWuim+IhqkSjBOeoIcYYQ79bLoiowqALPvs6xWb6i7OCjA/MHSXGLbMQtFKRBn3+gbSCd8US30REN50JZw==
   dependencies:
     currency.js "2.0.4"
 
