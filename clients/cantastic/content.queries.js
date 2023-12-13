@@ -23,6 +23,7 @@ const GET_CONTENT = gql`
     }
     cantastic_algemeen {
       over_cantastic
+      seo_beschrijving
       telefoon
       instagram
       usps

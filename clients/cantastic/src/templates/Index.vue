@@ -110,6 +110,24 @@ export default {
     await this.$vendure.getActiveOrder();
     await hydrate(this.$context.favorites, this.$vendure);
   },
+  metaInfo() {
+    const title = 'Cantastic.nl';
+    const seoDescription = this.$context.seoDescription;
+    console.log(seoDescription);
+    return {
+      title,
+      meta: [
+        { key: 'title', name: 'title', content: title },
+        { key: 'description', name: 'description', content: seoDescription },
+        { key: 'og:title', name: 'og:title', content: title },
+        {
+          key: 'og:description',
+          name: 'og:description',
+          content: seoDescription,
+        },
+      ],
+    };
+  },
 };
 </script>
 <style></style>

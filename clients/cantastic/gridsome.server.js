@@ -40,6 +40,7 @@ module.exports = async function (api) {
         cantastic_blogs: blogs,
         cantastic_algemeen: {
           over_cantastic: shortAbout,
+          seo_beschrijving,
           telefoon,
           instagram,
           facebook,
@@ -194,6 +195,7 @@ module.exports = async function (api) {
       context: {
         ...global,
         highlights,
+        seoDescription: seo_beschrijving,
         shortAbout,
         blogs: blogs.slice(0, 3).map(mapToMinimalBlog),
         brands: collections.find((collection) => collection.slug === 'merken')
