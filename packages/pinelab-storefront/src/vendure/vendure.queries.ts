@@ -87,6 +87,10 @@ export const COLLECTION_FIELDS = gql`
         }
       }
     }
+    customFields {
+      metaTitle
+      metaDescription
+    }
   }
 `;
 
