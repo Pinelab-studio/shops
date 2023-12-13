@@ -198,7 +198,7 @@ export type Collection = Node & {
   filters: Array<ConfigurableOperation>;
   translations: Array<CollectionTranslation>;
   productVariants: ProductVariantList;
-  customFields?: Maybe<Scalars['JSON']>;
+  customFields?: Maybe<CollectionCustomFields>;
 };
 
 export type CollectionProductVariantsArgs = {
@@ -212,6 +212,12 @@ export type CollectionBreadcrumb = {
   slug: Scalars['String'];
 };
 
+export type CollectionCustomFields = {
+  __typename?: 'CollectionCustomFields';
+  metaTitle?: Maybe<Scalars['String']>;
+  metaDescription?: Maybe<Scalars['String']>;
+};
+
 export type CollectionFilterParameter = {
   id?: Maybe<IdOperators>;
   createdAt?: Maybe<DateOperators>;
@@ -222,6 +228,8 @@ export type CollectionFilterParameter = {
   position?: Maybe<NumberOperators>;
   description?: Maybe<StringOperators>;
   parentId?: Maybe<IdOperators>;
+  metaTitle?: Maybe<StringOperators>;
+  metaDescription?: Maybe<StringOperators>;
 };
 
 export type CollectionList = PaginatedList & {
@@ -263,6 +271,8 @@ export type CollectionSortParameter = {
   position?: Maybe<SortOrder>;
   description?: Maybe<SortOrder>;
   parentId?: Maybe<SortOrder>;
+  metaTitle?: Maybe<SortOrder>;
+  metaDescription?: Maybe<SortOrder>;
 };
 
 export type CollectionTranslation = {
@@ -274,6 +284,13 @@ export type CollectionTranslation = {
   name: Scalars['String'];
   slug: Scalars['String'];
   description: Scalars['String'];
+  customFields?: Maybe<CollectionTranslationCustomFields>;
+};
+
+export type CollectionTranslationCustomFields = {
+  __typename?: 'CollectionTranslationCustomFields';
+  metaTitle?: Maybe<Scalars['String']>;
+  metaDescription?: Maybe<Scalars['String']>;
 };
 
 export type ConfigArg = {
@@ -1697,7 +1714,6 @@ export type MolliePaymentIntentError = ErrorResult & {
 };
 
 export type MolliePaymentIntentInput = {
-  redirectUrl?: Maybe<Scalars['String']>;
   paymentMethodCode: Scalars['String'];
   molliePaymentMethodCode?: Maybe<Scalars['String']>;
 };
@@ -1714,7 +1730,6 @@ export type MolliePaymentMethod = {
   minimumAmount?: Maybe<MollieAmount>;
   maximumAmount?: Maybe<MollieAmount>;
   image?: Maybe<MolliePaymentMethodImages>;
-  status?: Maybe<Scalars['String']>;
 };
 
 export type MolliePaymentMethodImages = {
@@ -3683,6 +3698,12 @@ export type CollectionFieldsFragment = { __typename?: 'Collection' } & Pick<
         }
       >;
     };
+    customFields?: Maybe<
+      { __typename?: 'CollectionCustomFields' } & Pick<
+        CollectionCustomFields,
+        'metaTitle' | 'metaDescription'
+      >
+    >;
   };
 
 export type OrderFieldsFragment = { __typename?: 'Order' } & Pick<

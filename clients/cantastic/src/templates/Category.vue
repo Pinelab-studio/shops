@@ -34,6 +34,7 @@ import { getMetaInfo } from 'pinelab-storefront';
 export default {
   metaInfo() {
     const url = `${process.env.GRIDSOME_HOST}${this.$route.fullPath}`;
+    console.log(getMetaInfo(this.$context.collection, url));
     return getMetaInfo(this.$context.collection, url);
   },
 };
