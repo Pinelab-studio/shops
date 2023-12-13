@@ -62,6 +62,7 @@ import { SendcloudCsvParserPlugin } from './sendcloud/sendcloud-csv-parser.plugi
 import { KlarnaPatchPlugin } from './klarna-patch-plugin';
 import { SelectableGiftsPlugin } from '@pinelab/vendure-plugin-selectable-gifts';
 import { MigrationV2Plugin } from '@vendure/migrate-v2';
+import { validateDescription } from './util/seo.util';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -157,6 +158,21 @@ export const config: VendureConfig = {
         type: 'text',
       },
     ],
+    Collection: [
+      {
+        name: 'metaTitle',
+        label: [{ value: 'Meta title', languageCode: LanguageCode.en }],
+        type: 'localeString',
+        ui: { component: 'text-form-input', tab: 'SEO' },
+      },
+      {
+        name: 'metaDescription',
+        label: [{ value: 'Meta description', languageCode: LanguageCode.en }],
+        type: 'localeString',
+        ui: { component: 'textarea-form-input', tab: 'SEO' },
+        validate: validateDescription,
+      },
+    ],
     Product: [
       {
         name: 'metaTitle',
@@ -169,16 +185,7 @@ export const config: VendureConfig = {
         label: [{ value: 'Meta description', languageCode: LanguageCode.en }],
         type: 'localeString',
         ui: { component: 'textarea-form-input', tab: 'SEO' },
-        validate: (value: string) => {
-          if (value?.length > 255) {
-            return [
-              {
-                value: 'Meta description can be max 255 characters',
-                languageCode: LanguageCode.en,
-              },
-            ];
-          }
-        },
+        validate: validateDescription,
       },
       {
         name: 'keywords',
