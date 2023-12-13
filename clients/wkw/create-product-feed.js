@@ -28,6 +28,7 @@ function createProductFeed(domain, products, feedUrl) {
             <g:condition>new</g:condition>
             <g:availability>in stock</g:availability>
             <g:price>${formatEuro(product.lowestPrice)}</g:price>
+            <g:brand>Wormenkwekerij Wasse</g:brand>
         </item>
     `;
     })
