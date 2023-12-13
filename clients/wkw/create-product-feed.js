@@ -1,5 +1,13 @@
 const fs = require('fs');
 
+function formatEuro(value) {
+  if (!value) {
+    value = 0;
+  }
+  const formattedValue = Math.abs(value / 100).toFixed(2);
+  return `${formattedValue} EUR`;
+}
+
 function createProductFeed(domain, products, feedUrl) {
   const productXML = products
     .map((product) => {
@@ -19,9 +27,7 @@ function createProductFeed(domain, products, feedUrl) {
             </g:image_link> 
             <g:condition>new</g:condition>
             <g:availability>in stock</g:availability>
-            <g:price>£${product.lowestPrice}</g:price>
-            <g:gtin><![CDATA[${product.slug}-${product.id}]]></g:gtin>
-            <g:mpn><![CDATA[${product.slug}-${product.id}]]></g:mpn>
+            <g:price>${formatEuro(product.lowestPrice)}</g:price>
         </item>
     `;
     })
