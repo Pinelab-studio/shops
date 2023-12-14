@@ -6,6 +6,9 @@
           <img :src="image" />
         </figure>
         <div class="hover-overlay"></div>
+        <div v-if="banner" class="is-overlay">
+          <span class="tag is-dark-green product-banner">{{ banner }}</span>
+        </div>
       </div>
       <div class="card-content">
         <div class="media">
@@ -20,12 +23,24 @@
 </template>
 <script>
 export default {
-  props: ['title', 'image', 'price', 'slug'],
+  props: ['title', 'image', 'price', 'slug', 'facetValues'],
+  computed: {
+    banner() {
+      return this.facetValues.find((f) => f.facet.code === 'banners')?.name;
+    },
+  },
 };
 </script>
 
 <style scoped>
 .media-content {
   overflow-x: clip;
+}
+
+.product-banner {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-radius: 0;
 }
 </style>

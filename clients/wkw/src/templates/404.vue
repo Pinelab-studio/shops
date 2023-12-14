@@ -22,6 +22,7 @@
                 :image="product.featuredAsset.thumbnail"
                 :slug="product.url"
                 :price="product.lowestPrice"
+                :facetValues="product.facetValues"
               />
             </div>
           </template>

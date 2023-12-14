@@ -91,7 +91,8 @@
   "product": {
     "no-reviews": "No reviews yet.",
     "description": "Product description",
-    "related": "Others also purchased"
+    "related": "Others also purchased",
+    "discounted-in-cart": "Discount will be calculated in cart"
   },
   "review": {
     "write-button": "Write review",

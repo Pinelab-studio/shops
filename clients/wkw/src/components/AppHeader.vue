@@ -71,7 +71,7 @@
                 <g-link :to="collection.url" class="navbar-link">
                   {{ collection.name }}
                 </g-link>
-                <div class="navbar-dropdown is-hidden-mobile">
+                <div class="navbar-dropdown is-hidden-touch">
                   <div class="container section py-1">
                     <div class="columns has-text-left">
                       <div class="column">

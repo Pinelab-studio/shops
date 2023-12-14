@@ -2,6 +2,7 @@ const {
   VendureServer,
   createLabelFunction,
   SearchUtil,
+  deduplicate,
 } = require('pinelab-storefront');
 const { GraphQLClient } = require('graphql-request');
 const {
@@ -389,7 +390,7 @@ module.exports = async function (api, options, context, ding) {
                 childCollections.length > 0
                   ? childCollections.map(mapToMinimalCollection)
                   : undefined,
-              products: allproductsInCollection,
+              products: deduplicate(allproductsInCollection),
             },
           });
         }

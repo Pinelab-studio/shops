@@ -93,7 +93,8 @@
   "product": {
     "no-reviews": "Er zijn nog geen reviews voor dit product.",
     "description": "Product beschrijving",
-    "related": "Anderen kochten ook"
+    "related": "Anderen kochten ook",
+    "discounted-in-cart": "Korting wordt berekend in winkelmand"
   },
   "review": {
     "write-button": "Schrijf review",

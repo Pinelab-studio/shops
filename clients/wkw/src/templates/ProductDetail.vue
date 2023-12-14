@@ -15,6 +15,14 @@
                 {{ $context.product.name }}
               </h1>
 
+              <div v-if="banner">
+                <span class="tag is-dark-green" style="">{{ banner }} </span>
+                <span class="is-centered is-small is-italic has-text-grey"
+                  >&nbsp; {{ $l('product.discounted-in-cart') }}</span
+                >
+                <br />
+              </div>
+
               <div class="is-flex">
                 <b-rate
                   v-model="$context.avgRating"
@@ -99,6 +107,7 @@
                     :image="product.featuredAsset.thumbnail"
                     :slug="product.url"
                     :price="product.lowestPrice"
+                    :facetValues="product.facetValues"
                   />
                 </div>
               </template>
@@ -157,6 +166,11 @@ export default {
     },
     isSoldOut() {
       return isOutOfStock(this.variant);
+    },
+    banner() {
+      return this.$context?.product.facetValues.find(
+        (f) => f.facet.code === 'banners'
+      )?.name;
     },
   },
   data() {
