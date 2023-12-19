@@ -324,11 +324,11 @@ export const config: VendureConfig = {
       },
       handlers: [
         orderConfirmationHandler,
-        createLowStockEmailHandler({
-          threshold: 10,
-          subject: 'Lage voorraad',
-          emailRecipients: ['martijn@pinelab.studio'],
-        }),
+        // createLowStockEmailHandler({
+        //   threshold: 10,
+        //   subject: 'Lage voorraad',
+        //   emailRecipients: ['martijn@pinelab.studio'],
+        // }),
       ],
       templateLoader: new CustomTemplateLoader(
         path.join(__dirname, '../static/email/templates')
