@@ -240,6 +240,9 @@ export const config: VendureConfig = {
       location: 'europe-west1',
       authSecret: process.env.CLOUD_TASKS_SECRET!,
       queueSuffix: process.env.SHOP_ENV!,
+      clientOptions: {
+        fallback: true,
+      },
     }),
     DutchPostalCodePlugin.init(process.env.POSTCODE_APIKEY!),
     WebhookPlugin.init({
