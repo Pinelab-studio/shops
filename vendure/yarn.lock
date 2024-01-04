@@ -2476,10 +2476,10 @@
   dependencies:
     node-fetch "2"
 
-"@pinelab/vendure-plugin-google-cloud-tasks@1.3.0":
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-google-cloud-tasks/-/vendure-plugin-google-cloud-tasks-1.3.0.tgz#218cce0097fc011f7940352bd1e34f6bcda8b47d"
-  integrity sha512-FsgGJPfA8kq7WJDVZpzGx0j2Xl7M8Toddr8vuY5d/gxzUJWmOq5M7GDM2ycspmnW//k9EY61u7vhlf1z9aHOZg==
+"@pinelab/vendure-plugin-google-cloud-tasks@1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-google-cloud-tasks/-/vendure-plugin-google-cloud-tasks-1.4.0.tgz#6f6fd6032e1300c3bcb2aa7d1c40f4bca24710c3"
+  integrity sha512-Fe6ObgbeG6J2M5I2CRDgYsKktYhartnn65Z4kJV3uO6KiDbb4cgheYs+TbI0K2XvwEYoQsk43j2YvoDLVk2i/g==
   dependencies:
     "@google-cloud/tasks" "^3.1.2"
 
@@ -2552,10 +2552,10 @@
   resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-variant-bulk-update/-/vendure-plugin-variant-bulk-update-1.1.0.tgz#6577704945908868c1eaf94141a58a7d37457618"
   integrity sha512-28MqruHKx8n3tRtxpPRKby8xR4NpFCYvcl6PBZ5czlY+T57WPqz0vjN3jv+Jba39wM6xMc+a0NaSsbqu57wOwQ==
 
-"@pinelab/vendure-plugin-webhook@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-webhook/-/vendure-plugin-webhook-1.1.0.tgz#99705f20b6471a0123faa62e1e0e78a784ec03ff"
-  integrity sha512-BbFYdcqeV9H7qQ7h+CrzoSzSkbxg/cS7DSSVEQlV+HVxM7KsKadG+besGeAKfGDSty3RjdXTEK2JL7suFSYl3Q==
+"@pinelab/vendure-plugin-webhook@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-webhook/-/vendure-plugin-webhook-1.1.1.tgz#57e6be62ae56190e9b7524b1b77db47c6af321fa"
+  integrity sha512-YOJUzw8q9IbII0A/SMG38hJ5F66n0dXRvEEmmkQqccsAvg9bfR9Tv2pGzPt+EBWm/tQiq9i1Rk6G7hEkKEetwQ==
 
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
@@ -3024,18 +3024,18 @@
   dependencies:
     "@types/node" "*"
 
-"@vendure/admin-ui-plugin@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vendure/admin-ui-plugin/-/admin-ui-plugin-2.1.4.tgz#4014daa6323b365fba36c5322f94192eb3446406"
-  integrity sha512-5icZfojryjJQYDp6i1S+EtQPtwb/qi+TBzEfswqP7Hd2ibT7oHibNfJtdBmvbrqs2wcQsPWkp5UMmsUyPucj8A==
+"@vendure/admin-ui-plugin@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vendure/admin-ui-plugin/-/admin-ui-plugin-2.1.5.tgz#3f72c65e095148a90451c1bc8806f13ba3497205"
+  integrity sha512-eL1HwJKGDSXTTaw+9sLmXDVkvzHqW5q/eB3oDsNXnswUsjHu2FIffAwj1VyLow+GvcGPrzhRKC+db8L/sSLAZg==
   dependencies:
     date-fns "^2.30.0"
     fs-extra "^11.1.1"
 
-"@vendure/admin-ui@^2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vendure/admin-ui/-/admin-ui-2.1.4.tgz#36a190afd21e7dc5bf8494b5fd9c1808aa5012a4"
-  integrity sha512-aasExw+0XEMNfFpbYhih7gaD5jaXVFUZ9We/z8/DbI2aFyFay41vCGbWhlCru9OXeFx5e3D34YL3v1ApSCJ09Q==
+"@vendure/admin-ui@^2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vendure/admin-ui/-/admin-ui-2.1.5.tgz#c8aa0374020a8bb232b05d910d54343bf5b7f75d"
+  integrity sha512-m2vMF4TJPr8OrmRzyQo8zrcD7QXAZ+/aHd5ZgSoXucIljKbcUma2WC4Pu2fmnmcx1HRzX19i1r0Ap8hTGc7Rsg==
   dependencies:
     "@angular/animations" "^16.2.2"
     "@angular/cdk" "^16.2.1"
@@ -3057,7 +3057,7 @@
     "@ng-select/ng-select" "^11.1.1"
     "@ngx-translate/core" "^15.0.0"
     "@ngx-translate/http-loader" "^8.0.0"
-    "@vendure/common" "^2.1.4"
+    "@vendure/common" "^2.1.5"
     "@webcomponents/custom-elements" "^1.6.0"
     apollo-angular "^5.0.0"
     apollo-upload-client "^17.0.0"
@@ -3087,24 +3087,24 @@
     tslib "^2.6.2"
     zone.js "~0.13.1"
 
-"@vendure/asset-server-plugin@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vendure/asset-server-plugin/-/asset-server-plugin-2.1.4.tgz#4b6f03ad399dd607906bc2157ec1b4127f70a29d"
-  integrity sha512-+ciyxwJAcHyEbJ3DckmziGcrna73RQqs+FtCigqc18RVb/PMtKO2g7stnRm3Rxcq0TuxGCBQVK+OdcRgjcmyxA==
+"@vendure/asset-server-plugin@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vendure/asset-server-plugin/-/asset-server-plugin-2.1.5.tgz#634abbd6d4e24558284d934c438fc08ddb437fc5"
+  integrity sha512-CKiPd9LDUSfPM69ihXmTQxAKt0L1O4YXcEESbsfkMxej2uanaYAR1z90UyG6vZP9qzo9Ol5vTnKpoBzB27wfkg==
   dependencies:
     file-type "^16.5.3"
     fs-extra "^11.1.1"
     sharp "~0.32.5"
 
-"@vendure/common@^2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vendure/common/-/common-2.1.4.tgz#401e966bfb3af99b7606491441f3986f856a477b"
-  integrity sha512-rSPv+pnxkYdPgpdZr4pQpjULiFz6qFX/qT65TEHHNaBRgrNxAVlH1T7luoBGN6fU3x2PBZV2CMPlB5rJaCAMaw==
+"@vendure/common@^2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vendure/common/-/common-2.1.5.tgz#481cc18e81254b9a43aa7ff624cff0313cdc82bd"
+  integrity sha512-OpT3L5IXY9sR6TNHm0bqW8OqnQwVpja03QQI15XYPLoR7inStf1fsaOaU2OFKhMrh3NqOuMXsiRmJXLIWEqP3w==
 
-"@vendure/core@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vendure/core/-/core-2.1.4.tgz#09108493f13ff5083b81285b5a4d8f325343ac9b"
-  integrity sha512-UkAh/ZiegRleh1mdmHZKGRmsn1aJ6Km2se87v1vvVhw8OURHUCShhogglrxafU0lrj0I/ZKD52cnSgt/KIcmVg==
+"@vendure/core@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vendure/core/-/core-2.1.5.tgz#9d54877d0ffbeca24459d9c4bb6cb24bdc7b243c"
+  integrity sha512-KsBgZlnDrw1j/JkImM4d6FXcctOVqgp0rQKO4oPQ71HkJ1iuoTm/6dWXFZ6aaJ2tcj79zf57C2+MVHrUTmfVAQ==
   dependencies:
     "@apollo/server" "^4.9.1"
     "@graphql-tools/stitch" "^9.0.1"
@@ -3117,7 +3117,7 @@
     "@nestjs/testing" "10.2.1"
     "@nestjs/typeorm" "10.0.0"
     "@types/fs-extra" "^9.0.1"
-    "@vendure/common" "^2.1.4"
+    "@vendure/common" "^2.1.5"
     bcrypt "^5.1.1"
     body-parser "^1.20.2"
     chalk "^4.1.2"
@@ -3146,10 +3146,10 @@
     rxjs "^7.8.1"
     typeorm "0.3.11"
 
-"@vendure/email-plugin@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vendure/email-plugin/-/email-plugin-2.1.4.tgz#316780bd2d21926ef72d0fdf91c843073f9ff700"
-  integrity sha512-LSdChXT2Bk+WAWUniR3hYnepy1fCpseXpjdE7QgTTlTDuXP4CCEpavzlBbxReEuuSsrpYs+DgIBWEsZCnAhNpg==
+"@vendure/email-plugin@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vendure/email-plugin/-/email-plugin-2.1.5.tgz#181043f8cd6eef6e90cfea8f78ca9738b11ddac9"
+  integrity sha512-WRYogC+lWee5uvC4qFQtKfXJZFjMP/xePD3gwKCwj6GtaWJ6BCFCfpzFamSMsEC1pnOkGAvxSOstd8KXHJcMEA==
   dependencies:
     "@types/nodemailer" "^6.4.9"
     dateformat "^3.0.3"
@@ -3164,21 +3164,21 @@
   resolved "https://registry.yarnpkg.com/@vendure/migrate-v2/-/migrate-v2-0.4.0.tgz#89fb1e5081a93aa58ede031301e6343d948c95ea"
   integrity sha512-bcnGlUV0H2p0MCTt7LAc2EJVIQuN6ZW6LBk2vcvmz4BWbCWf6VBAibIvMFv8EO6oWakscOBtF8KcIa/kT4VrTA==
 
-"@vendure/payments-plugin@2.0.0-beta.1":
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/@vendure/payments-plugin/-/payments-plugin-2.0.0-beta.1.tgz#99d52517764602633a00b9f87fadaf77520bda97"
-  integrity sha512-7b1fdWuim+IhqkSjBOeoIcYYQ79bLoiowqALPvs6xWb6i7OCjA/MHSXGLbMQtFKRBn3+gbSCd8US30REN50JZw==
+"@vendure/payments-plugin@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vendure/payments-plugin/-/payments-plugin-2.1.5.tgz#da72ee8f96856db52ee3f3de97c15970a07b5238"
+  integrity sha512-LdTjZkbTaUgtjfiVXCgydZSSgcM47D3piQzNSSSK9YUI+WM6zCgNOKExPWmHyGOyka1w1NJABeu2lmf5ie+qpg==
   dependencies:
     currency.js "2.0.4"
 
-"@vendure/testing@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vendure/testing/-/testing-2.1.4.tgz#6b3118bdeb6f842832bda11e65b6f0ad82590d7f"
-  integrity sha512-tGns697U4EsLFSHDKHgJOM0X4oadzaCEkFjBpOwlfNYJ0ru7L+rlJyFOZFiRC7eJliw3wy2/0Hl1avoaNQPs4Q==
+"@vendure/testing@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vendure/testing/-/testing-2.1.5.tgz#c534778712cec57b83c19a1b78ba5ba6be154bdf"
+  integrity sha512-wGURdF+LH8vElskUr9cnuCXCIyKYoWd5cHum28i612AnwLtFFtP/enftoq0Pklqlt0LEQrtwZYw442DcdQAh8A==
   dependencies:
     "@graphql-typed-document-node/core" "^3.2.0"
     "@types/node-fetch" "^2.6.4"
-    "@vendure/common" "^2.1.4"
+    "@vendure/common" "^2.1.5"
     faker "^4.1.0"
     form-data "^4.0.0"
     graphql "16.8.0"
@@ -3186,17 +3186,17 @@
     node-fetch "^2.7.0"
     sql.js "1.8.0"
 
-"@vendure/ui-devkit@2.1.4":
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/@vendure/ui-devkit/-/ui-devkit-2.1.4.tgz#4b99009786d0b75d2adafba94f74f1b2a396962a"
-  integrity sha512-6WlnjukWoVLR3boLSz69U6OKLXvAdxtke3gKGF8Qdku4ncsofdjkxlNt5Hf3jWk23oZ8hDISoaJCuGl9kYbTWQ==
+"@vendure/ui-devkit@2.1.5":
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/@vendure/ui-devkit/-/ui-devkit-2.1.5.tgz#f914e81ecf6d2426f5adbfe7ac65422f1f1e040e"
+  integrity sha512-0xqvihCOPKndXC/Px+yKCqNAUSEsxM16bZ1lHlQ5xVVqxMscrRe7tg86o/q+vd8Sg+jyMUMcKMOaBQoOZxlHoQ==
   dependencies:
     "@angular-devkit/build-angular" "^16.2.0"
     "@angular/cli" "^16.2.0"
     "@angular/compiler" "^16.2.2"
     "@angular/compiler-cli" "^16.2.2"
-    "@vendure/admin-ui" "^2.1.4"
-    "@vendure/common" "^2.1.4"
+    "@vendure/admin-ui" "^2.1.5"
+    "@vendure/common" "^2.1.5"
     chalk "^4.1.0"
     chokidar "^3.5.3"
     fs-extra "^11.1.1"

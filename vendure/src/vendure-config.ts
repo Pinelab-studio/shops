@@ -59,7 +59,6 @@ import { CouponsUsedExportStrategy } from './export/coupons-used-export-strategy
 import { MetricsPlugin } from '@pinelab/vendure-plugin-metrics';
 import { TaxPerCountryExportStrategy } from './export/tax-per-country-export-strategy';
 import { SendcloudCsvParserPlugin } from './sendcloud/sendcloud-csv-parser.plugin';
-import { KlarnaPatchPlugin } from './klarna-patch-plugin';
 import { SelectableGiftsPlugin } from '@pinelab/vendure-plugin-selectable-gifts';
 import { MigrationV2Plugin } from '@vendure/migrate-v2';
 import { validateDescription } from './util/seo.util';
@@ -220,7 +219,6 @@ export const config: VendureConfig = {
   plugins: [
     MigrationV2Plugin,
     SelectableGiftsPlugin,
-    KlarnaPatchPlugin,
     SendcloudCsvParserPlugin,
     VariantBulkUpdatePlugin,
     LimitVariantPerOrderPlugin,
