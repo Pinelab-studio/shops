@@ -26,7 +26,13 @@ export const orderConfirmationHandler: EmailEventHandler<any, any> =
           channel.defaultLanguageCode
         );
       });
-      const subject = `Bedankt voor je bestelling bij ${channel.code} met nr. ${event.order.code}`;
+      // Set customized email subject
+      let subject = `Bedankt voor je bestelling bij ${channel.code} met nr. ${event.order.code}`;
+      if (channel.token === 'wkw-default') {
+        subject = `Bedankt voor je bestelling bij de Wormenkwekerij met nr. ${event.order.code}`;
+      } else if (channel.token === 'op') {
+        subject = `Je e-boek Op! van Jet van Nieuwkerk`;
+      }
       const [{ sender, additionalRecipients }, invoicesEnabled] =
         await Promise.all([
           EmailUtil.getAdminEmailAddressesForChannel(injector, event.ctx),

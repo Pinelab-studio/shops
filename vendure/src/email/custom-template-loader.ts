@@ -8,9 +8,7 @@ import path from 'path';
 import fs from 'fs/promises';
 
 export class CustomTemplateLoader implements TemplateLoader {
-  constructor(private templatePath: string) {
-    console.log('TEMPLATE PATH', templatePath);
-  }
+  constructor(private templatePath: string) {}
 
   /**
    * Load a Handlebars template based on channel token
