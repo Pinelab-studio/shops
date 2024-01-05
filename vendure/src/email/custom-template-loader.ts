@@ -1,4 +1,4 @@
-import { Injector, RequestContext } from '@vendure/core';
+import { Injector, Logger, RequestContext } from '@vendure/core';
 import {
   LoadTemplateInput,
   TemplateLoader,
@@ -19,16 +19,17 @@ export class CustomTemplateLoader implements TemplateLoader {
     input: LoadTemplateInput
   ): Promise<string> {
     let templateFileName = `body.hbs`;
-    switch (ctx.channel.token) {
-      case 'wkw-default':
-        templateFileName = `wkw.hbs`;
-      default:
-        templateFileName = `body.hbs`;
+    if (ctx.channel.token === 'wkw-default') {
+      templateFileName = `wkw.hbs`;
     }
     const templatePath = path.join(
       this.templatePath,
       input.type,
       templateFileName
+    );
+    Logger.info(
+      `Loading template '${templatePath}' for channel '${ctx.channel.token}'`,
+      'CustomTemplateLoader'
     );
     return await fs.readFile(templatePath, 'utf-8');
   }
