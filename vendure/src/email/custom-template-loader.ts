@@ -25,7 +25,11 @@ export class CustomTemplateLoader implements TemplateLoader {
       default:
         templateFileName = `body.hbs`;
     }
-    const templatePath = path.join(this.templatePath, input.type, 'body.hbs');
+    const templatePath = path.join(
+      this.templatePath,
+      input.type,
+      templateFileName
+    );
     return await fs.readFile(templatePath, 'utf-8');
   }
 
