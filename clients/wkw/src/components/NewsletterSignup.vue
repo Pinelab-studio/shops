@@ -77,7 +77,6 @@ export default {
   },
   methods: {
     onBrevoSubmit() {
-      console.log('onSubmit');
       try {
         this.loading = true;
         document.getElementById('sib-form').submit();
