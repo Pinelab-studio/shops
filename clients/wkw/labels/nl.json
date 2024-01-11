@@ -71,7 +71,8 @@
     "add-to-cart": "In winkelmand",
     "sold-out": "Uitverkocht",
     "items-found": "producten gevonden",
-    "subscribe": "Aanmelden"
+    "subscribe": "Aanmelden",
+    "subscribed": "Aangemeld"
   },
   "error": {
     "INSUFFICIENT_STOCK_ERROR": "We hebben er niet meer helaas!"
