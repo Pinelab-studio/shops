@@ -69,7 +69,8 @@
     "add-to-cart": "Add to cart",
     "sold-out": "Sold out",
     "items-found": "items found",
-    "subscribe": "Subscribe"
+    "subscribe": "Subscribe",
+    "subscribed": "Already subscribed"
   },
   "error": {
     "INSUFFICIENT_STOCK_ERROR": "We don't have any more of those items!"
