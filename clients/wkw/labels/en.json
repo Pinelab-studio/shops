@@ -70,7 +70,7 @@
     "sold-out": "Sold out",
     "items-found": "items found",
     "subscribe": "Subscribe",
-    "subscribed": "Already subscribed"
+    "subscribed": "You have subscribed to the newsletter!"
   },
   "error": {
     "INSUFFICIENT_STOCK_ERROR": "We don't have any more of those items!"
