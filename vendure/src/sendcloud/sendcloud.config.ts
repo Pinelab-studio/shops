@@ -18,7 +18,7 @@ export const sendcloudConfig: SendcloudPluginOptions = {
     const weight =
       (line.productVariant.product?.customFields as any)?.weight ??
       (line.productVariant.customFields as any)?.weight;
-    return weight ? weight / 1000 : 0.01;
+    return weight ? weight / 1000 : 0.001;
   },
   hsCodeFn: (line) =>
     (line.productVariant.product?.customFields as any)?.hsCode,
@@ -39,7 +39,7 @@ export const sendcloudConfig: SendcloudPluginOptions = {
       additionalInputs.push({
         description: (order.customFields as any).customerNote,
         quantity: 1,
-        weight: '0.1',
+        weight: '0.001',
         sku: 'Customer note',
         value: '0',
       });
@@ -82,7 +82,7 @@ export async function getNrOfOrders(
   return {
     description: String(nrOfOrders),
     quantity: 1,
-    weight: '0.1',
+    weight: '0.001',
     sku: `Nr of orders`,
     value: '0',
   };
