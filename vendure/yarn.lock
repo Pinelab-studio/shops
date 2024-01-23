@@ -2513,10 +2513,10 @@
     chartist-plugin-tooltips-updated "^1.0.0"
     date-fns "^2.29.3"
 
-"@pinelab/vendure-plugin-myparcel@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-myparcel/-/vendure-plugin-myparcel-1.1.0.tgz#cb3ce38968f1864f7b9026d6a493d1855899b00c"
-  integrity sha512-PZJH/DEd+B8tyAkEFZcdcOEVVt0gbxdoeSewQcaECIZZPlwmg/+NBzOdmsxsB0F3bkfkkxb73Pfnslhjp5cItQ==
+"@pinelab/vendure-plugin-myparcel@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-myparcel/-/vendure-plugin-myparcel-1.2.0.tgz#355794b88f5da280e77e647cd6ab360eaa987d4d"
+  integrity sha512-A/yIzJ2thbGKPBtzkGTGJtqycksc6LZgFG3vaceKspFtaehjJYsDNxQNuA+Yaq3TCbBYJT5nIiBOQMaq8p6QCw==
   dependencies:
     axios "0.26.1"
 
@@ -2527,10 +2527,10 @@
   dependencies:
     csv-writer "^1.6.0"
 
-"@pinelab/vendure-plugin-selectable-gifts@1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-selectable-gifts/-/vendure-plugin-selectable-gifts-1.0.0.tgz#607a7b857a934554b93a1cff49bd1985d9f47c7a"
-  integrity sha512-36pxXR6dBbwHEVBMxJu1h8oLkb+5TNt/yCGWR1ecvGlorX95bn8IYIdqOXdVjqcIxPJis74aY4YLfRBqCt6pkA==
+"@pinelab/vendure-plugin-selectable-gifts@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-selectable-gifts/-/vendure-plugin-selectable-gifts-1.1.0.tgz#759352892b1e459f2dc5ce16a09f6ac7733c3d72"
+  integrity sha512-1Kbpnmf66cVc2ckQZwjmy9ogy4JitPuNb1Ie3HfKTMwEsET8olR8Y8Xg8+aHV9IOyOC8Vwl18edcS+Xx2qN91Q==
 
 "@pinelab/vendure-plugin-sendcloud@1.2.1":
   version "1.2.1"
