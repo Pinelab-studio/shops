@@ -2469,10 +2469,10 @@
   dependencies:
     soap "^0.43.0"
 
-"@pinelab/vendure-plugin-goedgepickt@1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-goedgepickt/-/vendure-plugin-goedgepickt-1.1.0.tgz#198df8ef0510dc53de0d4fe3a7658290033dbf19"
-  integrity sha512-S3s75YjdsiDhluqjiJepJ8ztRAJb/a6emcaD6rnHswLA6Ld4C/szKWnfXzdZ+fziimn6axyaB3ImArx2FjhTOA==
+"@pinelab/vendure-plugin-goedgepickt@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-goedgepickt/-/vendure-plugin-goedgepickt-1.1.1.tgz#07f1b88309736734aecd2e0f5eeeba434a264972"
+  integrity sha512-qWxwS1dIi0GNP9Q4hJuxZizqVN6qUesojc5BcB/98O0Y3Ep4sBPscmNGgjHhh6rAPcE5xDgy+XLIgPxRSt40vA==
   dependencies:
     node-fetch "2"
 
@@ -2532,10 +2532,10 @@
   resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-selectable-gifts/-/vendure-plugin-selectable-gifts-1.0.0.tgz#607a7b857a934554b93a1cff49bd1985d9f47c7a"
   integrity sha512-36pxXR6dBbwHEVBMxJu1h8oLkb+5TNt/yCGWR1ecvGlorX95bn8IYIdqOXdVjqcIxPJis74aY4YLfRBqCt6pkA==
 
-"@pinelab/vendure-plugin-sendcloud@1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-1.2.0.tgz#e48730acdd7c7cc3bdd7436c04d363b39bf41dba"
-  integrity sha512-N9+77Q1czcMc+n0Yufbp/ECjsIKY5TnXYV6RFjsQ35E54lQK6OUqS2NWHwWizynL94rdz/b5hlDswKysV5CmWw==
+"@pinelab/vendure-plugin-sendcloud@1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-1.2.1.tgz#8f1f8055ddf72d9dadfb3b50892fe3852939e822"
+  integrity sha512-kp+cFtbdbO+wHJfjR9utdC3AecBDyk2HzerVyrMWRpS13l/0oyEclO3UvC5UMApXRLRFpK4z1HDI18GCcgvYMQ==
 
 "@pinelab/vendure-plugin-shipping-by-weight-and-country@1.1.0":
   version "1.1.0"
