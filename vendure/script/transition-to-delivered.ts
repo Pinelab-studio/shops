@@ -35,6 +35,7 @@ import { sendcloudHandler } from '@pinelab/vendure-plugin-sendcloud';
   // Get all orders with skip/take in batches
   let count = 0;
   let hasMore = true;
+  let initialAmount: number | undefined = undefined;
   while (hasMore) {
     const { items, totalItems } = await orderService.findAll(ctx, {
       filter: {
@@ -44,6 +45,9 @@ import { sendcloudHandler } from '@pinelab/vendure-plugin-sendcloud';
       },
       take: 5,
     });
+    if (initialAmount === undefined) {
+      initialAmount = totalItems;
+    }
     if (items.length === 0) {
       hasMore = false;
     }
