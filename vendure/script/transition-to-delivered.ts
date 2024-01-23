@@ -60,7 +60,7 @@ import { sendcloudHandler } from '@pinelab/vendure-plugin-sendcloud';
         });
         count++;
         console.log(
-          `Transitioned order ${order.code} to Delivered. (${count}/${totalItems})`
+          `Transitioned order ${order.code} to Delivered. (${count}/${initialAmount})`
         );
       })
     );
