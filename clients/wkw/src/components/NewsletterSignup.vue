@@ -12,6 +12,7 @@
       <div class="column">
         <b-field position="is-centered" grouped group-multiline>
           <b-input
+            v-if="!isSubscribed"
             maxlength="200"
             type="text"
             id="FIRSTNAME"
@@ -20,6 +21,7 @@
             :placeholder="$l('review.name')"
           ></b-input>
           <b-input
+            v-if="!isSubscribed"
             type="email"
             id="EMAIL"
             name="EMAIL"
