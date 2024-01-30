@@ -40,4 +40,15 @@ export default function (Vue, { router, head, isClient }) {
       router
     );
   }
+  // Directus assets, use CMS host for local, otherwise go through netlify
+  const assetHost =
+    process.env.NODE_ENV === 'production'
+      ? ''
+      : process.env.GRIDSOME_DIRECTUS_HOST;
+  Vue.mixin({
+    methods: {
+      getDefaultImage: (id) => `${assetHost}/assets/${id}?key=default`,
+      getSquareImage: (id) => `${assetHost}/assets/${id}?key=square`,
+    },
+  });
 }

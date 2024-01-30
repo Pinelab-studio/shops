@@ -7,6 +7,14 @@
       itemAddedActionText="Naar winkelmand"
       :activeOrder="activeOrder"
     >
+      <g-link
+        v-for="link of links"
+        :to="link.url"
+        :key="link.url"
+        class="navbar-item"
+      >
+        {{ link.name }}
+      </g-link>
     </ShopNavBar>
 
     <div class="container is-widescreen section" style="min-height: 70vh">
@@ -72,15 +80,14 @@
         </div>
       </div> -->
     </div>
-    <div class="has-text-centered">
-      <p style="color: gray; font-size: 0.7rem">
+    <div id="footer" class="has-text-centered">
+      <p style="color: gray">
         <a
           href="https://royschreuder.com/images/icons/instagram.png"
           target="_blank"
           ><i class="mdi mdi-instagram mdi-16px"></i
         ></a>
-        • <a href="mailto:roy@royschreuder.com">roy@royschreuder.com</a> •
-        <a href="https://pinelab.studio/" target="_blank">❤ by pinelab</a>
+        • <a href="mailto:roy@royschreuder.com">roy@royschreuder.com</a>
       </p>
       <br />
     </div>
@@ -107,6 +114,32 @@ export default {
   components: {
     ShopNavBar,
     Consent,
+  },
+  data() {
+    return {
+      links: [
+        {
+          name: 'Shop',
+          url: '/',
+        },
+        {
+          name: 'Artwork',
+          url: '/artwork/',
+        },
+        {
+          name: 'Workshops',
+          url: '/workshops/',
+        },
+        {
+          name: 'Bio',
+          url: '/bio/',
+        },
+        {
+          name: 'Contact',
+          url: '#footer',
+        },
+      ],
+    };
   },
   mounted() {
     this.$vendure.getActiveOrder();
