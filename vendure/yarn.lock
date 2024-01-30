@@ -2476,10 +2476,10 @@
   dependencies:
     node-fetch "2"
 
-"@pinelab/vendure-plugin-google-cloud-tasks@1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-google-cloud-tasks/-/vendure-plugin-google-cloud-tasks-1.4.0.tgz#6f6fd6032e1300c3bcb2aa7d1c40f4bca24710c3"
-  integrity sha512-Fe6ObgbeG6J2M5I2CRDgYsKktYhartnn65Z4kJV3uO6KiDbb4cgheYs+TbI0K2XvwEYoQsk43j2YvoDLVk2i/g==
+"@pinelab/vendure-plugin-google-cloud-tasks@1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-google-cloud-tasks/-/vendure-plugin-google-cloud-tasks-1.5.0.tgz#4de5b9c297eac2751e709e4a943602fbd762b153"
+  integrity sha512-M4NNi5Ud+5pivxzQCkzuvBySqrhg0zWoBaoqHywXEOWdBlzm2Sw7+fYKxBxmF28zhupsBb3Cjecd/IWgLRflOA==
   dependencies:
     "@google-cloud/tasks" "^3.1.2"
 
