@@ -17,25 +17,27 @@
             type="text"
             id="FIRSTNAME"
             name="FIRSTNAME"
+            required
             autocomplete="off"
             :placeholder="$l('review.name')"
+            validation-message=" "
           ></b-input>
           <b-input
             v-if="!isSubscribed"
             type="email"
             id="EMAIL"
             name="EMAIL"
+            required
             autocomplete="off"
             :placeholder="$l('customer-details.email')"
+            validation-message=" "
           >
           </b-input>
           <p class="control">
             <b-button
               native-type="submit"
               type="is-dark-green is-shadowless is-hovered"
-              class="g-recaptcha"
-              data-sitekey="6Lc1I0spAAAAAOW30qmNTZEo0ZP1xl5fUKeHTsnh"
-              data-callback="onBrevoSubmit"
+              @click="onBrevoSubmit"
               :disabled="isSubscribed"
               :loading="loading"
               :label="
@@ -58,19 +60,6 @@ export default {
       type: String,
     },
   },
-  mounted() {
-    // Bind onSubmit to window so recaptcha can call it
-    window.onBrevoSubmit = this.onBrevoSubmit;
-    // Load recaptcha script
-    this.$nextTick(() => {
-      let recaptchaScript = document.createElement('script');
-      recaptchaScript.setAttribute(
-        'src',
-        'https://www.google.com/recaptcha/api.js'
-      );
-      document.head.appendChild(recaptchaScript);
-    });
-  },
   data() {
     return {
       isSubscribed: false,
@@ -79,12 +68,15 @@ export default {
   },
   methods: {
     onBrevoSubmit() {
-      try {
-        this.loading = true;
-        document.getElementById('sib-form').submit();
-        this.isSubscribed = true;
-      } finally {
-        this.loading = false;
+      const form = document.getElementById('sib-form');
+      if (form.checkValidity()) {
+        try {
+          this.loading = true;
+          form.submit();
+          this.isSubscribed = true;
+        } finally {
+          this.loading = false;
+        }
       }
     },
   },
