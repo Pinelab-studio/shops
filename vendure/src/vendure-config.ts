@@ -11,6 +11,7 @@ import {
   ProductVariantEvent,
   VendureConfig,
   VendureLogger,
+  defaultPromotionConditions,
 } from '@vendure/core';
 import { EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
@@ -45,10 +46,7 @@ import { TaxExportStrategy } from './export/tax-export-strategy';
 import { orderConfirmationHandler } from './email/order-confirmation.handlers';
 import { CustomTemplateLoader } from './email/custom-template-loader';
 import { ShippingByWeightAndCountryPlugin } from '@pinelab/vendure-plugin-shipping-by-weight-and-country';
-import {
-  createLowStockEmailHandler,
-  StockMonitoringPlugin,
-} from '@pinelab/vendure-plugin-stock-monitoring';
+import { StockMonitoringPlugin } from '@pinelab/vendure-plugin-stock-monitoring';
 import { SendcloudPlugin } from '@pinelab/vendure-plugin-sendcloud';
 import { sendcloudConfig } from './sendcloud/sendcloud.config';
 import { ChannelSpecificOrderCodeStrategy } from './order/order-code-strategy';
@@ -62,6 +60,7 @@ import { SendcloudCsvParserPlugin } from './sendcloud/sendcloud-csv-parser.plugi
 import { SelectableGiftsPlugin } from '@pinelab/vendure-plugin-selectable-gifts';
 import { MigrationV2Plugin } from '@vendure/migrate-v2';
 import { validateDescription } from './util/seo.util';
+import { customerNotInGroup } from './promotion/customer-not-in-group-promotion-condition';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -133,6 +132,13 @@ export const config: VendureConfig = {
   },
   paymentOptions: {
     paymentMethodHandlers: [],
+  },
+  promotionOptions: {
+    promotionConditions: [
+      // Make sure to also include the built-in conditions when adding a custom condition
+      customerNotInGroup,
+      ...defaultPromotionConditions,
+    ],
   },
   customFields: {
     Order: [
