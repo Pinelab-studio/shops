@@ -61,6 +61,7 @@ import { SelectableGiftsPlugin } from '@pinelab/vendure-plugin-selectable-gifts'
 import { MigrationV2Plugin } from '@vendure/migrate-v2';
 import { validateDescription } from './util/seo.util';
 import { customerNotInGroup } from './promotion/customer-not-in-group-promotion-condition';
+import { json } from 'body-parser';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -93,6 +94,13 @@ export const config: VendureConfig = {
     shopApiPlayground: {}, // turn this off for production
     shopApiDebug: false, // turn this off for production
     shopListQueryLimit: 500,
+    middleware: [
+      {
+        handler: json({ limit: '10mb' }),
+        route: '*',
+        beforeListen: true,
+      },
+    ],
   },
   authOptions: {
     superadminCredentials: {
