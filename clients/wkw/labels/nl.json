@@ -34,7 +34,7 @@
   "shipping": {
     "step-title": "Bezorging",
     "page-title": "Verzendwijze kiezen:",
-    "submit": "Bestellen en betalen"
+    "submit": "Controleer je bestelling"
   },
   "order-summary": {
     "title": "Samenvatting",
@@ -46,7 +46,7 @@
   "checkup": {
     "goodie-title": "Bedankt loyale klant!",
     "goodie-message": "Je mag een cadeautje uitzoeken, kost je niks!",
-    "title": "Bestellen en betalen",
+    "title": "Controleer je bestelling",
     "shipping-address": "Bezorgdadres",
     "billing-address": "Factuuradres",
     "items": "Producten",
