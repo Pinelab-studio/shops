@@ -3,7 +3,8 @@
     We doen 1 zak
     <a href="/product/wormenmix-voor-bodemverbetering/"> Wormenmix </a> en 1 zak
     <a href="/product/lavameel-frankys-flora/"> Lavameel </a>
-    bij je bestelling, voor elke 40 zakken
+    bij je bestelling, voor elke 40 zakken. Bij 70 zakken wormenmest: 2 zakken
+    Wormenmix en 2 zakken Lavameel.
     <a href="/product/wormenmest/"> wormenmest! </a>
     <br />
   </h5>
