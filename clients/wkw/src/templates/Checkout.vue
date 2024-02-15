@@ -9,6 +9,7 @@
         :available-countries="$context.availableCountries"
       >
         <template #orderSummaryFooter>
+          <CartNotification />
           <h5>{{ $l('order-summary.payments') }}</h5>
           <img src="/img/payments.png" :alt="$l('order-summary.payments')" />
         </template>
@@ -18,10 +19,12 @@
 </template>
 <script>
 import CheckoutSteps from 'pinelab-storefront/lib/components/CheckoutSteps';
+import CartNotification from '../components/CartNotification';
 
 export default {
   components: {
     CheckoutSteps,
+    CartNotification,
   },
 };
 </script>

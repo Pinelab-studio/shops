@@ -40,6 +40,7 @@
                 </div>
               </template>
             </OrderSummary>
+            <CartNotification />
             <h5>{{ $l('order-summary.payments') }}</h5>
             <img src="/img/payments.png" alt="Betaalmogelijkheden" />
           </div>
@@ -55,12 +56,14 @@
 import CartItemsTable from 'pinelab-storefront/lib/components/CartItemsTable';
 import OrderSummary from 'pinelab-storefront/lib/components/OrderSummary';
 import CouponInput from 'pinelab-storefront/lib/components/CouponInput';
+import CartNotification from '../components/CartNotification';
 
 export default {
   components: {
     CartItemsTable,
     OrderSummary,
     CouponInput,
+    CartNotification,
   },
   computed: {
     activeOrder() {
