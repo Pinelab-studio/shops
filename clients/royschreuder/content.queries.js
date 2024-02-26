@@ -12,6 +12,17 @@ const GET_CONTENT = gql`
         title
       }
     }
+    roy_workshops {
+      title_nl
+      title_en
+      content_nl
+      content_en
+      images {
+        directus_files_id {
+          id
+        }
+      }
+    }
   }
 `;
 

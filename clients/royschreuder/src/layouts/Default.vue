@@ -28,7 +28,7 @@
       <div class="has-text-centered">
         <p>
           <a href="http://eepurl.com/iCBgUM" target="_blank"
-            >Sign up for our newsletter here</a
+            >Sign up for my newsletter here</a
           >
         </p>
       </div>
@@ -80,12 +80,16 @@
         </div>
       </div> -->
     </div>
-    <div id="footer" class="has-text-centered">
+    <div id="contact" class="has-text-centered">
       <p style="color: gray">
-        <a
-          href="https://royschreuder.com/images/icons/instagram.png"
-          target="_blank"
+        <a href="https://www.instagram.com/royschreuder/" target="_blank"
           ><i class="mdi mdi-instagram mdi-16px"></i
+        ></a>
+        •
+        <a
+          href="https://www.facebook.com/people/Roy-Schreuder/100034878142789/"
+          target="_blank"
+          ><i class="mdi mdi-facebook mdi-16px"></i
         ></a>
         • <a href="mailto:roy@royschreuder.com">roy@royschreuder.com</a>
       </p>
@@ -136,7 +140,7 @@ export default {
         },
         {
           name: 'Contact',
-          url: '#footer',
+          url: '#contact',
         },
       ],
     };
