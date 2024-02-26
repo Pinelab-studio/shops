@@ -102,7 +102,7 @@ module.exports = function (api) {
           component: './src/templates/Shop.vue',
           context: {
             ...global,
-            products: productsPerCollection,
+            products: productsPerCollection.reverse(),
             collection,
             collections,
             breadcrumb: { Home, Shop, [collection.name]: collection.slug },
