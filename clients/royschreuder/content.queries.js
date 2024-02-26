@@ -23,6 +23,14 @@ const GET_CONTENT = gql`
         }
       }
     }
+    roy_artwork {
+      title
+      image {
+        title
+        id
+      }
+      category
+    }
   }
 `;
 

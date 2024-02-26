@@ -7,11 +7,20 @@
     />
     <h1>{{ title }}</h1>
     <div v-html="content"></div>
-    <img
-      v-for="image in images"
-      :src="getDefaultImage(image)"
-      alt="Roy Schreuder workshop"
-    />
+    <div class="columns is-multiline is-mobile">
+      <div
+        class="column is-12-mobile is-4-desktop is-6-tablet mb-4"
+        v-for="image of images"
+        :key="image"
+      >
+        <PopupImage
+          :small="getSquareImage(image)"
+          alt="Roy Schreuder workshop"
+          :large="getDefaultImage(image)"
+          class="mb-4"
+        />
+      </div>
+    </div>
   </Layout>
 </template>
 <script>

@@ -81,9 +81,11 @@ module.exports = async function (api) {
     const directus = new GraphQLClient(
       `${process.env.GRIDSOME_DIRECTUS_HOST}/graphql`
     );
-    const { roy_bio: bio, roy_workshops: workshops } = await directus.request(
-      GET_CONTENT
-    );
+    const {
+      roy_bio: bio,
+      roy_workshops: workshops,
+      roy_artwork: artwork,
+    } = await directus.request(GET_CONTENT);
 
     createPage({
       path: '/bio/',
@@ -98,6 +100,14 @@ module.exports = async function (api) {
       component: './src/templates/Workshops.vue',
       context: {
         workshops,
+      },
+    });
+
+    createPage({
+      path: '/artwork/',
+      component: './src/templates/Artwork.vue',
+      context: {
+        artwork,
       },
     });
   });

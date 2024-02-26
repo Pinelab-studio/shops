@@ -7,14 +7,15 @@
       itemAddedActionText="Naar winkelmand"
       :activeOrder="activeOrder"
     >
-      <g-link
+      <a
+        :href="link.url"
         v-for="link of links"
         :to="link.url"
         :key="link.url"
         class="navbar-item"
       >
         {{ link.name }}
-      </g-link>
+      </a>
     </ShopNavBar>
 
     <div class="container is-widescreen section" style="min-height: 70vh">
@@ -28,7 +29,7 @@
       <div class="has-text-centered">
         <p>
           <a href="http://eepurl.com/iCBgUM" target="_blank"
-            >Sign up for my newsletter here</a
+            >Click here to sign up for my newsletter</a
           >
         </p>
       </div>
@@ -80,7 +81,7 @@
         </div>
       </div> -->
     </div>
-    <div id="contact" class="has-text-centered">
+    <div id="contact" class="has-text-centered is-size-4">
       <p style="color: gray">
         <a href="https://www.instagram.com/royschreuder/" target="_blank"
           ><i class="mdi mdi-instagram mdi-16px"></i
