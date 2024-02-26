@@ -1,4 +1,6 @@
 const { VendureServer } = require('pinelab-storefront');
+const { GraphQLClient } = require('graphql-request');
+const { GET_CONTENT } = require('./content.queries');
 
 module.exports = async function (api) {
   api.createPages(async ({ createPage }) => {
@@ -72,6 +74,41 @@ module.exports = async function (api) {
       path: '/order/:code',
       component: './src/templates/Order.vue',
       context: {},
+    });
+
+    // ----------- Content pages
+
+    const directus = new GraphQLClient(
+      `${process.env.GRIDSOME_DIRECTUS_HOST}/graphql`
+    );
+    const {
+      roy_bio: bio,
+      roy_workshops: workshops,
+      roy_artwork: artwork,
+    } = await directus.request(GET_CONTENT);
+
+    createPage({
+      path: '/bio/',
+      component: './src/templates/Bio.vue',
+      context: {
+        bio,
+      },
+    });
+
+    createPage({
+      path: '/workshops/',
+      component: './src/templates/Workshops.vue',
+      context: {
+        workshops,
+      },
+    });
+
+    createPage({
+      path: '/artwork/',
+      component: './src/templates/Artwork.vue',
+      context: {
+        artwork,
+      },
     });
   });
 };

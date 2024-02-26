@@ -7,6 +7,15 @@
       itemAddedActionText="Naar winkelmand"
       :activeOrder="activeOrder"
     >
+      <a
+        :href="link.url"
+        v-for="link of links"
+        :to="link.url"
+        :key="link.url"
+        class="navbar-item"
+      >
+        {{ link.name }}
+      </a>
     </ShopNavBar>
 
     <div class="container is-widescreen section" style="min-height: 70vh">
@@ -20,7 +29,7 @@
       <div class="has-text-centered">
         <p>
           <a href="http://eepurl.com/iCBgUM" target="_blank"
-            >Sign up for our newsletter here</a
+            >Click here to sign up for my newsletter</a
           >
         </p>
       </div>
@@ -72,15 +81,18 @@
         </div>
       </div> -->
     </div>
-    <div class="has-text-centered">
-      <p style="color: gray; font-size: 0.7rem">
-        <a
-          href="https://royschreuder.com/images/icons/instagram.png"
-          target="_blank"
+    <div id="contact" class="has-text-centered is-size-4">
+      <p style="color: gray">
+        <a href="https://www.instagram.com/royschreuder/" target="_blank"
           ><i class="mdi mdi-instagram mdi-16px"></i
         ></a>
-        • <a href="mailto:roy@royschreuder.com">roy@royschreuder.com</a> •
-        <a href="https://pinelab.studio/" target="_blank">❤ by pinelab</a>
+        •
+        <a
+          href="https://www.facebook.com/people/Roy-Schreuder/100034878142789/"
+          target="_blank"
+          ><i class="mdi mdi-facebook mdi-16px"></i
+        ></a>
+        • <a href="mailto:roy@royschreuder.com">roy@royschreuder.com</a>
       </p>
       <br />
     </div>
@@ -107,6 +119,32 @@ export default {
   components: {
     ShopNavBar,
     Consent,
+  },
+  data() {
+    return {
+      links: [
+        {
+          name: 'Shop',
+          url: '/',
+        },
+        {
+          name: 'Artwork',
+          url: '/artwork/',
+        },
+        {
+          name: 'Workshops',
+          url: '/workshops/',
+        },
+        {
+          name: 'Bio',
+          url: '/bio/',
+        },
+        {
+          name: 'Contact',
+          url: '#contact',
+        },
+      ],
+    };
   },
   mounted() {
     this.$vendure.getActiveOrder();

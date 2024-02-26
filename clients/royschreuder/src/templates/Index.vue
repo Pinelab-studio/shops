@@ -1,7 +1,8 @@
 <template>
   <Layout>
-    <div class="bio">
+    <div>
       <h3>Roy Schreuder</h3>
+      <br />
     </div>
     <div class="columns is-multiline is-mobile">
       <template v-for="product of $context.products">
@@ -17,11 +18,6 @@
     </div>
   </Layout>
 </template>
-<style>
-.bio {
-  margin-bottom: 50px;
-}
-</style>
 <script>
 import ProductCard from 'pinelab-storefront/lib/components/ProductCard';
 import { hydrate } from 'pinelab-storefront';
