@@ -9,7 +9,7 @@
           </b-navbar-item>
         </template>
         <template #end>
-          <g-link class="mx-3 navbar-item" to="/shop/">SHOP</g-link>
+          <g-link class="mx-3 navbar-item" to="/shop/prints-2/">SHOP</g-link>
           <g-link class="mx-3 navbar-item" to="/over-ons/">OVER ONS</g-link>
           <g-link class="mx-3 navbar-item" to="/contact/">CONTACT</g-link>
           <Basket
