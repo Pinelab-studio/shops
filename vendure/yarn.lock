@@ -2542,10 +2542,10 @@
   resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-shipping-by-weight-and-country/-/vendure-plugin-shipping-by-weight-and-country-1.1.0.tgz#c92f135a0373a4973a75d3ca56882aff3e110837"
   integrity sha512-pbhFcOo+6xeGr5zMUKrGcFU0Jo579Tnt50+DuRGRWfQOaB2M+SusV01sjKKhbywI39XnTyTBclxC7cWxEMqEEQ==
 
-"@pinelab/vendure-plugin-stock-monitoring@1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-stock-monitoring/-/vendure-plugin-stock-monitoring-1.3.1.tgz#ae6b214bb4355d016d0152ecfacb2bc10fa1f5a7"
-  integrity sha512-Uh5rQIcjPAHOzdh29V5G+2BwhPtDo42Y+7g2lXzgdt9Zl6JSJTlEymekKIj6FlWK24sgWWtgPnlGoRJ25Af+fQ==
+"@pinelab/vendure-plugin-stock-monitoring@1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-stock-monitoring/-/vendure-plugin-stock-monitoring-1.3.2.tgz#d6d960e1d57bfeae4ef92b0e9cf819b47f8b1ec4"
+  integrity sha512-vsfvfG4ehV6al6nmOTsaZn2yUK08ouDdDT4l/q0JMBvuUIKHzIjZ9OR6LASKK07xQ0rIAGSMK7NeS57ySyHd9Q==
 
 "@pinelab/vendure-plugin-variant-bulk-update@1.1.0":
   version "1.1.0"
