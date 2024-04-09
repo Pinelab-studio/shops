@@ -27,6 +27,7 @@
 <script>
 import { buy } from 'pinelab-storefront';
 import debounce from 'debounce';
+import { trackViewItem, trackAddToCart } from '../gtm-util.js';
 
 export default {
   props: ['variant', 'bgColor', 'textColor'],
@@ -56,7 +57,6 @@ export default {
     async buy() {
       try {
         if (!this.orderLine) {
-          console.log(this.displayQuantity);
           // Buy because no existing orderLine
           await buy(
             this.variant,
@@ -84,10 +84,29 @@ export default {
       } finally {
         this.isLoading = false;
       }
+      if (this.$gtm.enabled()) {
+        trackAddToCart(
+          this.variant.name,
+          this.variant.sku,
+          this.variant.priceWithTax,
+          this.quantity,
+          'EUR'
+        );
+      }
     },
   },
   created() {
     this.buy = debounce(this.buy, 500);
+  },
+  mounted() {
+    if (this.$gtm.enabled()) {
+      trackViewItem(
+        this.variant.name,
+        this.variant.sku,
+        this.variant.priceWithTax,
+        'EUR'
+      );
+    }
   },
 };
 </script>
