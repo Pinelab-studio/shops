@@ -1714,6 +1714,7 @@ export type MolliePaymentIntentError = ErrorResult & {
 };
 
 export type MolliePaymentIntentInput = {
+  redirectUrl?: Maybe<Scalars['String']>;
   paymentMethodCode: Scalars['String'];
   molliePaymentMethodCode?: Maybe<Scalars['String']>;
 };
@@ -1730,6 +1731,7 @@ export type MolliePaymentMethod = {
   minimumAmount?: Maybe<MollieAmount>;
   maximumAmount?: Maybe<MollieAmount>;
   image?: Maybe<MolliePaymentMethodImages>;
+  status?: Maybe<Scalars['String']>;
 };
 
 export type MolliePaymentMethodImages = {
@@ -3758,7 +3760,11 @@ export type OrderFieldsFragment = { __typename?: 'Order' } & Pick<
     lines: Array<
       { __typename?: 'OrderLine' } & Pick<
         OrderLine,
-        'id' | 'quantity' | 'linePriceWithTax'
+        | 'id'
+        | 'quantity'
+        | 'proratedUnitPrice'
+        | 'proratedUnitPriceWithTax'
+        | 'linePriceWithTax'
       > & {
           featuredAsset?: Maybe<
             { __typename?: 'Asset' } & Pick<
