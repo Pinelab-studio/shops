@@ -18,10 +18,17 @@
 </template>
 <script>
 import CheckoutSteps from 'pinelab-storefront/lib/components/CheckoutSteps';
+import { trackBeginCheckout } from '../gtm-util.js';
 
 export default {
   components: {
     CheckoutSteps,
+  },
+  async mounted() {
+    if (this.$gtm.enabled()) {
+      await this.$vendure.getActiveOrder();
+      trackBeginCheckout(this.$store?.activeOrder, 'EUR');
+    }
   },
 };
 </script>

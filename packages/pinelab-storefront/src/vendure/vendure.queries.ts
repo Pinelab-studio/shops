@@ -139,6 +139,8 @@ export const ORDER_FIELDS = gql`
     lines {
       id
       quantity
+      proratedUnitPrice
+      proratedUnitPriceWithTax
       linePriceWithTax
       featuredAsset {
         id

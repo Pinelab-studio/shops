@@ -39,6 +39,7 @@
 import { getOrderByCode } from 'pinelab-storefront';
 import OrderSummary from 'pinelab-storefront/lib/components/OrderSummary';
 import CartItemsTable from 'pinelab-storefront/lib/components/CartItemsTable';
+import { trackPurchase } from '../gtm-util.js';
 
 export default {
   components: {
@@ -59,21 +60,7 @@ export default {
       // Push purchase event to GTM
       if (this.$gtm.enabled()) {
         try {
-          const items = this.order.lines.map((line) => ({
-            item_id: line.productVariant.sku,
-            item_name: line.productVariant.name,
-            quantity: line.quantity,
-            price: line.productVariant.priceWithTax / 100,
-          }));
-          window?.dataLayer?.push({
-            event: 'purchase',
-            ecommerce: {
-              transaction_id: this.order.id,
-              value: (this.order.totalWithTax / 100).toFixed(2),
-              currency: 'EUR',
-              items,
-            },
-          });
+          trackPurchase(this.order, 'EUR');
         } catch (e) {
           console.error(e);
         }

@@ -76,6 +76,7 @@ import VariantSelector from 'pinelab-storefront/lib/components/VariantSelector';
 import ReadMoreDescription from '../components/ReadMoreDescription';
 import { buy, hydrate, isOutOfStock } from 'pinelab-storefront';
 import { getMetaInfo } from 'pinelab-storefront';
+import { trackViewItem, trackAddToCart } from '../gtm-util.js';
 
 export default {
   components: {
@@ -104,6 +105,14 @@ export default {
   },
   async mounted() {
     await hydrate(this.$context.product, this.$vendure);
+    if (this.$gtm.enabled()) {
+      trackViewItem(
+        this.variant.name,
+        this.variant.sku,
+        this.variant.priceWithTax,
+        'EUR'
+      );
+    }
   },
   methods: {
     async buy() {
@@ -117,6 +126,15 @@ export default {
         this.quantity
       );
       this.isLoading = false;
+      if (this.$gtm.enabled()) {
+        trackAddToCart(
+          this.variant.name,
+          this.variant.sku,
+          this.variant.priceWithTax,
+          this.quantity,
+          'EUR'
+        );
+      }
     },
   },
   metaInfo() {
