@@ -149,6 +149,9 @@ module.exports = async function (api, options, context, ding) {
       const pageLinks = pages.map(mapToMinimalPage);
       const blogPageLinks = blogs.map(mapToMinimalBlogPage);
 
+      // Remove any products without variants
+      products = products.filter((p) => p.variants.length > 0);
+
       // Breadcrumb pages
       const Home = `${slugPrefix}/`;
 
