@@ -42,7 +42,7 @@
     "@pinelab/vendure-plugin-coinbase": "1.1.0",
     "@pinelab/vendure-plugin-dutch-postalcode": "1.1.0",
     "@pinelab/vendure-plugin-e-boekhouden": "1.1.0",
-    "@pinelab/vendure-plugin-goedgepickt": "1.1.4",
+    "@pinelab/vendure-plugin-goedgepickt": "1.1.5",
     "@pinelab/vendure-plugin-google-cloud-tasks": "1.5.0",
     "@pinelab/vendure-plugin-google-storage-assets": "1.1.0",
     "@pinelab/vendure-plugin-invoices": "1.2.0",
