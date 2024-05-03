@@ -2469,10 +2469,10 @@
   dependencies:
     soap "^0.43.0"
 
-"@pinelab/vendure-plugin-goedgepickt@1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-goedgepickt/-/vendure-plugin-goedgepickt-1.1.3.tgz#41ab7094325c145a9ea8f205a36d31d9113f1627"
-  integrity sha512-cVotNAwRsRHbKf59IbstHP7H/FBmNzw/bogVmC4oFf5rH6DvH0iF9Ua3ToOcsC25xKduwizcMKeUGlkNynHL0Q==
+"@pinelab/vendure-plugin-goedgepickt@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-goedgepickt/-/vendure-plugin-goedgepickt-1.1.4.tgz#8973a9dfe08f9b988e8e09871b28039daf336701"
+  integrity sha512-cin2PIkl9kgYTrUjwY9/G1+4nk20QJJTtlXSBTu4QXa7c7pfS4ehB3nYE1qlzYkaXk5J/3h3I7edKvca+wOtZg==
   dependencies:
     node-fetch "2"
 
