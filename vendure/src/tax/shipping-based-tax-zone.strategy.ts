@@ -1,5 +1,13 @@
-import { Channel, Logger, Order, RequestContext, Zone } from '@vendure/core';
+import {
+  Channel,
+  Logger,
+  Order,
+  RequestContext,
+  RequestContextCacheService,
+  Zone,
+} from '@vendure/core';
 import { TaxZoneStrategy } from '@vendure/core/dist/config/tax/tax-zone-strategy';
+import { app } from '../';
 
 const loggerCtx = 'TaxZoneStrategy';
 
@@ -10,6 +18,12 @@ export class ShippingBasedTaxZoneStrategy implements TaxZoneStrategy {
     channel: Channel,
     order?: Order
   ): Zone {
+    // FIXME: Dirty hack to avoid false setting of NL as taxzone, when it should be BE.
+    // This is due to a wrong cache setting in Vendure core. The commit below (v2.2.0) should fix this issue:
+    // https://github.com/vendure-ecommerce/vendure/commit/e543e5e7006140518be311bc7e60687bd9b40778
+    // Next line should be removed when upgraded to v2.2.0
+    app.get(RequestContextCacheService).set(ctx, 'activeTaxZone', undefined);
+
     const countryCode = order?.shippingAddress?.countryCode;
     if (order && countryCode) {
       const zone = zones.find((zone) =>
@@ -19,7 +33,7 @@ export class ShippingBasedTaxZoneStrategy implements TaxZoneStrategy {
         return zone;
       }
       Logger.warn(
-        `No taxzone found for country ${countryCode}. Setting default ${channel.defaultTaxZone.name} for order ${order.code}`,
+        `No tax zone found for country ${countryCode}. Setting default ${channel.defaultTaxZone.name} for order ${order.code}`,
         loggerCtx
       );
     }
