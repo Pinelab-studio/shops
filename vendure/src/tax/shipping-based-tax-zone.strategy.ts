@@ -18,11 +18,19 @@ export class ShippingBasedTaxZoneStrategy implements TaxZoneStrategy {
     channel: Channel,
     order?: Order
   ): Zone {
-    // FIXME: Dirty hack to avoid false setting of NL as taxzone, when it should be BE.
+    // FIXME: Dirty hack to avoid caching of wrong 'activeTaxZone'. This patch makes sure get() never returns anything for activeTaxZone
     // This is due to a wrong cache setting in Vendure core. The commit below (v2.2.0) should fix this issue:
     // https://github.com/vendure-ecommerce/vendure/commit/e543e5e7006140518be311bc7e60687bd9b40778
-    // Next line should be removed when upgraded to v2.2.0
-    app.get(RequestContextCacheService).set(ctx, 'activeTaxZone', undefined);
+    // Next block should be removed when upgraded to v2.2.0
+    const requestContextCache = app.get(RequestContextCacheService);
+    const originalGet = requestContextCache.get;
+    requestContextCache.get = function (ctx, key, getDefault?: any) {
+      if (key === 'activeTaxZone') {
+        return getDefault?.();
+      } else {
+        return originalGet.call(requestContextCache, ctx, key, getDefault);
+      }
+    };
 
     const countryCode = order?.shippingAddress?.countryCode;
     if (order && countryCode) {
