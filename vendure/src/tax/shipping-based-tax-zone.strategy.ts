@@ -30,7 +30,7 @@ export class ShippingBasedTaxZoneStrategy implements TaxZoneStrategy {
       } else {
         return originalGet.call(requestContextCache, ctx, key, getDefault);
       }
-    };
+    }; // End of ugly patch block
 
     const countryCode = order?.shippingAddress?.countryCode;
     if (order && countryCode) {
