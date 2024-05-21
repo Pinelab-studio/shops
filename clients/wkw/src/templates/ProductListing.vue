@@ -38,7 +38,7 @@
           style="display: inline-flex"
           @input="sort($event)"
         >
-          <option value="price-desc">Laagste prijs</option>
+          <option value="price-asc">Laagste prijs</option>
           <option value="alphabet">Alfabetische volgorde</option>
           <option value="popularity">Populariteit</option>
         </b-select>
@@ -116,7 +116,7 @@ export default {
       }
     },
     sort(value) {
-      if (value === 'price-desc') {
+      if (value === 'price-asc') {
         this.$context.products.sort((a, b) => a.lowestPrice - b.lowestPrice);
       } else if (value === 'alphabet') {
         this.$context.products.sort((a, b) => a.name.localeCompare(b.name));

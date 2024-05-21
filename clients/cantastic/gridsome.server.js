@@ -186,9 +186,6 @@ module.exports = async function (api) {
     );
 
     // ----------------- Index ---------------------
-    const highlightsParent = allCollections.find(
-      (col) => col.slug === 'highlights'
-    );
     createPage({
       path: '/',
       component: './src/templates/Index.vue',
