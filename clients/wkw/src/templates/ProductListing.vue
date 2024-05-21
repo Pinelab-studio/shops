@@ -36,11 +36,12 @@
         <b-select
           placeholder="Sorteer op"
           style="display: inline-flex"
+          v-model="sortedBy"
           @input="sort($event)"
         >
           <option value="price-asc">Laagste prijs</option>
           <option value="alphabet">Alfabetische volgorde</option>
-          <option value="popularity">Populariteit</option>
+          <option value="popularity" selected>Populariteit</option>
         </b-select>
       </div>
       <div class="columns is-multiline is-mobile" v-if="$context.products">
@@ -84,10 +85,15 @@ export default {
     ProductCard,
   },
   data() {
-    return {};
+    return {
+      sortedBy: 'popularity',
+    };
   },
   async mounted() {
     await hydrate(this.$context.products, this.$vendure);
+  },
+  created() {
+    this.sort(this.sortedBy);
   },
   methods: {
     /**
