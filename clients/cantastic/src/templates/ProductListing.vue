@@ -51,8 +51,8 @@
                 v-model="sortedBy"
                 @input="sort($event)"
               >
-                <option value="price-asc">Prijs: laag - hoog</option>
-                <option value="price-desc">Prijs: hoog - laag</option>
+                <option value="price-asc">Laagste prijs</option>
+                <option value="popularity">Populariteit</option>
               </b-select>
             </div>
 
@@ -111,7 +111,7 @@ export default {
     return {
       itemsPerPage: 24,
       products: [],
-      sortedBy: 'price-asc',
+      sortedBy: 'popularity',
       totalProducts: 0,
     };
   },
@@ -136,20 +136,16 @@ export default {
     loadFirstPage() {
       this.products = this.$context.products.slice(0, this.itemsPerPage);
     },
-    sortDesc(product1, product2) {
-      if (product1.lowestPrice > product2.lowestPrice) {
-        return -1;
-      } else if (product1.lowestPrice < product2.lowestPrice) {
-        return 1;
-      } else {
-        return 2;
-      }
-    },
     sort(value) {
-      if (value === 'price-desc') {
-        this.$context.products.sort(this.sortDesc);
-      } else {
-        this.$context.products.sort(this.sortDesc).reverse();
+      if (value === 'price-asc') {
+        this.$context.products.sort((a, b) => a.lowestPrice - b.lowestPrice);
+      } else if (value === 'alphabet') {
+        this.$context.products.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (value === 'popularity') {
+        this.$context.products.sort(
+          (a, b) =>
+            b.customFields.popularityScore - a.customFields.popularityScore
+        );
       }
       this.loadFirstPage();
     },

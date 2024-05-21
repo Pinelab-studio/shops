@@ -39,6 +39,7 @@ import { ProductsSoldExportStrategy } from '../src/export/products-sold-export-s
 import { MetricsPlugin } from '@pinelab/vendure-plugin-metrics';
 import { EBoekhoudenPlugin } from '@pinelab/vendure-plugin-e-boekhouden';
 import { EBookPlugin } from '../src/e-book/e-book.plugin';
+import { PopularityScoresPlugin } from '@pinelab/vendure-plugin-popularity-scores';
 
 const testPaymentMethod = new PaymentMethodHandler({
   code: 'test-payment-method',
@@ -130,6 +131,9 @@ export async function startDevServer(): Promise<TestEnv> {
       ],
     },
     plugins: [
+      PopularityScoresPlugin.init({
+        endpointSecret: 'secret',
+      }),
       LimitVariantPerOrderPlugin,
       MetricsPlugin,
       EBoekhoudenPlugin,

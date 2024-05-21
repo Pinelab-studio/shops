@@ -56,6 +56,7 @@ export const PRODUCT_FIELDS = gql`
       metaTitle
       metaDescription
       keywords
+      popularityScore
     }
   }
 `;
@@ -90,6 +91,7 @@ export const COLLECTION_FIELDS = gql`
     customFields {
       metaTitle
       metaDescription
+      popularityScore
     }
   }
 `;
