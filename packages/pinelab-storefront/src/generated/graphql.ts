@@ -4050,7 +4050,7 @@ export type DutchAddressLookupQuery = { __typename?: 'Query' } & {
   dutchAddressLookup?: Maybe<
     { __typename?: 'DutchAddressLookupResult' } & Pick<
       DutchAddressLookupResult,
-      'street' | 'city'
+      'street' | 'city' | 'postalCode' | 'houseNumber'
     >
   >;
 };
