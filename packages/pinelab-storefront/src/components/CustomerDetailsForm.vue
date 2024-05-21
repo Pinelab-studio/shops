@@ -115,10 +115,7 @@
               type="text"
               required
               v-model="address.postalCode"
-              v-on:input="
-                validateCountryForPostalCode();
-                lookupShippingAddress();
-              "
+              v-on:input="lookupShippingAddress()"
             />
             <span class="icon is-small is-left">
               <i class="mdi mdi-mailbox"></i>
@@ -160,20 +157,24 @@
     </div>
     <div class="columns">
       <div class="column">
-        <div class="field">
-          <p class="control is-expanded has-icons-left">
-            <b-input
-              :placeholder="`${$l('customer-details.street')}*`"
-              aria-label="streetname"
-              type="text"
-              required
-              v-model="address.streetLine1"
-            />
-            <span class="icon is-small is-left">
-              <i class="mdi mdi-home"></i>
-            </span>
-          </p>
-        </div>
+        <b-field
+          :type="postalCodeMatchesStreet ? '' : 'is-danger'"
+          :message="
+            postalCodeMatchesStreet
+              ? ''
+              : $l('customer-details.invalid-postalcode')
+          "
+        >
+          <b-input
+            icon="home"
+            :placeholder="`${$l('customer-details.street')}*`"
+            aria-label="streetname"
+            type="text"
+            required
+            v-model="address.streetLine1"
+          >
+          </b-input>
+        </b-field>
       </div>
       <div class="column">
         <div class="field">
@@ -185,7 +186,7 @@
               required
               v-model="address.city"
             />
-            <span class="icon is-small is-left">
+            <span class="icon is-left">
               <i class="mdi mdi-city"></i>
             </span>
           </p>
@@ -194,13 +195,7 @@
     </div>
     <div class="columns">
       <div class="column">
-        <b-field
-          :message="
-            isInvalidCountry
-              ? $l('customer-details.invalid-country-for-postalcode')
-              : ''
-          "
-        >
+        <b-field>
           <b-select
             expanded
             required
@@ -208,7 +203,6 @@
             aria-label="country"
             name="country"
             icon="earth"
-            @input="validateCountryForPostalCode"
             v-model="address.countryCode"
           >
             <option
@@ -396,9 +390,37 @@ export default {
       required: true,
     },
   },
+  computed: {
+    /**
+     * Check if the postal code matches the street based on the previously looked up address
+     */
+    postalCodeMatchesStreet() {
+      if (!this.foundAddress) {
+        return true;
+      }
+      if (
+        this.foundAddress.postalCode !== this.address.postalCode &&
+        this.foundAddress.street !== this.address.streetLine1
+      ) {
+        // If both postalcode and street don't match, we can't validate against the cached lookup address, so we ignore the check.
+        return true;
+      }
+      if (
+        this.foundAddress.postalCode !== this.address.postalCode ||
+        this.foundAddress.street !== this.address.streetLine1
+      ) {
+        // Postal code or street doesn't match the previously looked up address
+        return false;
+      }
+      return true;
+    },
+  },
   data() {
     return {
-      isInvalidCountry: false,
+      /**
+       * Last looked up address via postalcode/housenumber combination
+       */
+      foundAddress: undefined,
       customerNote: undefined,
       vatId: undefined,
       loadingShipping: false,
@@ -482,27 +504,8 @@ export default {
       );
       this.billingAddress.countryCode = country?.code || 'nl';
     }
-    this.validateCountryForPostalCode();
   },
   methods: {
-    /**
-     * Disables selecting NL if postalcodes is not dutch (6 characters)
-     */
-    validateCountryForPostalCode() {
-      const isDutchPostalCode =
-        this.address.postalCode?.length >= 6 &&
-        this.address.postalCode?.length <= 7;
-      if (
-        !isDutchPostalCode &&
-        this.address.countryCode?.toLowerCase() === 'nl'
-      ) {
-        // Ugly delay to prevent overriding the country when its already undefined
-        setTimeout(() => (this.address.countryCode = undefined), 500);
-        this.isInvalidCountry = true;
-      } else {
-        this.isInvalidCountry = false;
-      }
-    },
     setCustomerDetails: async function (e) {
       e.preventDefault();
       const houseNumberAddition = this.address.houseNumberAddition;
@@ -582,13 +585,13 @@ export default {
       if (address?.postalCode?.length < 6 || !address?.streetLine2) {
         return;
       }
-      const foundAddress = await this.vendure.lookupAddress({
+      this.foundAddress = await this.vendure.lookupAddress({
         postalCode: address.postalCode,
         houseNumber: address.streetLine2,
       });
-      if (foundAddress && foundAddress.street) {
-        address.streetLine1 = foundAddress.street;
-        address.city = foundAddress.city;
+      if (this.foundAddress && this.foundAddress.street) {
+        address.streetLine1 = this.foundAddress.street;
+        address.city = this.foundAddress.city;
         address.countryCode = 'nl';
       }
     },

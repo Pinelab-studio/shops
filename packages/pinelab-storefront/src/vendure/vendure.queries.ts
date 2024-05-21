@@ -381,6 +381,8 @@ export const GET_DUTCH_ADDRESS = gql`
     dutchAddressLookup(input: $input) {
       street
       city
+      postalCode
+      houseNumber
     }
   }
 `;
