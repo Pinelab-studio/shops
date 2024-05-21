@@ -107,21 +107,24 @@
     </div>
     <div class="columns is-mobile is-multiline">
       <div class="column is-12-mobile is-6-tablet">
-        <div class="field">
-          <p class="control is-expanded has-icons-left">
-            <b-input
-              :placeholder="`${$l('customer-details.postalcode')}*`"
-              aria-label="postalcode"
-              type="text"
-              required
-              v-model="address.postalCode"
-              v-on:input="lookupShippingAddress()"
-            />
-            <span class="icon is-small is-left">
+        <!-- <div class="field">
+          <p class="control is-expanded has-icons-left"> -->
+
+        <b-field :type="postalCodeMatchesStreet ? '' : 'is-danger'">
+          <b-input
+            :placeholder="`${$l('customer-details.postalcode')}*`"
+            aria-label="postalcode"
+            type="text"
+            required
+            v-model="address.postalCode"
+            v-on:input="lookupShippingAddress()"
+          />
+        </b-field>
+        <!-- <span class="icon is-small is-left">
               <i class="mdi mdi-mailbox"></i>
             </span>
           </p>
-        </div>
+        </div> -->
       </div>
       <div class="column is-6-mobile is-3-tablet">
         <div class="field is-small-field">

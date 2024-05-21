@@ -28,7 +28,7 @@
     "billing-address": "Billing address",
     "submit": "Shipping",
     "note": "Notitie",
-    "invalid-country-for-postalcode": "Invalid country for postalcode",
+    "invalid-postalcode": "Streetname doesn't match postalcode",
     "vatId": "VAT ID"
   },
   "shipping": {
