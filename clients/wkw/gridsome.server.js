@@ -167,6 +167,11 @@ module.exports = async function (api, options, context, ding) {
         pageLinks,
       };
 
+      // Sort products by popularity
+      products.sort(
+        (a, b) =>
+          b.customFields.popularityScore - a.customFields.popularityScore
+      );
       const popularProducts = products.slice(0, 5);
       const popularCollections = collections;
 

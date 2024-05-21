@@ -216,6 +216,7 @@ export type CollectionCustomFields = {
   __typename?: 'CollectionCustomFields';
   metaTitle?: Maybe<Scalars['String']>;
   metaDescription?: Maybe<Scalars['String']>;
+  popularityScore?: Maybe<Scalars['Int']>;
 };
 
 export type CollectionFilterParameter = {
@@ -230,6 +231,7 @@ export type CollectionFilterParameter = {
   parentId?: Maybe<IdOperators>;
   metaTitle?: Maybe<StringOperators>;
   metaDescription?: Maybe<StringOperators>;
+  popularityScore?: Maybe<NumberOperators>;
 };
 
 export type CollectionList = PaginatedList & {
@@ -273,6 +275,7 @@ export type CollectionSortParameter = {
   parentId?: Maybe<SortOrder>;
   metaTitle?: Maybe<SortOrder>;
   metaDescription?: Maybe<SortOrder>;
+  popularityScore?: Maybe<SortOrder>;
 };
 
 export type CollectionTranslation = {
@@ -971,6 +974,11 @@ export enum ErrorCode {
 export type ErrorResult = {
   errorCode: ErrorCode;
   message: Scalars['String'];
+};
+
+export type ExampleType = {
+  __typename?: 'ExampleType';
+  name?: Maybe<Scalars['String']>;
 };
 
 export type Facet = Node & {
@@ -2746,6 +2754,7 @@ export type ProductCustomFields = {
   metaDescription?: Maybe<Scalars['String']>;
   keywords?: Maybe<Scalars['String']>;
   hsCode?: Maybe<Scalars['String']>;
+  popularityScore?: Maybe<Scalars['Int']>;
   price?: Maybe<Scalars['Int']>;
   weight?: Maybe<Scalars['Int']>;
 };
@@ -2762,6 +2771,7 @@ export type ProductFilterParameter = {
   metaDescription?: Maybe<StringOperators>;
   keywords?: Maybe<StringOperators>;
   hsCode?: Maybe<StringOperators>;
+  popularityScore?: Maybe<NumberOperators>;
   price?: Maybe<NumberOperators>;
   weight?: Maybe<NumberOperators>;
 };
@@ -2841,6 +2851,7 @@ export type ProductSortParameter = {
   metaDescription?: Maybe<SortOrder>;
   keywords?: Maybe<SortOrder>;
   hsCode?: Maybe<SortOrder>;
+  popularityScore?: Maybe<SortOrder>;
   price?: Maybe<SortOrder>;
   weight?: Maybe<SortOrder>;
 };
@@ -3673,7 +3684,7 @@ export type ProductFieldsFragment = { __typename?: 'Product' } & Pick<
     customFields?: Maybe<
       { __typename?: 'ProductCustomFields' } & Pick<
         ProductCustomFields,
-        'metaTitle' | 'metaDescription' | 'keywords'
+        'metaTitle' | 'metaDescription' | 'keywords' | 'popularityScore'
       >
     >;
   };
@@ -3703,7 +3714,7 @@ export type CollectionFieldsFragment = { __typename?: 'Collection' } & Pick<
     customFields?: Maybe<
       { __typename?: 'CollectionCustomFields' } & Pick<
         CollectionCustomFields,
-        'metaTitle' | 'metaDescription'
+        'metaTitle' | 'metaDescription' | 'popularityScore'
       >
     >;
   };
