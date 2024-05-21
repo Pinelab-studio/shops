@@ -62,6 +62,7 @@ import { MigrationV2Plugin } from '@vendure/migrate-v2';
 import { validateDescription } from './util/seo.util';
 import { customerNotInGroup } from './promotion/customer-not-in-group-promotion-condition';
 import { json } from 'body-parser';
+import { PopularityScoresPlugin } from '@pinelab/vendure-plugin-popularity-scores';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -231,6 +232,9 @@ export const config: VendureConfig = {
     ],
   },
   plugins: [
+    PopularityScoresPlugin.init({
+      endpointSecret: process.env.WEBHOOK_TOKEN!,
+    }),
     MigrationV2Plugin,
     SelectableGiftsPlugin,
     SendcloudCsvParserPlugin,
