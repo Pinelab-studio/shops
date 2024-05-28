@@ -127,7 +127,6 @@ export default {
   },
   methods: {
     setPage({ start, end }) {
-      console.log(`Display products ${start} - ${end}`);
       this.products = this.$context.products.slice(start, end);
       setTimeout(function () {
         window.scrollTo(0, 0);
@@ -142,10 +141,16 @@ export default {
       } else if (value === 'alphabet') {
         this.$context.products.sort((a, b) => a.name.localeCompare(b.name));
       } else if (value === 'popularity') {
-        this.$context.products.sort(
-          (a, b) =>
+        this.$context.products.sort((a, b) => {
+          console.log(a.soldOut);
+          if (a.soldOut) {
+            // Move soldout to the bottom
+            return -1;
+          }
+          return (
             b.customFields.popularityScore - a.customFields.popularityScore
-        );
+          );
+        });
       }
       this.loadFirstPage();
     },
