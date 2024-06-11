@@ -152,14 +152,7 @@
     </div>
     <div class="columns">
       <div class="column">
-        <b-field
-          :type="postalCodeMatchesStreet ? '' : 'is-danger'"
-          :message="
-            postalCodeMatchesStreet
-              ? ''
-              : $l('customer-details.invalid-postalcode')
-          "
-        >
+        <b-field>
           <b-input
             icon="home"
             :placeholder="`${$l('customer-details.street')}*`"
@@ -387,39 +380,11 @@ export default {
     },
   },
   computed: {
-    /**
-     * Check if the postal code matches the street based on the previously looked up address
-     */
-    postalCodeMatchesStreet() {
-      if (this.address.countryCode?.toLowerCase() !== 'nl') {
-        return true;
-      }
-      if (!this.foundAddress) {
-        return true;
-      }
-      const normalizedPostalcode = this.address.postalCode?.replaceAll(' ', '');
-      const normalizedStreet = this.address.streetLine1?.replaceAll(' ', '');
-      if (
-        this.foundAddress.postalCode !== normalizedPostalcode &&
-        this.foundAddress.street !== normalizedStreet
-      ) {
-        // If both postalcode and street don't match, we can't validate against the cached lookup address, so we ignore the check.
-        return true;
-      }
-      if (
-        this.foundAddress.postalCode !== normalizedPostalcode ||
-        this.foundAddress.street !== normalizedStreet
-      ) {
-        // Postal code or street doesn't match the previously looked up address
-        return false;
-      }
-      return true;
-    },
     // Check if postalcoe is atleast 6 for NL and at least 4 characters for other countries
     postalCodeIsValid() {
       if (this.address.countryCode?.toLowerCase() === 'nl') {
         return /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(
-          this.address.postalCode
+          this.address.postalCode.replaceAll(' ', '')
         );
       } else {
         return this.address.postalCode?.length > 3;
