@@ -5,7 +5,7 @@
     "serve:static": "yarn concurrently \"nodemon --ext js,vue --watch '.src/' --exec 'yarn gridsome build && yarn http-server ./dist/'\"",
     "serve:test": "export VENDURE_ENV=test && yarn gridsome develop",
     "serve:local": "export VENDURE_ENV=local && yarn gridsome develop",
-    "build": "(cd ../../packages/pinelab-storefront && yarn build) && yarn gridsome build"
+    "build": "(cd ../../packages/pinelab-storefront && yarn && yarn build) && yarn gridsome build"
   },
   "dependencies": {
     "@fontsource/poppins": "^4.5.10",
