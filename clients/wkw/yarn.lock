@@ -7045,14 +7045,9 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinelab-storefront@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/pinelab-storefront/-/pinelab-storefront-1.2.1.tgz#ec564a6e8f07e79802c0fccf10e50204a639cae2"
-  integrity sha512-WJfzPDXlor7ssn64C3QAcl0oSEaA0k4LjmJq3XQHB8jKhLi4r1yz3dAunU4XnO2/z8mjvDHorZ5HUEneNrYhxA==
-  dependencies:
-    graphql "15.3.0"
-    graphql-request "^3.4.0"
-    mitt "^3.0.0"
+"pinelab-storefront@link:../../packages/pinelab-storefront":
+  version "0.0.0"
+  uid ""
 
 pinkie-promise@^2.0.0:
   version "2.0.1"

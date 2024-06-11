@@ -18,7 +18,7 @@
     "debounce": "^1.2.1",
     "fuse.js": "^6.6.2",
     "graphql-tag": "^2.12.6",
-    "pinelab-storefront": "1.4.0",
+    "pinelab-storefront": "link:../../packages/pinelab-storefront",
     "vue-disqus": "4.X",
     "vue-gtag": "1.X"
   },
