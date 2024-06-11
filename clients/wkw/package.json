@@ -5,10 +5,7 @@
     "serve:static": "yarn concurrently \"nodemon --ext js,vue --watch '.src/' --exec 'yarn gridsome build && yarn http-server ./dist/'\"",
     "serve:test": "export VENDURE_ENV=test && yarn gridsome develop",
     "serve:local": "export VENDURE_ENV=local && yarn gridsome develop",
-    "dev": "yarn link-there && yarn link-here && concurrently \"cd ../../packages/pinelab-storefront && yarn watch\" \"gridsome develop\"",
-    "dev:local": "export VENDURE_ENV=local && yarn link-there && yarn link-here && concurrently \"cd ../../packages/pinelab-storefront && yarn watch\" \"gridsome develop\"",
-    "link-here": "yarn link pinelab-storefront",
-    "link-there": "cd ../../packages/pinelab-storefront && yarn link"
+    "build": "cd ../../packages/pinelab-storefront && yarn build && cd ../../clients/wkw && yarn gridsome build"
   },
   "dependencies": {
     "@fontsource/poppins": "^4.5.10",
@@ -18,7 +15,7 @@
     "debounce": "^1.2.1",
     "fuse.js": "^6.6.2",
     "graphql-tag": "^2.12.6",
-    "pinelab-storefront": "1.4.0",
+    "pinelab-storefront": "link:../../packages/pinelab-storefront",
     "vue-disqus": "4.X",
     "vue-gtag": "1.X"
   },
@@ -32,7 +29,7 @@
     "sass": "^1.32.13",
     "sass-loader": "^10.1.1"
   },
-  "version": "1.4.0",
+  "version": "1.4.1",
   "resolutions": {
     "graphql": "^14.7.0"
   }

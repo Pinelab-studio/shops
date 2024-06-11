@@ -1,5 +1,5 @@
 <template>
-  <form v-on:submit="setCustomerDetails($event)">
+  <form v-on:submit="submit($event)">
     <h4>{{ $l('checkup.shipping-address') }}</h4>
     <div class="columns">
       <div class="column">
@@ -107,7 +107,7 @@
     </div>
     <div class="columns is-mobile is-multiline">
       <div class="column is-12-mobile is-6-tablet">
-        <b-field :type="postalCodeMatchesStreet ? '' : 'is-danger'">
+        <b-field :type="postalCodeIsValid ? '' : 'is-danger'">
           <b-input
             :placeholder="`${$l('customer-details.postalcode')}*`"
             aria-label="postalcode"
@@ -363,6 +363,7 @@
           aria-label="submit form"
           class="button"
           :loading="loadingShipping"
+          :disabled="!postalCodeIsValid"
         >
           {{ $l('customer-details.submit') }}
         </b-button>
@@ -390,24 +391,39 @@ export default {
      * Check if the postal code matches the street based on the previously looked up address
      */
     postalCodeMatchesStreet() {
+      if (this.address.countryCode?.toLowerCase() !== 'nl') {
+        return true;
+      }
       if (!this.foundAddress) {
         return true;
       }
+      const normalizedPostalcode = this.address.postalCode?.replaceAll(' ', '');
+      const normalizedStreet = this.address.streetLine1?.replaceAll(' ', '');
       if (
-        this.foundAddress.postalCode !== this.address.postalCode &&
-        this.foundAddress.street !== this.address.streetLine1
+        this.foundAddress.postalCode !== normalizedPostalcode &&
+        this.foundAddress.street !== normalizedStreet
       ) {
         // If both postalcode and street don't match, we can't validate against the cached lookup address, so we ignore the check.
         return true;
       }
       if (
-        this.foundAddress.postalCode !== this.address.postalCode ||
-        this.foundAddress.street !== this.address.streetLine1
+        this.foundAddress.postalCode !== normalizedPostalcode ||
+        this.foundAddress.street !== normalizedStreet
       ) {
         // Postal code or street doesn't match the previously looked up address
         return false;
       }
       return true;
+    },
+    // Check if postalcoe is atleast 6 for NL and at least 4 characters for other countries
+    postalCodeIsValid() {
+      if (this.address.countryCode?.toLowerCase() === 'nl') {
+        return /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(
+          this.address.postalCode
+        );
+      } else {
+        return this.address.postalCode?.length > 3;
+      }
     },
   },
   data() {
@@ -501,7 +517,7 @@ export default {
     }
   },
   methods: {
-    setCustomerDetails: async function (e) {
+    submit: async function (e) {
       e.preventDefault();
       const houseNumberAddition = this.address.houseNumberAddition;
       this.loadingShipping = true;
