@@ -384,7 +384,7 @@ export default {
     postalCodeIsValid() {
       if (this.address.countryCode?.toLowerCase() === 'nl') {
         return /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(
-          this.address.postalCode.replaceAll(' ', '')
+          this.address.postalCode?.replaceAll(' ', '')
         );
       } else {
         return this.address.postalCode?.length > 3;
