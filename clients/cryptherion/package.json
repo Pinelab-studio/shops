@@ -14,7 +14,7 @@
     "@gridsome/plugin-sitemap": "^0.4.0",
     "buefy": "^0.9.14",
     "debounce": "^1.2.1",
-    "pinelab-storefront": "1.4.2",
+    "pinelab-storefront": "1.4.3",
     "vue-gtag": "^1.16.1"
   },
   "devDependencies": {
@@ -28,7 +28,7 @@
     "sass": "^1.32.13",
     "sass-loader": "^10.1.1"
   },
-  "version": "1.4.2",
+  "version": "1.4.3",
   "resolutions": {
     "graphql": "^14.7.0"
   }

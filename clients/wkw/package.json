@@ -29,7 +29,7 @@
     "sass": "^1.32.13",
     "sass-loader": "^10.1.1"
   },
-  "version": "1.4.2",
+  "version": "1.4.3",
   "resolutions": {
     "graphql": "^14.7.0"
   }
