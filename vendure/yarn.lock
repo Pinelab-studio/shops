@@ -2537,10 +2537,10 @@
   resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-selectable-gifts/-/vendure-plugin-selectable-gifts-1.1.1.tgz#417faa57b109819eeac0d538211904eed308ef61"
   integrity sha512-hF0G/a4TJZzvZW2+B5jZ6G/U1jM8s2iH2Tdz7dfQasekYn/tV4ESC6BX4AYx3wO993z0DmCYGZ518gMoMzz19w==
 
-"@pinelab/vendure-plugin-sendcloud@1.2.3":
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-1.2.3.tgz#5e4561e9e7ccd0112d1c64bd7b0fd0ce37867ec8"
-  integrity sha512-QNJufSIqYgnkE/qqQKyB069ATBXomi/9PVolpdyWkYNSm3tU5ebxYVKcI8i+FO92TBO5SyECU2CXzFXhEV/c7A==
+"@pinelab/vendure-plugin-sendcloud@1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@pinelab/vendure-plugin-sendcloud/-/vendure-plugin-sendcloud-1.2.5.tgz#acd636eb088a04c188c34e095fad279f3588f7d5"
+  integrity sha512-Xy1PVw+ffahbE/yXCVeIhsN+drez6DKB4CvuEiVqa3MvJztGqU1dqklZqdEyd96+rI0w837/ZUtDTvny3XGRSw==
 
 "@pinelab/vendure-plugin-shipping-by-weight-and-country@1.1.0":
   version "1.1.0"
