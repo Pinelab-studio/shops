@@ -12,6 +12,7 @@ import {
   VendureConfig,
   VendureLogger,
   defaultPromotionConditions,
+  DefaultGuestCheckoutStrategy,
 } from '@vendure/core';
 import { EmailPlugin } from '@vendure/email-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
@@ -63,7 +64,6 @@ import { validateDescription } from './util/seo.util';
 import { customerNotInGroup } from './promotion/customer-not-in-group-promotion-condition';
 import { json } from 'body-parser';
 import { PopularityScoresPlugin } from '@pinelab/vendure-plugin-popularity-scores';
-import { rawBodyMiddleware } from '@pinelab/vendure-plugin-sendcloud/dist/util/src/raw-body.middleware';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -86,6 +86,9 @@ export const config: VendureConfig = {
   orderOptions: {
     orderPlacedStrategy: new PlaceOrderOnSettlementStrategy(),
     orderCodeStrategy: new ChannelSpecificOrderCodeStrategy(),
+    guestCheckoutStrategy: new DefaultGuestCheckoutStrategy({
+      allowGuestCheckoutForRegisteredCustomers: true,
+    }),
   },
   apiOptions: {
     port: (process.env.PORT! as unknown as number) || 3000,
