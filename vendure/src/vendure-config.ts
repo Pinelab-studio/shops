@@ -104,17 +104,23 @@ export const config: VendureConfig = {
        * Combine the 10mb limit together with the rawBody middleware.
        * Only specifying `json()` will override any set raw body middleware by plugins.
        */
+      // DOESNT WORK
+      // {
+      //   handler: json({
+      //     type: '*/*',
+      //     limit: '10mb',
+      //     verify(req: any, res: any, buf: any) {
+      //       if (Buffer.isBuffer(buf)) {
+      //         req.rawBody = Buffer.from(buf);
+      //       }
+      //       return true;
+      //     },
+      //   }),
+      //   route: '*',
+      //   beforeListen: true,
+      // },
       {
-        handler: json({
-          type: '*/*',
-          limit: '10mb',
-          verify(req: any, res: any, buf: any) {
-            if (Buffer.isBuffer(buf)) {
-              req.rawBody = Buffer.from(buf);
-            }
-            return true;
-          },
-        }),
+        handler: json({ limit: '10mb' }),
         route: '*',
         beforeListen: true,
       },
