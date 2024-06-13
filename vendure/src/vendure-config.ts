@@ -63,6 +63,7 @@ import { validateDescription } from './util/seo.util';
 import { customerNotInGroup } from './promotion/customer-not-in-group-promotion-condition';
 import { json } from 'body-parser';
 import { PopularityScoresPlugin } from '@pinelab/vendure-plugin-popularity-scores';
+import { rawBodyMiddleware } from '@pinelab/vendure-plugin-sendcloud/dist/util/src/raw-body.middleware';
 
 let logger: VendureLogger;
 export let runningLocal = false;
@@ -96,8 +97,21 @@ export const config: VendureConfig = {
     shopApiDebug: false, // turn this off for production
     shopListQueryLimit: 500,
     middleware: [
+      /**
+       * Combine the 10mb limit together with the rawBody middleware.
+       * Only specifying `json()` will override any set raw body middleware by plugins.
+       */
       {
-        handler: json({ limit: '10mb' }),
+        handler: json({
+          type: '*/*',
+          limit: '10mb',
+          verify(req: any, res: any, buf: any) {
+            if (Buffer.isBuffer(buf)) {
+              req.rawBody = Buffer.from(buf);
+            }
+            return true;
+          },
+        }),
         route: '*',
         beforeListen: true,
       },
