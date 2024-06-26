@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '16'
       - name: Build Vendure
-        run: cd ../../vendure/ && yarn
+        run: cd ../../vendure/ && npm install
       - name: Build Pinelab-storefront
         run: cd ../pinelab-storefront && yarn
       - name: Build e2e
