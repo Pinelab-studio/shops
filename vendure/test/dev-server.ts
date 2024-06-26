@@ -25,7 +25,7 @@ import {
   InvoicePlugin,
   LocalFileStrategy,
 } from '@pinelab/vendure-plugin-invoices';
-import { TaxInvoiceStrategy } from '../src/invoice/tax-invoice-strategy';
+import { taxInvoiceDataFn } from '../src/invoice/tax-invoice-strategy';
 import { OrderExportPlugin } from '@pinelab/vendure-plugin-order-export';
 import { EmailPlugin } from '@vendure/email-plugin';
 import { orderConfirmationHandler } from '../src/email/order-confirmation.handlers';
@@ -141,7 +141,7 @@ export async function startDevServer(): Promise<TestEnv> {
       InvoicePlugin.init({
         vendureHost: 'localhost:3000',
         storageStrategy: new LocalFileStrategy(),
-        dataStrategy: new TaxInvoiceStrategy(),
+        loadDataFn: taxInvoiceDataFn,
       }),
       GoedgepicktPlugin.init({
         vendureHost: 'localhost:3000',
