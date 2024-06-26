@@ -37,7 +37,7 @@ import {
   GoogleStorageInvoiceStrategy,
   InvoicePlugin,
 } from '@pinelab/vendure-plugin-invoices';
-import { TaxInvoiceStrategy } from './invoice/tax-invoice-strategy';
+import { taxInvoiceDataFn } from './invoice/tax-invoice-strategy';
 import { CoinbasePlugin } from '@pinelab/vendure-plugin-coinbase';
 import { EBoekhoudenPlugin } from '@pinelab/vendure-plugin-e-boekhouden';
 import { EBookPlugin } from './e-book/e-book.plugin';
@@ -260,13 +260,12 @@ export const config: VendureConfig = {
     EBoekhoudenPlugin,
     EBookPlugin.init(process.env.VENDURE_HOST!),
     InvoicePlugin.init({
-      licenseKey: process.env.INVOICE_LICENSE,
       vendureHost: process.env.VENDURE_HOST!,
       storageStrategy: new GoogleStorageInvoiceStrategy({
         bucketName: 'pinelab-invoices',
         storageOptions: runningLocal ? { keyFilename: 'key.json' } : undefined,
       }),
-      dataStrategy: new TaxInvoiceStrategy(),
+      loadDataFn: taxInvoiceDataFn,
     }),
     CloudTasksPlugin.init({
       taskHandlerHost: process.env.WORKER_HOST!,
